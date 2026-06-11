@@ -21,6 +21,9 @@ from pathlib import Path
 
 import httpx
 
+UPLOAD_RETRIES = 3
+RETRY_BACKOFF_SEC = 3.0  # 3s, 6s, 12s
+
 from common import DEFAULT_BLOSSOM, sha256_file
 from nostr_util import Signer, verify_event
 
@@ -76,19 +79,32 @@ def upload(
             reason = head.headers.get("x-reason", head.reason_phrase)
             raise RuntimeError(f"preflight rejected ({head.status_code}): {reason}")
 
-        with open(file, "rb") as f:
-            resp = client.put(
-                f"{server}/upload",
-                content=f.read(),
-                headers={
-                    **headers,
-                    "Content-Type": content_type,
-                    "Content-Length": str(size),
-                },
-            )
-    if resp.status_code not in (200, 201):
-        reason = resp.headers.get("x-reason", resp.text[:300])
-        raise RuntimeError(f"upload failed ({resp.status_code}): {reason}")
+        resp = None
+        for attempt in range(1, UPLOAD_RETRIES + 1):
+            try:
+                with open(file, "rb") as f:
+                    resp = client.put(
+                        f"{server}/upload",
+                        content=f.read(),
+                        headers={
+                            **headers,
+                            "Content-Type": content_type,
+                            "Content-Length": str(size),
+                        },
+                    )
+            except httpx.TransportError as exc:
+                if attempt == UPLOAD_RETRIES:
+                    raise RuntimeError(f"upload failed after {attempt} attempts: {exc}") from exc
+                resp = None
+            # retry only transient server errors; 4xx are permanent
+            if resp is not None and resp.status_code < 500:
+                break
+            if attempt < UPLOAD_RETRIES:
+                time.sleep(RETRY_BACKOFF_SEC * (2 ** (attempt - 1)))
+    if resp is None or resp.status_code not in (200, 201):
+        reason = resp.headers.get("x-reason", resp.text[:300]) if resp is not None else "no response"
+        status = resp.status_code if resp is not None else "n/a"
+        raise RuntimeError(f"upload failed ({status}): {reason}")
 
     descriptor = resp.json()
     if descriptor.get("sha256") != sha256:

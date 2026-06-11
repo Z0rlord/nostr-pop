@@ -83,7 +83,14 @@ def build_video_event(
     if duration:
         tags.append(["duration", str(int(duration))])
 
-    hashtags = list(config.get("hashtags") or []) + list(config.get("extra_hashtags") or [])
+    hashtags = [
+        h.strip().lower()
+        for h in list(config.get("hashtags") or []) + list(config.get("extra_hashtags") or [])
+        if h and h.strip()
+    ]
+    # Invariant: every DojoPop event carries t=dojopop, regardless of config.
+    if "dojopop" not in hashtags:
+        hashtags.append("dojopop")
     for tag in dict.fromkeys(hashtags):  # dedupe, keep order
         tags.append(["t", tag])
 
@@ -102,6 +109,8 @@ def build_video_event(
         .format(title=title, description=description, url=meta.get("webpage_url") or "")
         .strip()
     )
+
+    assert ["t", "dojopop"] in tags, "every event must carry the dojopop hashtag"
 
     event = signer.sign_event(kind=kind, content=content, tags=tags)
     assert verify_event(event), "video event failed local signature verification"

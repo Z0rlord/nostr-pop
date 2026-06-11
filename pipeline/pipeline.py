@@ -16,7 +16,11 @@ import argparse
 import asyncio
 import json
 import sys
+import time
 from pathlib import Path
+
+# politeness gap between videos on real runs (uploads are ~5-15 MB each)
+INTER_VIDEO_DELAY_SEC = 2.0
 
 from common import (
     DEFAULT_BLOSSOM,
@@ -152,6 +156,7 @@ def main() -> int:
         if entry is not None:
             state[yt_id] = entry
             save_state(state)
+            time.sleep(INTER_VIDEO_DELAY_SEC)
 
     if args.dry_run:
         print("\n[dry-run] complete — nothing uploaded or published")
