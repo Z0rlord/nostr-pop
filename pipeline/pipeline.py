@@ -21,8 +21,10 @@ from pathlib import Path
 from common import (
     DEFAULT_BLOSSOM,
     DEFAULT_RELAYS,
+    PREVIEW_DIR,
     THUMBS_DIR,
     VIDEOS_DIR,
+    load_metadata_config,
     load_state,
     make_thumbnail,
     save_state,
@@ -31,7 +33,7 @@ from common import (
 from blossom_upload import build_upload_auth, upload
 from download_youtube import download
 from nostr_util import Signer
-from publish_video_event import KIND_SHORT_VIDEO, build_video_event, publish, report
+from publish_video_event import build_video_event, publish, report
 
 
 def process_video(
@@ -39,8 +41,7 @@ def process_video(
     signer: Signer,
     server: str,
     relays: list[str],
-    kind: int,
-    hashtags: list[str] | None,
+    config: dict,
     dry_run: bool,
 ) -> dict | None:
     """Upload one video + thumbnail and publish its event. Returns state entry."""
@@ -67,8 +68,14 @@ def process_video(
             if thumb
             else None
         )
-        event = build_video_event(signer, meta, fake_desc, fake_thumb, kind=kind, hashtags=hashtags)
-        print(f"  [dry-run] signed+verified kind-{kind} event {event['id'][:16]}… (not uploaded/published)")
+        event = build_video_event(signer, meta, fake_desc, fake_thumb, config=config)
+        PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
+        preview_file = PREVIEW_DIR / f"{meta['id']}.event.json"
+        preview_file.write_text(json.dumps(event, indent=2, ensure_ascii=False))
+        print(
+            f"  [dry-run] signed+verified kind-{event['kind']} event {event['id'][:16]}… "
+            f"(not uploaded/published; preview: {preview_file})"
+        )
         return None
 
     video_desc = upload(video, server, signer)
@@ -81,8 +88,8 @@ def process_video(
         except Exception as exc:
             print(f"  thumb upload failed (continuing without): {exc}")
 
-    event = build_video_event(signer, meta, video_desc, thumb_desc, kind=kind, hashtags=hashtags)
-    print(f"  publishing event {event['id']} (kind {kind}) to {len(relays)} relays:")
+    event = build_video_event(signer, meta, video_desc, thumb_desc, config=config)
+    print(f"  publishing event {event['id']} (kind {event['kind']}) to {len(relays)} relays:")
     results = asyncio.run(publish(event, relays))
     accepted = report(results)
     if not accepted:
@@ -90,7 +97,7 @@ def process_video(
 
     return {
         "event_id": event["id"],
-        "kind": kind,
+        "kind": event["kind"],
         "video_url": video_desc["url"],
         "video_sha256": video_desc["sha256"],
         "thumb_url": thumb_desc["url"] if thumb_desc else None,
@@ -106,8 +113,9 @@ def main() -> int:
     ap.add_argument("--max-duration", type=int, default=None, help="Skip videos longer than N seconds (e.g. 90)")
     ap.add_argument("--server", default=DEFAULT_BLOSSOM, help="Blossom server base URL")
     ap.add_argument("--relay", action="append", dest="relays", default=None)
-    ap.add_argument("--kind", type=int, default=KIND_SHORT_VIDEO)
-    ap.add_argument("--hashtag", action="append", dest="hashtags", default=None)
+    ap.add_argument("--kind", type=int, default=None)
+    ap.add_argument("--hashtag", action="append", dest="hashtags", default=None, help="Override the default hashtag list (repeatable)")
+    ap.add_argument("--config", type=Path, default=None, help="Metadata config YAML (default pipeline/metadata.yml)")
     ap.add_argument("--output-dir", type=Path, default=VIDEOS_DIR)
     ap.add_argument("--force", action="store_true", help="Re-publish even if already in state file")
     ap.add_argument("--dry-run", action="store_true", help="Download + sign only; no upload, no publish")
@@ -115,6 +123,12 @@ def main() -> int:
 
     signer = Signer.from_env()
     relays = args.relays or DEFAULT_RELAYS
+    config = load_metadata_config(args.config)
+    if args.kind is not None:
+        config["kind"] = args.kind
+    if args.hashtags is not None:
+        config["hashtags"] = args.hashtags
+        config["extra_hashtags"] = []
     state = load_state()
 
     print(f"Downloading from {args.url} …")
@@ -129,7 +143,7 @@ def main() -> int:
             continue
         try:
             entry = process_video(
-                meta, signer, args.server.rstrip("/"), relays, args.kind, args.hashtags, args.dry_run
+                meta, signer, args.server.rstrip("/"), relays, config, args.dry_run
             )
         except Exception as exc:
             failures += 1

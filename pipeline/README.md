@@ -22,7 +22,29 @@ doppler run -- uv run --project pipeline pipeline/pipeline.py \
   skip them (`--force` to re-publish).
 - `--dry-run`: downloads, hashes, generates the thumbnail, builds + signs +
   locally verifies the 24242 auth and kind-22 video events, but uploads and
-  publishes nothing.
+  publishes nothing. Each built event is written to `data/preview/<id>.event.json`
+  for review (the `url`/`x` imeta values are placeholders until the real
+  Blossom upload).
+
+## Metadata configuration
+
+Event metadata defaults live in [`metadata.yml`](./metadata.yml)
+(`--config <path>` to use a different file):
+
+| Key | Default | Meaning |
+|---|---|---|
+| `kind` | `22` | NIP-71 short video; `34236` for the addressable variant |
+| `hashtags` | swordpractice, dojopop, proofofpractice | `t` tags |
+| `extra_hashtags` | `[]` | appended to `hashtags` |
+| `content_template` | `{title}\n\n{description}` | event content; `{title}` `{description}` `{url}` available |
+| `alt_template` | `Short practice video: {title}` | NIP-31 `alt` tag; empty disables |
+| `content_warning` | `null` | adds a `content-warning` tag when set |
+
+CLI overrides: `--kind`, `--hashtag` (repeatable; replaces the list).
+`published_at` is always the **original YouTube publish time** (exact
+timestamp when yt-dlp provides one, otherwise the upload date at midnight
+UTC); `duration`/`dim` come from the yt-dlp info of the actual downloaded
+file.
 
 ## Individual stages
 

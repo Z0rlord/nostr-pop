@@ -76,11 +76,19 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
   `sudo chown -R perseus-air /opt/homebrew …` command brew prints, then
   optionally `brew install yt-dlp ffmpeg deno` (deno silences yt-dlp's JS
   runtime warning).
-- [ ] GitLab: rotate the expired `GITLAB_TOKEN` in Doppler, confirm the repo
-  path, then `git remote set-url gitlab <url>` and `git push gitlab main`.
+- [x] GitLab: token rotated; created `gitlab.com/zbarber1/nostr-pop` (public)
+  via API and pushed `main` (token passed via env-based credential helper at
+  push time — nothing stored in `.git/config`).
 - [ ] GitHub push auth: no SSH key for github.com and no `gh` CLI — commits
   are local only. `brew install gh && gh auth login`, then `git push -u origin main`.
-- [ ] Real publish run with the actual channel URL (see usage below).
+- [ ] Real publish run: dry-run against `https://www.youtube.com/@Z0rlord/shorts`
+  resolved **156 shorts** (2023-01-22 → 2026-06-10, 7–89 s); all events built,
+  signed, and locally verified. Previews in `data/preview/*.event.json` +
+  `data/preview/INDEX.md`. **Awaiting user approval of metadata** before the
+  non-dry-run publish to blossom.yakihonne.com + relays.
+- Metadata is now configurable via `pipeline/metadata.yml`
+  (hashtags, content/alt templates, content-warning, kind); `published_at` is
+  the original YouTube publish time.
 
 ## Usage (the real run)
 

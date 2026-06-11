@@ -1,0 +1,24 @@
+# Per-run metadata defaults for published video events.
+# Loaded by pipeline.py / publish_video_event.py (--config to point elsewhere).
+# Templates may use {title}, {description}, {url} (YouTube watch URL).
+
+# 22 = NIP-71 short video (one-minute clips); 34236 = addressable variant.
+kind: 22
+
+# t tags on every event.
+hashtags:
+  - swordpractice
+  - dojopop
+  - proofofpractice
+
+# Appended to hashtags (useful for one-off runs without losing the defaults).
+extra_hashtags: []
+
+# Event content. YouTube title + description carried over by default.
+content_template: "{title}\n\n{description}"
+
+# NIP-31 alt tag for clients that can't render kind 22. Empty string disables.
+alt_template: "Short practice video: {title}"
+
+# Optional content-warning tag value (null = no tag).
+content_warning: null

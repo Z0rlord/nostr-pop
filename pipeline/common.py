@@ -12,7 +12,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
 VIDEOS_DIR = DATA_DIR / "videos"
 THUMBS_DIR = DATA_DIR / "thumbs"
+PREVIEW_DIR = DATA_DIR / "preview"
 STATE_FILE = DATA_DIR / "published.json"
+DEFAULT_METADATA_CONFIG = Path(__file__).resolve().parent / "metadata.yml"
 
 DEFAULT_BLOSSOM = "https://blossom.yakihonne.com"
 DEFAULT_RELAYS = [
@@ -22,6 +24,31 @@ DEFAULT_RELAYS = [
     "wss://nos.lol",
 ]
 DEFAULT_HASHTAGS = ["swordpractice", "dojopop", "proofofpractice"]
+
+# Defaults for event metadata; pipeline/metadata.yml (or --config) overrides.
+METADATA_DEFAULTS: dict = {
+    "kind": 22,
+    "hashtags": DEFAULT_HASHTAGS,
+    "extra_hashtags": [],
+    "content_template": "{title}\n\n{description}",
+    "alt_template": "Short practice video: {title}",
+    "content_warning": None,
+}
+
+
+def load_metadata_config(path: Path | None = None) -> dict:
+    """Merge metadata.yml (if present) over METADATA_DEFAULTS."""
+    import yaml
+
+    config = dict(METADATA_DEFAULTS)
+    path = path or DEFAULT_METADATA_CONFIG
+    if path.exists():
+        loaded = yaml.safe_load(path.read_text()) or {}
+        for key, value in loaded.items():
+            if key not in METADATA_DEFAULTS:
+                raise SystemExit(f"unknown metadata config key: {key!r} in {path}")
+            config[key] = value
+    return config
 
 
 def sha256_file(path: Path) -> str:
