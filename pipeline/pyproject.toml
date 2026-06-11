@@ -1,0 +1,15 @@
+[project]
+name = "dojopop-pipeline"
+version = "0.1.0"
+description = "YouTube -> Blossom -> Nostr (NIP-71) proof-of-practice video pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "coincurve>=20.0.0",
+    "httpx>=0.27.0",
+    "websockets>=13.0",
+    "yt-dlp>=2025.1.1",
+    "imageio-ffmpeg>=0.5.1",
+]
+
+[tool.uv]
+package = false
