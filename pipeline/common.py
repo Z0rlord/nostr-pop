@@ -17,12 +17,30 @@ STATE_FILE = DATA_DIR / "published.json"
 DEFAULT_METADATA_CONFIG = Path(__file__).resolve().parent / "metadata.yml"
 
 DEFAULT_BLOSSOM = "https://blossom.yakihonne.com"
+
+# Self-hosted DojoPop relay (nostr-rs-relay on relay-2 over Tailscale).
+# Published to FIRST; failures are tolerated like any other relay.
+PRIMARY_RELAY = "ws://relay-2:7777"
+# "relay-2" is an SSH alias, not DNS — map to the Tailscale IP at connect time.
+RELAY_HOST_ALIASES = {"relay-2": "100.125.184.46"}
+
 DEFAULT_RELAYS = [
+    PRIMARY_RELAY,
     "wss://nostr-01.yakihonne.com",
     "wss://nostr-02.yakihonne.com",
     "wss://relay.damus.io",
     "wss://nos.lol",
 ]
+
+
+def relay_connect_url(relay: str) -> str:
+    """Rewrite tailnet alias hostnames to their IPs for the actual connection."""
+    from urllib.parse import urlparse
+
+    host = urlparse(relay).hostname
+    if host in RELAY_HOST_ALIASES:
+        return relay.replace(host, RELAY_HOST_ALIASES[host], 1)
+    return relay
 DEFAULT_HASHTAGS = ["swordpractice", "dojopop", "proofofpractice"]
 
 # Defaults for event metadata; pipeline/metadata.yml (or --config) overrides.

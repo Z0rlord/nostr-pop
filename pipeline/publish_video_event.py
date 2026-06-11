@@ -20,7 +20,13 @@ from pathlib import Path
 
 import websockets
 
-from common import DEFAULT_RELAYS, METADATA_DEFAULTS, load_metadata_config
+from common import (
+    DEFAULT_RELAYS,
+    METADATA_DEFAULTS,
+    PRIMARY_RELAY,
+    load_metadata_config,
+    relay_connect_url,
+)
 from nostr_util import Signer, verify_event
 
 KIND_SHORT_VIDEO = 22  # NIP-71 short/vertical video
@@ -104,7 +110,7 @@ def build_video_event(
 
 async def publish_to_relay(relay: str, event: dict, timeout: float = 15.0) -> tuple[bool, str]:
     try:
-        async with websockets.connect(relay, open_timeout=timeout, close_timeout=5) as ws:
+        async with websockets.connect(relay_connect_url(relay), open_timeout=timeout, close_timeout=5) as ws:
             await ws.send(json.dumps(["EVENT", event], ensure_ascii=False))
             deadline = asyncio.get_event_loop().time() + timeout
             while True:
@@ -120,8 +126,16 @@ async def publish_to_relay(relay: str, event: dict, timeout: float = 15.0) -> tu
 
 
 async def publish(event: dict, relays: list[str]) -> dict[str, tuple[bool, str]]:
-    results = await asyncio.gather(*(publish_to_relay(r, event) for r in relays))
-    return dict(zip(relays, results))
+    """Primary-then-public: the self-hosted relay is published to first
+    (sequentially), then the remaining relays in parallel. Per-relay failure
+    is tolerated and reported."""
+    results: dict[str, tuple[bool, str]] = {}
+    rest = list(relays)
+    if PRIMARY_RELAY in rest:
+        rest.remove(PRIMARY_RELAY)
+        results[PRIMARY_RELAY] = await publish_to_relay(PRIMARY_RELAY, event)
+    results.update(zip(rest, await asyncio.gather(*(publish_to_relay(r, event) for r in rest))))
+    return results
 
 
 def report(results: dict[str, tuple[bool, str]]) -> bool:

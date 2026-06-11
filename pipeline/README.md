@@ -16,8 +16,12 @@ doppler run -- uv run --project pipeline pipeline/pipeline.py \
 - Default Blossom server: `https://blossom.yakihonne.com` (`--server` to
   override, e.g. `--server http://localhost:3000` for the local
   `blossom-server/`).
-- Default relays: YakiHonne (`nostr-01/02.yakihonne.com`) + `relay.damus.io` +
-  `nos.lol` (`--relay wss://…` to override, repeatable).
+- Default relays, published primary-then-public: **`ws://relay-2:7777`**
+  (self-hosted DojoPop relay over Tailscale, first, sequentially — `relay-2`
+  is an SSH alias so the connection rewrites it to the Tailscale IP, see
+  `RELAY_HOST_ALIASES` in `common.py`), then YakiHonne
+  (`nostr-01/02.yakihonne.com`) + `relay.damus.io` + `nos.lol` in parallel
+  (`--relay wss://…` to override, repeatable). Per-relay failure is tolerated.
 - Idempotent: `data/published.json` records published YouTube ids; re-runs
   skip them (`--force` to re-publish).
 - `--dry-run`: downloads, hashes, generates the thumbnail, builds + signs +
