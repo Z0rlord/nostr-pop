@@ -76,5 +76,5 @@ curl -s -H 'Accept: application/nostr+json' https://relay.dojopop.live | python3
 nak req -k 34567 wss://relay.dojopop.live    # expect EOSE
 ```
 
-The pipeline publisher's relay list should add/swap `wss://relay.dojopop.live`
-alongside `ws://relay-2:7777` (owned by the pipeline agent — do not edit here).
+The pipeline publisher (`pipeline/common.py`) already uses both
+`ws://relay-2:7777` and `wss://relay.dojopop.live` as primary relays.

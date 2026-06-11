@@ -26,18 +26,20 @@ See [docs/sessions/README.md](./docs/sessions/README.md).
 ## Layout
 
 ```
+web/              # Next.js landing + $0.99/mo membership (Stripe + Lightning scaffold)
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
 blossom-server/   # self-hosted hzrd149/blossom-server (docker compose)
 relay/            # nostr-rs-relay 0.10.0 (docker compose) — deployed on relay-2:7777, kind 34567 allowlist
 scripts/          # Google Drive backup tooling (root pyproject.toml)
-data/             # downloaded videos + publish state (gitignored)
+data/             # downloaded videos (gitignored); published.json tracked
 ```
 
 Publish videos: `doppler run -- uv run --project pipeline pipeline/pipeline.py --url <youtube-url> --max-duration 90` (see `pipeline/README.md`).
 
-Primary relay: `ws://relay-2:7777` (Hetzner over Tailscale; `wss://relay.dojopop.xyz`
-planned — see `relay/README.md`). Planned: `dojopop/` Rust CLI (post, verify,
-config, relay-start). Blossom upload, relay publish primary-then-public.
+Retract a published video: `doppler run -- uv run --project pipeline pipeline/delete_published.py --yt-id <id> --reason "…"`.
 
-Git remotes: `origin` = GitHub `Z0rlord/nostr-pop`; `gitlab` = placeholder
-(token expired — confirm URL, then `git remote set-url gitlab <url>`).
+**Doppler:** project `dojopop`, config `prd_zorie` — signing key `NOSTR_NSEC` (inject via `doppler run --`, never commit).
+
+**Relays (primary-then-public):** `ws://relay-2:7777` (Tailscale), `wss://relay.dojopop.live` (Cloudflare Tunnel), then YakiHonne + public relays — see `relay/README.md` and `pipeline/README.md`. Planned: `dojopop/` Rust CLI (post, verify, config, relay-start).
+
+**Git remotes:** `origin` = [GitHub Z0rlord/nostr-pop](https://github.com/Z0rlord/nostr-pop); `gitlab` = [gitlab.com/zbarber1/nostr-pop](https://gitlab.com/zbarber1/nostr-pop). Push both: `git push origin main && git push gitlab main`.

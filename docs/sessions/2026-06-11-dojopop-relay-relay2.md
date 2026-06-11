@@ -102,13 +102,12 @@ publish (accepted), kind-5 deletion (accepted, event gone afterwards).
 
 ## Open items
 
-- [ ] pipeline relay list: add/swap `wss://relay.dojopop.live` alongside
-      `ws://relay-2:7777` (pipeline agent's job).
+- [x] pipeline relay list: `wss://relay.dojopop.live` + `ws://relay-2:7777`
+      in `pipeline/common.py`.
 - [ ] Replace placeholder relay icon; consider rotating the tunnel token if
       Doppler's CLOUDFLARE_DNS_TOKEN is ever rotated.
-- [ ] **pipeline/publish_video_event.py should add the primary relay
-      (`ws://relay-2:7777`, later wss URL) to its relay list** — pipeline/ is
-      owned by another agent; not touched here.
+- [x] pipeline publisher uses primary relays (`ws://relay-2:7777`,
+      `wss://relay.dojopop.live`) before YakiHonne + public relays.
 - [ ] relay-2 has a pending kernel upgrade (6.8.0-117 → -124); reboot at a
       convenient time (`docker compose` stack is `restart: unless-stopped`).
 - [ ] Replace placeholder contact/icon in `relay/config.toml`.
