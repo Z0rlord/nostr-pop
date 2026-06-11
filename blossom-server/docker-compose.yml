@@ -1,0 +1,10 @@
+services:
+  blossom:
+    image: ghcr.io/hzrd149/blossom-server:master
+    container_name: dojopop-blossom
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config.yml:/app/config.yml:ro
+      - ./data:/app/data

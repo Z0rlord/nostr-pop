@@ -1,0 +1,98 @@
+# DojoPop self-hosted Blossom server (hzrd149/blossom-server)
+# Local dev: docker compose up -d   →   http://localhost:3000
+# See README.md in this directory for production notes (domain, TLS).
+
+port: 3000
+host: 0.0.0.0
+
+# Production: set to the bare hostname served by your reverse proxy /
+# Cloudflare Tunnel (NO protocol scheme), e.g. "blossom.dojopop.example".
+# Leave commented for local use — the Host header of each request is used.
+# publicDomain: "blossom.example.com"
+
+database:
+  path: data/sqlite.db
+
+storage:
+  backend: local
+  local:
+    dir: ./data/blobs
+  removeWhenNoOwners: false
+
+  # Retention rules double as the upload allowlist (first match wins).
+  # Scoped to the DojoPop identity pubkey:
+  # npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg
+  rules:
+    - type: "video/*"
+      expiration: 10 years
+      pubkeys:
+        - "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a"
+    - type: "image/*"
+      expiration: 10 years
+      pubkeys:
+        - "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a"
+
+upload:
+  enabled: true
+  requireAuth: true
+  # Only pubkeys listed in a storage rule may upload (closed server).
+  requirePubkeyInRule: true
+  maxSize: 1073741824 # 1 GB per blob
+  workers: 0
+  maxJobsPerWorker: 4
+  throughputWindowMs: 1000
+
+mirror:
+  enabled: true
+  requireAuth: true
+  connectTimeout: 30000
+  bodyTimeout: 0
+
+delete:
+  requireAuth: true
+
+list:
+  enabled: true
+  requireAuth: false
+  allowListOthers: true
+
+# BUD-05 media optimisation (transcode/thumbnail) — the official docker image
+# bundles ffmpeg, so this can stay enabled.
+media:
+  enabled: true
+  requireAuth: true
+  maxSize: 1073741824 # 1 GB
+  image:
+    quality: 90
+    progressive: true
+    maxWidth: 1920
+    maxHeight: 1080
+    outputFormat: webp
+    maintainAspectRatio: true
+    keepExif: false
+    fps: 30
+  video:
+    quality: 90
+    maxHeight: 1080
+    maxFps: 30
+    format: mp4
+    audioCodec: aac
+    videoCodec: libx264
+  thumbnail:
+    enabled: true
+    quality: 80
+    maxWidth: 512
+    maxHeight: 512
+    outputFormat: webp
+    videoSeek: 1
+
+prune:
+  initialDelayMs: 60000
+  intervalMs: 30000
+
+landing:
+  enabled: true
+  title: "DojoPop Blossom"
+
+report:
+  enabled: true
