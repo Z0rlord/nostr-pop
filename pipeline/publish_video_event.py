@@ -23,7 +23,7 @@ import websockets
 from common import (
     DEFAULT_RELAYS,
     METADATA_DEFAULTS,
-    PRIMARY_RELAY,
+    PRIMARY_RELAYS,
     load_metadata_config,
     relay_connect_url,
 )
@@ -135,14 +135,14 @@ async def publish_to_relay(relay: str, event: dict, timeout: float = 15.0) -> tu
 
 
 async def publish(event: dict, relays: list[str]) -> dict[str, tuple[bool, str]]:
-    """Primary-then-public: the self-hosted relay is published to first
-    (sequentially), then the remaining relays in parallel. Per-relay failure
-    is tolerated and reported."""
+    """Primary-then-public: self-hosted relays published first (sequentially),
+    then the remaining relays in parallel. Per-relay failure is tolerated."""
     results: dict[str, tuple[bool, str]] = {}
     rest = list(relays)
-    if PRIMARY_RELAY in rest:
-        rest.remove(PRIMARY_RELAY)
-        results[PRIMARY_RELAY] = await publish_to_relay(PRIMARY_RELAY, event)
+    for primary in PRIMARY_RELAYS:
+        if primary in rest:
+            rest.remove(primary)
+            results[primary] = await publish_to_relay(primary, event)
     results.update(zip(rest, await asyncio.gather(*(publish_to_relay(r, event) for r in rest))))
     return results
 

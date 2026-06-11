@@ -18,16 +18,17 @@ DEFAULT_METADATA_CONFIG = Path(__file__).resolve().parent / "metadata.yml"
 
 DEFAULT_BLOSSOM = "https://blossom.yakihonne.com"
 
-# Self-hosted DojoPop relay (nostr-rs-relay on relay-2 over Tailscale).
-# Published to FIRST; failures are tolerated like any other relay.
-PRIMARY_RELAY = "ws://relay-2:7777"
+# Self-hosted DojoPop relays (nostr-rs-relay on relay-2).
+# Published to FIRST (sequentially); failures are tolerated like any other relay.
+PRIMARY_RELAY = "ws://relay-2:7777"  # tailnet; kept for backward compat
+PUBLIC_RELAY = "wss://relay.dojopop.live"  # Cloudflare Tunnel (public wss)
+PRIMARY_RELAYS = [PRIMARY_RELAY, PUBLIC_RELAY]
 # "relay-2" is an SSH alias, not DNS — map to the Tailscale IP at connect time.
 RELAY_HOST_ALIASES = {"relay-2": "100.125.184.46"}
 
 DEFAULT_RELAYS = [
-    PRIMARY_RELAY,
+    *PRIMARY_RELAYS,
     "wss://nostr-01.yakihonne.com",
-    "wss://nostr-02.yakihonne.com",
     "wss://relay.damus.io",
     "wss://nos.lol",
 ]

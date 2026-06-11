@@ -104,20 +104,6 @@
     "video_sha256": "c54b23040ed5725b12827a545985eecb26e0979a1b3938476071f4aaa5fe9f44",
     "video_url": "https://blossom.yakihonne.com/c54b23040ed5725b12827a545985eecb26e0979a1b3938476071f4aaa5fe9f44.mp4"
   },
-  "2caNpw5T5T8": {
-    "event_id": "830cd9366bec611bf19265fba835daf901f12fa075d545bcdf8842c521cabef5",
-    "kind": 22,
-    "published_at": 1781140662,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": null,
-    "title": "Thank you @tenshinryu",
-    "video_sha256": "a08940f9ddeac854a6e85157ca21831cc2c7d9673c7268df111e23437a59c749",
-    "video_url": "https://blossom.yakihonne.com/a08940f9ddeac854a6e85157ca21831cc2c7d9673c7268df111e23437a59c749.mp4"
-  },
   "2jUwIKclTkI": {
     "event_id": "346e03f1ac31f3525ee4fa6bcd4de9abfc1467065bdb9f4a5451fae8ac5e3b5a",
     "kind": 22,
@@ -262,20 +248,6 @@
     "title": "Day 1290 thank you @tenshinryu  #dojopop #themembrane",
     "video_sha256": "4f05bb7c26b1c6b4a5f2f9dc9296f495dbee90d61e89e8d7d4bcbff20a68b4a5",
     "video_url": "https://blossom.yakihonne.com/4f05bb7c26b1c6b4a5f2f9dc9296f495dbee90d61e89e8d7d4bcbff20a68b4a5.mp4"
-  },
-  "6birzJnQc40": {
-    "event_id": "c0b4b278f819513d94ed7f740e46d83df85e22370ab5d54a11ff09f83a182c82",
-    "kind": 22,
-    "published_at": 1781141026,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/a109021218de10d2e65ce32ea01dd5ee066005031c7bf06bd2c902021d16d8b9.jpeg",
-    "title": "Tenuguis shipping \ud83d\ude4f\ud83c\udffc\u2694\ufe0f",
-    "video_sha256": "cecc81840e94de544f5b4df7a1fb1bcccaee7ce132802aa1f3e02f1115d1b290",
-    "video_url": "https://blossom.yakihonne.com/cecc81840e94de544f5b4df7a1fb1bcccaee7ce132802aa1f3e02f1115d1b290.mp4"
   },
   "7QycaBOJnAc": {
     "event_id": "88625683b06b7cdbb658d0c96c7d17a4fd59aa888397c3308b62245bff86a9f2",
@@ -455,21 +427,6 @@
     "video_sha256": "e1584df2d0d2b80a92645b2d6365b65d8429fb30d3d0a02b8d69e0c75bb9c782",
     "video_url": "https://blossom.yakihonne.com/e1584df2d0d2b80a92645b2d6365b65d8429fb30d3d0a02b8d69e0c75bb9c782.mp4"
   },
-  "AIME40H6Fiw": {
-    "event_id": "87d1213e0ec7dfbe1b4266a68efc81ead7840983ee981ebea206bf52321814d0",
-    "kind": 22,
-    "published_at": 1781141006,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/ab1328a6e7c628c2ca1c508cf9cd55dd8dd294ad9e4beba4eb67a9264a10a0b8.jpeg",
-    "title": "October 17, 2024",
-    "video_sha256": "ba4c77d5ea95d143dd90aee5de8216d27b6727b5dca51bd293ed88205ccfc112",
-    "video_url": "https://blossom.yakihonne.com/ba4c77d5ea95d143dd90aee5de8216d27b6727b5dca51bd293ed88205ccfc112.mp4"
-  },
   "Ab7gpIc8Qs8": {
     "event_id": "677a35109c4613ca5d8ce87127a57ced2c40fc168f66dafeda6c08bd7b35e759",
     "kind": 22,
@@ -588,21 +545,6 @@
     "video_sha256": "7f5734e68974af2a357fd87200bbc99f4dda57d11a6f3ebc97c36fd6c89d84f2",
     "video_url": "https://blossom.yakihonne.com/7f5734e68974af2a357fd87200bbc99f4dda57d11a6f3ebc97c36fd6c89d84f2.mp4"
   },
-  "CgoVctkPCnw": {
-    "event_id": "afb4a6a75c6fcd37de868883ed02adb79e7131fed9c209629bf48f4202e8ce21",
-    "kind": 22,
-    "published_at": 1781141035,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/ea371f27896d385250b942abfd8d13f8413bbd993f836237c7277af8baa4a6de.jpeg",
-    "title": "Prizes Announced for Global Leaderboard Competition",
-    "video_sha256": "2e0b9eb706d88115044b6ed4adbdc08bebacf193832bc6ebd07c1620a3750910",
-    "video_url": "https://blossom.yakihonne.com/2e0b9eb706d88115044b6ed4adbdc08bebacf193832bc6ebd07c1620a3750910.mp4"
-  },
   "CjjlIofJPIg": {
     "event_id": "b2c4de23fbc5a4e070a12a760496f5a68a3ccceb675995aa8f659864d0e06418",
     "kind": 22,
@@ -705,21 +647,6 @@
     "video_sha256": "cce39d8ff435a07d1cb1821b783e2112e130b8e695f22035699ec564114beab2",
     "video_url": "https://blossom.yakihonne.com/cce39d8ff435a07d1cb1821b783e2112e130b8e695f22035699ec564114beab2.mp4"
   },
-  "E0mehIC2BdA": {
-    "event_id": "e820c4389d1edec362d78b15bad330b7e1cb8f7fc0c6a492f7274246533292b6",
-    "kind": 22,
-    "published_at": 1781141017,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/2753b60d806b979834fe3dddb490f97e65850d2885593ab52c70f4546a67c2f2.jpeg",
-    "title": "Samurai Dandy Visits Sensoji and Discusses Death Awareness Meditation",
-    "video_sha256": "857b36098712d88d91bb5edca97acba21bf6ed67dd8d2bca89093189787b4101",
-    "video_url": "https://blossom.yakihonne.com/857b36098712d88d91bb5edca97acba21bf6ed67dd8d2bca89093189787b4101.mp4"
-  },
   "E7RabSj0ov8": {
     "event_id": "ff10d6371e3fea30647c536f1ae47363253f91594a998dcef744065509f6a4f8",
     "kind": 22,
@@ -749,20 +676,6 @@
     "title": "Dojo Pop Update from Seiseki Koen",
     "video_sha256": "c2f2abd586731d98c4db24932b1b99c5b2d40c8c495a39523c2844062c4803a8",
     "video_url": "https://blossom.yakihonne.com/c2f2abd586731d98c4db24932b1b99c5b2d40c8c495a39523c2844062c4803a8.mp4"
-  },
-  "FRosOMzY-sg": {
-    "event_id": "ce5623729fccc389b376f0505689b55448abacebefc4a80e9ca3e22961ca30ef",
-    "kind": 22,
-    "published_at": 1781140783,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/0129f094ffd54b9728ffff353705bcc2f231dc837030d3cf89b6172a494d9145.jpeg",
-    "title": "Edo jidai tengu mask",
-    "video_sha256": "5a948f2f84ec1c55762dec23a1062f0b0064c9ae3451193aaf288cb0c4484c01",
-    "video_url": "https://blossom.yakihonne.com/5a948f2f84ec1c55762dec23a1062f0b0064c9ae3451193aaf288cb0c4484c01.mp4"
   },
   "Ft-Cp8czuJE": {
     "event_id": "38c752d3e46c46ae0958d869adbd25f7565ba0b1e6f360968b2a94144a53de80",
@@ -986,20 +899,6 @@
     "video_sha256": "bae82fcc9402bccde26b1b05923ce81d71a534c5340a7c936a7d1ebd35eea145",
     "video_url": "https://blossom.yakihonne.com/bae82fcc9402bccde26b1b05923ce81d71a534c5340a7c936a7d1ebd35eea145.mp4"
   },
-  "OJtdQj0nezs": {
-    "event_id": "6837c1dd513fa439a771dd4e45a735af6778f4bf6658f2171e8af872feca60e2",
-    "kind": 22,
-    "published_at": 1781140589,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/785a04625e536e4dc1b0088c09dbe8e0bfe03402de8ae5497c011f1dc226289b.jpeg",
-    "title": "Thank you @tenshinryu",
-    "video_sha256": "d5044aed09e02958b49a11c9c47fc1acb6965facaf77f19d043944a641c41a3b",
-    "video_url": "https://blossom.yakihonne.com/d5044aed09e02958b49a11c9c47fc1acb6965facaf77f19d043944a641c41a3b.mp4"
-  },
   "OtEfg2t5blI": {
     "event_id": "98563601f93f78a44fe9a6e47e12b470172c664f15c29e42a57f48da71a724cd",
     "kind": 22,
@@ -1087,21 +986,6 @@
     "title": "Day 1252 thank you @t@tenshinryu",
     "video_sha256": "0fb70b8ea8ace32ba4f32853bbf7476a10a364a15e8215ee8d79e8655d6fca52",
     "video_url": "https://blossom.yakihonne.com/0fb70b8ea8ace32ba4f32853bbf7476a10a364a15e8215ee8d79e8655d6fca52.mp4"
-  },
-  "QfmUbdGt6_o": {
-    "event_id": "45e0dec85888d0e5844e27ef01eb11b8df215421eec61acefb049113c9e1c406",
-    "kind": 22,
-    "published_at": 1781141184,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/5ec6c684cd5473f8c0dc5d504b2af91d45f699d5378a9b488dd233d3802b4e1a.jpeg",
-    "title": "October 19, 2023",
-    "video_sha256": "413ccdd708acc9b70e447e7fd87aa16f1222ec3947f4fc249bf38ff4e86e9336",
-    "video_url": "https://blossom.yakihonne.com/413ccdd708acc9b70e447e7fd87aa16f1222ec3947f4fc249bf38ff4e86e9336.mp4"
   },
   "RbBDkMREAoY": {
     "event_id": "8f1f863c2eea675673b58b8e255bbdaca39f18078854b10a936a02522f67e53c",
@@ -1235,21 +1119,6 @@
     "video_sha256": "08aa6184eb6175e20c007dd1288d7eeef278377fb61d65fae446e6ec5ec71f10",
     "video_url": "https://blossom.yakihonne.com/08aa6184eb6175e20c007dd1288d7eeef278377fb61d65fae446e6ec5ec71f10.mp4"
   },
-  "TNnWPmSIg7M": {
-    "event_id": "69480be14e1b59ced0d45d9d239f16f33f919971abbaea963b862ba5740d7fd6",
-    "kind": 22,
-    "published_at": 1781140978,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": null,
-    "title": "Raijin Fujin kakuobi from the ZlabDenim Samurai Dandy collection. 2 left dm",
-    "video_sha256": "975fa8b15e67af047beed2c3bbc3e35b07a1d3d3e4567d7cabe8c1632f801926",
-    "video_url": "https://blossom.yakihonne.com/975fa8b15e67af047beed2c3bbc3e35b07a1d3d3e4567d7cabe8c1632f801926.mp4"
-  },
   "U4plDYTt91w": {
     "event_id": "9baa0128ce06915d24a7e7a91bb6638451d780bf359756e830de58b6f12cced4",
     "kind": 22,
@@ -1292,20 +1161,6 @@
     "title": "July 26, 2024",
     "video_sha256": "4ca826536e5c9952b062c1ce8be639748c5efc0e04cddcc8a11424bc7cfdc7ec",
     "video_url": "https://blossom.yakihonne.com/4ca826536e5c9952b062c1ce8be639748c5efc0e04cddcc8a11424bc7cfdc7ec.mp4"
-  },
-  "UTcxW1l4fuc": {
-    "event_id": "a29fe53526f8de06bc2d8d8bcfc1a3c206f6211993c689a11e53195dd9f9d985",
-    "kind": 22,
-    "published_at": 1781141169,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/7b9f3e9c6107062d08d197ca577741b3b9c638093c4fc040e7cd2979fad36689.jpeg",
-    "title": "Tokyo Ebisu Tower Motorcycle test",
-    "video_sha256": "54daeb8fb466784ab94b330dc7242706d5f8f39d0332b9300d950daaddefc4a6",
-    "video_url": "https://blossom.yakihonne.com/54daeb8fb466784ab94b330dc7242706d5f8f39d0332b9300d950daaddefc4a6.mp4"
   },
   "Ul00evCoof4": {
     "event_id": "b9eae43903a3488cc39204f3e63cc3e8ad4347b0b932296af4811cf454e35445",
@@ -1395,20 +1250,6 @@
     "video_sha256": "1d4313d084c5c20eb9749b5c0ce7977285b2aba6673e5eec73a7d0c585145924",
     "video_url": "https://blossom.yakihonne.com/1d4313d084c5c20eb9749b5c0ce7977285b2aba6673e5eec73a7d0c585145924.mp4"
   },
-  "VuLqlxWnHeQ": {
-    "event_id": "656aa1e4ffc5cd44be8210255ec010a847eb8bbdc0695a0a4f387be49bb6e082",
-    "kind": 22,
-    "published_at": 1781140898,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/89e3e71ceefd152df3fcffd02a7700ef2df5701b57c43eb6707a63887ea55e2e.jpeg",
-    "title": "New Dragon Tenugui in the Z-Lab Denim Samurai Dandy shop!",
-    "video_sha256": "86193337952276a94d6fa20e023797ca5b0ac9d7e1fc4b19c47c74e1d3f420a9",
-    "video_url": "https://blossom.yakihonne.com/86193337952276a94d6fa20e023797ca5b0ac9d7e1fc4b19c47c74e1d3f420a9.mp4"
-  },
   "WoVp2XcXmHU": {
     "event_id": "ecd5c470e7795fad14e8f2f06b28bd7a438e3fea25e7a673e0d463632b2d2534",
     "kind": 22,
@@ -1497,21 +1338,6 @@
     "video_sha256": "c79018d1e642d26db4f43b45798fcd8f714700d9a498689f82967c16344433c4",
     "video_url": "https://blossom.yakihonne.com/c79018d1e642d26db4f43b45798fcd8f714700d9a498689f82967c16344433c4.mp4"
   },
-  "aDdW1n1HHsU": {
-    "event_id": "1ae6560f21a1fdd4c28d8d0586bf93deddecf6bbb75ba25f32bfb8ad5572d52e",
-    "kind": 22,
-    "published_at": 1781140685,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/e5c97944c0c25723a2f7a0bc6a81ba293f6aef488fa92732009490fe2ce3f3c3.jpeg",
-    "title": "Dojopop.xyz update",
-    "video_sha256": "c00ae3d7c18cf4c127e5821515d45e2fd001f7a40225b16d06258a7ba0905c0f",
-    "video_url": "https://blossom.yakihonne.com/c00ae3d7c18cf4c127e5821515d45e2fd001f7a40225b16d06258a7ba0905c0f.mp4"
-  },
   "aHo9yFzDQ5E": {
     "event_id": "cd0ba23d1a6e853652c6b3d30a07d8e634c2df973d39491bef5cead9977e4b7d",
     "kind": 22,
@@ -1599,21 +1425,6 @@
     "title": "Day 1145 thank you @tenshinryu  #dojopop",
     "video_sha256": "86f4115e4cc6ca4ef7562f6488fa27394ac56aadf1a162419253fd2e552489f7",
     "video_url": "https://blossom.yakihonne.com/86f4115e4cc6ca4ef7562f6488fa27394ac56aadf1a162419253fd2e552489f7.mp4"
-  },
-  "dbM_sxbXxyM": {
-    "event_id": "dc78872387591414faa742d67e94115682efb2cc4f29c83ae333bfac3d1a8269",
-    "kind": 22,
-    "published_at": 1781140572,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/2476cde5e0f2e8dcba630ad8ba54d1300d6e6383bc00c8a5258d18cf2b7d7d8f.jpeg",
-    "title": "Day 1149 thank you @tenshinryu",
-    "video_sha256": "9299f5a6c60a05d65e8ebad21b1daf57d065214e6b41cda782a8136221901905",
-    "video_url": "https://blossom.yakihonne.com/9299f5a6c60a05d65e8ebad21b1daf57d065214e6b41cda782a8136221901905.mp4"
   },
   "dmg8GSyUVrk": {
     "event_id": "915f451530cd01fb526be6a4c826fc95343fc384d43b5e4d14a3f1c94fedf045",
@@ -1732,21 +1543,6 @@
     "title": "Day 1250 thank you @tenshinryu",
     "video_sha256": "17dd15f7f5147222c70c10ccba7d900bcad61dd56e1d3505c2d560b724d9fe55",
     "video_url": "https://blossom.yakihonne.com/17dd15f7f5147222c70c10ccba7d900bcad61dd56e1d3505c2d560b724d9fe55.mp4"
-  },
-  "gJceflLGrFI": {
-    "event_id": "08944d154d4057c4f0a9dbcf3c24bb6fe357181bf0b8d9ef9cfcf84a81150c70",
-    "kind": 22,
-    "published_at": 1781140793,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://relay.damus.io",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/0b510df164c59878542262ace673c90ae8790963a31191b82b5b0fb432d6a076.jpeg",
-    "title": "Spear Training and Preparing for New Year's Demonstration",
-    "video_sha256": "0a817f91d23d80b555a54f9b5b407dfd9b2c421e3540b9659050c054ed39c35c",
-    "video_url": "https://blossom.yakihonne.com/0a817f91d23d80b555a54f9b5b407dfd9b2c421e3540b9659050c054ed39c35c.mp4"
   },
   "hUpKhRYhcyY": {
     "event_id": "5536d1f71282eae5cf515541cb89fbdb718cdb876ad83c9519efb77ac53115c1",
@@ -1894,20 +1690,6 @@
     "title": "June 24, 2024",
     "video_sha256": "6996e26af486ddda74dbf071a131c2cd4b45940007634ec3699ec723fc73bc56",
     "video_url": "https://blossom.yakihonne.com/6996e26af486ddda74dbf071a131c2cd4b45940007634ec3699ec723fc73bc56.mp4"
-  },
-  "mI4M5VE-g5w": {
-    "event_id": "7bb7943295d21aa5cd4bf847366a955a0323622627f5d663fd49dc0efee17011",
-    "kind": 22,
-    "published_at": 1781141192,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/290b0c5335e8413d3c79521e470ce1618e104d6ac70abb717d4c415f23a5c1d2.jpeg",
-    "title": "#tenshinryu 4ever",
-    "video_sha256": "73c61df45e9e5636055391e1a5b11f7df50e3daac7947856eaf7f6a2702909da",
-    "video_url": "https://blossom.yakihonne.com/73c61df45e9e5636055391e1a5b11f7df50e3daac7947856eaf7f6a2702909da.mp4"
   },
   "mMALMP2NzVQ": {
     "event_id": "b85d52b64d355a76b8ca88c3c9a4dc622c2150f1e19ef713130993e56755eead",
@@ -2073,20 +1855,6 @@
     "video_sha256": "39aafed6ff43b1fc7c95c91c4b5f016c7e18a1088c5a5b990ec98d5204aa168b",
     "video_url": "https://blossom.yakihonne.com/39aafed6ff43b1fc7c95c91c4b5f016c7e18a1088c5a5b990ec98d5204aa168b.mp4"
   },
-  "qKqXgbdjN7E": {
-    "event_id": "4fb69d003b6defa3a69adcaa6e37dd8702a54f43d71083b6fd720d97799faa3d",
-    "kind": 22,
-    "published_at": 1781140801,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/6126bb738fb4940a88f8c37dcc876e3f6671d803439aec0774c933d95baf0c12.jpeg",
-    "title": "December 17, 2024",
-    "video_sha256": "a049c1f5e10e012f139cccb7e423ac4e25ac87995720d87618e2570dd0caecae",
-    "video_url": "https://blossom.yakihonne.com/a049c1f5e10e012f139cccb7e423ac4e25ac87995720d87618e2570dd0caecae.mp4"
-  },
   "qQtknHWAmQ0": {
     "event_id": "c95b7d8ff3738b2b6accbe1969ad958d17d5cd8bbe65a7e3dde6004a3fcde5a0",
     "kind": 22,
@@ -2145,34 +1913,6 @@
     "title": "Day 1164 thank you @tenshinryu",
     "video_sha256": "1cc5c5e92a79c06c807288d8040dc6fef8234e56f3b8c88f464e13f786761592",
     "video_url": "https://blossom.yakihonne.com/1cc5c5e92a79c06c807288d8040dc6fef8234e56f3b8c88f464e13f786761592.mp4"
-  },
-  "sXzGwdZH71M": {
-    "event_id": "862dff4b37b5406e2e6e6fd0925708757024d75104b72d09bab43b9bbb4633d9",
-    "kind": 22,
-    "published_at": 1781140961,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/84a4af7e79f00a5629f8e55148ad7772e9088081ba799c88cc696182d4ce254c.jpeg",
-    "title": "Samurai Dandy Showcases Rare Vintage Oshima Tiger Haori in Ginza",
-    "video_sha256": "11add2eb3a79e721164b894f282fdc5198189ea3643c68a0bf6e8a2f320b91fc",
-    "video_url": "https://blossom.yakihonne.com/11add2eb3a79e721164b894f282fdc5198189ea3643c68a0bf6e8a2f320b91fc.mp4"
-  },
-  "sZCtlkm0Iis": {
-    "event_id": "a70a023ed3a0ca032b7a2082239df2f3bb4405c964d4eccd28a273d85894dae0",
-    "kind": 22,
-    "published_at": 1781140849,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/d88ca79edd88801f564d733eca8203be1be51747adc58af037b18c535af59be7.jpeg",
-    "title": "Edo Era Fujin - God of Wind Tsuba - iron by Ishiguro Masaaki",
-    "video_sha256": "1d998a1f8c15e02b9fbc97a3762ea09ea49d895473ef21efe867f677d14bff4a",
-    "video_url": "https://blossom.yakihonne.com/1d998a1f8c15e02b9fbc97a3762ea09ea49d895473ef21efe867f677d14bff4a.mp4"
   },
   "tJis8xYCClc": {
     "event_id": "79c0316f60723c3b720947489dad1517e8d47cd10a913111bba371ec8b063850",
@@ -2337,20 +2077,6 @@
     "video_sha256": "a2c1f01087ae597b8cd92fe4ef5d9d56804c23231d508587fdeb3c070b856a0a",
     "video_url": "https://blossom.yakihonne.com/a2c1f01087ae597b8cd92fe4ef5d9d56804c23231d508587fdeb3c070b856a0a.mp4"
   },
-  "vvl5SYJQHBk": {
-    "event_id": "f3911eeeec00eda6a47b013d5a6095b8dd004d4fc150c2e328016f273a2de79d",
-    "kind": 22,
-    "published_at": 1781140835,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/98d80bbd6371ad921dccb2f8b7b703aa0dfccdc25bdf4440910845444b85e7c6.jpeg",
-    "title": "Magsafe iphone cases in the shop. Z-Lab Denim Samurai Dandy collection.  Limited supply.",
-    "video_sha256": "d29fb6f5e15ab75e86a79da16d374c34a4d52885073e9f204be2ba721e3355f2",
-    "video_url": "https://blossom.yakihonne.com/d29fb6f5e15ab75e86a79da16d374c34a4d52885073e9f204be2ba721e3355f2.mp4"
-  },
   "w1l5s9NKODA": {
     "event_id": "6acf5c908af9269e789dc18df3c48beb405e26040f0482a46072f966f67127eb",
     "kind": 22,
@@ -2422,20 +2148,6 @@
     "title": "Raijin Fujin Kakuobi for swordsmen.",
     "video_sha256": "2a77f8001d279b4a3c524ec5cdfe8cd7d1f16127d22a0c49ac74e3c90fedd5bf",
     "video_url": "https://blossom.yakihonne.com/2a77f8001d279b4a3c524ec5cdfe8cd7d1f16127d22a0c49ac74e3c90fedd5bf.mp4"
-  },
-  "xoqJBl3JewQ": {
-    "event_id": "2dffacaac3a3a0e12eadf4d6361dbf09fd895016feac415414b767ffb268e865",
-    "kind": 22,
-    "published_at": 1781140691,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/9a37122256a6b0ab9391c5434d1aa1695903ec2d439a15ef47eeb373b2a6095e.jpeg",
-    "title": "Day 1142",
-    "video_sha256": "314a867de78aacd9c89b678c5bdba8f2fce3dce289d705a4a84e0fa53d5b6bda",
-    "video_url": "https://blossom.yakihonne.com/314a867de78aacd9c89b678c5bdba8f2fce3dce289d705a4a84e0fa53d5b6bda.mp4"
   },
   "xpgwwQHqDWk": {
     "event_id": "6824eed1e841396a1d97b04dc4c2e7ce15ec41a234dfd2bbf786cbb7393f71f8",
@@ -2525,20 +2237,6 @@
     "title": "Day 1261 thank you @tenshinryu",
     "video_sha256": "0c3feb345d31221c1d144a3ffa767511c62aeabfca7061ba65b124190d05a250",
     "video_url": "https://blossom.yakihonne.com/0c3feb345d31221c1d144a3ffa767511c62aeabfca7061ba65b124190d05a250.mp4"
-  },
-  "z-vME90l6jY": {
-    "event_id": "18bc24461c637f32d49324c56205b02b3e37f057eb2d2a99fba32f55d61198a9",
-    "kind": 22,
-    "published_at": 1781141154,
-    "relays_accepted": [
-      "ws://relay-2:7777",
-      "wss://nostr-01.yakihonne.com",
-      "wss://nos.lol"
-    ],
-    "thumb_url": "https://blossom.yakihonne.com/822b8b46a05108b5a45d708d9a7c1c9b59eeb4d9f040d9e875f126360aa3d32b.jpeg",
-    "title": "Practice #dojopop 5-22-24",
-    "video_sha256": "37ba10306c1ff262dbd693a08140cb7a081f8727009f66e464559e73fc03d73a",
-    "video_url": "https://blossom.yakihonne.com/37ba10306c1ff262dbd693a08140cb7a081f8727009f66e464559e73fc03d73a.mp4"
   },
   "zAyiK8M5ikA": {
     "event_id": "69ac7955ea763d77f8e4481ff1da547640045ffa674e3d1a080445ee9a6aaa3d",

@@ -17,11 +17,10 @@ doppler run -- uv run --project pipeline pipeline/pipeline.py \
   override, e.g. `--server http://localhost:3000` for the local
   `blossom-server/`).
 - Default relays, published primary-then-public: **`ws://relay-2:7777`**
-  (self-hosted DojoPop relay over Tailscale, first, sequentially — `relay-2`
-  is an SSH alias so the connection rewrites it to the Tailscale IP, see
-  `RELAY_HOST_ALIASES` in `common.py`), then YakiHonne
-  (`nostr-01/02.yakihonne.com`) + `relay.damus.io` + `nos.lol` in parallel
-  (`--relay wss://…` to override, repeatable). Per-relay failure is tolerated.
+  (tailnet) and **`wss://relay.dojopop.live`** (public Cloudflare Tunnel),
+  first sequentially, then YakiHonne (`nostr-01.yakihonne.com`) +
+  `relay.damus.io` + `nos.lol` in parallel (`--relay wss://…` to override,
+  repeatable). Per-relay failure is tolerated.
 - Idempotent: `data/published.json` records published YouTube ids; re-runs
   skip them (`--force` to re-publish).
 - `--dry-run`: downloads, hashes, generates the thumbnail, builds + signs +
@@ -49,6 +48,16 @@ CLI overrides: `--kind`, `--hashtag` (repeatable; replaces the list).
 timestamp when yt-dlp provides one, otherwise the upload date at midnight
 UTC); `duration`/`dim` come from the yt-dlp info of the actual downloaded
 file.
+
+## Retract a published video
+
+```bash
+doppler run -- uv run --project pipeline pipeline/delete_published.py \
+  --yt-id <youtube-id> --reason "posted in error"
+```
+
+Sends NIP-09 kind-5 deletion, Blossom BUD-02 delete, and removes the entry from
+`data/published.json`.
 
 ## Individual stages
 

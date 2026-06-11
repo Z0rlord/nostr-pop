@@ -30,11 +30,9 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
 - **ffmpeg without Homebrew:** Homebrew is unusable (dirs owned by another
   user, `sudo chown` needed), so yt-dlp merging and thumbnails use the static
   binary from `imageio-ffmpeg`; system ffmpeg is preferred when present.
-- **Remotes:** `origin` = GitHub `Z0rlord/nostr-pop` (exists, verified 200);
-  `gitlab` = `git@gitlab.com:Z0rlord/nostr-pop.git` **placeholder** —
-  `GITLAB_TOKEN` in Doppler is expired, so the real GitLab path could not be
-  verified. Fix with:
-  `git remote set-url gitlab <real-url>` once known.
+- **Remotes:** `origin` = GitHub `Z0rlord/nostr-pop`;
+  `gitlab` = `https://gitlab.com/zbarber1/nostr-pop.git` (created via API,
+  both remotes synced at `2587a8d`).
 - **Blossom whitelist:** hex pubkey
   `b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a`
   (decoded from the dojopop npub) scoped in `blossom-server/config.yml` rules
@@ -76,11 +74,8 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
   `sudo chown -R perseus-air /opt/homebrew …` command brew prints, then
   optionally `brew install yt-dlp ffmpeg deno` (deno silences yt-dlp's JS
   runtime warning).
-- [x] GitLab: token rotated; created `gitlab.com/zbarber1/nostr-pop` (public)
-  via API and pushed `main` (token passed via env-based credential helper at
-  push time — nothing stored in `.git/config`).
-- [ ] GitHub push auth: no SSH key for github.com and no `gh` CLI — commits
-  are local only. `brew install gh && gh auth login`, then `git push -u origin main`.
+- [x] GitLab: `gitlab.com/zbarber1/nostr-pop` created; `main` pushed.
+- [x] GitHub: `origin` synced (`main` at `2587a8d`).
 - [x] Test batch published (2026-06-11): 3 of the 156 staged shorts
   (HzPwWEm2y5s newest, TN5WBkrinEk mid-range, y7cVcxIsDrE oldest 2023) —
   video + thumb on blossom.yakihonne.com (HTTP 200, sizes match), kind-22
@@ -102,6 +97,12 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
   The 21 videos absent from the preview run were under-enumeration in that
   first pass, not channel expansion. The 37 unpublished tab entries are all
   >90 s (duration filter).
+- **Retraction (2026-06-11):** 21 non-practice promo/product shorts retracted via
+  `delete_published.py` (NIP-09 kind-5 to relay-2, relay.dojopop.live,
+  nostr-01, damus, nos.lol). Events no longer returned by REQ on relay-2 and
+  nostr-01. Blossom DELETE returned HTTP 200 per blob but YakiHonne CDN still
+  serves some URLs (likely their caching policy). **156 practice shorts remain**
+  in `data/published.json`.
 - **Guard added:** `/shorts` URLs are pinned to the tab's flat-playlist id set
   before download; any out-of-tab id aborts the run. `delete_published.py`
   added for retractions (NIP-09 kind-5 + Blossom BUD-02 delete + state
@@ -126,5 +127,6 @@ local blossom-server instead of YakiHonne.
 
 - Doppler: project `dojopop`, config `prd_zorie`, secret `NOSTR_NSEC` (name only)
 - GitHub: https://github.com/Z0rlord/nostr-pop (origin)
+- GitLab: https://gitlab.com/zbarber1/nostr-pop (gitlab remote)
 - Blossom: https://blossom.yakihonne.com, hzrd149/blossom-server
 - Specs: NIP-01, NIP-71, NIP-92/94, BUD-02, BUD-06
