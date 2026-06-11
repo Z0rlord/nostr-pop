@@ -1,0 +1,57 @@
+# DojoPop Relay — nostr-rs-relay configuration
+# Deployed on relay-2 (Hetzner, Tailscale 100.125.184.46), host port 7777.
+# Upstream reference: https://github.com/scsibug/nostr-rs-relay/blob/master/config.toml
+
+[info]
+# Current URL (Tailscale LAN). Switch to wss://relay.dojopop.xyz once TLS is
+# fronted by a Cloudflare Tunnel / reverse proxy (see relay/README.md).
+relay_url = "ws://relay-2:7777"
+name = "DojoPop Relay"
+description = "Primary relay for DojoPop proof-of-practice events (kind 34567) and practice video metadata."
+# Administrative contact pubkey (hex of npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg)
+pubkey = "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a"
+# TODO: replace placeholders with a real contact + hosted icon.
+contact = "mailto:admin@dojopop.xyz"
+relay_icon = "https://dojopop.xyz/relay-icon.png"
+
+[diagnostics]
+
+[database]
+engine = "sqlite"
+# Mounted as a named docker volume (relay-data) in docker-compose.yml.
+data_directory = "/usr/src/app/db"
+
+[network]
+address = "0.0.0.0"
+port = 8080
+
+[options]
+reject_future_seconds = 1800
+
+[limits]
+messages_per_sec = 50
+max_event_bytes = 131072
+max_ws_message_bytes = 262144
+max_ws_frame_bytes = 262144
+
+# Only the kinds DojoPop actually needs. Everything else is rejected.
+#     0  profile metadata (relay clients show author info)
+#     1  short text notes (announcements / test events)
+#     3  contact list
+#     5  deletion requests (NIP-09, lets us retract events)
+#    21  video event (NIP-71, current)
+#    22  short-form video event (NIP-71, current — pipeline publishes these)
+#  1063  file metadata (NIP-94, Blossom blob descriptors)
+# 10002  relay list metadata (NIP-65, so clients can discover this relay)
+# 34235  addressable video event (NIP-71, legacy form)
+# 34236  addressable short video event (NIP-71, legacy form)
+# 34567  DojoPop proof-of-practice (protocol's own kind)
+# Deliberately excluded: 24242 (Blossom auth — consumed by the Blossom
+# server over HTTP, never published to a relay).
+event_kind_allowlist = [0, 1, 3, 5, 21, 22, 1063, 10002, 34235, 34236, 34567]
+
+[authorization]
+# Only these authors may publish. Add dojo member pubkeys (32-byte hex) here.
+pubkey_whitelist = [
+  "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a",
+]

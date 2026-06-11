@@ -28,15 +28,16 @@ See [docs/sessions/README.md](./docs/sessions/README.md).
 ```
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
 blossom-server/   # self-hosted hzrd149/blossom-server (docker compose)
+relay/            # nostr-rs-relay 0.10.0 (docker compose) — deployed on relay-2:7777, kind 34567 allowlist
 scripts/          # Google Drive backup tooling (root pyproject.toml)
 data/             # downloaded videos + publish state (gitignored)
 ```
 
 Publish videos: `doppler run -- uv run --project pipeline pipeline/pipeline.py --url <youtube-url> --max-duration 90` (see `pipeline/README.md`).
 
-Planned: `dojopop/` Rust CLI (post, verify, config, relay-start) + `relay/`
-nostr-rs-relay, kind **34567** whitelist, port 7777. Blossom upload, relay
-publish primary-then-public.
+Primary relay: `ws://relay-2:7777` (Hetzner over Tailscale; `wss://relay.dojopop.xyz`
+planned — see `relay/README.md`). Planned: `dojopop/` Rust CLI (post, verify,
+config, relay-start). Blossom upload, relay publish primary-then-public.
 
 Git remotes: `origin` = GitHub `Z0rlord/nostr-pop`; `gitlab` = placeholder
 (token expired — confirm URL, then `git remote set-url gitlab <url>`).
