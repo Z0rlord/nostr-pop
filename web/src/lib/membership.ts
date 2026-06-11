@@ -133,14 +133,15 @@ export async function activateMember(
 export async function updateMemberStatus(
   subscriptionId: string,
   status: MemberStatus
-): Promise<void> {
+): Promise<Member | undefined> {
   const store = await readStore();
   const member = store.members.find(
     (m) => m.stripeSubscriptionId === subscriptionId
   );
-  if (!member) return;
+  if (!member) return undefined;
   member.status = status;
   await writeStore(store);
+  return member;
 }
 
 export async function listActiveMembers(): Promise<Member[]> {

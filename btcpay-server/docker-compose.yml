@@ -1,0 +1,57 @@
+# BTCPay Server scaffold for DojoPop Lightning membership.
+# Requires an external bitcoind or nbxplorer+node — see README.md.
+#
+# Not started by default. Deploy when ready:
+#   ./deploy.sh relay-2
+services:
+  btcpayserver:
+    image: btcpayserver/btcpayserver:2.0.4
+    container_name: dojopop-btcpay
+    restart: unless-stopped
+    ports:
+      - "49392:49392"
+    environment:
+      - BTCPAY_HOST=${BTCPAY_HOST:-btcpay.dojopop.live}
+      - BTCPAY_PROTOCOL=${BTCPAY_PROTOCOL:-https}
+      - BTCPAY_CHAINS=BTC
+      - BTCPAY_BTCEXPLORERURL=http://nbxplorer:32838/
+      - BTCPAY_BTCLIGHTNING=${BTCPAY_BTCLIGHTNING:-type=clightning;server=unix:///root/.lightning/lightning-rpc}
+      - BTCPAY_POSTGRES=User ID=btcpay;Password=${BTCPAY_DB_PASSWORD};Host=postgres;Port=5432;Database=btcpay
+      - BTCPAY_EXPLORERPOSTGRES=User ID=nbxplorer;Password=${BTCPAY_DB_PASSWORD};Host=postgres;Port=5432;Database=nbxplorer
+      - BTCPAY_SSHTRUSTEDFINGERPRINTS=
+      - BTCPAY_SSHKEYFILE=
+    volumes:
+      - btcpay-data:/datadir
+    depends_on:
+      - postgres
+      - nbxplorer
+
+  nbxplorer:
+    image: nicolasdorier/nbxplorer:2.5.20
+    container_name: dojopop-nbxplorer
+    restart: unless-stopped
+    environment:
+      - NBXPLORER_NETWORK=mainnet
+      - NBXPLORER_CHAINS=btc
+      - NBXPLORER_BTCRPCURL=${BITCOIN_RPC_URL:-http://bitcoind:8332/}
+      - NBXPLORER_BTCRPCUSER=${BITCOIN_RPC_USER:-bitcoin}
+      - NBXPLORER_BTCRPCPASSWORD=${BITCOIN_RPC_PASSWORD}
+      - NBXPLORER_POSTGRES=User ID=nbxplorer;Password=${BTCPAY_DB_PASSWORD};Host=postgres;Port=5432;Database=nbxplorer
+    volumes:
+      - nbxplorer-data:/datadir
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: dojopop-btcpay-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${BTCPAY_DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  btcpay-data:
+  nbxplorer-data:
+  postgres-data:

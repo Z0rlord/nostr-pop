@@ -64,9 +64,20 @@ export function membershipSats(): number {
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_MEMBERSHIP_SATS;
 }
 
-export async function getInvoice(id: string): Promise<LightningInvoiceRecord | undefined> {
+export async function getInvoice(
+  id: string
+): Promise<LightningInvoiceRecord | undefined> {
   const store = await readStore();
   return store.invoices.find((i) => i.id === id);
+}
+
+export async function findInvoiceByExternalId(
+  externalOrInternalId: string
+): Promise<LightningInvoiceRecord | undefined> {
+  const store = await readStore();
+  return store.invoices.find(
+    (i) => i.id === externalOrInternalId || i.externalId === externalOrInternalId
+  );
 }
 
 export async function saveInvoice(
@@ -79,7 +90,9 @@ export async function saveInvoice(
   await writeStore(store);
 }
 
-export async function markInvoicePaid(id: string): Promise<LightningInvoiceRecord | undefined> {
+export async function markInvoicePaid(
+  id: string
+): Promise<LightningInvoiceRecord | undefined> {
   const store = await readStore();
   const invoice = store.invoices.find((i) => i.id === id);
   if (!invoice) return undefined;
@@ -87,6 +100,44 @@ export async function markInvoicePaid(id: string): Promise<LightningInvoiceRecor
   invoice.paidAt = new Date().toISOString();
   await writeStore(store);
   return invoice;
+}
+
+async function fetchBolt11(
+  externalId: string
+): Promise<{ bolt11?: string; checkoutLink?: string }> {
+  const base = process.env.BTCPAY_URL!.replace(/\/$/, "");
+  const storeId = process.env.BTCPAY_STORE_ID!;
+
+  const pmRes = await fetch(
+    `${base}/api/v1/stores/${storeId}/invoices/${externalId}/payment-methods`,
+    { headers: { Authorization: `token ${process.env.BTCPAY_API_KEY}` } }
+  );
+  if (pmRes.ok) {
+    const methods = (await pmRes.json()) as Array<{
+      paymentMethod?: string;
+      destination?: string;
+      paymentLink?: string;
+    }>;
+    const ln = methods.find(
+      (m) =>
+        m.paymentMethod?.includes("Lightning") ||
+        m.paymentMethod === "BTC-LN"
+    );
+    if (ln?.destination) {
+      return { bolt11: ln.destination, checkoutLink: ln.paymentLink };
+    }
+  }
+
+  const invRes = await fetch(
+    `${base}/api/v1/stores/${storeId}/invoices/${externalId}`,
+    { headers: { Authorization: `token ${process.env.BTCPAY_API_KEY}` } }
+  );
+  if (invRes.ok) {
+    const inv = (await invRes.json()) as { checkoutLink?: string };
+    return { checkoutLink: inv.checkoutLink };
+  }
+
+  return {};
 }
 
 interface CreateInvoiceInput {
@@ -121,7 +172,7 @@ export async function createLightningInvoice(
       invoice,
       configured: false,
       setupHint:
-        "Add BTCPAY_URL, BTCPAY_API_KEY, and BTCPAY_STORE_ID to Doppler to enable Lightning invoices.",
+        "Add BTCPAY_URL, BTCPAY_API_KEY, and BTCPAY_STORE_ID to Doppler. See btcpay-server/README.md.",
     };
   }
 
@@ -137,6 +188,7 @@ export async function createLightningInvoice(
       amount: (amountSats / 100_000_000).toFixed(8),
       currency: "BTC",
       metadata: {
+        memberInvoiceId: id,
         npub: input.npub,
         email: input.email || "",
         membership: "dojopop-monthly",
@@ -158,13 +210,15 @@ export async function createLightningInvoice(
     checkoutLink: string;
   };
 
+  const payment = await fetchBolt11(data.id);
+
   const invoice: LightningInvoiceRecord = {
     id,
     npub: input.npub,
     email: input.email,
     amountSats,
-    bolt11: undefined,
-    checkoutLink: data.checkoutLink,
+    bolt11: payment.bolt11,
+    checkoutLink: payment.checkoutLink || data.checkoutLink,
     provider: "btcpay",
     status: "pending",
     createdAt: new Date().toISOString(),
@@ -193,6 +247,13 @@ export async function refreshInvoiceStatus(
   if (!res.ok) return invoice;
 
   const data = (await res.json()) as { status: string };
+  if (!invoice.bolt11) {
+    const payment = await fetchBolt11(invoice.externalId);
+    invoice.bolt11 = payment.bolt11;
+    invoice.checkoutLink = payment.checkoutLink || invoice.checkoutLink;
+    await saveInvoice(invoice);
+  }
+
   if (data.status === "Settled" || data.status === "Processing") {
     return markInvoicePaid(id);
   }

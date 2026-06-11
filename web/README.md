@@ -13,9 +13,18 @@ on Nostr with **$0.99/month** membership via Stripe or Lightning.
 
 ## Membership v1
 
-After payment, the member's **npub** is stored as `active`. Operators manually add
-active member pubkeys to `relay/config.toml` → `authorization.pubkey_whitelist`.
-Future: automated whitelist sync, `#dojopop-member` tag feeds.
+After payment, the member's **npub** is stored as `active`. Webhooks automatically
+sync active member pubkeys (decoded to hex) into `relay/config.toml`
+`pubkey_whitelist` and restart `dojopop-relay`. Admin pubkey is always included.
+
+Manual sync:
+
+```bash
+doppler run --project dojopop --config prd_zorie -- ./web/scripts/sync-relay-whitelist.sh
+```
+
+On subscription cancel/expiry, the member is removed from the whitelist on the
+next webhook or manual sync. nostr-rs-relay requires a container restart (no SIGHUP).
 
 ## Environment variables (names only)
 
@@ -31,10 +40,14 @@ Set via Doppler project `dojopop`, config `prd_zorie`:
 | `BTCPAY_URL` | Lightning | BTCPay base URL |
 | `BTCPAY_API_KEY` | Lightning | BTCPay API token |
 | `BTCPAY_STORE_ID` | Lightning | BTCPay store id |
+| `BTCPAY_WEBHOOK_SECRET` | Lightning | BTCPay webhook HMAC secret |
 | `MEMBERSHIP_DATA_DIR` | no | Default `./data` (Docker: `/app/data`) |
+| `RELAY_CONFIG_PATH` | prod | `/relay/config.toml` (mounted from relay-2) |
+| `RELAY_CONTAINER_NAME` | prod | `dojopop-relay` |
+| `DOCKER_GID` | prod | Host docker group id for container restart |
 
-**Lightning:** No Lightning/BTCPay/OpenNode keys exist in Doppler today. Stripe is
-fully wired; Lightning runs in **scaffold mode** until `BTCPAY_*` vars are added.
+**Lightning:** No `BTCPAY_*` secrets in Doppler yet. Integration is production-ready;
+see `btcpay-server/README.md` for deploy or external BTCPay setup.
 
 ## Local development
 

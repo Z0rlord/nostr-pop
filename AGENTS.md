@@ -26,7 +26,8 @@ See [docs/sessions/README.md](./docs/sessions/README.md).
 ## Layout
 
 ```
-web/              # Next.js landing + $0.99/mo membership (Stripe + Lightning scaffold)
+web/              # Next.js landing + $0.99/mo membership; auto relay whitelist sync
+btcpay-server/    # BTCPay docker scaffold for Lightning (not deployed yet)
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
 blossom-server/   # self-hosted hzrd149/blossom-server (docker compose)
 relay/            # nostr-rs-relay 0.10.0 (docker compose) — deployed on relay-2:7777, kind 34567 allowlist

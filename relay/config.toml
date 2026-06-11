@@ -51,7 +51,8 @@ max_ws_frame_bytes = 262144
 event_kind_allowlist = [0, 1, 3, 5, 21, 22, 1063, 10002, 34235, 34236, 34567]
 
 [authorization]
-# Only these authors may publish. Add dojo member pubkeys (32-byte hex) here.
+# Only these authors may publish. Member pubkeys are auto-synced from web members.json
+# via web/scripts/sync-relay-whitelist.sh (admin pubkey always included).
 pubkey_whitelist = [
   "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a",
 ]

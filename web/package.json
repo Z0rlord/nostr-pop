@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "stripe:ensure-price": "node scripts/ensure-stripe-price.mjs"
+    "stripe:ensure-price": "node scripts/ensure-stripe-price.mjs",
+    "sync:relay-whitelist": "node scripts/sync-relay-whitelist.mjs"
   },
   "dependencies": {
     "next": "^14.2.29",
+    "nostr-tools": "^2.10.4",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

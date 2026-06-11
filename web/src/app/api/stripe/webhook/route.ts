@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import {
-  activateMember,
-  findMemberByStripeSubscription,
-  updateMemberStatus,
-} from "@/lib/membership";
+import { activateMember, updateMemberStatus } from "@/lib/membership";
 import { getStripe } from "@/lib/stripe";
+import { onMembershipChanged } from "@/lib/webhook-side-effects";
 
 export const runtime = "nodejs";
 
@@ -33,6 +30,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
+  let shouldSync = false;
+
   try {
     switch (event.type) {
       case "checkout.session.completed": {
@@ -54,6 +53,7 @@ export async function POST(req: NextRequest) {
             stripeSubscriptionId: subId,
             paymentMethod: "stripe",
           });
+          shouldSync = true;
         }
         break;
       }
@@ -65,12 +65,15 @@ export async function POST(req: NextRequest) {
             : sub.status === "canceled"
               ? "canceled"
               : "expired";
-        await updateMemberStatus(sub.id, status);
+        const member = await updateMemberStatus(sub.id, status);
+        if (member && status !== "active") shouldSync = true;
+        if (member && status === "active") shouldSync = true;
         break;
       }
       case "customer.subscription.deleted": {
         const sub = event.data.object as Stripe.Subscription;
-        await updateMemberStatus(sub.id, "canceled");
+        const member = await updateMemberStatus(sub.id, "canceled");
+        if (member) shouldSync = true;
         break;
       }
       default:
@@ -79,6 +82,10 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     console.error("stripe webhook handler error", event.type, e);
     return NextResponse.json({ error: "Handler failed" }, { status: 500 });
+  }
+
+  if (shouldSync) {
+    await onMembershipChanged(`stripe:${event.type}`);
   }
 
   return NextResponse.json({ received: true });

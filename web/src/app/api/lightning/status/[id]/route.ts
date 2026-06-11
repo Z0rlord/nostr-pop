@@ -5,16 +5,20 @@ import {
   lightningConfigured,
   refreshInvoiceStatus,
 } from "@/lib/lightning";
+import { onMembershipChanged } from "@/lib/webhook-side-effects";
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    let invoice = await refreshInvoiceStatus(params.id);
-    if (!invoice) {
+    const before = await refreshInvoiceStatus(params.id);
+    if (!before) {
       return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
     }
+
+    let invoice = before;
+    let activated = false;
 
     if (invoice.status === "paid") {
       const member = await findMemberByLightningInvoice(invoice.id);
@@ -23,6 +27,8 @@ export async function GET(
           lightningInvoiceId: invoice.id,
           paymentMethod: "lightning",
         });
+        await onMembershipChanged("lightning:poll-paid");
+        activated = true;
       }
     }
 
@@ -41,7 +47,9 @@ export async function GET(
         ? undefined
         : "Add BTCPAY_URL, BTCPAY_API_KEY, and BTCPAY_STORE_ID to enable live Lightning.",
       checkoutLink: invoice.checkoutLink,
+      bolt11: invoice.bolt11,
       qrDataUrl,
+      activated,
     });
   } catch (e) {
     console.error("lightning status error", e);
