@@ -21,6 +21,14 @@ from common import VIDEOS_DIR, find_ffmpeg
 MP4_FORMAT = "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/b"
 
 
+def get_tab_video_ids(url: str) -> set[str]:
+    """Authoritative id set for a channel-tab URL via a flat-playlist pass."""
+    with yt_dlp.YoutubeDL({"extract_flat": True, "quiet": True, "noprogress": True}) as ydl:
+        info = ydl.extract_info(url, download=False)
+    entries = info.get("entries") or []
+    return {e["id"] for e in entries if e and e.get("id")}
+
+
 def download(url: str, out_dir: Path, max_duration: int | None = None) -> list[dict]:
     """Download videos; return a list of normalized metadata dicts.
 
@@ -28,6 +36,18 @@ def download(url: str, out_dir: Path, max_duration: int | None = None) -> list[d
                 filepath, info_json}
     """
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    # GUARD: for a /shorts tab URL, pin the exact id set of that tab up front.
+    # yt-dlp can normalize handle/tab URLs in surprising ways; anything it
+    # downloads that is not in the tab's own flat listing is rejected, so a
+    # full-channel expansion can never leak into publishing.
+    allowed_ids: set[str] | None = None
+    if "/shorts" in url:
+        allowed_ids = get_tab_video_ids(url)
+        if not allowed_ids:
+            raise RuntimeError(f"shorts guard: flat-playlist returned no ids for {url}")
+        print(f"[guard] shorts tab pinned to {len(allowed_ids)} video ids")
+
     ydl_opts: dict = {
         "format": MP4_FORMAT,
         "merge_output_format": "mp4",
@@ -56,6 +76,13 @@ def download(url: str, out_dir: Path, max_duration: int | None = None) -> list[d
             # filtered out (duration) or download failed
             continue
         results.append(normalize_entry(entry, Path(filepath)))
+
+    if allowed_ids is not None:
+        violations = [r["id"] for r in results if r["id"] not in allowed_ids]
+        assert not violations, (
+            f"shorts guard: yt-dlp returned {len(violations)} video(s) outside "
+            f"the {url} tab listing: {violations} — refusing to continue"
+        )
     return results
 
 

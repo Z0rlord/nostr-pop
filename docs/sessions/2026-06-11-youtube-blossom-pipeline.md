@@ -89,10 +89,24 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
   YakiHonne. `nostr-02.yakihonne.com` rejected all (server-side: HTTP 502 /
   "mdb_txn_commit: No space left on device" — their disk, not us).
   State in `data/published.json` (now git-tracked).
-- [ ] Remaining 153 shorts: same path, pending user go-ahead
-  (`doppler run -- uv run --project pipeline pipeline/pipeline.py --url
-  https://www.youtube.com/@Z0rlord/shorts --max-duration 90` — published ids
-  are skipped automatically).
+- [x] Full batch published (2026-06-11): **177 total** (3 test + 174 batch).
+  Per-relay: relay-2 174/174, nostr-01.yakihonne 174/174, nos.lol 174/174,
+  damus 118/174 (rate-limit "noting too much" + CF 520s), nostr-02 0/174
+  (disk full / 502 — server-side). Every event accepted by ≥3 relays.
+  ~2.2 GB uploaded to blossom.yakihonne.com.
+- **Shorts-only audit (after user concern):** all 177 published ids verified
+  to be in the Shorts tab two independent ways — membership in
+  `yt-dlp --flat-playlist` of `/@Z0rlord/shorts` (playlist "Z0r Lord -
+  Shorts", 214 ids) and `https://www.youtube.com/shorts/<id>` returning
+  HTTP 200 (regular videos 303-redirect). **Zero non-shorts published.**
+  The 21 videos absent from the preview run were under-enumeration in that
+  first pass, not channel expansion. The 37 unpublished tab entries are all
+  >90 s (duration filter).
+- **Guard added:** `/shorts` URLs are pinned to the tab's flat-playlist id set
+  before download; any out-of-tab id aborts the run. `delete_published.py`
+  added for retractions (NIP-09 kind-5 + Blossom BUD-02 delete + state
+  removal): `doppler run -- uv run --project pipeline
+  pipeline/delete_published.py --yt-id <id> --reason "posted in error"`.
 - Metadata is now configurable via `pipeline/metadata.yml`
   (hashtags, content/alt templates, content-warning, kind); `published_at` is
   the original YouTube publish time.
