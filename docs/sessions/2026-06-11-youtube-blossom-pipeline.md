@@ -81,11 +81,18 @@ remotes. Fixed the Doppler scope to `dojopop` / `prd_zorie`, which contains
   push time — nothing stored in `.git/config`).
 - [ ] GitHub push auth: no SSH key for github.com and no `gh` CLI — commits
   are local only. `brew install gh && gh auth login`, then `git push -u origin main`.
-- [ ] Real publish run: dry-run against `https://www.youtube.com/@Z0rlord/shorts`
-  resolved **156 shorts** (2023-01-22 → 2026-06-10, 7–89 s); all events built,
-  signed, and locally verified. Previews in `data/preview/*.event.json` +
-  `data/preview/INDEX.md`. **Awaiting user approval of metadata** before the
-  non-dry-run publish to blossom.yakihonne.com + relays.
+- [x] Test batch published (2026-06-11): 3 of the 156 staged shorts
+  (HzPwWEm2y5s newest, TN5WBkrinEk mid-range, y7cVcxIsDrE oldest 2023) —
+  video + thumb on blossom.yakihonne.com (HTTP 200, sizes match), kind-22
+  events accepted by `ws://relay-2:7777` (primary), nostr-01.yakihonne.com,
+  relay.damus.io, nos.lol; fetched back + sig-verified from relay-2 and
+  YakiHonne. `nostr-02.yakihonne.com` rejected all (server-side: HTTP 502 /
+  "mdb_txn_commit: No space left on device" — their disk, not us).
+  State in `data/published.json` (now git-tracked).
+- [ ] Remaining 153 shorts: same path, pending user go-ahead
+  (`doppler run -- uv run --project pipeline pipeline/pipeline.py --url
+  https://www.youtube.com/@Z0rlord/shorts --max-duration 90` — published ids
+  are skipped automatically).
 - Metadata is now configurable via `pipeline/metadata.yml`
   (hashtags, content/alt templates, content-warning, kind); `published_at` is
   the original YouTube publish time.
