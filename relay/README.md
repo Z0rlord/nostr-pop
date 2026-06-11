@@ -53,23 +53,47 @@ whitelist is working.
 
 ## TLS / wss:// via Cloudflare Tunnel (follow-up)
 
-Clients on the public internet need `wss://`. Recommended: a Cloudflare Tunnel
-on relay-2 so no inbound port is exposed:
+Target hostname: **`relay.dojopop.live`** (zone added to Cloudflare
+2026-06-11, zone id `cf2b671698354bbaafb5c606945dbb2c`; status was *pending*
+NS propagation at the time of writing).
+
+**Blocked on token scope:** none of the Doppler `CLOUDFLARE_*` tokens carry
+*Account → Cloudflare Tunnel → Edit* (tunnel API returns code 10000
+Authentication error). Mint a token with:
+
+- **Account → Cloudflare Tunnel → Edit** (account `dfc6e38d…112a`)
+- **Zone → DNS → Edit** on `dojopop.live`
+  (`CLOUDFLARE_DNS_TOKEN` already has DNS read/likely edit on the zone;
+  only the tunnel scope is missing)
+
+Once a workable token exists, the remote-managed-tunnel plan:
+
+1. `POST /accounts/{acct}/cfd_tunnel` — create tunnel `dojopop-relay`
+   (`config_src: "cloudflare"`).
+2. `PUT  /accounts/{acct}/cfd_tunnel/{id}/configurations` — ingress:
+   `relay.dojopop.live` → `http://localhost:7777` (websockets are proxied
+   natively), catch-all `http_status:404`.
+3. `GET  /accounts/{acct}/cfd_tunnel/{id}/token` — fetch the run token; store
+   it only in `/opt/dojopop/relay/.env` on relay-2 (chmod 600, never in git).
+4. Add a `cloudflared` compose service
+   (`cloudflare/cloudflared`, `tunnel --no-autoupdate run`,
+   `TUNNEL_TOKEN=${TUNNEL_TOKEN}`, `network_mode: host`) and redeploy —
+   `deploy.sh` rsync excludes protect the remote `.env`.
+5. `POST /zones/cf2b…/dns_records` — proxied CNAME `relay` →
+   `{tunnel-id}.cfargotunnel.com`.
+6. Update `relay_url` in `config.toml` to `wss://relay.dojopop.live`,
+   redeploy, and verify:
 
 ```bash
-ssh relay-2
-cloudflared tunnel login                       # uses CLOUDFLARE_* creds (Doppler)
-cloudflared tunnel create dojopop-relay
-cloudflared tunnel route dns dojopop-relay relay.dojopop.xyz
-cloudflared tunnel run --url http://localhost:7777 dojopop-relay
+curl -s -H 'Accept: application/nostr+json' https://relay.dojopop.live | python3 -m json.tool
+nak req -k 34567 wss://relay.dojopop.live    # expect EOSE
 ```
 
-Cloudflare proxies websockets automatically, so `wss://relay.dojopop.xyz`
-terminates TLS at the edge and forwards to `localhost:7777`. Once live:
+(While the zone is still `pending`, public DNS won't resolve — the tunnel can
+be created and will show HEALTHY, but the curl/wss check needs propagation.)
 
-1. Update `relay_url` in `config.toml` and redeploy.
-2. Add the relay to the pipeline publisher's relay list (owned by the
-   pipeline agent — do not edit from here).
+After cutover, the pipeline publisher's relay list should add/swap
+`wss://relay.dojopop.live` (owned by the pipeline agent — do not edit here).
 
 Alternative: caddy/nginx with Let's Encrypt directly on relay-2 (requires
 opening 443 on the Hetzner firewall).

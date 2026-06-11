@@ -3,16 +3,16 @@
 # Upstream reference: https://github.com/scsibug/nostr-rs-relay/blob/master/config.toml
 
 [info]
-# Current URL (Tailscale LAN). Switch to wss://relay.dojopop.xyz once TLS is
-# fronted by a Cloudflare Tunnel / reverse proxy (see relay/README.md).
+# Current URL (Tailscale LAN). Switch to wss://relay.dojopop.live once the
+# Cloudflare Tunnel is live (zone added 2026-06-11; see relay/README.md).
 relay_url = "ws://relay-2:7777"
 name = "DojoPop Relay"
 description = "Primary relay for DojoPop proof-of-practice events (kind 34567) and practice video metadata."
 # Administrative contact pubkey (hex of npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg)
 pubkey = "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a"
 # TODO: replace placeholders with a real contact + hosted icon.
-contact = "mailto:admin@dojopop.xyz"
-relay_icon = "https://dojopop.xyz/relay-icon.png"
+contact = "mailto:admin@dojopop.live"
+relay_icon = "https://dojopop.live/relay-icon.png"
 
 [diagnostics]
 

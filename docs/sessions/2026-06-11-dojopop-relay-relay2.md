@@ -64,10 +64,30 @@ publish (accepted), kind-5 deletion (accepted, event gone afterwards).
   an owned zone) + a token with Account:Cloudflare Tunnel:Edit and
   Zone:DNS:Edit for that zone.
 
+## Follow-up 2 (same day): GITHUB_PAT push + dojopop.live zone
+
+- **GitHub push done:** `GITHUB_PAT` added to Doppler; pushed `main`
+  (`684f2bd..28ee294`) via env-only credential helper and verified through
+  the GitHub API. GitLab `main` already level at the same SHA (and
+  `GITLAB_TOKEN` works — AGENTS.md "token expired" note is stale).
+- **Zone decision:** `dojopop.live` added to Cloudflare (zone
+  `cf2b671698354bbaafb5c606945dbb2c`, account `dfc6e38d…112a`), status
+  **pending** NS propagation. Final relay URL: **`wss://relay.dojopop.live`**
+  (now: `ws://relay-2:7777`).
+- **Tunnel still blocked on token scope:** all `CLOUDFLARE_*` tokens are
+  denied by the tunnel API (code 10000). `CLOUDFLARE_DNS_TOKEN` can read DNS
+  on the new zone and has account-level read, but none carry
+  *Account → Cloudflare Tunnel → Edit*. Full runbook ready in
+  `relay/README.md`.
+
 ## Open items
 
-- [ ] GitHub PAT in Doppler, then `git push origin main` (merge commit ready).
-- [ ] TLS: Cloudflare Tunnel → wss — blocked on zone + token scope (above).
+- [ ] Cloudflare token with **Account → Cloudflare Tunnel → Edit** +
+      **Zone → DNS → Edit (dojopop.live)**, then execute the tunnel runbook
+      in `relay/README.md`.
+- [ ] NS propagation for dojopop.live (zone `pending` as of 2026-06-11 10:00 JST).
+- [ ] pipeline relay list: add/swap `wss://relay.dojopop.live` once live
+      (pipeline agent's job).
 - [ ] **pipeline/publish_video_event.py should add the primary relay
       (`ws://relay-2:7777`, later wss URL) to its relay list** — pipeline/ is
       owned by another agent; not touched here.
