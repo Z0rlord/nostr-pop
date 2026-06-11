@@ -40,10 +40,34 @@ publish (accepted), kind-5 deletion (accepted, event gone afterwards).
   zerotier already in use).
 - Deployed and verified: REQ→EOSE, kind-1 accepted, kind-5 cleanup accepted.
 
+## Follow-up (same day): GitHub push + Cloudflare Tunnel attempt
+
+- **GitHub:** merged the `Z0rlord/nostr-pop` stub (LICENSE/README,
+  `--allow-unrelated-histories`) into local `main`; push is **blocked** — no
+  GitHub token found in any Doppler config (`dojopop` dev/dev_personal/stg/
+  prd/prd_zorie, `nostr-pop`), `gh` CLI not installed, no keychain entry,
+  pass-cli not authenticated. `GITLAB_TOKEN` is gitlab-shaped (401 on GitHub
+  API). Needs: a GitHub PAT in Doppler (e.g. `GITHUB_TOKEN`, repo scope).
+- **Cloudflare Tunnel:** blocked on two counts:
+  1. **No `dojopop.xyz` zone** in the account. Token-visible zones:
+     bulletpruf.xyz, combatforge.space, ghost-holdings.com, krtrmesh.xyz,
+     shibumicrypto.com, shibumihotel.com, the47.xyz, wisperluxe.net.
+     `dojopop.xyz` is registered to a third party (abovedomains/Trellian
+     parking NS) — the domain is not owned.
+  2. **Token scope:** `CLOUDFLARE_API_TOKEN` verifies (active) with zone
+     read but has **no account-level access** → missing
+     *Account → Cloudflare Tunnel → Edit*, required to create tunnels.
+     `CLOUDFLARE_DNS_TOKEN`/`CLOUD_FLARE_API` fail verification;
+     `CLOUDFLARE_GLOBAL_API_KEY` rejected (9103); `CLOUDFLARE_ZONE_ID`
+     points at the47.xyz.
+  Needs from user: pick the relay hostname/zone (buy dojopop.xyz or choose
+  an owned zone) + a token with Account:Cloudflare Tunnel:Edit and
+  Zone:DNS:Edit for that zone.
+
 ## Open items
 
-- [ ] TLS: Cloudflare Tunnel → `wss://relay.dojopop.xyz` (creds exist in
-      Doppler: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`, …).
+- [ ] GitHub PAT in Doppler, then `git push origin main` (merge commit ready).
+- [ ] TLS: Cloudflare Tunnel → wss — blocked on zone + token scope (above).
 - [ ] **pipeline/publish_video_event.py should add the primary relay
       (`ws://relay-2:7777`, later wss URL) to its relay list** — pipeline/ is
       owned by another agent; not touched here.
