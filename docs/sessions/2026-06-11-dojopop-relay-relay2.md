@@ -80,14 +80,32 @@ publish (accepted), kind-5 deletion (accepted, event gone afterwards).
   *Account → Cloudflare Tunnel → Edit*. Full runbook ready in
   `relay/README.md`.
 
+## Follow-up 3 (same day): wss://relay.dojopop.live LIVE
+
+- `CLOUDFLARE_DNS_TOKEN` updated by user — tunnel API now returns 200
+  (oddly `/user/tokens/verify` still says invalid; likely an account-owned
+  token — harmless).
+- Created remote-managed tunnel **dojopop-relay**
+  (`543b3cee-e3dd-422f-a619-7a34236a0ba0`), ingress
+  `relay.dojopop.live → http://localhost:7777`, proxied CNAME
+  `relay → 543b3cee….cfargotunnel.com`.
+- `cloudflared:2026.6.0` added as a compose service on relay-2 (host
+  networking); `TUNNEL_TOKEN` only in `/opt/dojopop/relay/.env` (600).
+- Zone went **active** during setup (fast NS flip to Cloudflare); Universal
+  SSL issued within ~a minute.
+- **Verified end-to-end from the Mac:** tunnel HEALTHY (4 QUIC connections,
+  fra edge), NIP-11 over `https://relay.dojopop.live` shows
+  `relay_url = wss://relay.dojopop.live`, and a wss REQ returned 3 events +
+  EOSE (the pipeline's published videos are flowing through).
+- `config.toml` relay_url switched to `wss://relay.dojopop.live`; relay
+  container restarted to pick it up.
+
 ## Open items
 
-- [ ] Cloudflare token with **Account → Cloudflare Tunnel → Edit** +
-      **Zone → DNS → Edit (dojopop.live)**, then execute the tunnel runbook
-      in `relay/README.md`.
-- [ ] NS propagation for dojopop.live (zone `pending` as of 2026-06-11 10:00 JST).
-- [ ] pipeline relay list: add/swap `wss://relay.dojopop.live` once live
-      (pipeline agent's job).
+- [ ] pipeline relay list: add/swap `wss://relay.dojopop.live` alongside
+      `ws://relay-2:7777` (pipeline agent's job).
+- [ ] Replace placeholder relay icon; consider rotating the tunnel token if
+      Doppler's CLOUDFLARE_DNS_TOKEN is ever rotated.
 - [ ] **pipeline/publish_video_event.py should add the primary relay
       (`ws://relay-2:7777`, later wss URL) to its relay list** — pipeline/ is
       owned by another agent; not touched here.

@@ -13,5 +13,19 @@ services:
     environment:
       - RUST_LOG=warn,nostr_rs_relay=info
 
+  cloudflared:
+    # Pinned: 2026.6.0. Exposes wss://relay.dojopop.live via tunnel dojopop-relay
+    # (remote-managed; ingress relay.dojopop.live -> http://localhost:7777).
+    image: cloudflare/cloudflared:2026.6.0
+    container_name: dojopop-cloudflared
+    restart: unless-stopped
+    # Host networking so "localhost:7777" in the remote-managed ingress
+    # reaches the relay's published port.
+    network_mode: host
+    command: tunnel --no-autoupdate run
+    environment:
+      # From /opt/dojopop/relay/.env on the host (chmod 600) — never in git.
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+
 volumes:
   relay-data:
