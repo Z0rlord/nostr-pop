@@ -1,0 +1,5 @@
+# Legacy pin file — prefer: uv sync (see pyproject.toml)
+# Recreate venv: scripts/setup-drive-venv.sh
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.1.0

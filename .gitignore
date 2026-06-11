@@ -1,0 +1,19 @@
+.venv-drive/
+docs/sessions/.last-drive-backup.json
+*.redacted
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+pipeline/.venv/
+
+# pipeline artifacts (videos, thumbs, publish state)
+data/
+
+# local blossom server runtime data
+blossom-server/data/
+
+# secrets — never commit
+.env
+.env.*

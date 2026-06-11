@@ -1,0 +1,66 @@
+---
+description: Persist significant agent chat decisions and session summaries to docs/sessions/
+alwaysApply: true
+---
+
+# Session log (chat capture)
+
+At the **end of every significant session** (architecture decisions, credential setup, shipped features, debugging outcomes), append a session file under `docs/sessions/`.
+
+## When to write
+
+- User asks to save the chat or remember something
+- A decision was made (stack, secrets, relay behavior, keys)
+- Work completed or blocked with clear next steps
+- Before ending a long thread
+
+## File format
+
+Path: `docs/sessions/YYYY-MM-DD-short-slug.md`
+
+```markdown
+# Session: {title}
+**Date:** YYYY-MM-DD
+**Project:** dojopop | nostr-pop
+
+## Summary
+2-4 sentences.
+
+## Decisions
+- ...
+
+## Actions taken
+- ...
+
+## Open items
+- ...
+
+## References
+- Links, Doppler project names, repo paths (no secret values)
+```
+
+## Rules
+
+- **Never** store secret values (nsec, PAT, passwords) in session files.
+- Use secret **names** only (`NSEC`, `BLOSSOM_URL`).
+- One file per session; update the same file if continuing the same topic same day.
+- If Notion is available and user prefers cloud, offer `knowledge-capture` skill in addition to local files.
+
+## Index
+
+Keep `docs/sessions/README.md` table updated with new session links (newest first).
+
+## Google Drive backup
+
+After writing or updating a session file, run:
+
+```bash
+/Users/perseus-air/Projects/dojopop/.venv-drive/bin/python3 \
+  /Users/perseus-air/Projects/dojopop/scripts/backup-to-drive.py
+```
+
+- Target folder: [cursor backup](https://drive.google.com/drive/folders/1nEC-WUSO-t1wLMyFZhBqthYqS0vCQck0) (`1nEC-WUSO-t1wLMyFZhBqthYqS0vCQck0`).
+- Auth: **OAuth** as `zbarber@gmail.com` (service accounts cannot upload to personal Gmail Drive).
+- First-time: `scripts/drive-oauth-setup.py` (needs `~/.config/dojopop/oauth-client.json` from GCP Desktop OAuth client).
+- Then: `scripts/backup-to-drive.py`
+- Config: `~/.config/dojopop/drive-backup.json`
