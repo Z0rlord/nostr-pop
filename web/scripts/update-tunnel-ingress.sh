@@ -11,13 +11,14 @@ TUNNEL_ID="${DOJOPOP_TUNNEL_ID:-543b3cee-e3dd-422f-a619-7a34236a0ba0}"
 ACCOUNT_ID="${CLOUDFLARE_ACCOUNT_ID:-dfc6e38d5b254f0f8ffac8a0e554112a}"
 DOJOPOP_ZONE_ID="${DOJOPOP_ZONE_ID:-cf2b671698354bbaafb5c606945dbb2c}"
 WEB_PORT="${DOJOPOP_WEB_PORT:-3001}"
-BUNKER_ADMIN_PORT="${DOJOPOP_BUNKER_ADMIN_PORT:-3002}"
+BUNKER_PORT="${DOJOPOP_BUNKER_PORT:-3005}"
+ADMIN_PORT="${DOJOPOP_ADMIN_PORT:-3002}"
 BLOSSOM_PORT="${DOJOPOP_BLOSSOM_PORT:-3004}"
 ALBY_HUB_PORT="${DOJOPOP_ALBY_HUB_PORT:-8080}"
 TENSHINRYU_PORT="${TENSHINRYU_PORT:-3003}"
 TENSHINRYU_STAGING_PORT="${TENSHINRYU_STAGING_PORT:-3013}"
 TENSHINRYU_STAGING_HOST="${TENSHINRYU_STAGING_HOST:-staging.tenshinryu.xyz}"
-# Bunker46 now serves admin.dojopop.live via BUNKER_ADMIN_PORT (:3002); bunker.dojopop.live removed.
+# bunker.dojopop.live → Bunker46 (:3005); admin.dojopop.live → ops placeholder (:3002).
 TENSHINRYU_APEX="${TENSHINRYU_APEX:-tenshinryu.xyz}"
 TENSHINRYU_WWW="${TENSHINRYU_WWW:-www.tenshinryu.xyz}"
 TENSHINRYU_HOST="${TENSHINRYU_HOST:-kiwami.tenshinryu.xyz}"
@@ -46,7 +47,8 @@ PAYLOAD=$(cat <<EOF
       { "hostname": "relay.dojopop.live", "service": "http://localhost:7777" },
       { "hostname": "dojopop.live", "service": "http://localhost:${WEB_PORT}" },
       { "hostname": "www.dojopop.live", "service": "http://localhost:${WEB_PORT}" },
-      { "hostname": "admin.dojopop.live", "service": "http://localhost:${BUNKER_ADMIN_PORT}" },
+      { "hostname": "bunker.dojopop.live", "service": "http://localhost:${BUNKER_PORT}" },
+      { "hostname": "admin.dojopop.live", "service": "http://localhost:${ADMIN_PORT}" },
       { "hostname": "blossom.dojopop.live", "service": "http://localhost:${BLOSSOM_PORT}" },
       { "hostname": "hub.dojopop.live", "service": "http://localhost:${ALBY_HUB_PORT}" },
       { "hostname": "${TENSHINRYU_APEX}", "service": "http://localhost:${TENSHINRYU_PORT}" },
@@ -79,7 +81,7 @@ python3 -m json.tool /tmp/cf-tunnel-resp.json | head -30
 
 echo ""
 echo "DNS (zone ${DOJOPOP_ZONE_ID}, not CLOUDFLARE_ZONE_ID which may be another domain):"
-for NAME in dojopop.live www admin blossom hub; do
+for NAME in dojopop.live www admin bunker blossom hub; do
   TARGET="${TUNNEL_ID}.cfargotunnel.com"
   curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${DOJOPOP_ZONE_ID}/dns_records" \
     -H "Authorization: Bearer $TOKEN" \

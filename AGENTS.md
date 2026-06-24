@@ -30,7 +30,8 @@ web/              # Next.js landing + membership; school attendance pilot (hikar
 tenshinryu/       # Tenshinryu ONLINE KIWAMI PWA — Firebase auth, Hetzner :3003 (prod) / :3013 (staging)
 nsecbunker/       # DEPRECATED — replaced by bunker46 (volume kept for rollback)
 nsecbunker-admin-ui/  # git submodule — legacy SvelteKit admin UI
-bunker46/         # dsbaars/bunker46 NIP-46 manager — primary (admin.dojopop.live :3002)
+admin/            # DojoPop ops placeholder — admin.dojopop.live :3002 (future dashboard)
+bunker46/         # dsbaars/bunker46 NIP-46 manager — primary (bunker.dojopop.live :3005)
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
 alby-hub/         # Alby Hub — relay-2:8080, hub.dojopop.live (NWC wallet)
 blossom-server/   # self-hosted hzrd149/blossom-server — relay-2:3004, blossom.dojopop.live

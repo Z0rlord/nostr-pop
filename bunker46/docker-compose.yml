@@ -1,4 +1,4 @@
-# DojoPop Bunker46 — primary NIP-46 manager (admin.dojopop.live :3002)
+# DojoPop Bunker46 — primary NIP-46 manager (bunker.dojopop.live :3005)
 # Build context: upstream/ (pinned dsbaars/bunker46 at COMMIT)
 services:
   db:
@@ -81,7 +81,7 @@ services:
     depends_on:
       - server
     ports:
-      - "3002:8080"
+      - "3005:8080"
 
 volumes:
   pgdata:

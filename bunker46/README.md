@@ -9,9 +9,11 @@ Primary NIP-46 bunker manager for DojoPop, based on [dsbaars/bunker46](https://g
 
 | Service | Port (relay-2) | Public URL |
 |---------|----------------|------------|
-| Bunker46 web (Caddy + Vue) | **3002** | `https://admin.dojopop.live` |
+| Bunker46 web (Caddy + Vue) | **3005** | `https://bunker.dojopop.live` |
 | Bunker46 API (NestJS) | internal :3000 | proxied via web `/api*` |
 | PostgreSQL / Redis | internal only | not exposed |
+
+**Admin hub:** `https://admin.dojopop.live` (:3002) is reserved for a future DojoPop ops dashboard — see [`../admin/`](../admin/).
 
 **Deprecated:** nsecbunker stack stopped 2026-06-24; config volume retained for rollback.
 
@@ -29,7 +31,7 @@ Configured via `BUNKER46_NOSTR_DEFAULT_RELAYS` in Doppler.
 # 1. Ensure Doppler secrets (see scripts/sync-env.sh)
 doppler secrets --only-names --project dojopop --config prd_zorie | grep BUNKER46
 
-# 2. Tunnel + DNS (admin.dojopop.live → :3002)
+# 2. Tunnel + DNS (bunker.dojopop.live → :3005, admin.dojopop.live → :3002)
 doppler run --project dojopop --config prd_zorie -- ./web/scripts/update-tunnel-ingress.sh
 
 # 3. NextDNS allowlist (optional, fixes Tailscale DNS sinkhole)
@@ -40,19 +42,20 @@ chmod +x deploy.sh scripts/sync-env.sh
 doppler run --project dojopop --config prd_zorie -- ./deploy.sh relay-2
 ```
 
-## Phase 5 cutover (2026-06-24)
+## Domain retask (2026-06-24)
 
-- `admin.dojopop.live` now serves Bunker46 on port 3002.
-- `bunker.dojopop.live` removed from Cloudflare Tunnel ingress (returns 404).
+Phase 5 briefly moved Bunker46 to `admin.dojopop.live` (:3002). Reverted same day:
+
+- `bunker.dojopop.live` → Bunker46 on port **3005**
+- `admin.dojopop.live` → placeholder ops hub on port **3002** (future dashboard)
 - nsecbunker stopped; `dojopop_nsecbunker_bunker-config` volume kept 7–14 days for rollback.
-- Backup: `/opt/dojopop/backups/nsecbunker-config-YYYYMMDD.tar.gz` on relay-2.
 
 ### WebAuthn re-enrollment required
 
-RP ID changed from `bunker.dojopop.live` → `admin.dojopop.live`. Existing passkeys
-registered on the parallel hostname are **invalid** and must be re-registered:
+RP ID is `bunker.dojopop.live`. Passkeys registered during the brief
+`admin.dojopop.live` cutover are **invalid** and must be re-registered:
 
-1. Open **https://admin.dojopop.live** in desktop Chrome, Firefox, or Safari.
+1. Open **https://bunker.dojopop.live** in desktop Chrome, Firefox, or Safari.
 2. Log in with **password + TOTP** (TOTP still works).
 3. Go to **Settings → Security → Register Passkey**.
 4. Choose **Security Key** (not Touch ID / "This device").
@@ -70,9 +73,9 @@ DojoPop patches (`patches/`) relax upstream `residentKey: required` to `preferre
 | `BUNKER46_JWT_REFRESH_SECRET` | Refresh token signing |
 | `BUNKER46_ENCRYPTION_KEY` | AES-256-GCM for stored nsec material |
 | `BUNKER46_NOSTR_DEFAULT_RELAYS` | Default relay list (comma-separated `wss://`) |
-| `BUNKER46_WEBAUTHN_RP_ID` | `admin.dojopop.live` |
-| `BUNKER46_WEBAUTHN_ORIGIN` | `https://admin.dojopop.live` |
-| `BUNKER46_CORS_ORIGINS` | `https://admin.dojopop.live` |
+| `BUNKER46_WEBAUTHN_RP_ID` | `bunker.dojopop.live` |
+| `BUNKER46_WEBAUTHN_ORIGIN` | `https://bunker.dojopop.live` |
+| `BUNKER46_CORS_ORIGINS` | `https://bunker.dojopop.live` |
 | `BUNKER46_ALLOW_REGISTRATION` | `false` (locked after founder onboarding) |
 
 `scripts/sync-env.sh` maps these into a compose `.env` on relay-2 (chmod 600).
@@ -86,8 +89,7 @@ If Bunker46 cutover must be reversed within the retention window:
 ssh relay-2 'cd /opt/dojopop/bunker46 && docker compose stop'
 ssh relay-2 'cd /opt/dojopop/nsecbunker && docker compose up -d'
 
-# Revert Doppler WebAuthn/CORS to bunker.dojopop.live and redeploy bunker46 on :3005
-# Re-add bunker.dojopop.live ingress line in web/scripts/update-tunnel-ingress.sh
+# Re-point admin.dojopop.live ingress to :3002 nsecbunker admin UI
 doppler run --project dojopop --config prd_zorie -- ./web/scripts/update-tunnel-ingress.sh
 ```
 

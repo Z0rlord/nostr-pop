@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploy Bunker46 (dsbaars/bunker46) to relay-2 — primary at admin.dojopop.live :3002.
+# Deploy Bunker46 (dsbaars/bunker46) to relay-2 — primary at bunker.dojopop.live :3005.
 #
 # Usage: ./deploy.sh [ssh-host]   (default: relay-2)
 set -euo pipefail
@@ -48,8 +48,8 @@ ssh -o BatchMode=yes "$HOST" "
   docker compose up -d
   docker compose ps
   echo ''
-  echo '==> Health check (localhost:3002):'
-  curl -sS -o /dev/null -w 'HTTP %{http_code}\n' http://127.0.0.1:3002/ || true
+  echo '==> Health check (localhost:3005):'
+  curl -sS -o /dev/null -w 'HTTP %{http_code}\n' http://127.0.0.1:3005/ || true
 "
 
-echo "==> Done. Bunker46 on ${HOST}:3002 (tunnel: https://admin.dojopop.live)"
+echo "==> Done. Bunker46 on ${HOST}:3005 (tunnel: https://bunker.dojopop.live)"
