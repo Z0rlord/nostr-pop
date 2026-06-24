@@ -17,7 +17,7 @@ echo "==> Syncing relay whitelist via ${HOST}"
 
 ssh -o BatchMode=yes "$HOST" "mkdir -p /opt/dojopop/web/scripts"
 
-rsync -az "$SCRIPT_DIR/sync-relay-whitelist.mjs" "$HOST:/opt/dojopop/web/scripts/"
+rsync -az "$SCRIPT_DIR/sync-relay-whitelist.mjs" "$SCRIPT_DIR/sync-blossom-whitelist.mjs" "$HOST:/opt/dojopop/web/scripts/"
 
 ssh -o BatchMode=yes "$HOST" bash -s <<'REMOTE'
 set -euo pipefail
@@ -59,6 +59,10 @@ else
 fi
 
 NODE_PATH="$NODE_PATH" node /opt/dojopop/web/scripts/sync-relay-whitelist.mjs
+
+export BLOSSOM_CONFIG_PATH="/opt/dojopop/blossom/config.yml"
+export BLOSSOM_CONTAINER_NAME="dojopop-blossom"
+NODE_PATH="$NODE_PATH" node /opt/dojopop/web/scripts/sync-blossom-whitelist.mjs
 REMOTE
 
 echo "==> Done. Verify: curl -s -H 'Accept: application/nostr+json' https://relay.dojopop.live | head -5"

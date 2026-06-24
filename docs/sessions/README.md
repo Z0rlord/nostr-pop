@@ -4,6 +4,8 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-06-18 | [tenshinryu-staging](./2026-06-18-tenshinryu-staging.md) | staging.tenshinryu.xyz on relay-2:3013, deploy-staging workflow |
+| 2026-06-16 | [tenshinryu-kiwami-pwa](./2026-06-16-tenshinryu-kiwami-pwa.md) | Tenshinryu KIWAMI PWA on Hetzner vol1, Firebase auth, kiwami.tenshinryu.xyz |
 | 2026-06-11 | [dojopop-relay-relay2](./2026-06-11-dojopop-relay-relay2.md) | nostr-rs-relay scaffold + deploy to relay-2 (Hetzner), kind allowlist, pubkey whitelist |
 | 2026-06-11 | [youtube-blossom-pipeline](./2026-06-11-youtube-blossom-pipeline.md) | YouTube→Blossom→Nostr pipeline, blossom-server scaffold, git remotes, Doppler prd_zorie |
 | 2026-06-09 | [drive-backup-setup](./2026-06-09-drive-backup-setup.md) | Google Drive backup, certs.json vs SA key |

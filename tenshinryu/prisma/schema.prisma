@@ -1,0 +1,349 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Dojo {
+  id               String             @id @default(uuid())
+  name             String
+  location         String?
+  timezone         String             @default("Europe/Warsaw")
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  checkIns         CheckIn[]
+  classes          Class[]
+  instructors      Instructor[]
+  InstructorInvite InstructorInvite[]
+  leaderboards     Leaderboard[]
+  students         Student[]
+}
+
+model Student {
+  id                   String             @id @default(uuid())
+  dojoId               String
+  name                 String
+  email                String?
+  phone                String?
+  beltRank             BeltRank           @default(WHITE)
+  stripes              Int                @default(0)
+  qrCode               String             @unique
+  isActive             Boolean            @default(true)
+  joinedAt             DateTime           @default(now())
+  lastCheckIn          DateTime?
+  dojoBalance          Int                @default(0)
+  totalEarned          Int                @default(0)
+  totalSpent           Int                @default(0)
+  avatar               String?
+  language             String             @default("en")
+  password             String?
+  firebaseUid          String?            @unique
+  membershipExpires    DateTime?
+  lineId               String?            @unique
+  membershipStatus     String             @default("active")
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  paypalSubscriptionId String?
+  membershipTier       MembershipTier     @default(NONE)
+  checkIns             CheckIn[]
+  JournalEntry         JournalEntry[]
+  leaderboardEntries   LeaderboardEntry[]
+  learnings            Lineage[]          @relation("StudentLineage")
+  notifications        NotificationLog[]
+  PracticeGoal         PracticeGoal[]
+  SoloPracticeLog      SoloPracticeLog[]
+  dojo                 Dojo               @relation(fields: [dojoId], references: [id])
+  transactions         TokenTransaction[]
+  videos               Video[]
+}
+
+model Instructor {
+  id          String    @id @default(uuid())
+  dojoId      String
+  name        String
+  email       String    @unique
+  password    String
+  isAdmin     Boolean   @default(false)
+  firebaseUid String?   @unique
+  classes     Class[]
+  dojo        Dojo      @relation(fields: [dojoId], references: [id])
+  teachings   Lineage[] @relation("TeacherLineage")
+}
+
+model Class {
+  id           String     @id @default(uuid())
+  dojoId       String
+  instructorId String
+  name         String
+  schedule     String
+  maxStudents  Int        @default(30)
+  createdAt    DateTime   @default(now())
+  location     String?
+  isRecurring  Boolean    @default(false)
+  checkIns     CheckIn[]
+  dojo         Dojo       @relation(fields: [dojoId], references: [id])
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+}
+
+model CheckIn {
+  id            String   @id @default(uuid())
+  studentId     String
+  dojoId        String
+  classId       String
+  checkedInAt   DateTime @default(now())
+  method        String   @default("qr")
+  tokensAwarded Int      @default(0)
+  class         Class    @relation(fields: [classId], references: [id])
+  dojo          Dojo     @relation(fields: [dojoId], references: [id])
+  student       Student  @relation(fields: [studentId], references: [id])
+}
+
+model Video {
+  id            String   @id @default(uuid())
+  studentId     String
+  title         String
+  description   String?
+  url           String
+  technique     String?
+  recordedAt    DateTime @default(now())
+  tokensAwarded Int      @default(0)
+  student       Student  @relation(fields: [studentId], references: [id])
+}
+
+model TokenTransaction {
+  id          String               @id @default(uuid())
+  studentId   String
+  amount      Int
+  type        TokenTransactionType
+  description String
+  relatedId   String?
+  createdAt   DateTime             @default(now())
+  student     Student              @relation(fields: [studentId], references: [id])
+}
+
+model Leaderboard {
+  id        String             @id @default(uuid())
+  dojoId    String
+  month     String
+  year      Int
+  name      String
+  status    LeaderboardStatus  @default(ACTIVE)
+  prizePool Int                @default(0)
+  createdAt DateTime           @default(now())
+  endedAt   DateTime?
+  dojo      Dojo               @relation(fields: [dojoId], references: [id])
+  entries   LeaderboardEntry[]
+}
+
+model LeaderboardEntry {
+  id            String      @id @default(uuid())
+  leaderboardId String
+  studentId     String
+  rank          Int?
+  checkIns      Int         @default(0)
+  streak        Int         @default(0)
+  videos        Int         @default(0)
+  totalScore    Int         @default(0)
+  prizeAwarded  Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  leaderboard   Leaderboard @relation(fields: [leaderboardId], references: [id])
+  student       Student     @relation(fields: [studentId], references: [id])
+
+  @@unique([leaderboardId, studentId])
+}
+
+model Lineage {
+  id        String     @id @default(uuid())
+  teacherId String
+  studentId String
+  school    String
+  style     String?
+  startDate DateTime   @default(now())
+  endDate   DateTime?
+  isActive  Boolean    @default(true)
+  notes     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  student   Student    @relation("StudentLineage", fields: [studentId], references: [id])
+  teacher   Instructor @relation("TeacherLineage", fields: [teacherId], references: [id])
+
+  @@unique([teacherId, studentId, school])
+}
+
+model InstructorInvite {
+  id         String    @id @default(uuid())
+  email      String    @unique
+  name       String?
+  token      String    @unique
+  invitedBy  String
+  dojoId     String
+  inviteRole String    @default("instructor")
+  status     String    @default("pending")
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+  acceptedAt DateTime?
+  Dojo       Dojo      @relation(fields: [dojoId], references: [id])
+
+  @@index([token])
+  @@index([email])
+  @@index([status])
+}
+
+model NotificationLog {
+  id        String   @id @default(uuid())
+  studentId String
+  classId   String?
+  type      String
+  channel   String
+  sentAt    DateTime @default(now())
+  student   Student  @relation(fields: [studentId], references: [id])
+}
+
+model JournalEntry {
+  id                  String   @id
+  studentId           String
+  title               String?
+  content             String
+  entryType           String   @default("general")
+  relatedClassId      String?
+  relatedPracticeId   String?
+  voiceNoteUrl        String?
+  voiceNoteDuration   Int?
+  voiceNoteTranscript String?
+  photos              String[]
+  tags                String[]
+  isPrivate           Boolean  @default(true)
+  entryDate           DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime
+  Student             Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([entryDate])
+  @@index([entryType])
+  @@index([studentId])
+}
+
+model PracticeGoal {
+  id           String    @id
+  studentId    String
+  title        String
+  description  String?
+  goalType     String
+  targetValue  Float
+  currentValue Float     @default(0)
+  unit         String
+  startDate    DateTime  @default(now())
+  endDate      DateTime?
+  isActive     Boolean   @default(true)
+  isCompleted  Boolean   @default(false)
+  completedAt  DateTime?
+  reminderTime String?
+  reminderDays String[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime
+  Student      Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([isActive])
+  @@index([studentId])
+}
+
+model SoloPracticeLog {
+  id                String   @id
+  studentId         String
+  date              DateTime @default(now())
+  durationMinutes   Int
+  practiceType      String
+  location          String?
+  latitude          Float?
+  longitude         Float?
+  intensity         String   @default("medium")
+  notes             String?
+  photos            String[]
+  videoUrl          String?
+  voiceNoteUrl      String?
+  voiceNoteDuration Int?
+  tags              String[]
+  mood              String?  @default("neutral")
+  energyLevel       Int?     @default(5)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  Student           Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([date])
+  @@index([practiceType])
+  @@index([studentId])
+}
+
+model VideoReview {
+  id           String    @id
+  studentId    String
+  instructorId String
+  videoUrl     String
+  technique    String?
+  feedback     String?
+  isApproved   Boolean   @default(false)
+  submittedAt  DateTime  @default(now())
+  reviewedAt   DateTime?
+
+  @@index([instructorId])
+  @@index([studentId])
+}
+
+model ZoomLesson {
+  id              String   @id
+  instructorId    String
+  title           String
+  description     String?
+  zoomLink        String
+  scheduledAt     DateTime
+  durationMinutes Int      @default(60)
+  maxParticipants Int      @default(20)
+  isRecorded      Boolean  @default(false)
+  recordingUrl    String?
+  createdAt       DateTime @default(now())
+
+  @@index([instructorId])
+  @@index([scheduledAt])
+}
+
+enum MembershipTier {
+  NONE
+  YOUTUBE
+  GOLD
+  ROYAL
+}
+
+enum BeltRank {
+  WHITE
+  YELLOW
+  ORANGE
+  GREEN
+  BLUE
+  PURPLE
+  BROWN
+  BLACK
+  RED_BLACK
+  RED_WHITE
+  RED
+}
+
+enum TokenTransactionType {
+  CHECK_IN
+  STREAK_BONUS
+  BELT_PROMOTION
+  VIDEO_UPLOAD
+  REFERRAL
+  LEADERBOARD_PRIZE
+  REDEMPTION
+  ADMIN_ADJUSTMENT
+}
+
+enum LeaderboardStatus {
+  ACTIVE
+  ENDED
+  PRIZES_DISTRIBUTED
+}

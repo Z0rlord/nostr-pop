@@ -7,7 +7,7 @@ and Nostr (YakiHonne-compatible NIP-71 kind 22).
 
 ```bash
 doppler run -- uv run --project pipeline pipeline/pipeline.py \
-  --url <youtube-url> --max-duration 90
+  --url <youtube-url>
 ```
 
 See [AGENTS.md](./AGENTS.md), [pipeline/README.md](./pipeline/README.md), and

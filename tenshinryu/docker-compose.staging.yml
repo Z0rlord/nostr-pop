@@ -1,0 +1,29 @@
+# Staging — parallel stack on relay-2:3013 (production stays on :3003)
+services:
+  tenshinryu-staging:
+    build:
+      context: .
+      args:
+        PORT: "3013"
+        NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY}
+        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+        NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+        NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}
+        NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
+        NEXT_PUBLIC_FIREBASE_APP_ID: ${NEXT_PUBLIC_FIREBASE_APP_ID}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+    image: tenshinryu-staging:latest
+    container_name: tenshinryu-staging
+    restart: unless-stopped
+    ports:
+      - "3013:3013"
+    env_file:
+      - .env
+    environment:
+      PORT: "3013"
+      APP_ENV: staging
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3013/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

@@ -5,10 +5,8 @@
 port: 3000
 host: 0.0.0.0
 
-# Production: set to the bare hostname served by your reverse proxy /
-# Cloudflare Tunnel (NO protocol scheme), e.g. "blossom.dojopop.example".
-# Leave commented for local use — the Host header of each request is used.
-# publicDomain: "blossom.example.com"
+# Bare hostname for blob descriptor URLs (Cloudflare Tunnel on relay-2).
+publicDomain: "blossom.dojopop.live"
 
 database:
   path: data/sqlite.db
@@ -37,7 +35,10 @@ upload:
   requireAuth: true
   # Only pubkeys listed in a storage rule may upload (closed server).
   requirePubkeyInRule: true
-  maxSize: 1073741824 # 1 GB per blob
+  # PUT /upload stores the blob as-is (no server transcode).
+  # DojoPop practice clips use pipeline/ (client ffmpeg → 480p/60s) then PUT /upload.
+  # Large masters (e.g. feature films) also use PUT /upload via blossom_upload.py.
+  maxSize: 5368709120 # 5 GB per blob (feature-film headroom above ~4 GB masters)
   workers: 0
   maxJobsPerWorker: 4
   throughputWindowMs: 1000
@@ -56,12 +57,13 @@ list:
   requireAuth: false
   allowListOthers: true
 
-# BUD-05 media optimisation (transcode/thumbnail) — the official docker image
-# bundles ffmpeg, so this can stay enabled.
+# BUD-05 media optimisation (PUT /media only — NOT used by pipeline/ or large masters).
+# Server-side 480p cap applies only when clients call /media; PUT /upload is passthrough.
+# The official docker image bundles ffmpeg, so this can stay enabled for trusted /media use.
 media:
   enabled: true
   requireAuth: true
-  maxSize: 1073741824 # 1 GB
+  maxSize: 1073741824 # 1 GB input for /media (practice clips should use pipeline ffmpeg instead)
   image:
     quality: 90
     progressive: true
@@ -73,7 +75,8 @@ media:
     fps: 30
   video:
     quality: 90
-    maxHeight: 1080
+    # DojoPop practice policy: 480p when a client uses PUT /media (pipeline transcodes before PUT /upload).
+    maxHeight: 480
     maxFps: 30
     format: mp4
     audioCodec: aac

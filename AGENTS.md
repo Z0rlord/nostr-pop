@@ -26,16 +26,20 @@ See [docs/sessions/README.md](./docs/sessions/README.md).
 ## Layout
 
 ```
-web/              # Next.js landing + $0.99/mo membership; auto relay whitelist sync
-btcpay-server/    # BTCPay docker scaffold for Lightning (not deployed yet)
+web/              # Next.js landing + membership; school attendance pilot (hikari-warsaw)
+tenshinryu/       # Tenshinryu ONLINE KIWAMI PWA — Firebase auth, Hetzner :3003 (prod) / :3013 (staging)
+nsecbunker/       # DEPRECATED — replaced by bunker46 (volume kept for rollback)
+nsecbunker-admin-ui/  # git submodule — legacy SvelteKit admin UI
+bunker46/         # dsbaars/bunker46 NIP-46 manager — primary (admin.dojopop.live :3002)
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
-blossom-server/   # self-hosted hzrd149/blossom-server (docker compose)
+alby-hub/         # Alby Hub — relay-2:8080, hub.dojopop.live (NWC wallet)
+blossom-server/   # self-hosted hzrd149/blossom-server — relay-2:3004, blossom.dojopop.live
 relay/            # nostr-rs-relay 0.10.0 (docker compose) — deployed on relay-2:7777, kind 34567 allowlist
 scripts/          # Google Drive backup tooling (root pyproject.toml)
 data/             # downloaded videos (gitignored); published.json tracked
 ```
 
-Publish videos: `doppler run -- uv run --project pipeline pipeline/pipeline.py --url <youtube-url> --max-duration 90` (see `pipeline/README.md`).
+Publish videos: `doppler run -- uv run --project pipeline pipeline/pipeline.py --url <youtube-url>` (60 s / 480p transcode; see `pipeline/README.md`).
 
 Retract a published video: `doppler run -- uv run --project pipeline pipeline/delete_published.py --yt-id <id> --reason "…"`.
 

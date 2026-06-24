@@ -20,6 +20,13 @@ node_modules/
 web/node_modules/
 web/.next/
 web/data/
+!web/data/schools.example.json
+nsecbunker-admin-ui/node_modules/
+nsecbunker-admin-ui/.svelte-kit/
+nsecbunker-admin-ui/build/
+
+# bunker46 upstream clone (pinned at COMMIT, fetched by deploy.sh)
+bunker46/upstream/
 
 # secrets — never commit
 .env

@@ -1,0 +1,24 @@
+:8080 {
+	root * /srv
+	encode gzip zstd
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-XSS-Protection "1; mode=block"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		Permissions-Policy "publickey-credentials-create=(self), publickey-credentials-get=(self)"
+	}
+
+	# route keeps order: API proxy first, then SPA fallback (try_files has higher default order than reverse_proxy)
+	route {
+		reverse_proxy /api* server:3000 {
+			# Pass through proxy headers from upstream (e.g. caddy-docker-proxy) so NestJS gets real client IP for sessions/throttling
+			header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+			header_up X-Real-IP {http.request.header.X-Real-IP}
+			header_up X-Forwarded-Proto {http.request.header.X-Forwarded-Proto}
+		}
+		try_files {path} /index.html
+		file_server
+	}
+}

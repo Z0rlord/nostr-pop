@@ -4,7 +4,15 @@ services:
     container_name: dojopop-blossom
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      # Host 3000 is occupied on relay-2; tunnel → localhost:3004
+      - "127.0.0.1:3004:3000"
     volumes:
       - ./config.yml:/app/config.yml:ro
       - ./data:/app/data
+    networks:
+      - dojopop-internal
+
+networks:
+  dojopop-internal:
+    external: true
+    name: dojopop-internal

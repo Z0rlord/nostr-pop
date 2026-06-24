@@ -8,14 +8,13 @@ project from the root drive-backup tooling (`uv run --project pipeline …`).
 ```bash
 cd ~/Projects/dojopop
 doppler run -- uv run --project pipeline pipeline/pipeline.py \
-  --url <youtube-channel-or-playlist-or-video-url> --max-duration 90
+  --url <youtube-channel-or-playlist-or-video-url>
 ```
 
 - `NOSTR_NSEC` comes from Doppler (`dojopop` / `prd_zorie`) — never pass it on
   the command line.
-- Default Blossom server: `https://blossom.yakihonne.com` (`--server` to
-  override, e.g. `--server http://localhost:3000` for the local
-  `blossom-server/`).
+- Default Blossom server: `https://blossom.dojopop.live` (self-hosted on
+  relay-2; `--server` to override, e.g. `http://localhost:3000` for local dev).
 - Default relays, published primary-then-public: **`ws://relay-2:7777`**
   (tailnet) and **`wss://relay.dojopop.live`** (public Cloudflare Tunnel),
   first sequentially, then YakiHonne (`nostr-01.yakihonne.com`) +
@@ -59,11 +58,25 @@ doppler run -- uv run --project pipeline pipeline/delete_published.py \
 Sends NIP-09 kind-5 deletion, Blossom BUD-02 delete, and removes the entry from
 `data/published.json`.
 
+## Large masters (feature films)
+
+Practice policy (480p / 60 s) is enforced in `common.prepare_video_for_upload`
+and used by `pipeline.py`. Large masters bypass that path entirely:
+
+```bash
+doppler run -- uv run --project pipeline pipeline/blossom_upload.py \
+  --file /path/to/master.mp4 --server https://blossom.dojopop.live
+```
+
+Default endpoint is `PUT /upload` (no server transcode). Do not use
+`--endpoint media` for films — that hits BUD-05 and downscales to 480p on the
+DojoPop blossom server.
+
 ## Individual stages
 
 ```bash
 # 1. download only (writes data/videos/<id>.mp4 + .info.json)
-uv run --project pipeline pipeline/download_youtube.py --url <URL> --max-duration 90
+uv run --project pipeline pipeline/download_youtube.py --url <URL> --max-duration 60
 
 # 2. upload one file to Blossom (prints BlobDescriptor JSON)
 doppler run -- uv run --project pipeline pipeline/blossom_upload.py --file data/videos/<id>.mp4
@@ -86,5 +99,6 @@ doppler run -- uv run --project pipeline pipeline/publish_video_event.py \
 - **Blossom auth**: BUD-02 kind-24242 event (`t=upload`, `x=<sha256>`,
   `expiration`), base64 in `Authorization: Nostr …`; BUD-06 HEAD preflight
   before the PUT.
-- **ffmpeg**: uses system ffmpeg if present, otherwise the static binary
-  bundled by `imageio-ffmpeg` (no Homebrew needed).
+- **ffmpeg**: transcodes every upload to **480p max height**, **60 s max** (CRF 28,
+  AAC 96k) before Blossom upload; thumbnails capped at 480px wide. Uses system
+  ffmpeg if present, otherwise the static binary bundled by `imageio-ffmpeg`.

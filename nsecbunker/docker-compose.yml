@@ -1,0 +1,58 @@
+services:
+  nsecbunkerd-migrate:
+    image: pablof7z/nsecbunkerd:latest
+    platform: linux/arm64
+    container_name: dojopop-nsecbunkerd-migrate
+    restart: "no"
+    volumes:
+      - bunker-config:/app/config
+    environment:
+      - DATABASE_URL=file:/app/config/nsecbunker.db
+    entrypoint: ""
+    command: ["npx", "prisma", "migrate", "deploy"]
+
+  nsecbunkerd:
+    image: pablof7z/nsecbunkerd:latest
+    platform: linux/arm64
+    container_name: dojopop-nsecbunkerd
+    restart: unless-stopped
+    depends_on:
+      nsecbunkerd-migrate:
+        condition: service_completed_successfully
+    volumes:
+      - bunker-config:/app/config
+    environment:
+      - DATABASE_URL=file:/app/config/nsecbunker.db
+      - ADMIN_NPUBS=${ADMIN_NPUBS:-npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg}
+      - RELAYS=${NSEC_BUNKER_RELAYS:-wss://relay.dojopop.live,wss://relay.nsecbunker.com}
+    ports:
+      - "3003:3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  admin-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin-ui
+    image: dojopop-nsecbunker-admin:latest
+    container_name: dojopop-nsecbunker-admin
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - DATA_DIR=/data
+      - BODY_SIZE_LIMIT=0
+    volumes:
+      - bunker-config:/data/defaults:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    group_add:
+      - "${DOCKER_GID:-988}"
+
+volumes:
+  bunker-config:

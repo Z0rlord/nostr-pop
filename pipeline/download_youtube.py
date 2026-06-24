@@ -1,10 +1,10 @@
 """Download YouTube videos (channel / playlist / single URL) with yt-dlp.
 
 Prefers mp4, writes the yt-dlp info JSON next to each video, and can filter
-to short (~1 minute) videos via --max-duration.
+to short practice clips via --max-duration (default 60 s in pipeline.py).
 
 Usage:
-    uv run --project pipeline pipeline/download_youtube.py --url <URL> [--max-duration 90]
+    uv run --project pipeline pipeline/download_youtube.py --url <URL> [--max-duration 60]
 """
 
 from __future__ import annotations
@@ -122,7 +122,7 @@ def main() -> int:
         "--max-duration",
         type=int,
         default=None,
-        help="Skip videos longer than this many seconds (e.g. 90)",
+        help="Skip videos longer than this many seconds (default: no filter; pipeline defaults to 60)",
     )
     args = ap.parse_args()
 

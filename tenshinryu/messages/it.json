@@ -1,0 +1,367 @@
+{
+  "metadata": {
+    "title": "Tenshinryu KIWAMI - Arti Marziali Giapponesi Tradizionali",
+    "description": "Il sistema definitivo per imparare il Tenshinryu Hyoho. Saggezza tradizionale. Tecnologia moderna."
+  },
+  "navigation": {
+    "signIn": "Accedi",
+    "join": "Iscriviti",
+    "home": "Home",
+    "training": "Allenamento",
+    "legal": "Legale",
+    "contact": "Contatto"
+  },
+  "hero": {
+    "badge": "Tradizione Giapponese",
+    "title": "PADRONAGGIO. IL PERCORSO. 極",
+    "subtitle": "Il sistema definitivo per imparare il Tenshinryu Hyoho.",
+    "description": "Saggezza tradizionale. Tecnologia moderna. Cammina il sentiero che i samurai percorrevano 400 anni fa.",
+    "features": {
+      "videos": "Curriculum video con sottotitoli in inglese",
+      "streaming": "Lezioni in streaming su YouTube",
+      "feedback": "Feedback diretto dal Sensei Tenshin"
+    },
+    "cta": {
+      "begin": "Inizia l'Allenamento",
+      "login": "Accesso Membri"
+    },
+    "tagline": "La tradizione è immutabile. La crescita è infinita."
+  },
+  "membership": {
+    "title": "MEMBERSHIP",
+    "subtitle": "Scegli il percorso adatto al tuo viaggio.",
+    "youtube": {
+      "name": "YOUTUBE",
+      "price": "$4.99",
+      "period": "/mese",
+      "badge": "Base",
+      "features": [
+        "Video tecniche di base",
+        "Accesso community YouTube",
+        "Streaming dal vivo mensili"
+      ]
+    },
+    "standard": {
+      "name": "STANDARD",
+      "price": "$35",
+      "period": "/mese",
+      "badge": "Serio",
+      "features": [
+        "Libreria video completa",
+        "Materiali scaricabili",
+        "Tracciamento progressi",
+        "Messaggistica diretta"
+      ]
+    },
+    "pro": {
+      "name": "PRO",
+      "price": "$85",
+      "period": "/mese",
+      "badge": "Dedicato",
+      "features": [
+        "Tutto dello Standard",
+        "Revisioni video 1-a-1",
+        "Supporto prioritario",
+        "Certificazione gradi",
+        "Piani allenamento personalizzati"
+      ]
+    },
+    "choose": "Scegli {plan}"
+  },
+  "features": {
+    "title": "FUNZIONALITÀ",
+    "items": {
+      "curriculum": {
+        "number": "01",
+        "title": "Curriculum Strutturato",
+        "description": "Progressione passo-passo dalle tecniche base a quelle avanzate, seguendo il programma tradizionale Tenshinryu."
+      },
+      "feedback": {
+        "number": "02",
+        "title": "Feedback Diretto",
+        "description": "Invia i tuoi video di allenamento e ricevi correzioni personalizzate da istruttori certificati."
+      },
+      "community": {
+        "number": "03",
+        "title": "Community Globale",
+        "description": "Connettiti con praticanti in tutto il mondo. Condividi esperienze e cresci insieme."
+      },
+      "ranking": {
+        "number": "04",
+        "title": "Sistema di Gradi",
+        "description": "Guadagna gradi riconosciuti man mano che progredisci. Traccia il tuo viaggio dalla cintura bianca a quella nera."
+      }
+    }
+  },
+  "footer": {
+    "training": "Allenamento",
+    "legal": "Legale",
+    "terms": "Termini",
+    "privacy": "Privacy",
+    "contact": "Contatto",
+    "dojo": "Dojo Internazionale",
+    "copyright": "© 2026 TRADIZIONE GIAPPONESE TENSHINRYU HYOHO. TUTTI I DIRITTI RISERVATI."
+  },
+  "auth": {
+    "login": {
+      "title": "Bentornato",
+      "signIn": "Accedi a",
+      "google": "Continua con Google",
+      "apple": "Continua con Apple",
+      "noAccount": "Non hai un account?",
+      "error": "Accesso fallito. Riprova."
+    }
+  },
+  "student": {
+    "dashboard": "Dashboard Studente",
+    "overview": "Panoramica",
+    "history": "Cronologia",
+    "ready": "Pronto per la Lezione?",
+    "checkIn": {
+      "description": "Troveremo automaticamente la tua lezione in base all'orario e alla posizione",
+      "finding": "Ricerca lezione...",
+      "found": "Trovata",
+      "success": "Registrato!",
+      "button": "Registrati Ora",
+      "thisMonth": "Questo Mese",
+      "streak": "Giorni Consecutivi"
+    },
+    "videos": {
+      "title": "Video Allenamento",
+      "subtitle": "Tecniche \u0026 tutorial",
+      "visit": "Visita YouTube Tenshinryu"
+    },
+    "instructorMode": "Modalità Istruttore",
+    "logout": "Esci",
+    "upcomingClasses": {
+      "title": "Prossime Lezioni",
+      "next": "Prossime 5",
+      "instructor": "Istruttore",
+      "noClasses": "Nessuna lezione programmata",
+      "checkWithInstructor": "Contatta il tuo istruttore per la prossima sessione"
+    },
+    "solo": {
+      "title": "Registra Allenamento",
+      "editTitle": "Modifica Allenamento",
+      "practiceType": "Tipo di Allenamento",
+      "types": {
+        "kihon": "Kihon (Base)",
+        "kata": "Kata (Forme)",
+        "sparring": "Sparring",
+        "meditation": "Meditazione",
+        "fitness": "Fitness",
+        "weapons": "Armi",
+        "footwork": "Movimenti",
+        "other": "Altro"
+      },
+      "duration": "Durata",
+      "minutes": "minuti",
+      "intensity": "Intensità",
+      "intensities": {
+        "light": "Leggera",
+        "medium": "Media",
+        "hard": "Alta"
+      },
+      "mood": "Umore",
+      "moods": {
+        "great": "Ottimo",
+        "good": "Buono",
+        "neutral": "Neutrale",
+        "tired": "Stanco",
+        "exhausted": "Esaurito"
+      },
+      "energyLevel": "Livello Energia",
+      "location": "Luogo",
+      "locationPlaceholder": "Dove ti sei allenato?",
+      "tags": "Tag",
+      "tagsPlaceholder": "Aggiungi tag (premi Invio)",
+      "notes": "Note",
+      "notesPlaceholder": "Come è andata? Su cosa ti sei concentrato?",
+      "voiceNote": "Nota Vocale",
+      "recordVoice": "Registra",
+      "recording": "Registrazione...",
+      "stopRecording": "Ferma",
+      "photos": "Foto",
+      "addPhotos": "Aggiungi Foto",
+      "photoLimit": "Max 3 foto, 5MB ciascuna",
+      "practiceDate": "Data Allenamento",
+      "timer": "Timer",
+      "startTimer": "Avvia",
+      "stopTimer": "Ferma",
+      "resetTimer": "Reset",
+      "save": "Salva",
+      "saving": "Salvataggio...",
+      "cancel": "Annulla",
+      "stats": {
+        "totalSessions": "Sessioni Totali",
+        "totalHours": "Ore Totali",
+        "currentStreak": "Serie Attuale",
+        "avgEnergy": "Media Energia"
+      },
+      "history": "Storico Allenamenti",
+      "noLogs": "Nessun allenamento registrato",
+      "logFirst": "Registra il tuo primo allenamento!"
+    },
+    "journal": {
+      "title": "Nuova Voce",
+      "editTitle": "Modifica Voce",
+      "entryType": "Tipo di Voce",
+      "types": {
+        "general": "Generale",
+        "class_notes": "Note Lezione",
+        "technique_reflection": "Tecnica",
+        "goal": "Obiettivo",
+        "insight": "Intuizione"
+      },
+      "titleLabel": "Titolo",
+      "titlePlaceholder": "Dai un titolo alla voce...",
+      "content": "Contenuto",
+      "contentPlaceholder": "Scrivi i tuoi pensieri qui...",
+      "isPrivate": "Voce Privata",
+      "isPrivateDesc": "Solo tu puoi vedere le voci private",
+      "tags": "Tag",
+      "tagsPlaceholder": "Aggiungi tag (premi Invio)",
+      "voiceNote": "Nota Vocale",
+      "recordVoice": "Registra",
+      "recording": "Registrazione...",
+      "stopRecording": "Ferma",
+      "save": "Salva",
+      "saving": "Salvataggio...",
+      "cancel": "Annulla",
+      "history": "Voci del Diario",
+      "noEntries": "Nessuna voce",
+      "writeFirst": "Scrivi la tua prima voce!"
+    }
+  },
+  "instructor": {
+    "dashboard": "DASHBOARD ISTRUTTORE",
+    "welcome": "Benvenuto",
+    "tabs": {
+      "checkin": "REGISTRO",
+      "classes": "LEZIONI",
+      "attendance": "PRESENZE",
+      "notify": "NOTIFICHE"
+    },
+    "stats": {
+      "present": "Presenti Oggi",
+      "absent": "Assenti",
+      "total": "Totale Studenti"
+    },
+    "class": {
+      "select": "Seleziona una lezione",
+      "noClass": "Nessuna lezione selezionata",
+      "create": "Crea Lezione",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "location": "Luogo"
+    },
+    "beacon": {
+      "title": "Beacon Bluetooth",
+      "description": "Trasmissione... Gli studenti possono registrarsi automaticamente",
+      "start": "Avvia Beacon",
+      "stop": "Ferma Beacon"
+    },
+    "qr": {
+      "title": "Codice QR Lezione",
+      "description": "Mostra per la scansione degli studenti",
+      "generate": "Genera Nuovo QR"
+    },
+    "studentMode": "Modalità Studente"
+  },
+  "invite": {
+    "title": "Invita Istruttore",
+    "button": "+ Invita Istruttore",
+    "send": "Invia Invito",
+    "sending": "Invio in corso...",
+    "email": "Email",
+    "emailPlaceholder": "instructor@example.com",
+    "name": "Nome (opzionale)",
+    "namePlaceholder": "Nome completo",
+    "description": "Riceveranno un link per creare il loro account istruttore.",
+    "expires": "L'invito scade dopo 7 giorni.",
+    "success": "Invito inviato a {email}!",
+    "shareLink": "Condividi questo link con loro:",
+    "copyLink": "Copia",
+    "linkCopied": "Link copiato!",
+    "sendAnother": "Invia un altro invito",
+    "tabs": {
+      "send": "Invia Invito",
+      "list": "Inviti"
+    },
+    "status": {
+      "pending": "In attesa",
+      "accepted": "Accettato",
+      "expired": "Scaduto"
+    },
+    "list": {
+      "empty": "Nessun invito inviato ancora.",
+      "sent": "Inviato",
+      "expires": "Scade",
+      "accepted": "Accettato"
+    },
+    "errors": {
+      "invalidEmail": "Inserisci un indirizzo email valido",
+      "alreadyInstructor": "Questa email è già registrata come istruttore",
+      "pendingInvite": "Esiste già un invito in sospeso per questa email",
+      "generic": "Impossibile creare l'invito",
+      "sendFailed": "Impossibile inviare l'invito"
+    },
+    "accept": {
+      "title": "Unisciti come Istruttore",
+      "welcome": "Sei stato invitato a unirti a",
+      "createAccount": "Crea Account",
+      "name": "Nome Completo",
+      "password": "Password",
+      "passwordConfirm": "Conferma Password",
+      "passwordHint": "Minimo 8 caratteri",
+      "passwordMismatch": "Le password non coincidono",
+      "showPassword": "Mostra password",
+      "hidePassword": "Nascondi password",
+      "submit": "Crea Account",
+      "creating": "Creazione in corso...",
+      "emailLocked": "Questa email non può essere modificata",
+      "success": "Benvenuto in Tenshinryu!",
+      "successDesc": "Il tuo account istruttore è stato creato con successo.",
+      "goToDashboard": "Vai alla Dashboard Istruttore",
+      "invalid": "Invito Non Valido",
+      "expired": "Questo invito è scaduto",
+      "alreadyUsed": "Questo invito è già stato utilizzato",
+      "createFailed": "Impossibile creare l'account",
+      "haveAccount": "Hai già un account?"
+    }
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "create": "Crea",
+    "add": "Aggiungi",
+    "close": "Chiudi",
+    "confirm": "Conferma",
+    "back": "Indietro",
+    "next": "Avanti",
+    "viewAll": "Vedi Tutto"
+  },
+  "home": {
+    "welcomeBack": "Bentornato",
+    "quickAccess": "Accesso rapido agli strumenti del dojo",
+    "instructor": {
+      "checkIn": "Registrazione",
+      "checkInDesc": "QR, NFC e BLE per i studenti",
+      "classes": "Lezioni",
+      "classesDesc": "Gestisci il calendario delle lezioni",
+      "attendance": "Presenze",
+      "attendanceDesc": "Visualizza e correggi i registri presenze",
+      "notifications": "Notifiche",
+      "notificationsDesc": "Invia avvisi agli studenti"
+    },
+    "student": {
+      "progress": "I Miei Progressi",
+      "progressDesc": "Visualizza le tue presenze e serie",
+      "history": "Cronologia Registrazioni",
+      "historyDesc": "Vedi le tue sessioni di allenamento passate"
+    }
+  }
+}

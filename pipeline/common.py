@@ -16,7 +16,7 @@ PREVIEW_DIR = DATA_DIR / "preview"
 STATE_FILE = DATA_DIR / "published.json"
 DEFAULT_METADATA_CONFIG = Path(__file__).resolve().parent / "metadata.yml"
 
-DEFAULT_BLOSSOM = "https://blossom.yakihonne.com"
+DEFAULT_BLOSSOM = "https://blossom.dojopop.live"
 
 # Self-hosted DojoPop relays (nostr-rs-relay on relay-2).
 # Published to FIRST (sequentially); failures are tolerated like any other relay.
@@ -29,6 +29,7 @@ RELAY_HOST_ALIASES = {"relay-2": "100.125.184.46"}
 DEFAULT_RELAYS = [
     *PRIMARY_RELAYS,
     "wss://nostr-01.yakihonne.com",
+    "wss://relay.primal.net",
     "wss://relay.damus.io",
     "wss://nos.lol",
 ]
@@ -42,7 +43,11 @@ def relay_connect_url(relay: str) -> str:
     if host in RELAY_HOST_ALIASES:
         return relay.replace(host, RELAY_HOST_ALIASES[host], 1)
     return relay
-DEFAULT_HASHTAGS = ["swordpractice", "dojopop", "proofofpractice"]
+DEFAULT_HASHTAGS = ["dojopop", "proofofpractice"]
+
+# Upload policy: short vertical practice clips, modest bitrate for storage cost.
+MAX_VIDEO_DURATION_SEC = 60
+MAX_VIDEO_HEIGHT = 480
 
 # Defaults for event metadata; pipeline/metadata.yml (or --config) overrides.
 METADATA_DEFAULTS: dict = {
@@ -88,6 +93,98 @@ def find_ffmpeg() -> str:
     return imageio_ffmpeg.get_ffmpeg_exe()
 
 
+def find_ffprobe() -> str | None:
+    found = shutil.which("ffprobe") or shutil.which("ffprobe", path="/opt/homebrew/bin:/usr/local/bin")
+    if found:
+        return found
+    companion = Path(find_ffmpeg()).with_name("ffprobe")
+    return str(companion) if companion.exists() else None
+
+
+def probe_video(path: Path) -> dict:
+    """Return {duration, width, height} from the first video stream."""
+    ffprobe = find_ffprobe()
+    if ffprobe:
+        proc = subprocess.run(
+            [
+                ffprobe,
+                "-v",
+                "quiet",
+                "-print_format",
+                "json",
+                "-show_streams",
+                "-show_format",
+                str(path),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        data = json.loads(proc.stdout)
+        duration = float(data.get("format", {}).get("duration") or 0)
+        for stream in data.get("streams") or []:
+            if stream.get("codec_type") == "video":
+                return {
+                    "duration": duration,
+                    "width": int(stream["width"]),
+                    "height": int(stream["height"]),
+                }
+        raise RuntimeError(f"no video stream in {path}")
+
+    # ffprobe missing (some imageio-ffmpeg bundles): parse ffmpeg -i stderr.
+    proc = subprocess.run(
+        [find_ffmpeg(), "-i", str(path)],
+        capture_output=True,
+        text=True,
+    )
+    import re
+
+    stderr = proc.stderr
+    dim = re.search(r"Video:.*\s(\d{2,5})x(\d{2,5})\s", stderr)
+    dur = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", stderr)
+    if not dim or not dur:
+        raise RuntimeError(f"could not probe {path}")
+    h, m, s = dur.groups()
+    return {
+        "duration": int(h) * 3600 + int(m) * 60 + float(s),
+        "width": int(dim.group(1)),
+        "height": int(dim.group(2)),
+    }
+
+
+def prepare_video_for_upload(video: Path) -> tuple[Path, dict]:
+    """Transcode to MAX_VIDEO_HEIGHT and trim to MAX_VIDEO_DURATION_SEC."""
+    out = video.with_name(f"{video.stem}.upload.mp4")
+    if out.exists():
+        out.unlink()
+    vf = f"scale=-2:'min({MAX_VIDEO_HEIGHT},ih)'"
+    cmd = [
+        find_ffmpeg(),
+        "-y",
+        "-i",
+        str(video),
+        "-t",
+        str(MAX_VIDEO_DURATION_SEC),
+        "-vf",
+        vf,
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "28",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "96k",
+        "-movflags",
+        "+faststart",
+        str(out),
+    ]
+    subprocess.run(cmd, check=True, capture_output=True)
+    return out, probe_video(out)
+
+
 def make_thumbnail(video: Path, out_dir: Path, seek_sec: float = 1.0) -> Path:
     """Grab a single frame as a JPEG thumbnail."""
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -102,7 +199,7 @@ def make_thumbnail(video: Path, out_dir: Path, seek_sec: float = 1.0) -> Path:
         "-frames:v",
         "1",
         "-vf",
-        "scale='min(1280,iw)':-2",
+        f"scale='min({MAX_VIDEO_HEIGHT},iw)':-2",
         "-q:v",
         "3",
         str(out),

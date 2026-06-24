@@ -28,20 +28,70 @@ with the storage rules scoped to the DojoPop pubkey
 their hex pubkey to the `pubkeys` lists in `config.yml` and
 `docker compose restart`.
 
+## Deploy to relay-2
+
+```bash
+cd blossom-server
+./deploy.sh relay-2
+```
+
+Blobs live in `/opt/dojopop/blossom/data` on the host (~125 GB free on relay-2
+today). Public URL: `https://blossom.dojopop.live` via the dojopop-relay
+Cloudflare Tunnel → `localhost:3004` (host port 3000 is already taken).
+
+After first deploy, update tunnel ingress + DNS:
+
+```bash
+doppler run --project dojopop --config prd_zorie -- ./web/scripts/update-tunnel-ingress.sh
+```
+
+Point the video pipeline at the new server:
+
+```bash
+doppler run -- uv run --project pipeline pipeline/pipeline.py \
+  --url <youtube-url> --server https://blossom.dojopop.live
+```
+
+Or change `DEFAULT_BLOSSOM` in `pipeline/common.py` once verified.
+
+## Practice clips vs feature films
+
+Two upload paths share the same Blossom server and DojoPop pubkey; only the
+client path differs.
+
+| Content | Tool | Blossom endpoint | Transcode |
+|---|---|---|---|
+| DojoPop practice (YouTube → Nostr) | `pipeline/pipeline.py` | `PUT /upload` | **Client** ffmpeg → 480p / 60 s (`pipeline/common.py`) |
+| Large master (e.g. *The Yoga Sutra*) | `pipeline/blossom_upload.py` | `PUT /upload` | **None** — file stored as-is |
+| Optional server transcode | `blossom_upload.py --endpoint media` | `PUT /media` | **Server** capped at 480p (`media.video` in `config.yml`) |
+
+`pipeline/` always transcodes before upload and never calls `/media`. The 480p
+rule in `config.yml` applies only to `PUT /media`, not to `PUT /upload`.
+
+**Feature film upload** (after deploy with raised `upload.maxSize`):
+
+```bash
+doppler run -- uv run --project pipeline pipeline/blossom_upload.py \
+  --file /path/to/yoga-sutra-master.mp4 \
+  --server https://blossom.dojopop.live
+```
+
+Do **not** pass `--endpoint media` for masters — that would downscale via BUD-05.
+
+### Move to Raspberry Pi later
+
+1. `rsync -az relay-2:/opt/dojopop/blossom/data/ pi5:/opt/dojopop/blossom/data/`
+2. `./deploy.sh pi5`
+3. Update tunnel ingress to `http://100.75.188.125:3004` (or run cloudflared on the Pi).
+
 ## Production checklist
 
-1. **Domain**: uncomment `publicDomain` in `config.yml` and set the bare
-   hostname (no `https://`), e.g. `blossom.dojopop.example`. This is the
-   hostname baked into the blob descriptor URLs returned to clients.
-2. **TLS / exposure**: keep the container bound to localhost and put a reverse
-   proxy in front (Caddy/nginx with certs) **or** a Cloudflare Tunnel:
-   `cloudflared tunnel create blossom && cloudflared tunnel route dns blossom blossom.dojopop.example`,
-   ingress → `http://localhost:3000`. Then change the compose port mapping to
-   `127.0.0.1:3000:3000`.
-3. **Limits**: `upload.maxSize` is 1 GB; raise if longer practice videos appear.
-   Retention is 10 years for the whitelisted pubkey (rules in `config.yml`).
-4. **Storage**: move `./data` to a real volume / S3 (`storage.backend: s3`)
-   when blobs outgrow the host disk.
+1. **Domain**: `publicDomain: blossom.dojopop.live` in `config.yml`.
+2. **TLS / exposure**: `127.0.0.1:3004:3000` + Cloudflare Tunnel on relay-2.
+3. **Limits**: `upload.maxSize` is 5 GB (passthrough masters on `PUT /upload`).
+   `media.video.maxHeight` is 480p for `PUT /media` only; practice clips are
+   capped at 480p / 60 s in `pipeline/` before upload.
+4. **Uploaders**: append hex pubkeys to `storage.rules` in `config.yml`, then
+   `docker compose restart` on the host.
 5. **Pin the image**: `ghcr.io/hzrd149/blossom-server:master` tracks master —
    pin a release tag for production.
-6. Point the pipeline at it: `--server https://blossom.dojopop.example`.

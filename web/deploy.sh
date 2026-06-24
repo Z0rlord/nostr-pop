@@ -25,6 +25,7 @@ ssh -o BatchMode=yes "$HOST" "
     echo '==> docker compose plugin missing; installing (apt)'
     apt-get update -qq && apt-get install -y -qq docker-compose-v2
   fi
+  docker network create dojopop-internal 2>/dev/null || true
   cd '$REMOTE_DIR'
   export DOCKER_GID=\$(getent group docker | cut -d: -f3)
   if [[ ! -f .env ]]; then
@@ -36,6 +37,9 @@ ssh -o BatchMode=yes "$HOST" "
   DOCKER_GID=\$DOCKER_GID docker compose build --pull
   DOCKER_GID=\$DOCKER_GID docker compose up -d
   docker compose ps
+  echo ''
+  echo '==> Blossom upload reachability from web container:'
+  docker exec dojopop-web wget -qO- --timeout=5 http://dojopop-blossom:3000/ >/dev/null && echo OK || echo 'WARN: cannot reach dojopop-blossom:3000 — run blossom-server/deploy.sh'
 "
 
 echo "==> Done. Landing page should be on ${HOST}:3001 (tunnel: dojopop.live)"

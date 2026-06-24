@@ -1,0 +1,604 @@
+{
+  "metadata": {
+    "title": "天心流 極 - 日本伝統武術",
+    "description": "天心流兵法を学ぶための究極のオンラインシステム。伝統の知恵。現代の技術。"
+  },
+  "navigation": {
+    "signIn": "ログイン",
+    "join": "入会",
+    "home": "ホーム",
+    "training": "稽古",
+    "legal": "規約",
+    "contact": "お問い合わせ",
+    "backToHome": "← ホームへ"
+  },
+  "hero": {
+    "badge": "日本伝統",
+    "title": "極める。道を。極",
+    "subtitle": "天心流兵法を学ぶための究極のオンラインシステム。",
+    "description": "伝統の知恵。現代の技術。400年前の武士と同じ道を歩む。",
+    "features": {
+      "videos": "英語字幕付き動画カリキュラム",
+      "streaming": "YouTubeライブ配信",
+      "feedback": "天心先生からの直接フィードバック"
+    },
+    "cta": {
+      "begin": "稽古を始める",
+      "login": "会員ログイン"
+    },
+    "tagline": "伝統は不変。成長は無限。",
+    "titleLine1": "極める。",
+    "titleLine2": "道を。",
+    "titleLine3": "極"
+  },
+  "membership": {
+    "title": "会員プラン",
+    "subtitle": "あなたの道に合ったプランを選んでください。",
+    "youtube": {
+      "name": "YOUTUBE",
+      "features": [
+        "限定ライブ配信",
+        "先行動画アクセス",
+        "メンバー限定投稿"
+      ]
+    },
+    "standard": {
+      "name": "スタンダード",
+      "price": "$35",
+      "period": "/月",
+      "badge": "本格",
+      "features": [
+        "全動画ライブラリ",
+        "ダウンロード資料",
+        "進捗追跡",
+        "ダイレクトメッセージ"
+      ]
+    },
+    "pro": {
+      "name": "プロ",
+      "price": "$85",
+      "period": "/月",
+      "badge": "専門",
+      "features": [
+        "スタンダードの全機能",
+        "1対1動画レビュー",
+        "優先サポート",
+        "段位認定",
+        "カスタム稽古プラン"
+      ]
+    },
+    "choose": "{plan}を選択",
+    "entry": "入門",
+    "fullAccess": "本格",
+    "ultimate": "専門",
+    "joinYoutube": "入会する",
+    "joinGold": "GOLDに入会",
+    "joinRoyal": "ROYALに入会",
+    "period": "/月",
+    "popular": "人気",
+    "gold": {
+      "name": "GOLD",
+      "features": [
+        "YOUTUBEの全機能",
+        "会員サイト完全アクセス",
+        "ダウンロード資料",
+        "先生とのダイレクトメッセージ"
+      ]
+    },
+    "royal": {
+      "name": "ROYAL",
+      "features": [
+        "GOLDの全機能",
+        "1対1動画レビュー",
+        "優先サポート",
+        "段位認定",
+        "カスタム稽古プラン"
+      ]
+    }
+  },
+  "features": {
+    "title": "機能",
+    "subtitle": "あなたの武道の旅をサポートする充実した機能。",
+    "items": {
+      "curriculum": {
+        "title": "体系的カリキュラム",
+        "description": "基本的技法から上級技法まで、天心流伝統の課程に沿った段階的な進捗。"
+      },
+      "feedback": {
+        "title": "直接フィードバック",
+        "description": "稽古動画を提出し、認定指導員からパーソナライズされた指導を受ける。"
+      },
+      "community": {
+        "title": "グローバルコミュニティ",
+        "description": "世界中の仲間とつながる。経験を分かち合い、共に成長する。"
+      },
+      "ranking": {
+        "title": "段位制度",
+        "description": "進捗に応じて認定された帯を取得。白帯から黒帯までの道のりを記録する。"
+      }
+    }
+  },
+  "footer": {
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  },
+  "auth": {
+    "login": {
+      "title": "おかえりなさい",
+      "signIn": "ログイン",
+      "google": "Googleで続ける",
+      "apple": "Appleで続ける",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "error": "ログインに失敗しました。もう一度お試しください。"
+    }
+  },
+  "student": {
+    "dashboard": "生徒ダッシュボード",
+    "ready": "稽古の準備はできましたか？",
+    "stripe": "ストライプ",
+    "stripes": "ストライプ",
+    "tabs": {
+      "overview": "概要",
+      "history": "履歴",
+      "resources": "資料"
+    },
+    "checkIn": {
+      "description": "時間と場所に基づいて自動的にクラスを見つけます",
+      "finding": "クラスを検索中...",
+      "checkingIn": "チェックイン中...",
+      "found": "見つかりました",
+      "success": "チェックイン完了",
+      "failed": "チェックインに失敗しました",
+      "error": "エラーが発生しました。もう一度お試しください。",
+      "noClassFound": "アクティブなクラスが見つかりません",
+      "button": "今すぐチェックイン",
+      "thisMonth": "今月",
+      "streak": "日連続"
+    },
+    "videos": {
+      "title": "稽古動画",
+      "subtitle": "技法とチュートリアル",
+      "visit": "天心流YouTubeへ"
+    },
+    "instructorMode": "👨‍🏫 指導員モード",
+    "logout": "ログアウト",
+    "history": {
+      "title": "最近のチェックイン"
+    },
+    "upcomingClasses": {
+      "title": "今後のクラス",
+      "next": "次の5件",
+      "instructor": "指導員",
+      "noClasses": "予定されているクラスはありません",
+      "checkWithInstructor": "次のセッションについて指導員にお問い合わせください"
+    },
+    "solo": {
+      "title": "稽古を記録",
+      "editTitle": "稽古を編集",
+      "practiceType": "稽古タイプ",
+      "types": {
+        "kihon": "基本",
+        "kata": "形",
+        "sparring": "組手",
+        "meditation": "瞑想",
+        "fitness": "フィットネス",
+        "weapons": "武器",
+        "footwork": "足捌き",
+        "other": "その他"
+      },
+      "duration": "時間",
+      "minutes": "分",
+      "intensity": "強度",
+      "intensities": {
+        "light": "軽い",
+        "medium": "中程度",
+        "hard": "激しい"
+      },
+      "mood": "気分",
+      "moods": {
+        "great": "最高",
+        "good": "良い",
+        "neutral": "普通",
+        "tired": "疲れた",
+        "exhausted": " exhausted"
+      },
+      "energyLevel": "エネルギーレベル",
+      "location": "場所",
+      "locationPlaceholder": "どこで稽古しましたか？",
+      "tags": "タグ",
+      "tagsPlaceholder": "タグを追加（Enterで確定）",
+      "notes": "メモ",
+      "notesPlaceholder": "どうでしたか？何に集中しましたか？",
+      "voiceNote": "ボイスメモ",
+      "recordVoice": "録音する",
+      "recording": "録音中...",
+      "stopRecording": "録音停止",
+      "photos": "写真",
+      "addPhotos": "写真を追加",
+      "photoLimit": "最大3枚、各5MBまで",
+      "practiceDate": "稽古日",
+      "timer": "タイマー",
+      "startTimer": "開始",
+      "stopTimer": "停止",
+      "resetTimer": "リセット",
+      "save": "保存",
+      "saving": "保存中...",
+      "cancel": "キャンセル",
+      "stats": {
+        "totalSessions": "総回数",
+        "totalHours": "総時間",
+        "currentStreak": "連続記録",
+        "avgEnergy": "平均エネルギー"
+      },
+      "history": "稽古履歴",
+      "noLogs": "まだ記録がありません",
+      "logFirst": "最初の稽古を記録しましょう！"
+    },
+    "journal": {
+      "title": "新しいジャーナル",
+      "editTitle": "ジャーナルを編集",
+      "entryType": "タイプ",
+      "types": {
+        "general": "一般",
+        "class_notes": "クラスメモ",
+        "technique_reflection": "技術",
+        "goal": "目標",
+        "insight": "洞察"
+      },
+      "titleLabel": "タイトル",
+      "titlePlaceholder": "タイトルを入力...",
+      "content": "内容",
+      "contentPlaceholder": "ここに書いてください...",
+      "isPrivate": "非公開",
+      "isPrivateDesc": "非公開のエントリーはあなただけが見られます",
+      "tags": "タグ",
+      "tagsPlaceholder": "タグを追加（Enterで確定）",
+      "voiceNote": "ボイスメモ",
+      "recordVoice": "録音する",
+      "recording": "録音中...",
+      "stopRecording": "録音停止",
+      "save": "保存",
+      "saving": "保存中...",
+      "cancel": "キャンセル",
+      "history": "ジャーナル履歴",
+      "noEntries": "まだエントリーがありません",
+      "writeFirst": "最初のエントリーを書きましょう！"
+    },
+    "resources": {
+      "about": {
+        "title": "天心流とは？",
+        "description": "天心流は約400年の歴史を持つ日本伝統武術です。技法に興味がある方、伝統を守る活動をサポートしたい方は、ぜひご参加ください。お待ちしております。"
+      },
+      "online": {
+        "title": "天心流オンライン",
+        "description": "オンライン学習システムがあります。世界中のどこからでも天心流を学べます！",
+        "royal": "ロイヤル会員",
+        "royalDesc": "全コンテンツへのアクセス",
+        "gold": "ゴールド会員",
+        "goldDesc": "コアトレーニングコンテンツ"
+      },
+      "youtube": {
+        "title": "YouTubeメンバーシップ",
+        "description": "月額$4.99で、プライベート動画の視聴とプライベートレッスンへの参加が可能です。",
+        "join": "メンバーに加入",
+        "subscribe": "チャンネル登録"
+      },
+      "playlists": {
+        "title": "動画プレイリスト",
+        "techniques": "技法動画",
+        "techniquesDesc": "ステップバイステップの技法チュートリアル",
+        "enbu": "演武＆昇段",
+        "enbuDesc": "演武と昇段動画"
+      },
+      "social": {
+        "title": "フォローする",
+        "blog": "ブログ"
+      },
+      "website": {
+        "title": "公式ウェブサイト"
+      }
+    }
+  },
+  "instructor": {
+    "dashboard": "指導員ダッシュボード",
+    "instructorTitle": "指導員",
+    "welcome": "ようこそ",
+    "studentMode": "Training",
+    "logout": "ログアウト",
+    "tabs": {
+      "checkin": "チェックイン",
+      "classes": "クラス",
+      "attendance": "出席",
+      "notify": "通知"
+    },
+    "stats": {
+      "present": "本日出席",
+      "absent": "欠席",
+      "total": "総生徒数"
+    },
+    "checkin": {
+      "title": "クラスチェックイン管理",
+      "selectedClass": "選択されたクラス",
+      "noClass": "クラス未選択",
+      "selectPrompt": "チェックインを有効にするクラスを選択",
+      "change": "変更",
+      "qrTitle": "クラスQRコード",
+      "qrDesc": "生徒がスキャンするために表示",
+      "qrAlt": "クラスQRコード",
+      "generateQR": "新しいQRを生成",
+      "qrError": "QRコードの生成に失敗しました",
+      "beaconTitle": "Bluetoothビーコン",
+      "beaconActive": "配信中...生徒は自動チェックイン可能",
+      "beaconInactive": "自動生徒チェックインのためビーコンを有効化",
+      "startBeacon": "ビーコン開始",
+      "stopBeacon": "ビーコン停止",
+      "recent": "最近のチェックイン",
+      "noCheckIns": "今日はまだチェックインがありません"
+    },
+    "classes": {
+      "title": "クラス管理",
+      "schedule": "日時",
+      "create": "クラス作成",
+      "createNew": "新規クラス作成",
+      "editClass": "クラス編集",
+      "name": "クラス名",
+      "namePlaceholder": "例：キッズBJJ初級",
+      "selectDateTime": "日時を選択",
+      "selectWhenStarts": "クラス開始時刻を選択",
+      "location": "場所",
+      "searchLocation": "場所を検索...",
+      "searchGoogleMaps": "Googleマップから検索して選択",
+      "maxStudents": "最大生徒数",
+      "recurring": "繰り返し",
+      "recurringLabel": "これは繰り返しクラスです",
+      "recurringDesc": "このクラスは毎週同じ日時に繰り返されます。",
+      "actions": "アクション",
+      "edit": "編集",
+      "delete": "削除",
+      "deleteConfirm": "このクラスを削除してもよろしいですか？",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "selectForCheckin": "チェックイン用に選択",
+      "noClasses": "まだクラスが作成されていません。「クラス作成」をクリックして最初のクラスを追加してください。",
+      "instructor": "指導員",
+      "max": "最大",
+      "students": "名"
+    },
+    "attendance": {
+      "title": "本日の出席",
+      "markPresent": "出席にする",
+      "mark": "",
+      "attendance": "出席",
+      "edit": "編集",
+      "remove": "削除",
+      "removeConfirm": "このチェックインを削除してもよろしいですか？",
+      "removeFailed": "チェックインの削除に失敗しました",
+      "correction": "出席修正",
+      "notes": "備考（任意）",
+      "notCheckedIn": "未チェックイン",
+      "status": {
+        "present": "出席",
+        "absent": "欠席",
+        "late": "遅刻"
+      }
+    },
+    "invite": {
+      "title": "指導員を招待",
+      "button": "+ 指導員を招待",
+      "send": "招待を送信",
+      "sending": "送信中...",
+      "email": "メールアドレス",
+      "emailPlaceholder": "instructor@example.com",
+      "name": "名前（任意）",
+      "namePlaceholder": "相手のフルネーム",
+      "description": "指導員アカウント作成用のリンクが送信されます。",
+      "expires": "招待は7日間有効です。",
+      "success": "{email}に招待を送信しました！",
+      "shareLink": "以下のリンクを共有してください：",
+      "copyLink": "コピー",
+      "linkCopied": "リンクをコピーしました！",
+      "sendAnother": "別の招待を送信",
+      "tabs": {
+        "send": "招待を送信",
+        "list": "招待一覧"
+      },
+      "status": {
+        "pending": "保留中",
+        "accepted": "承諾済み",
+        "expired": "期限切れ"
+      },
+      "list": {
+        "empty": "まだ招待を送信していません。",
+        "sent": "送信日",
+        "expires": "有効期限",
+        "accepted": "承諾日"
+      },
+      "errors": {
+        "invalidEmail": "有効なメールアドレスを入力してください",
+        "alreadyInstructor": "このメールは既に指導員として登録されています",
+        "pendingInvite": "このメールには既に保留中の招待があります",
+        "generic": "招待の作成に失敗しました",
+        "sendFailed": "招待の送信に失敗しました"
+      },
+      "accept": {
+        "title": "指導員として参加",
+        "welcome": "あなたは以下に招待されました：",
+        "createAccount": "アカウント作成",
+        "name": "フルネーム",
+        "password": "パスワード",
+        "passwordConfirm": "パスワード（確認）",
+        "passwordHint": "最低8文字",
+        "passwordMismatch": "パスワードが一致しません",
+        "showPassword": "パスワードを表示",
+        "hidePassword": "パスワードを非表示",
+        "submit": "アカウントを作成",
+        "creating": "作成中...",
+        "emailLocked": "このメールアドレスは変更できません",
+        "success": "天心流へようこそ！",
+        "successDesc": "指導員アカウントが正常に作成されました。",
+        "goToDashboard": "指導員ダッシュボードへ",
+        "invalid": "無効な招待",
+        "expired": "この招待は期限切れです",
+        "alreadyUsed": "この招待は既に使用されています",
+        "createFailed": "アカウントの作成に失敗しました",
+        "haveAccount": "既にアカウントをお持ちですか？"
+      }
+    },
+    "notifications": {
+      "title": "通知を送信",
+      "selectClass": "クラスを選択してください",
+      "chooseClass": "クラスを選択...",
+      "sendVia": "送信方法",
+      "allChannels": "全チャンネル",
+      "emailSms": "メール＆SMS",
+      "lineApp": "LINEアプリ",
+      "connected": "接続済み",
+      "type": "通知タイプ",
+      "types": {
+        "reminder": "クラスリマインダー",
+        "locationChange": "場所変更",
+        "cancellation": "休講",
+        "custom": "カスタムメッセージ"
+      },
+      "message": "メッセージ",
+      "preview": "メッセージプレビュー",
+      "characters": "文字",
+      "send": "送信：",
+      "sending": "送信中...",
+      "sentTo": "送信先：",
+      "students": "名",
+      "failed": "失敗",
+      "sendFailed": "送信に失敗しました",
+      "allNote": "登録されている電話番号にはSMS、メールアドレスにはメールで送信",
+      "lineNote": "LINEアプリ経由で接続済みの生徒のみに送信",
+      "lineSetup": "LINEメッセージ設定",
+      "lineSetupDesc": "LINE通知を受け取るには、生徒は以下の手順を行う必要があります：",
+      "lineStep1": "LINE公式アカウントを友だち追加する",
+      "lineStep2": "メールアドレスを送信してアカウントを連携する",
+      "studentsConnected": "接続済み生徒",
+      "default": {
+        "reminder": "⏰ クラスリマインダー：まもなくクラスが始まります！お待ちしております！🥋",
+        "locationChange": "📍 場所変更：クラスの場所が変更されました。新しい住所をご確認ください。",
+        "cancellation": "❌ 休講のお知らせ：本日のクラスは休講となりました。ご不便をおかけして申し訳ございません。"
+      }
+    }
+  },
+  "home": {
+    "welcomeBack": "おかえりなさい",
+    "quickAccess": "道場ツールに素早くアクセス",
+    "instructor": {
+      "checkIn": "チェックイン",
+      "checkInDesc": "生徒のQR、NFC、BLEチェックイン",
+      "classes": "クラス",
+      "classesDesc": "クラススケジュールの管理",
+      "attendance": "出席",
+      "attendanceDesc": "出席記録の確認と修正",
+      "notifications": "通知",
+      "notificationsDesc": "生徒への通知送信"
+    },
+    "student": {
+      "progress": "進捗",
+      "progressDesc": "出席と連続記録を確認",
+      "history": "チェックイン履歴",
+      "historyDesc": "過去の稽古セッションを確認"
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "save": "保存",
+    "saving": "保存中...",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "create": "作成",
+    "creating": "作成中...",
+    "add": "追加",
+    "close": "閉じる",
+    "confirm": "確認",
+    "back": "戻る",
+    "next": "次へ",
+    "selected": "選択済み",
+    "unknown": "不明",
+    "viewAll": "すべて表示",
+    "refresh": "更新",
+    "change": "変更",
+    "uploading": "アップロード中",
+    "error": "エラー",
+    "networkError": "ネットワークエラー"
+  },
+  "admin": {
+    "title": "ビジネスダッシュボード",
+    "tabs": {
+      "overview": "概要",
+      "students": "生徒",
+      "finance": "財務",
+      "classes": "クラス"
+    },
+    "kpi": {
+      "totalStudents": "生徒総数",
+      "activeStudents": "アクティブ生徒",
+      "attendanceToday": "本日のチェックイン",
+      "monthlyRevenue": "月間収益"
+    },
+    "atRisk": {
+      "title": "離脱リスクのある生徒",
+      "noShow14": "14日以上出席していない生徒"
+    },
+    "recentActivity": "最近のアクティビティ",
+    "membershipDistribution": "会員プラン分布",
+    "upcomingClasses": "今後のクラス",
+    "registered": "登録済み",
+    "never": "未出席",
+    "finance": {
+      "monthlyRecurring": "月間定期収益",
+      "annualRecurring": "年間定期収益",
+      "avgPerStudent": "生徒1人あたり平均収益",
+      "revenueByTier": "プラン別収益"
+    },
+    "table": {
+      "name": "名前",
+      "tier": "プラン",
+      "lastCheckIn": "最終チェックイン",
+      "daysMissed": "欠席日数",
+      "count": "人数",
+      "price": "価格",
+      "revenue": "収益"
+    }
+  },
+  "curriculum": {
+    "title": "カリキュラム",
+    "subtitle": "六つのカテゴリー。段階的な習得。",
+    "kihon": {
+      "title": "基本",
+      "description": "基本動作。すべての技法の基礎。正しい構え、握り、身体の動き。"
+    },
+    "giho": {
+      "title": "技法",
+      "description": "技法。天心流の核となる方法。斬り、突き、受け—それぞれの動きを磨く。"
+    },
+    "keikoho": {
+      "title": "稽古法",
+      "description": "実践的方法。文脈の中での応用。技法が稽古の中でどう流れるか。"
+    },
+    "shosa": {
+      "title": "所作と礼法",
+      "description": "武士の振る舞いと礼法。立ち振る舞いの道。敬意、規律、気品。"
+    },
+    "philosophy": {
+      "title": "哲学",
+      "description": "天心流と武士の哲学。身体を超えた教えと経典。"
+    },
+    "kurai": {
+      "title": "位（秘伝）",
+      "description": "奥義。熱心な修行者にのみ示される上級原理。"
+    }
+  },
+  "cta": {
+    "title": "道を歩み始める。",
+    "subtitle": "世界中の仲間と共に、天心流兵法の究極の道を学ぶ。",
+    "button": "道場に入る"
+  },
+  "testimonials": {
+    "title": "門弟の声"
+  }
+}

@@ -45,7 +45,7 @@ export async function GET(
       configured: lightningConfigured(),
       setupHint: lightningConfigured()
         ? undefined
-        : "Add BTCPAY_URL, BTCPAY_API_KEY, and BTCPAY_STORE_ID to enable live Lightning.",
+        : "Add NWC_CONNECTION_SECRET (nostr+walletconnect://…) to enable live Lightning.",
       checkoutLink: invoice.checkoutLink,
       bolt11: invoice.bolt11,
       qrDataUrl,

@@ -6,7 +6,7 @@ performs no Blossom upload and no relay publish.
 
 Usage:
     doppler run -- uv run --project pipeline pipeline/pipeline.py \
-        --url <youtube-url> --max-duration 90 \
+        --url <youtube-url> \
         [--server https://blossom.yakihonne.com] [--relay wss://...] [--dry-run]
 """
 
@@ -25,12 +25,15 @@ INTER_VIDEO_DELAY_SEC = 2.0
 from common import (
     DEFAULT_BLOSSOM,
     DEFAULT_RELAYS,
+    MAX_VIDEO_DURATION_SEC,
+    MAX_VIDEO_HEIGHT,
     PREVIEW_DIR,
     THUMBS_DIR,
     VIDEOS_DIR,
     load_metadata_config,
     load_state,
     make_thumbnail,
+    prepare_video_for_upload,
     save_state,
     sha256_file,
 )
@@ -49,72 +52,102 @@ def process_video(
     dry_run: bool,
 ) -> dict | None:
     """Upload one video + thumbnail and publish its event. Returns state entry."""
-    video = Path(meta["filepath"])
+    source = Path(meta["filepath"])
     print(f"\n=== {meta['id']}: {meta['title']!r} ({meta.get('duration')}s) ===")
 
-    sha256 = sha256_file(video)
+    upload_path = source
+    prepared: tuple[Path, dict] | None = None
+    if not dry_run:
+        prepared = prepare_video_for_upload(source)
+        upload_path = prepared[0]
+        meta = {
+            **meta,
+            "duration": prepared[1]["duration"],
+            "width": prepared[1]["width"],
+            "height": prepared[1]["height"],
+        }
+        print(
+            f"  prepared: {meta['width']}x{meta['height']}, "
+            f"{int(meta['duration'])}s (max {MAX_VIDEO_DURATION_SEC}s @ {prepared[1]['height']}p)"
+        )
+    else:
+        print(
+            f"  [dry-run] would transcode to max {MAX_VIDEO_DURATION_SEC}s / "
+            f"{MAX_VIDEO_HEIGHT}p before upload"
+        )
+
+    sha256 = sha256_file(upload_path)
     print(f"  sha256: {sha256}")
 
     # thumbnail (best effort)
     thumb: Path | None = None
     try:
-        thumb = make_thumbnail(video, THUMBS_DIR)
+        thumb = make_thumbnail(upload_path, THUMBS_DIR)
         print(f"  thumbnail: {thumb}")
     except Exception as exc:
         print(f"  thumbnail generation failed (continuing without): {exc}")
 
-    if dry_run:
-        auth = build_upload_auth(signer, sha256, f"Upload {video.name}")
-        print(f"  [dry-run] signed+verified 24242 auth event {auth['id'][:16]}…")
-        fake_desc = {"url": f"{server}/{sha256}.mp4", "sha256": sha256, "type": "video/mp4"}
-        fake_thumb = (
-            {"url": f"{server}/{sha256_file(thumb)}.jpg", "sha256": sha256_file(thumb), "type": "image/jpeg"}
-            if thumb
-            else None
-        )
-        event = build_video_event(signer, meta, fake_desc, fake_thumb, config=config)
-        PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
-        preview_file = PREVIEW_DIR / f"{meta['id']}.event.json"
-        preview_file.write_text(json.dumps(event, indent=2, ensure_ascii=False))
-        print(
-            f"  [dry-run] signed+verified kind-{event['kind']} event {event['id'][:16]}… "
-            f"(not uploaded/published; preview: {preview_file})"
-        )
-        return None
+    try:
+        if dry_run:
+            auth = build_upload_auth(signer, sha256, f"Upload {upload_path.name}")
+            print(f"  [dry-run] signed+verified 24242 auth event {auth['id'][:16]}…")
+            fake_desc = {"url": f"{server}/{sha256}.mp4", "sha256": sha256, "type": "video/mp4"}
+            fake_thumb = (
+                {"url": f"{server}/{sha256_file(thumb)}.jpg", "sha256": sha256_file(thumb), "type": "image/jpeg"}
+                if thumb
+                else None
+            )
+            event = build_video_event(signer, meta, fake_desc, fake_thumb, config=config)
+            PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
+            preview_file = PREVIEW_DIR / f"{meta['id']}.event.json"
+            preview_file.write_text(json.dumps(event, indent=2, ensure_ascii=False))
+            print(
+                f"  [dry-run] signed+verified kind-{event['kind']} event {event['id'][:16]}… "
+                f"(not uploaded/published; preview: {preview_file})"
+            )
+            return None
 
-    video_desc = upload(video, server, signer)
-    print(f"  video uploaded: {video_desc['url']}")
-    thumb_desc = None
-    if thumb:
-        try:
-            thumb_desc = upload(thumb, server, signer)
-            print(f"  thumb uploaded: {thumb_desc['url']}")
-        except Exception as exc:
-            print(f"  thumb upload failed (continuing without): {exc}")
+        video_desc = upload(upload_path, server, signer)
+        print(f"  video uploaded: {video_desc['url']}")
+        thumb_desc = None
+        if thumb:
+            try:
+                thumb_desc = upload(thumb, server, signer)
+                print(f"  thumb uploaded: {thumb_desc['url']}")
+            except Exception as exc:
+                print(f"  thumb upload failed (continuing without): {exc}")
 
-    event = build_video_event(signer, meta, video_desc, thumb_desc, config=config)
-    print(f"  publishing event {event['id']} (kind {event['kind']}) to {len(relays)} relays:")
-    results = asyncio.run(publish(event, relays))
-    accepted = report(results)
-    if not accepted:
-        raise RuntimeError("no relay accepted the event")
+        event = build_video_event(signer, meta, video_desc, thumb_desc, config=config)
+        print(f"  publishing event {event['id']} (kind {event['kind']}) to {len(relays)} relays:")
+        results = asyncio.run(publish(event, relays))
+        accepted = report(results)
+        if not accepted:
+            raise RuntimeError("no relay accepted the event")
 
-    return {
-        "event_id": event["id"],
-        "kind": event["kind"],
-        "video_url": video_desc["url"],
-        "video_sha256": video_desc["sha256"],
-        "thumb_url": thumb_desc["url"] if thumb_desc else None,
-        "relays_accepted": [r for r, (ok, _) in results.items() if ok],
-        "title": meta["title"],
-        "published_at": event["created_at"],
-    }
+        return {
+            "event_id": event["id"],
+            "kind": event["kind"],
+            "video_url": video_desc["url"],
+            "video_sha256": video_desc["sha256"],
+            "thumb_url": thumb_desc["url"] if thumb_desc else None,
+            "relays_accepted": [r for r, (ok, _) in results.items() if ok],
+            "title": meta["title"],
+            "published_at": event["created_at"],
+        }
+    finally:
+        if prepared is not None and prepared[0].exists():
+            prepared[0].unlink()
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--url", required=True, help="YouTube channel/playlist/video URL")
-    ap.add_argument("--max-duration", type=int, default=None, help="Skip videos longer than N seconds (e.g. 90)")
+    ap.add_argument(
+        "--max-duration",
+        type=int,
+        default=MAX_VIDEO_DURATION_SEC,
+        help=f"Skip videos longer than N seconds at download (default {MAX_VIDEO_DURATION_SEC})",
+    )
     ap.add_argument("--server", default=DEFAULT_BLOSSOM, help="Blossom server base URL")
     ap.add_argument("--relay", action="append", dest="relays", default=None)
     ap.add_argument("--kind", type=int, default=None)

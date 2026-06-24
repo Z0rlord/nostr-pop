@@ -1,0 +1,513 @@
+{
+  "metadata": {
+    "title": "Tenshinryu KIWAMI - Artes Marciales Tradicionales Japonesas",
+    "description": "El sistema definitivo en línea para aprender Tenshinryu Hyoho. Sabiduría tradicional. Tecnología moderna."
+  },
+  "navigation": {
+    "signIn": "Iniciar Sesión",
+    "join": "Unirse",
+    "home": "Inicio",
+    "training": "Entrenamiento",
+    "legal": "Legal",
+    "contact": "Contacto",
+    "backToHome": "← INICIO"
+  },
+  "hero": {
+    "badge": "Tradición Japonesa",
+    "title": "DOMINA. EL CAMINO. 極",
+    "subtitle": "El sistema definitivo en línea para aprender Tenshinryu Hyoho.",
+    "description": "Sabiduría tradicional. Tecnología moderna. Camina el sendero que los samuráis recorrieron hace 400 años.",
+    "features": {
+      "videos": "Plan de estudios en video con subtítulos en inglés",
+      "streaming": "Clases en vivo transmitidas en YouTube",
+      "feedback": "Retroalimentación directa del Sensei Tenshin"
+    },
+    "cta": {
+      "begin": "Comenzar Entrenamiento",
+      "login": "Inicio de Miembros"
+    },
+    "tagline": "La tradición es inmutable. El crecimiento es infinito."
+  },
+  "membership": {
+    "title": "MEMBRESÍA",
+    "subtitle": "Elige el camino que se adapte a tu viaje.",
+    "youtube": {
+      "name": "YOUTUBE",
+      "price": "$4.99",
+      "period": "/mes",
+      "badge": "Inicial",
+      "features": [
+        "Videos de técnicas básicas",
+        "Acceso a la comunidad de YouTube",
+        "Transmisiones en vivo mensuales"
+      ]
+    },
+    "standard": {
+      "name": "STANDARD",
+      "price": "$35",
+      "period": "/mes",
+      "badge": "Serio",
+      "features": [
+        "Biblioteca completa de videos",
+        "Materiales descargables",
+        "Seguimiento de progreso",
+        "Mensajería directa"
+      ]
+    },
+    "pro": {
+      "name": "PRO",
+      "price": "$85",
+      "period": "/mes",
+      "badge": "Dedicado",
+      "features": [
+        "Todo lo de Standard",
+        "Revisiones de video 1-a-1",
+        "Soporte prioritario",
+        "Certificación de cinturón",
+        "Planes de entrenamiento personalizados"
+      ]
+    },
+    "choose": "Elegir {plan}"
+  },
+  "features": {
+    "title": "CARACTERÍSTICAS",
+    "items": {
+      "curriculum": {
+        "number": "01",
+        "title": "Plan de Estudios Estructurado",
+        "description": "Progresión paso a paso desde técnicas básicas hasta avanzadas, siguiendo el plan de estudios tradicional de Tenshinryu."
+      },
+      "feedback": {
+        "number": "02",
+        "title": "Retroalimentación Directa",
+        "description": "Envía tus videos de práctica y recibe correcciones personalizadas de instructores certificados."
+      },
+      "community": {
+        "number": "03",
+        "title": "Comunidad Global",
+        "description": "Conecta con compañeros practicantes de todo el mundo. Comparte experiencias y crece juntos."
+      },
+      "ranking": {
+        "number": "04",
+        "title": "Sistema de Clasificación",
+        "description": "Gana rangos de cinturón reconocidos a medida que progresas. Rastrea tu viaje desde cinturón blanco hasta negro."
+      }
+    }
+  },
+  "footer": {
+    "training": "Entrenamiento",
+    "legal": "Legal",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "contact": "Contacto",
+    "dojo": "Dojo Internacional",
+    "copyright": "© 2026 TRADICIÓN JAPONESA TENSHINRYU HYOHO. TODOS LOS DERECHOS RESERVADOS."
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de Nuevo",
+      "signIn": "Iniciar Sesión en",
+      "google": "Continuar con Google",
+      "apple": "Continuar con Apple",
+      "noAccount": "¿No tienes una cuenta?",
+      "error": "Error al iniciar sesión. Por favor intenta de nuevo."
+    }
+  },
+  "student": {
+    "dashboard": "Panel de Estudiante",
+    "ready": "¿Listo para la Clase?",
+    "stripe": "Divisa",
+    "stripes": "Divisas",
+    "tabs": {
+      "overview": "Resumen",
+      "solo": "Individual",
+      "journal": "Diario",
+      "history": "Historial",
+      "resources": "Recursos"
+    },
+    "checkIn": {
+      "description": "Encontraremos automáticamente tu clase basándonos en la hora y ubicación",
+      "finding": "Buscando clase...",
+      "checkingIn": "Registrando...",
+      "found": "Encontrada",
+      "success": "Registrado",
+      "failed": "Registro fallido",
+      "error": "Algo salió mal. Intenta de nuevo.",
+      "noClassFound": "No se encontró clase activa",
+      "button": "Registrarse Ahora",
+      "thisMonth": "Este Mes",
+      "streak": "Racha de Días"
+    },
+    "videos": {
+      "title": "Videos de Entrenamiento",
+      "subtitle": "Técnicas y tutoriales",
+      "visit": "Visitar Tenshinryu en YouTube"
+    },
+    "instructorMode": "👨‍🏫 Modo Instructor",
+    "logout": "Cerrar Sesión",
+    "history": {
+      "title": "Registros Recientes"
+    },
+    "resources": {
+      "about": {
+        "title": "¿Qué es Tenshinryu?",
+        "description": "Tenshinryu es un arte marcial tradicional japonés con una historia de aproximadamente 400 años. Si estás interesado en las técnicas o te gustaría apoyar las actividades de preservación de las tradiciones, únete a nosotros. Te esperamos."
+      },
+      "online": {
+        "title": "TENSHINRYU ONLINE",
+        "description": "Contamos con un sistema de aprendizaje en línea. ¡Aprende Tenshinryu desde cualquier lugar del mundo!",
+        "royal": "Membresía ROYAL",
+        "royalDesc": "Acceso completo a todo el contenido",
+        "gold": "Membresía GOLD",
+        "goldDesc": "Contenido principal de entrenamiento"
+      },
+      "youtube": {
+        "title": "Membresía de YouTube",
+        "description": "Por $4.99 al mes, mira videos Privados y participa en clases Privadas.",
+        "join": "Unirse a la Membresía",
+        "subscribe": "Suscribirse"
+      },
+      "playlists": {
+        "title": "Listas de Reproducción",
+        "techniques": "Videos de Técnicas",
+        "techniquesDesc": "Tutoriales de técnicas paso a paso",
+        "enbu": "ENBU y Promociones",
+        "enbuDesc": "Presentaciones y videos de promoción"
+      },
+      "social": {
+        "title": "Conéctate Con Nosotros",
+        "blog": "Blog"
+      },
+      "website": {
+        "title": "Sitio Web Oficial"
+      }
+    },
+    "upcomingClasses": {
+      "title": "Próximas Clases",
+      "next": "Siguientes 5",
+      "instructor": "Instructor",
+      "noClasses": "No hay clases programadas",
+      "checkWithInstructor": "Consulta con tu instructor para la próxima sesión"
+    },
+    "solo": {
+      "title": "Registrar Práctica",
+      "editTitle": "Editar Práctica",
+      "practiceType": "Tipo de Práctica",
+      "types": {
+        "kihon": "Kihon",
+        "kata": "Kata",
+        "sparring": "Sparring",
+        "meditation": "Meditación",
+        "fitness": "Fitness",
+        "weapons": "Armas",
+        "footwork": "Movimiento",
+        "other": "Otro"
+      },
+      "duration": "Duración",
+      "minutes": "minutos",
+      "intensity": "Intensidad",
+      "intensities": {
+        "light": "Ligera",
+        "medium": "Media",
+        "hard": "Intensa"
+      },
+      "mood": "Estado de ánimo",
+      "moods": {
+        "great": "Excelente",
+        "good": "Bien",
+        "neutral": "Neutral",
+        "tired": "Cansado",
+        "exhausted": "Agotado"
+      },
+      "energyLevel": "Nivel de energía",
+      "location": "Ubicación",
+      "locationPlaceholder": "¿Dónde practicaste?",
+      "tags": "Etiquetas",
+      "tagsPlaceholder": "Añadir etiquetas (presiona Enter)",
+      "notes": "Notas",
+      "notesPlaceholder": "¿Cómo te fue? ¿En qué te concentraste?",
+      "voiceNote": "Nota de voz",
+      "recordVoice": "Grabar",
+      "recording": "Grabando...",
+      "stopRecording": "Detener grabación",
+      "photos": "Fotos",
+      "addPhotos": "Añadir fotos",
+      "photoLimit": "Máximo 3 fotos, 5MB cada una",
+      "practiceDate": "Fecha de práctica",
+      "timer": "Temporizador",
+      "startTimer": "Iniciar",
+      "stopTimer": "Detener",
+      "resetTimer": "Reiniciar",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "stats": {
+        "totalSessions": "Sesiones totales",
+        "totalHours": "Horas totales",
+        "currentStreak": "Racha actual",
+        "avgEnergy": "Energía promedio"
+      },
+      "history": "Historial de práctica",
+      "noLogs": "Aún no hay registros",
+      "logFirst": "¡Registra tu primera práctica!"
+    },
+    "journal": {
+      "title": "Nueva entrada",
+      "editTitle": "Editar entrada",
+      "entryType": "Tipo de entrada",
+      "types": {
+        "general": "General",
+        "class_notes": "Notas de clase",
+        "technique_reflection": "Técnica",
+        "goal": "Objetivo",
+        "insight": "Reflexión"
+      },
+      "titleLabel": "Título",
+      "titlePlaceholder": "Escribe un título...",
+      "content": "Contenido",
+      "contentPlaceholder": "Escribe aquí tus pensamientos...",
+      "isPrivate": "Privado",
+      "isPrivateDesc": "Las entradas privadas solo las puedes ver tú",
+      "tags": "Etiquetas",
+      "tagsPlaceholder": "Añadir etiquetas (presiona Enter)",
+      "voiceNote": "Nota de voz",
+      "recordVoice": "Grabar",
+      "recording": "Grabando...",
+      "stopRecording": "Detener grabación",
+      "save": "Guardar",
+      "saving": "Guardando...",
+      "cancel": "Cancelar",
+      "history": "Historial del diario",
+      "noEntries": "Aún no hay entradas",
+      "writeFirst": "¡Escribe tu primera entrada!"
+    }
+  },
+  "instructor": {
+    "dashboard": "PANEL DE INSTRUCTOR",
+    "instructorTitle": "Instructor",
+    "welcome": "Bienvenido",
+    "studentMode": "🥋 Modo Estudiante",
+    "logout": "Cerrar Sesión",
+    "tabs": {
+      "checkin": "REGISTRO",
+      "classes": "CLASES",
+      "attendance": "ASISTENCIA",
+      "notify": "NOTIFICAR"
+    },
+    "stats": {
+      "present": "Presentes Hoy",
+      "absent": "Ausentes",
+      "total": "Total de Estudiantes"
+    },
+    "checkin": {
+      "title": "Controles de Registro de Clase",
+      "selectedClass": "Clase Seleccionada",
+      "noClass": "No hay clase seleccionada",
+      "selectPrompt": "Selecciona una clase para habilitar el registro",
+      "change": "Cambiar",
+      "qrTitle": "Código QR de Clase",
+      "qrDesc": "Mostrar para que los estudiantes escaneen",
+      "qrAlt": "Código QR de Clase",
+      "generateQR": "Generar Nuevo QR",
+      "qrError": "Error al generar el código QR",
+      "beaconTitle": "Baliza Bluetooth",
+      "beaconActive": "Transmitiendo... Los estudiantes pueden registrarse automáticamente",
+      "beaconInactive": "Habilitar baliza para registro automático de estudiantes",
+      "startBeacon": "Iniciar Baliza",
+      "stopBeacon": "Detener Baliza",
+      "recent": "Registros Recientes",
+      "noCheckIns": "Aún no hay registros hoy"
+    },
+    "classes": {
+      "title": "Gestión de Clases",
+      "schedule": "Horario de Clases",
+      "create": "Crear Clase",
+      "createNew": "Crear Nueva Clase",
+      "editClass": "Editar Clase",
+      "name": "Nombre de la Clase",
+      "namePlaceholder": "ej., Principiantes BJJ Niños",
+      "schedule": "Fecha y Hora del Horario",
+      "selectDateTime": "Seleccionar fecha y hora",
+      "selectWhenStarts": "Seleccionar cuándo comienza la clase",
+      "location": "Ubicación",
+      "searchLocation": "Buscar una ubicación...",
+      "searchGoogleMaps": "Buscar y seleccionar en Google Maps",
+      "maxStudents": "Máximo de Estudiantes",
+      "recurring": "Recurrente",
+      "recurringLabel": "Esta es una clase recurrente",
+      "recurringDesc": "Esta clase se repetirá semanalmente el mismo día y hora.",
+      "actions": "Acciones",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar esta clase?",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "selectForCheckin": "Seleccionar para Registro",
+      "noClasses": "Aún no hay clases creadas. Haz clic en \"Crear Clase\" para agregar tu primera clase.",
+      "instructor": "Instructor",
+      "max": "Máx",
+      "students": "estudiantes"
+    },
+    "attendance": {
+      "title": "Asistencia de Hoy",
+      "markPresent": "Marcar Presente",
+      "mark": "Marcar",
+      "attendance": "Asistencia",
+      "edit": "Editar",
+      "remove": "Eliminar",
+      "removeConfirm": "¿Estás seguro de que deseas eliminar este registro?",
+      "removeFailed": "Error al eliminar el registro",
+      "correction": "Corrección de Asistencia",
+      "notes": "Notas (opcional)",
+      "notCheckedIn": "No registrado",
+      "status": {
+        "present": "Presente",
+        "absent": "Ausente",
+        "late": "Tarde"
+      }
+    },
+    "invite": {
+      "title": "Invitar Instructor",
+      "button": "+ Invitar Instructor",
+      "send": "Enviar Invitación",
+      "sending": "Enviando...",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "instructor@example.com",
+      "name": "Nombre (opcional)",
+      "namePlaceholder": "Su nombre completo",
+      "description": "Recibirán un enlace para crear su cuenta de instructor.",
+      "expires": "La invitación expira en 7 días.",
+      "success": "¡Invitación enviada a {email}!",
+      "shareLink": "Comparte este enlace con ellos:",
+      "copyLink": "Copiar",
+      "linkCopied": "¡Enlace copiado!",
+      "sendAnother": "Enviar otra invitación",
+      "tabs": {
+        "send": "Enviar Invitación",
+        "list": "Invitaciones"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "accepted": "Aceptada",
+        "expired": "Expirada"
+      },
+      "list": {
+        "empty": "Aún no se han enviado invitaciones.",
+        "sent": "Enviada",
+        "expires": "Expira",
+        "accepted": "Aceptada"
+      },
+      "errors": {
+        "invalidEmail": "Por favor ingresa un correo electrónico válido",
+        "alreadyInstructor": "Este correo ya está registrado como instructor",
+        "pendingInvite": "Ya existe una invitación pendiente para este correo",
+        "generic": "Error al crear la invitación",
+        "sendFailed": "Error al enviar la invitación"
+      },
+      "accept": {
+        "title": "Unirse como Instructor",
+        "welcome": "Has sido invitado a unirte a",
+        "createAccount": "Crear Cuenta",
+        "name": "Nombre Completo",
+        "password": "Contraseña",
+        "passwordConfirm": "Confirmar Contraseña",
+        "passwordHint": "Mínimo 8 caracteres",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "showPassword": "Mostrar contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "submit": "Crear Cuenta",
+        "creating": "Creando...",
+        "emailLocked": "Este correo no puede ser cambiado",
+        "success": "¡Bienvenido a Tenshinryu!",
+        "successDesc": "Tu cuenta de instructor ha sido creada exitosamente.",
+        "goToDashboard": "Ir al Panel de Instructor",
+        "invalid": "Invitación Inválida",
+        "expired": "Esta invitación ha expirado",
+        "alreadyUsed": "Esta invitación ya ha sido utilizada",
+        "createFailed": "Error al crear la cuenta",
+        "haveAccount": "¿Ya tienes una cuenta?"
+      }
+    },
+    "notifications": {
+      "title": "Enviar Notificaciones",
+      "selectClass": "Por favor selecciona una clase",
+      "chooseClass": "Elige una clase...",
+      "sendVia": "Enviar Vía",
+      "allChannels": "Todos los Canales",
+      "emailSms": "Email y SMS",
+      "lineApp": "App LINE",
+      "connected": "conectado",
+      "type": "Tipo de Notificación",
+      "types": {
+        "reminder": "Recordatorio de Clase",
+        "locationChange": "Cambio de Ubicación",
+        "cancellation": "Cancelación",
+        "custom": "Mensaje Personalizado"
+      },
+      "message": "Mensaje",
+      "preview": "Vista Previa del Mensaje",
+      "characters": "caracteres",
+      "send": "Enviar vía",
+      "sending": "Enviando...",
+      "sentTo": "Enviado a",
+      "students": "estudiantes",
+      "failed": "fallido",
+      "sendFailed": "Error al enviar",
+      "allNote": "Envía vía SMS (si tiene teléfono registrado) y Email (si tiene email registrado)",
+      "lineNote": "Envía vía app LINE solo a estudiantes conectados",
+      "lineSetup": "Configuración de Mensajería LINE",
+      "lineSetupDesc": "Para recibir notificaciones de LINE, los estudiantes deben:",
+      "lineStep1": "Agregar tu Cuenta Oficial de LINE como amigo",
+      "lineStep2": "Enviar su dirección de email para vincular su cuenta",
+      "studentsConnected": "Estudiantes conectados",
+      "default": {
+        "reminder": "⏰ Recordatorio de clase: ¡Tu clase comienza pronto! ¡Nos vemos allí! 🥋",
+        "locationChange": "📍 Cambio de ubicación: La ubicación de la clase ha sido actualizada. Por favor verifica la nueva dirección.",
+        "cancellation": "❌ Clase cancelada: La clase de hoy ha sido cancelada. Disculpa las molestias."
+      }
+    }
+  },
+  "home": {
+    "welcomeBack": "Bienvenido de nuevo",
+    "quickAccess": "Acceso rápido a tus herramientas del dojo",
+    "instructor": {
+      "checkIn": "Registro",
+      "checkInDesc": "Registro QR, NFC y BLE para estudiantes",
+      "classes": "Clases",
+      "classesDesc": "Gestiona tu horario de clases",
+      "attendance": "Asistencia",
+      "attendanceDesc": "Ver y corregir registros de asistencia",
+      "notifications": "Notificaciones",
+      "notificationsDesc": "Enviar alertas a estudiantes"
+    },
+    "student": {
+      "progress": "Mi Progreso",
+      "progressDesc": "Ver tu asistencia y racha",
+      "history": "Historial de Registros",
+      "historyDesc": "Ver tus sesiones de entrenamiento pasadas"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "creating": "Creando...",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "selected": "Seleccionado",
+    "unknown": "Desconocido",
+    "add": "Añadir",
+    "viewAll": "Ver Todo",
+    "refresh": "Actualizar",
+    "change": "Cambiar",
+    "uploading": "Subiendo",
+    "error": "Error",
+    "networkError": "Error de red"
+  }
+}

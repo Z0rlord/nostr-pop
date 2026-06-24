@@ -1,0 +1,413 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Dojo {
+  id        String   @id @default(uuid())
+  name      String
+  location  String?
+  timezone  String   @default("Europe/Warsaw")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  students    Student[]
+  classes     Class[]
+  checkIns    CheckIn[]
+  instructors Instructor[]
+  leaderboards Leaderboard[]
+  instructorInvites InstructorInvite[]
+}
+
+model Student {
+  id          String    @id @default(uuid())
+  dojoId      String
+  name        String
+  email       String?
+  phone       String?
+  avatar      String?
+  password    String?   // Hashed password for account login
+  firebaseUid String?   @unique // Firebase Auth UID
+  lineId      String?   @unique // LINE Messaging API user ID
+  language    String    @default("en") // en, ja, pl, it
+  beltRank    BeltRank  @default(WHITE)
+  stripes     Int       @default(0)
+  qrCode      String    @unique
+  isActive    Boolean   @default(true)
+  joinedAt    DateTime @default(now())
+  lastCheckIn DateTime?
+  
+  // DOJO Token balance
+  dojoBalance Int       @default(0)
+  totalEarned Int       @default(0)
+  totalSpent  Int       @default(0)
+  
+  // Membership/subscription fields
+  membershipTier     String   @default("FREE") // FREE, YOUTUBE, GOLD, ROYAL
+  membershipStatus   String   @default("active") // active, past_due, cancelled, canceling
+  stripeCustomerId   String?
+  stripeSubscriptionId String?
+  membershipExpires  DateTime?
+
+  dojo        Dojo              @relation(fields: [dojoId], references: [id])
+  checkIns    CheckIn[]
+  videos      Video[]
+  transactions TokenTransaction[]
+  leaderboardEntries LeaderboardEntry[]
+  notifications NotificationLog[]
+  learnings   Lineage[] @relation("StudentLineage")
+  
+  // Solo practice and journal
+  soloPracticeLogs SoloPracticeLog[]
+  journalEntries JournalEntry[]
+  practiceGoals PracticeGoal[]
+}
+
+model Instructor {
+  id          String  @id @default(uuid())
+  dojoId      String
+  name        String
+  email       String  @unique
+  password    String
+  firebaseUid String? @unique // Firebase Auth UID
+  isAdmin     Boolean @default(false)
+
+  dojo    Dojo    @relation(fields: [dojoId], references: [id])
+  classes Class[]
+  teachings Lineage[] @relation("TeacherLineage")
+}
+
+model Class {
+  id           String   @id @default(uuid())
+  dojoId       String
+  instructorId String
+  name         String
+  schedule     String
+  location     String?
+  maxStudents  Int      @default(30)
+  isRecurring  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  dojo       Dojo      @relation(fields: [dojoId], references: [id])
+  instructor Instructor @relation(fields: [instructorId], references: [id])
+  checkIns   CheckIn[]
+}
+
+model CheckIn {
+  id          String   @id @default(uuid())
+  studentId   String
+  dojoId      String
+  classId     String
+  checkedInAt DateTime @default(now())
+  method      String   @default("qr")
+  
+  // Track if tokens were awarded for this check-in
+  tokensAwarded Int     @default(0)
+
+  student Student @relation(fields: [studentId], references: [id])
+  dojo    Dojo    @relation(fields: [dojoId], references: [id])
+  class   Class   @relation(fields: [classId], references: [id])
+}
+
+model Video {
+  id          String   @id @default(uuid())
+  studentId   String
+  title       String
+  description String?
+  url         String
+  technique   String?
+  recordedAt  DateTime @default(now())
+  
+  // Track if tokens were awarded for this video
+  tokensAwarded Int     @default(0)
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+model TokenTransaction {
+  id          String   @id @default(uuid())
+  studentId   String
+  amount      Int      // Positive for earn, negative for spend
+  type        TokenTransactionType
+  description String
+  relatedId   String?  // Check-in ID, Video ID, etc.
+  createdAt   DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+model Leaderboard {
+  id          String   @id @default(uuid())
+  dojoId      String
+  month       String   // Format: "2026-02"
+  year        Int
+  name        String   // e.g., "February 2026 Global Leaderboard"
+  status      LeaderboardStatus @default(ACTIVE)
+  prizePool   Int      @default(0)  // Total DOJO tokens for prizes
+  createdAt   DateTime @default(now())
+  endedAt     DateTime?
+
+  dojo    Dojo              @relation(fields: [dojoId], references: [id])
+  entries LeaderboardEntry[]
+}
+
+model LeaderboardEntry {
+  id           String   @id @default(uuid())
+  leaderboardId String
+  studentId    String
+  rank         Int?
+  checkIns     Int      @default(0)
+  streak       Int      @default(0)
+  videos       Int      @default(0)
+  totalScore   Int      @default(0)
+  prizeAwarded Int      @default(0)  // DOJO tokens won
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  leaderboard Leaderboard @relation(fields: [leaderboardId], references: [id])
+  student     Student     @relation(fields: [studentId], references: [id])
+
+  @@unique([leaderboardId, studentId])
+}
+
+enum BeltRank {
+  WHITE
+  YELLOW
+  ORANGE
+  GREEN
+  BLUE
+  PURPLE
+  BROWN
+  BLACK
+  RED_BLACK
+  RED_WHITE
+  RED
+}
+
+enum TokenTransactionType {
+  CHECK_IN
+  STREAK_BONUS
+  BELT_PROMOTION
+  VIDEO_UPLOAD
+  REFERRAL
+  LEADERBOARD_PRIZE
+  REDEMPTION
+  ADMIN_ADJUSTMENT
+}
+
+enum LeaderboardStatus {
+  ACTIVE
+  ENDED
+  PRIZES_DISTRIBUTED
+}
+
+model Lineage {
+  id          String   @id @default(uuid())
+  teacherId   String   // Instructor ID
+  studentId   String   // Student ID
+  school      String   // Martial arts school/affiliation (e.g., "Gracie Barra", "Alliance", "Atos")
+  style       String?  // Martial arts style (e.g., "BJJ", "Judo", "Karate")
+  startDate   DateTime @default(now())
+  endDate     DateTime? // Null if still active
+  isActive    Boolean  @default(true)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  teacher     Instructor @relation("TeacherLineage", fields: [teacherId], references: [id])
+  student     Student    @relation("StudentLineage", fields: [studentId], references: [id])
+
+  @@unique([teacherId, studentId, school])
+}
+
+model InstructorInvite {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String?
+  token       String   @unique
+  invitedBy   String   // Instructor ID who sent the invite
+  dojoId      String
+  status      String   @default("pending") // pending, accepted, expired
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  acceptedAt  DateTime?
+  
+  dojo        Dojo     @relation(fields: [dojoId], references: [id])
+  
+  @@index([token])
+  @@index([email])
+  @@index([status])
+}
+
+model NotificationLog {
+  id        String   @id @default(uuid())
+  studentId String
+  classId   String?
+  type      String   // reminder, location_change, cancellation
+  channel   String   // email, sms, email,sms
+  sentAt    DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+// Tenshinryu additions (nullable for compatibility)
+model VideoReview {
+  id          String   @id @default(uuid())
+  studentId   String
+  instructorId String
+  videoUrl    String
+  technique   String?
+  feedback    String?
+  isApproved  Boolean  @default(false)
+  submittedAt DateTime @default(now())
+  reviewedAt  DateTime?
+  
+  @@index([studentId])
+  @@index([instructorId])
+}
+
+model ZoomLesson {
+  id          String   @id @default(uuid())
+  instructorId String
+  title       String
+  description String?
+  zoomLink    String
+  scheduledAt DateTime
+  durationMinutes Int @default(60)
+  maxParticipants Int @default(20)
+  isRecorded  Boolean @default(false)
+  recordingUrl String?
+  createdAt   DateTime @default(now())
+
+  @@index([instructorId])
+  @@index([scheduledAt])
+}
+
+// Solo Practice - for independent practitioners without school affiliation
+model SoloPracticeLog {
+  id          String   @id @default(uuid())
+  studentId   String
+
+  // Practice details
+  date        DateTime @default(now())
+  durationMinutes Int
+  practiceType String
+
+  // Location (optional - for tracking where they trained)
+  location    String?
+  latitude    Float?
+  longitude   Float?
+
+  // Intensity and notes
+  intensity   String   @default("medium")
+  notes       String?
+
+  // Media attachments
+  photos      String[]
+  videoUrl    String?
+
+  // Voice note (stored as audio file URL)
+  voiceNoteUrl String?
+  voiceNoteDuration Int?
+
+  // Tags for categorization
+  tags        String[]
+
+  // Mood/energy level
+  mood        String?  @default("neutral")
+  energyLevel Int?     @default(5)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([date])
+  @@index([practiceType])
+}
+
+// Journal/Notes system for practitioners
+model JournalEntry {
+  id          String   @id @default(uuid())
+  studentId   String
+
+  // Entry content
+  title       String?
+  content     String   @db.Text
+
+  // Entry type
+  entryType   String   @default("general")
+
+  // Related to a specific class or practice
+  relatedClassId String?
+  relatedPracticeId String?
+
+  // Voice note attachment
+  voiceNoteUrl String?
+  voiceNoteDuration Int?
+  voiceNoteTranscript String? @db.Text
+
+  // Media
+  photos      String[]
+
+  // Tags and categorization
+  tags        String[]
+
+  // Privacy
+  isPrivate   Boolean  @default(true)
+
+  // Timestamps
+  entryDate   DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([entryDate])
+  @@index([entryType])
+}
+
+// Practice Goals/Streaks for solo practitioners
+model PracticeGoal {
+  id          String   @id @default(uuid())
+  studentId   String
+
+  // Goal details
+  title       String
+  description String?
+
+  // Goal type
+  goalType    String
+
+  // Target and progress
+  targetValue Float
+  currentValue Float   @default(0)
+  unit        String
+
+  // Timeframe
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+
+  // Status
+  isActive    Boolean  @default(true)
+  isCompleted Boolean  @default(false)
+  completedAt DateTime?
+
+  // Reminders
+  reminderTime String?
+  reminderDays String[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([isActive])
+}

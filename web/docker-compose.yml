@@ -1,6 +1,9 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://dojopop.live}
     image: dojopop-web:latest
     container_name: dojopop-web
     restart: unless-stopped
@@ -11,18 +14,30 @@ services:
     environment:
       - RELAY_CONFIG_PATH=/relay/config.toml
       - RELAY_CONTAINER_NAME=dojopop-relay
+      - BLOSSOM_CONFIG_PATH=/blossom/config.yml
+      - BLOSSOM_CONTAINER_NAME=dojopop-blossom
+      - BLOSSOM_INTERNAL_URL=http://dojopop-blossom:3000
       - DOCKER_SOCKET=/var/run/docker.sock
     volumes:
       - web-data:/app/data
       - /opt/dojopop/relay/config.toml:/relay/config.toml
+      - /opt/dojopop/blossom/config.yml:/blossom/config.yml
       - /var/run/docker.sock:/var/run/docker.sock
     group_add:
       - "${DOCKER_GID:-988}"
+    networks:
+      - default
+      - dojopop-internal
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3001/"]
       interval: 30s
       timeout: 5s
       retries: 3
+
+networks:
+  dojopop-internal:
+    external: true
+    name: dojopop-internal
 
 volumes:
   web-data:
