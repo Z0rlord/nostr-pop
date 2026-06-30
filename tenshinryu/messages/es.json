@@ -485,6 +485,10 @@
       "progressDesc": "Ver tu asistencia y racha",
       "history": "Historial de Registros",
       "historyDesc": "Ver tus sesiones de entrenamiento pasadas"
+    },
+    "wiki": {
+      "title": "Wiki de Hyoho",
+      "desc": "Estudia técnicas, historia y filosofía."
     }
   },
   "common": {

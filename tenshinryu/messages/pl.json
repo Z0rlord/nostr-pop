@@ -378,6 +378,10 @@
       "progressDesc": "Przeglądaj swoją obecność i serię",
       "history": "Historia obecności",
       "historyDesc": "Zobacz swoje minione sesje treningowe"
+    },
+    "wiki": {
+      "title": "Wiki Hyoho",
+      "desc": "Studiuj techniki, historię i filozofię."
     }
   },
   "common": {

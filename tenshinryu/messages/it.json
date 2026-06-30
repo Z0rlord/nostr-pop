@@ -362,6 +362,10 @@
       "progressDesc": "Visualizza le tue presenze e serie",
       "history": "Cronologia Registrazioni",
       "historyDesc": "Vedi le tue sessioni di allenamento passate"
+    },
+    "wiki": {
+      "title": "Wiki Hyoho",
+      "desc": "Studia tecniche, storia e filosofia."
     }
   }
 }

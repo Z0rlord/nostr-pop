@@ -44,6 +44,7 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/superadmin") ||
     pathname.startsWith("/terms") ||
     pathname.startsWith("/privacy") ||
+    pathname.startsWith("/wiki") ||
     pathname.startsWith("/rules") ||
     pathname.startsWith("/member") ||
     pathname.startsWith("/_next") ||

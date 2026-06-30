@@ -10,7 +10,10 @@
     "training": "Training",
     "legal": "Legal",
     "contact": "Contact",
-    "backToHome": "← HOME"
+    "backToHome": "← HOME",
+    "wiki": "Hyoho Wiki",
+    "instructor": "Instructor",
+    "owner": "Owner"
   },
   "hero": {
     "badge": "Your School",
@@ -472,7 +475,18 @@
       "progressDesc": "Check in and track your practice",
       "history": "Check-in history",
       "historyDesc": "Review past sessions"
+    },
+    "wiki": {
+      "title": "Hyoho Wiki",
+      "desc": "Study techniques, history, and philosophy."
     }
+  },
+  "footer": {
+    "memberArea": "Member Area",
+    "connect": "Connect",
+    "internationalSite": "International Site",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
   },
   "common": {
     "loading": "Loading…",

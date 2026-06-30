@@ -486,6 +486,10 @@
       "progressDesc": "Deine Anwesenheit und Serie anzeigen",
       "history": "Check-in-Verlauf",
       "historyDesc": "Deine vergangenen Trainingseinheiten ansehen"
+    },
+    "wiki": {
+      "title": "Hyoho-Wiki",
+      "desc": "Techniken, Geschichte und Philosophie studieren."
     }
   },
   "common": {

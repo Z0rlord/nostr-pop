@@ -4,6 +4,8 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-06-30 | [tenshinryu-wiki-vcs-app-integration](./2026-06-30-tenshinryu-wiki-vcs-app-integration.md) | Wiki in monorepo git, `/wiki` locale redirect, KIWAMI nav integration |
+| 2026-06-29 | [tenshinryu-wiki-deploy](./2026-06-29-tenshinryu-wiki-deploy.md) | wiki.tenshinryu.xyz static wiki, Python SSG, relay-2 :3014 |
 | 2026-06-18 | [tenshinryu-staging](./2026-06-18-tenshinryu-staging.md) | staging.tenshinryu.xyz on relay-2:3013, deploy-staging workflow |
 | 2026-06-16 | [tenshinryu-kiwami-pwa](./2026-06-16-tenshinryu-kiwami-pwa.md) | Tenshinryu KIWAMI PWA on Hetzner vol1, Firebase auth, kiwami.tenshinryu.xyz |
 | 2026-06-11 | [dojopop-relay-relay2](./2026-06-11-dojopop-relay-relay2.md) | nostr-rs-relay scaffold + deploy to relay-2 (Hetzner), kind allowlist, pubkey whitelist |

@@ -10,7 +10,10 @@
     "training": "稽古",
     "legal": "規約",
     "contact": "お問い合わせ",
-    "backToHome": "← ホームへ"
+    "backToHome": "← ホームへ",
+    "wiki": "兵法ウィキ",
+    "instructor": "指導者",
+    "owner": "オーナー"
   },
   "hero": {
     "badge": "日本伝統",
@@ -501,7 +504,18 @@
       "progressDesc": "出席と連続記録を確認",
       "history": "チェックイン履歴",
       "historyDesc": "過去の稽古セッションを確認"
+    },
+    "wiki": {
+      "title": "兵法ウィキ",
+      "desc": "技法・歴史・哲学を学ぶ"
     }
+  },
+  "footer": {
+    "memberArea": "会員エリア",
+    "connect": "つながる",
+    "internationalSite": "国際サイト",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
   },
   "common": {
     "loading": "読み込み中...",

@@ -105,6 +105,12 @@ function InstructorQuickLinks({ t }: { t: (key: string) => string }) {
       icon: <span className="text-lg font-bold">道</span>,
     },
     {
+      href: "/wiki",
+      title: t("home.wiki.title"),
+      description: t("home.wiki.desc"),
+      icon: <span className="text-lg font-bold">書</span>,
+    },
+    {
       href: "/instructor",
       title: t("home.instructor.checkIn"),
       description: t("home.instructor.checkInDesc"),
@@ -146,6 +152,12 @@ function StudentQuickLinks({ t }: { t: (key: string) => string }) {
       title: t("home.student.progress"),
       description: t("home.student.progressDesc"),
       icon: <span className="text-lg font-bold">道</span>,
+    },
+    {
+      href: "/wiki",
+      title: t("home.wiki.title"),
+      description: t("home.wiki.desc"),
+      icon: <span className="text-lg font-bold">書</span>,
     },
     {
       href: "/student?section=progress&tab=history",

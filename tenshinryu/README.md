@@ -77,6 +77,18 @@ Hosted on **Hetzner Nuremberg vol1** (`relay-2`, Tailscale `100.125.184.46`) at 
 - Firebase Auth (Google + Apple)
 - Service worker + `manifest.json` for PWA install
 
+## Hyoho Wiki
+
+Study material lives in the sibling **[`tenshinryu-wiki/`](../tenshinryu-wiki/)** directory (same `dojopop` monorepo, deployed separately to `wiki.tenshinryu.xyz`).
+
+| In-app | Wiki |
+|--------|------|
+| `/wiki` | Locale-aware redirect → `https://wiki.tenshinryu.xyz/{en\|ja\|es\|el}/` |
+| Home quick link + nav **Study** | ~2860 markdown pages (EN/JA full; ES/EL stubbed) |
+| Site footer **Hyoho Wiki** | Static nginx on relay-2 `:3014` |
+
+Wiki content is version-controlled at repo root (`tenshinryu-wiki/`); book PDFs and kata photos stay local (`raw/books/`, `raw/assets/` gitignored). Deploy wiki with `cd tenshinryu-wiki && ./deploy.sh`. Deploy this app with `./deploy.sh` below.
+
 ## Local dev
 
 ```bash
@@ -124,6 +136,18 @@ ssh relay-2 'chmod 600 /opt/dojopop/tenshinryu/.env'
 ## Source repo
 
 Forked from [Z0rlord/tenshinryu-app](https://github.com/Z0rlord/tenshinryu-app); this tree keeps the KIWAMI landing plus instructor/student/owner dashboards from that repo.
+
+## Hyoho Wiki
+
+The multilingual reference wiki lives in the sibling directory [`../tenshinryu-wiki/`](../tenshinryu-wiki/) (same `dojopop` monorepo). Public site: [wiki.tenshinryu.xyz](https://wiki.tenshinryu.xyz).
+
+| In-app entry | Behavior |
+|--------------|----------|
+| `/wiki` | Redirects to `wiki.tenshinryu.xyz/{locale}/` using the `locale` cookie (en/ja/es/el; others → en) |
+| App nav + `/home` quick link | Same `/wiki` redirect |
+| Footer + landing header | Links to `/wiki` |
+
+Wiki content and deploy are independent of the PWA — run `tenshinryu-wiki/deploy.sh` after wiki edits; run `tenshinryu/deploy.sh` after app changes.
 
 ## PayPal subscriptions
 

@@ -27,6 +27,12 @@ export function SiteHeader() {
         </Link>
         <nav className="flex items-center gap-3 sm:gap-5 shrink-0">
           <Link
+            href="/wiki"
+            className="hidden sm:inline text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Hyoho Wiki
+          </Link>
+          <Link
             href="/login"
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
           >

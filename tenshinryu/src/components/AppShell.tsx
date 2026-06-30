@@ -5,9 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { SiteFooter } from "@/components/SiteFooter";
+import { useI18n } from "@/components/I18nProvider";
 import { signOutUser } from "@/lib/firebase";
 
-type NavItem = { href: string; label: string };
+type NavItem = { href: string; label: string; external?: boolean };
 
 type Props = {
   children: React.ReactNode;
@@ -18,29 +19,41 @@ type Props = {
   compact?: boolean;
 };
 
-const STUDENT_NAV: NavItem[] = [
-  { href: "/student", label: "Training" },
-  { href: "/member", label: "Account" },
-  { href: "/home", label: "Home" },
-];
-
-const INSTRUCTOR_NAV: NavItem[] = [
-  { href: "/student", label: "Training" },
-  { href: "/instructor", label: "Instructor" },
-  { href: "/home", label: "Home" },
-];
-
-const ADMIN_NAV: NavItem[] = [
-  { href: "/student", label: "Training" },
-  { href: "/instructor", label: "Instructor" },
-  { href: "/admin", label: "Owner" },
-  { href: "/home", label: "Home" },
-];
-
-function navForRole(role?: string): NavItem[] {
-  if (role === "admin") return ADMIN_NAV;
-  if (role === "instructor") return INSTRUCTOR_NAV;
-  return STUDENT_NAV;
+function navForRole(
+  role: string | undefined,
+  labels: {
+    training: string;
+    account: string;
+    instructor: string;
+    owner: string;
+    home: string;
+    wiki: string;
+  },
+): NavItem[] {
+  const wiki: NavItem = { href: "/wiki", label: labels.wiki };
+  if (role === "admin") {
+    return [
+      { href: "/student", label: labels.training },
+      wiki,
+      { href: "/instructor", label: labels.instructor },
+      { href: "/admin", label: labels.owner },
+      { href: "/home", label: labels.home },
+    ];
+  }
+  if (role === "instructor") {
+    return [
+      { href: "/student", label: labels.training },
+      wiki,
+      { href: "/instructor", label: labels.instructor },
+      { href: "/home", label: labels.home },
+    ];
+  }
+  return [
+    { href: "/student", label: labels.training },
+    wiki,
+    { href: "/member", label: labels.account },
+    { href: "/home", label: labels.home },
+  ];
 }
 
 export function AppShell({
@@ -51,7 +64,15 @@ export function AppShell({
   compact = false,
 }: Props) {
   const pathname = usePathname();
-  const nav = navForRole(role);
+  const { t } = useI18n();
+  const nav = navForRole(role, {
+    training: t("navigation.training"),
+    account: t("footer.memberArea"),
+    instructor: t("navigation.instructor"),
+    owner: t("navigation.owner"),
+    home: t("navigation.home"),
+    wiki: t("navigation.wiki"),
+  });
 
   const handleSignOut = async () => {
     try {
@@ -91,18 +112,28 @@ export function AppShell({
           <nav className="hidden md:flex items-center gap-0.5" aria-label="Main">
             {nav.map((item) => {
               const active =
-                pathname === item.href ||
-                pathname.startsWith(`${item.href}?`);
+                !item.external &&
+                (pathname === item.href || pathname.startsWith(`${item.href}?`));
+              const className = `relative px-3 py-2 text-sm font-medium transition-colors rounded-md ${
+                active
+                  ? "text-crimson"
+                  : "text-muted-foreground hover:text-foreground"
+              }`;
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {item.label}
+                  </a>
+                );
+              }
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-md ${
-                    active
-                      ? "text-crimson"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
+                <Link key={item.href} href={item.href} className={className}>
                   {item.label}
                   {active && (
                     <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-crimson rounded-full" />
@@ -129,17 +160,27 @@ export function AppShell({
           aria-label="Main mobile"
         >
           {nav.map((item) => {
-            const active = pathname === item.href;
+            const active = !item.external && pathname === item.href;
+            const className = `px-3 py-1.5 text-xs font-medium whitespace-nowrap rounded-full ${
+              active
+                ? "bg-crimson text-white"
+                : "bg-white text-muted-foreground border border-border"
+            }`;
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                >
+                  {item.label}
+                </a>
+              );
+            }
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-3 py-1.5 text-xs font-medium whitespace-nowrap rounded-full ${
-                  active
-                    ? "bg-crimson text-white"
-                    : "bg-white text-muted-foreground border border-border"
-                }`}
-              >
+              <Link key={item.href} href={item.href} className={className}>
                 {item.label}
               </Link>
             );

@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useI18n } from "@/components/I18nProvider";
 
 export function SiteFooter() {
+  const { t } = useI18n();
+
   return (
     <footer className="bg-frame text-white mt-auto">
       <div className="section-pad !py-10 !text-white">
@@ -19,27 +24,32 @@ export function SiteFooter() {
             </p>
           </div>
           <div>
-            <h4 className="font-heading text-base mb-3">Training</h4>
+            <h4 className="font-heading text-base mb-3">{t("navigation.training")}</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
                 <Link href="/signup" className="hover:text-white">
-                  Join
+                  {t("navigation.join")}
                 </Link>
               </li>
               <li>
                 <Link href="/login" className="hover:text-white">
-                  Sign In
+                  {t("navigation.signIn")}
                 </Link>
               </li>
               <li>
                 <Link href="/member" className="hover:text-white">
-                  Member Area
+                  {t("footer.memberArea")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/wiki" className="hover:text-white">
+                  {t("navigation.wiki")}
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="font-heading text-base mb-3">Connect</h4>
+            <h4 className="font-heading text-base mb-3">{t("footer.connect")}</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
                 <a
@@ -58,22 +68,22 @@ export function SiteFooter() {
                   rel="noopener noreferrer"
                   className="hover:text-white"
                 >
-                  International Site
+                  {t("footer.internationalSite")}
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="font-heading text-base mb-3">Legal</h4>
+            <h4 className="font-heading text-base mb-3">{t("navigation.legal")}</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li>
                 <Link href="/terms" className="hover:text-white">
-                  Terms of Service
+                  {t("footer.terms")}
                 </Link>
               </li>
               <li>
                 <Link href="/privacy" className="hover:text-white">
-                  Privacy Policy
+                  {t("footer.privacy")}
                 </Link>
               </li>
             </ul>

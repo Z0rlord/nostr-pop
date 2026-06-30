@@ -28,6 +28,7 @@ See [docs/sessions/README.md](./docs/sessions/README.md).
 ```
 web/              # Next.js landing + membership; school attendance pilot (hikari-warsaw)
 tenshinryu/       # Tenshinryu ONLINE KIWAMI PWA — Firebase auth, Hetzner :3003 (prod) / :3013 (staging)
+tenshinryu-wiki/  # Multilingual EN/JA/ES/EL Hyoho wiki — wiki.tenshinryu.xyz :3014 (nginx static)
 nsecbunker/       # DEPRECATED — replaced by bunker46 (volume kept for rollback)
 nsecbunker-admin-ui/  # git submodule — legacy SvelteKit admin UI
 admin/            # DojoPop ops placeholder — admin.dojopop.live :3002 (future dashboard)
@@ -35,6 +36,7 @@ bunker46/         # dsbaars/bunker46 NIP-46 manager — primary (bunker.dojopop.
 pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
 alby-hub/         # Alby Hub — relay-2:8080, hub.dojopop.live (NWC wallet)
 blossom-server/   # self-hosted hzrd149/blossom-server — relay-2:3004, blossom.dojopop.live
+kosync/           # koreader/kosync progress sync — relay-2:3007, sync.krtrmesh.xyz
 relay/            # nostr-rs-relay 0.10.0 (docker compose) — deployed on relay-2:7777, kind 34567 allowlist
 scripts/          # Google Drive backup tooling (root pyproject.toml)
 data/             # downloaded videos (gitignored); published.json tracked
