@@ -23,7 +23,7 @@
     "firebase-admin": "^13.9.0",
     "lucide-react": "^0.577.0",
     "maplibre-gl": "^5.24.0",
-    "next": "^14.2.29",
+    "next": "^15.5.18",
     "prisma": "^6.19.2",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
