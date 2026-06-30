@@ -1,0 +1,35 @@
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/{{ lang }}/">
+      <img class="site-logo" src="/assets/logo-icon.png" alt="Tenshinryu" width="36" height="36">
+      <span class="site-title">天心流兵法 Wiki</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel" aria-label="{{ nav_menu_label }}">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="site-nav-panel" id="site-nav-panel">
+      <nav class="site-nav" aria-label="{{ nav_main_label }}">
+        {% for item in nav_items %}
+        <a class="nav-link{% if item.active %} active{% endif %}{% if item.cta %} nav-cta{% endif %}"
+           href="{{ item.href }}"
+           {% if item.sub %}aria-haspopup="true"{% endif %}>{{ item.label }}</a>
+        {% endfor %}
+        <a class="nav-link{% if active_page == 'graph' %} active{% endif %}" href="/{{ lang }}/graph">{{ graph_label }}</a>
+      </nav>
+      <div class="site-nav-tools">
+        <div class="search-wrap">
+          <input id="search-input" type="search" placeholder="{{ search_placeholder }}" autocomplete="off" aria-label="{{ search_placeholder }}">
+          <div id="search-results" role="listbox"></div>
+        </div>
+        <div class="lang-switch" aria-label="{{ nav_lang_label }}">
+          <a href="{{ alternate.en }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
+          <a href="{{ alternate.ja }}"{% if lang == 'ja' %} class="active"{% endif %}>JA</a>
+          <a href="{{ alternate.es }}"{% if lang == 'es' %} class="active"{% endif %}>ES</a>
+          <a href="{{ alternate.el }}"{% if lang == 'el' %} class="active"{% endif %}>EL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

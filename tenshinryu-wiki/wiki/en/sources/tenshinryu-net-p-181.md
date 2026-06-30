@@ -1,0 +1,27 @@
+---
+slug: sources/tenshinryu-net-p-181
+lang: en
+title: "Source: 「武藝の分化、未分化」「特定技法の指導」について"
+pair: ja/sources/tenshinryu-net-p-181
+tags: ['source', 'website']
+sources:
+  - raw/web/tenshinryu-net-p-181.md
+updated: 2026-06-30
+---
+# Source summary — 「武藝の分化、未分化」「特定技法の指導」について
+
+**URL:** https://tenshinryu.net/?p=181  
+**Fetched:** 2026-06-30  
+**Raw:** `raw/web/tenshinryu-net-p-181.md`
+
+## Key takeaways
+
+- 天心流兵法は抜刀術、剣術を中心としながら、素槍術、薙刀術、鎖鎌術、柔（柔術）、他兵法を外物として備え、さらに宝蔵院流の十文字槍術を併伝としております。
+中には江戸期以前の太刀（拵え）を用いた古式の技法（天心流の抜刀術の原型とされております）や、明治の廃刀令を受けて、それまでの技法を発展させ仕込刀に応用した「先蹤の杖」と称される技法も御座います。
+「 日本生活文化史6　日本的生活の完成 」に次のような記載があります。
+武士たちは、その本業たる武芸の方面でも、この時代に、かつての弓馬の道から武芸修得に転進した。
+平和以前には弓と馬と鉄砲だけは分化していたが、刀・槍・柔・忍などは一括して兵法と呼ばれ…
+
+## Wiki pages from this source
+
+- [[articles/p-181]]

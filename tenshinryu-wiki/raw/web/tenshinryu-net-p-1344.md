@@ -1,0 +1,37 @@
+---
+url: https://tenshinryu.net/?p=1344
+fetched: 2026-06-30
+title: "1.22（金）柿生支部代替オンライン稽古!!"
+date: 2021-01-21
+wp_id: 1344
+source: website
+categories:
+  - "オンライン稽古"
+---
+
+# 1.22（金）柿生支部代替オンライン稽古!!
+
+> Auto-fetched via WP REST; review before ingest.
+
+> https://youtu.be/0rLl1thQG3A 1.22（金）柿生支部代替オンライン稽古!! 緊急事態宣言の発出により稽古場での稽古を休止とし、代替としてオンライン稽古を行います。 当公開版は19:30～20: […]
+
+https://youtu.be/0rLl1thQG3A 
+1.22（金）柿生支部代替オンライン稽古!! 
+緊急事態宣言の発出により稽古場での稽古を休止とし、代替としてオンライン稽古を行います。 
+当公開版は19:30～20:00の30分間です。 
+指導解説：まーこ先生（滝沢 洞風代範） 
+第十世師家 鍬海 政雲 
+その後は、第十世 鍬海政雲師家による一時間の天心流ファミリー（門人、天心流オンラインメンバー、You Tubeメンバーシップ）限定の配信稽古を行います。 
+ご興味お有りの方は、ぜひ下記より天心流オンライン、メンバーシップにご加入下さい。 
+https://www.youtube.com/channel/UCXPuOeySFeoYG7wrJROThBg/join 
+またご希望の方はオンラインから入門も可能です。 
+https://tenshinryu.net/?page_id=1134 
+*1.22 19:30-20:00(JST) 
+Alternative online training for the Kakio branch !! 
+Since the dojo has been suspended due to the issuance of a state of emergency, we are conducting online training as an alternative. 
+Public delivery is 30 minutes from 19:00 to 19:30. 
+Instructor : 10th Shike Kuwami Masakumo Sensei 
+Takizawa Dofu Daihan 
+After that, We will give a one-hour private online practice exclusively for the Tenshin-ryu family (students, Tenshin-ryu online members, You Tube membership). 
+If you are interested, please join Tenshin-ryu Online and membership from the following. 
+https://www.youtube.com/channel/UCXPuOeySFeoYG7wrJROThBg/join

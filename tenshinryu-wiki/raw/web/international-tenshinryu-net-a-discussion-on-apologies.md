@@ -1,0 +1,100 @@
+---
+url: https://international.tenshinryu.net/a-discussion-on-apologies
+fetched: 2026-06-29
+title: "A Discussion on Apologies│JAPANESE TRADITION TENSHINRYU HYOHO"
+source: website
+---
+
+# A Discussion on Apologies│JAPANESE TRADITION TENSHINRYU HYOHO
+
+> Auto-fetched; review before ingest.
+
+A Discussion on Apologies│JAPANESE TRADITION TENSHINRYU HYOHO 
+
+A Discussion on Apologies 
+Thought 
+Thought 
+
+HOME 
+Private: Masters 
+Thought 
+A Discussion on Apologies 
+
+**A Discussion on Apologies** 
+This is a story about someone who previously defamed Tenshinryu. A person who had repeatedly defamed Tenshinryu on social media in the past recently contacted Tenshinryu through one of its students, expressing a desire to engage with the school. 
+At some point, this individual got into arguments on social media with others who were also defaming Tenshinryu and eventually retracted their defamatory statements. However, it was already too late. 
+There is a saying: “You cannot take back what you spit out.” Defaming a school or tradition is not something that can be easily resolved by retracting one’s words. The individual in question had been making bold claims about the samurai and the warrior class on social media. If one wishes to speak so boldly, they must also adhere to the same level of responsibility and standards upheld by the samurai and warrior class of old. 
+To declare, “This is what a true samurai is!” or “This is the essence of the warrior class!” while hurling insults and defamatory remarks at others, only to claim that it has nothing to do with them when confronted, is an extremely selfish and hypocritical stance. 
+While I don’t remember the details of the past incidents clearly, the individual eventually apologized through social media. However, their attitude was far too dismissive. 
+If someone were to apologize for such blatant and insulting behavior in the context of the warrior class, they would need to follow proper procedures. First, they must write a letter of apology by hand, using a brush and ink as a bare minimum. In this letter, they must clearly state their identity, express the utmost respect, and convey deep regret. Furthermore, they should humbly request a formal opportunity to apologize in person, showing their genuine reflection on their actions. 
+As a gesture of remorse, they should also prepare an appropriate offering—monetary or otherwise—reflecting the severity of their actions. In today’s era, social media posts can spread far and wide, reaching an indeterminate number of people. Therefore, as a minimum act of sincerity to restore the honor they have damaged, the individual must publicly post an image of their handwritten apology, along with a confession of their foolishness, on all the social media platforms they use. Additionally, they should commit to using paid advertisements to ensure the apology is widely disseminated. 
+This individual has insulted not just a person but an entire prestigious martial arts school. It is akin to challenging an entire lineage. In a different era, such actions might have warranted death. Taking measures of this level is only natural. 
+If their remorse, apology, and sincerity are deemed genuine, we would then consider accepting the apology. A formal apology meeting would be arranged, during which the individual would appear alone at the designated location, dressed in formal attire such as a haori and hakama. At the meeting, they would first reintroduce themselves and express gratitude for the opportunity to apologize. They would then admit their wrongdoing, sincerely apologize for their insults, and demonstrate their sincerity by presenting reparations. 
+If they can demonstrate this level of contrition, the next step would be to arrange a formal reconciliation ceremony (*sakazuki*) and appoint a witness. On the appointed day, in the presence of the witness, the individual would present a written statement of apology. The witness would read it aloud, affirming the authenticity of the apology and declaring that if any falsehoods were present, divine punishment would befall the individual, and the witness would take responsibility for ensuring justice. The three parties would then share a ceremonial drink. 
+This would signify the completion of reconciliation. In some cases, a celebratory banquet might follow, with the witness bearing the costs. In such instances, the apologizing party and our school would each provide the witness with an appropriate sum as a token of appreciation. These funds would be used to cover the preparations for the reconciliation ceremony and the banquet itself. 
+Afterward, it would be crucial for our school to promptly communicate to all its members that there is no longer any animosity toward the individual. In the past, failing to do so could result in members encountering the individual and taking lethal action. Depending on the situation, letters might also be sent to affiliated schools, informing them that the conflict with the individual has been resolved. Historically, allied families might have taken it upon themselves to uphold their pride by avenging an insult. 
+Of course, customs varied depending on the era, region, and circumstances. I am still studying these practices, so there may be inaccuracies, but this is an example of an exceptionally formal apology process. Such measures were standard in the warrior’s world. It is a notion incomprehensible to those who, ignorant of true martial traditions, recklessly insult others in the guise of “samurai cosplay” on social media to glorify themselves. 
+Regrettably, troublesome individuals of this sort have always plagued the martial arts world. Even in my less than 20 years of experience with traditional martial arts, I have encountered numerous such nuisances. 
+Ishii-sensei often criticized those who pretended to embody bushido without any true foundation, calling them out as engaging in “samurai cosplay.” Unfortunately, such individuals loudly proclaim their own correctness. Many Japanese people today, lacking an understanding of historical traditions, are misled by the falsehoods of these individuals. Foreigners unfamiliar with Japan’s traditional culture are even more vulnerable to such misinformation. 
+Even in the *Hagakure*, there are anecdotes about disputes at sakazuki ceremonies escalating into duels. The pride of the samurai was truly a matter of life and death. To insult others was to invite equivalent danger upon oneself. 
+While such matters are indeed troublesome, they serve as a reminder of the importance of exercising caution when dealing with members of other schools. For Tenshinryu, let this serve as a lesson to exercise prudence and restraint in our conduct, particularly on social media, and to use such incidents as opportunities to reflect and improve. 
+
+Prev 
+2024-11-17 
+Ide’s  lessons#196 
+
+Next 
+2024-11-22 
+The Culture of Kata(Forms) in Japan 
+関連する記事 
+
+Thought 
+
+2021-12-01 
+Let’s be careful. Our words build our character. 
+
+Thought 
+
+2024-11-29 
+To make a mistake and not correct it is to truly make a mistake. 
+
+Thought 
+
+2024-11-15 
+A concern is that students are not improving. 
+
+Thought 
+
+2025-03-22 
+Hold pride that is not arrogance,and humility that is not self-deprecation 
+
+Thought 
+
+2025-09-11 
+Right in theory, wrong in practice 
+
+Thought の最新記事8件 
+
+2025-09-11 
+Right in theory, wrong in practice 
+
+2025-09-10 
+Datsuryoku: Releasing Unnecessary Tension 
+
+2025-05-26 
+Regarding Movement Inside the Dōjō 
+
+2025-03-22 
+Hold pride that is not arrogance,and humility that is not self-deprecation 
+
+2025-01-19 
+Onko Chishin 温故知新 
+
+2024-11-29 
+To make a mistake and not correct it is to truly make a mistake. 
+
+2024-11-29 
+for Creators 
+
+2024-11-21 
+A Discussion on Apologies

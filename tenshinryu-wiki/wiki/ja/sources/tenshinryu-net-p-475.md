@@ -1,0 +1,34 @@
+---
+slug: sources/tenshinryu-net-p-475
+lang: ja
+title: "出典: 【2月26日】第14回 しんえん【火曜日】"
+pair: en/sources/tenshinryu-net-p-475
+tags: ['source', 'website']
+sources:
+  - raw/web/tenshinryu-net-p-475.md
+updated: 2026-06-30
+---
+# 出典要約 — 【2月26日】第14回 しんえん【火曜日】
+
+**URL:** https://tenshinryu.net/?p=475  
+**取得日:** 2026-06-30  
+**原文:** `raw/web/tenshinryu-net-p-475.md`
+
+## 要点
+
+- 第14回目となる「しんえん」が来る2月26日（火）に開催となります。
+開場： 18:00
+チケット：3000（1drk +1food代を含む）
+会場：新宿御苑rosso（「新宿御苑前駅」２番出口より徒歩3分）
+天心流からはしんえんの顔の一人、まーこ先生こと滝沢代範、また若手筆頭 小川迅月剣士も演武を行います。
+ご予約は
+scene62@gmail.com
+まで。
+必ず 受付でお名乗りいただきますお名前をひらがなで 、それと 人数 、 イベント参加の目当て （例えば天心流）、 未成年の方はその旨をご明記 の上、メール宛先の「しんろく」さんまでご連絡ください。
+どうぞよろしくお願い致します。
+
+## 関連ウィキページ
+
+- [[articles/p-475]]
+
+英語: [../en/sources/tenshinryu-net-p-475.md](../en/sources/tenshinryu-net-p-475.md)
