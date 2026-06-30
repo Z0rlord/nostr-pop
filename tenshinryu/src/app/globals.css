@@ -1,0 +1,614 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tenshinryu KIWAMI — aligned with international.tenshinryu.net (The Thor / Lato / Fjalla One) */
+
+:root {
+  --background: #ffffff;
+  --foreground: #191919;
+  --frame: #191919;
+
+  --surface: #f7f7f7;
+  --surface-card: #ffffff;
+  --surface-elevated: #ffffff;
+  --surface-dark: #191919;
+
+  --primary: #a83f3f;
+  --primary-foreground: #ffffff;
+  --primary-container: #f2e0e0;
+  --primary-container-foreground: #752f2f;
+  --primary-dark: #8b3232;
+  --primary-deep: #752f2f;
+
+  --secondary: #323232;
+  --secondary-foreground: #ffffff;
+  --secondary-container: #e6e6e6;
+  --secondary-container-foreground: #323232;
+
+  --muted: #f2f2f2;
+  --muted-foreground: #7f7f7f;
+  --accent: #a83f3f;
+  --accent-foreground: #ffffff;
+  --destructive: #b60105;
+  --destructive-foreground: #ffffff;
+  --success: #2d5a3d;
+  --success-foreground: #ffffff;
+
+  --card: #ffffff;
+  --card-foreground: #191919;
+  --popover: #ffffff;
+  --popover-foreground: #191919;
+
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.15);
+  --input: #f2f2f2;
+  --ring: #a83f3f;
+  --radius-button: 5px;
+  --radius-card: 5px;
+
+  --font-display: var(--font-fjalla), var(--font-lato), "Yu Gothic", "Hiragino Kaku Gothic Pro",
+    Meiryo, sans-serif;
+  --font-body: var(--font-lato), "Yu Gothic", "Hiragino Kaku Gothic Pro", Meiryo,
+    "MS PGothic", sans-serif;
+
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  --shadow-elevated: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-modal: 0 4px 24px rgba(0, 0, 0, 0.12);
+
+  --content-max: 1170px;
+  --content-narrow: 780px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  a {
+    color: var(--primary);
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: var(--primary-dark);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-label {
+    font-family: var(--font-body);
+    @apply text-sm font-medium text-muted-foreground;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Marketing shell — dark frame + white content column (reference site) */
+.kiwami-page {
+  min-height: 100vh;
+  background: var(--frame);
+}
+
+.kiwami-container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  background: var(--background);
+  min-height: 100vh;
+}
+
+.kiwami-container-narrow {
+  max-width: var(--content-narrow);
+  margin: 0 auto;
+}
+
+/* Section title bar — .heading-primary on reference site */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: var(--radius-card);
+  padding: 0.625rem 0.75rem;
+  line-height: 1.35;
+}
+
+.section-heading-plain {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+}
+
+/* Buttons — .btn__link-primary on reference site */
+.btn-primary {
+  @apply inline-flex items-center justify-center font-bold text-white transition-all duration-150;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-button);
+  background: var(--primary);
+  border: none;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.25);
+  line-height: normal;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-primary:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center font-bold transition-all duration-150;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-button);
+  color: var(--primary);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background: var(--primary);
+  border-color: transparent;
+}
+
+.btn-payment {
+  @apply inline-flex items-center justify-center gap-2 w-full font-bold text-white transition-all duration-150;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-button);
+  background: var(--primary);
+  border: none;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.25);
+}
+
+.btn-payment:hover {
+  background: var(--primary-dark);
+}
+
+.section-pad {
+  @apply px-4 sm:px-6 py-10 md:py-14;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  @apply bg-white p-6;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.card-dark {
+  @apply text-white p-0 overflow-hidden;
+  background: var(--surface-dark);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-card {
+  @apply bg-white p-5 sm:p-6;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.dashboard-card-interactive {
+  @apply bg-white p-5 sm:p-6 transition-all duration-200;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.dashboard-card-interactive:hover {
+  border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+  box-shadow: var(--shadow-elevated);
+}
+
+.alert-success {
+  @apply rounded text-sm px-4 py-3;
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--success) 25%, transparent);
+  background-color: color-mix(in srgb, var(--success) 8%, white);
+  color: var(--success);
+}
+
+.alert-error {
+  @apply rounded text-sm px-4 py-3;
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--destructive) 25%, transparent);
+  background-color: color-mix(in srgb, var(--destructive) 8%, white);
+  color: var(--destructive);
+}
+
+.alert-muted {
+  @apply rounded text-sm px-4 py-3 text-foreground;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.promo-notice {
+  @apply text-sm leading-relaxed px-4 sm:px-6 py-5;
+  background: #fff8f0;
+  border-top: 1px solid #f0e0d0;
+  border-bottom: 1px solid #f0e0d0;
+  color: #5c3d2e;
+}
+
+.promo-notice strong {
+  color: var(--primary);
+}
+
+.breadcrumb {
+  @apply text-sm text-muted-foreground py-3 px-4 sm:px-6 border-b;
+  border-color: var(--border);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  background: #fff;
+}
+
+.breadcrumb a:hover {
+  color: var(--primary);
+}
+
+/* Pricing list — red square bullets like reference */
+.pricing-list {
+  @apply space-y-0 text-sm leading-relaxed;
+}
+
+.pricing-list li {
+  @apply flex items-start gap-3 py-3 border-b;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.pricing-list li:last-child {
+  border-bottom: none;
+}
+
+.pricing-list li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.45rem;
+  border: 2px solid var(--primary);
+  background: transparent;
+}
+
+.work-main {
+  background: var(--surface);
+}
+
+.work-main-padded {
+  @apply pb-24;
+}
+
+.dashboard-page {
+  @apply max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-6 py-5 sm:py-6;
+}
+
+/* App chrome */
+.app-header {
+  @apply sticky top-0 z-40 bg-white;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header-row {
+  @apply flex items-center justify-between gap-3 px-4 sm:px-6 py-3;
+}
+
+.app-brand {
+  @apply flex items-center gap-3 min-w-0;
+}
+
+.app-brand-eyebrow {
+  @apply block text-[10px] text-muted-foreground tracking-[0.12em];
+}
+
+.app-brand-title {
+  font-family: var(--font-display);
+  @apply block text-lg leading-none text-foreground;
+}
+
+.app-brand-badge {
+  @apply block text-xs text-primary font-medium mt-0.5;
+}
+
+.app-header-actions {
+  @apply flex items-center gap-2 shrink-0;
+}
+
+.app-sign-out {
+  @apply text-xs font-medium text-muted-foreground hover:text-primary px-2 py-1 transition-colors;
+}
+
+.staff-toolbar {
+  @apply flex items-center gap-2 px-4 sm:px-6 py-2 text-xs;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--primary) 4%, white);
+}
+
+.staff-toolbar-label {
+  @apply text-muted-foreground font-medium mr-1;
+}
+
+.staff-toolbar-link {
+  @apply px-2.5 py-1 rounded font-medium text-muted-foreground hover:text-primary transition-colors;
+  border-radius: var(--radius-button);
+}
+
+.staff-toolbar-link-active {
+  @apply text-primary font-semibold bg-primary-container;
+}
+
+.page-intro {
+  @apply flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6;
+}
+
+.page-intro-text {
+  @apply min-w-0;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  @apply text-2xl md:text-3xl text-foreground;
+}
+
+.page-subtitle {
+  @apply text-sm md:text-base text-muted-foreground mt-1.5;
+}
+
+.page-intro-actions {
+  @apply flex flex-wrap items-center gap-2 shrink-0;
+}
+
+.page-hero {
+  @apply mb-6 p-5 sm:p-6 rounded-card bg-white border border-border shadow-card;
+}
+
+.page-hero-eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-primary mb-1;
+}
+
+.page-hero-title {
+  font-family: var(--font-display);
+  @apply text-2xl text-foreground;
+}
+
+.page-hero-meta {
+  @apply text-sm text-muted-foreground mt-1;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  @apply text-lg text-foreground;
+}
+
+.card-title-row {
+  @apply flex items-start justify-between gap-4 mb-4 pb-3;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-description {
+  @apply text-sm text-muted-foreground mt-1;
+}
+
+.stat-tile {
+  @apply bg-white p-4 sm:p-5 text-center rounded-card border border-border shadow-card;
+}
+
+.stat-tile-value {
+  font-family: var(--font-display);
+  @apply text-3xl text-primary leading-none;
+}
+
+.stat-tile-label {
+  @apply text-sm text-muted-foreground mt-2;
+}
+
+.action-tile {
+  @apply text-left p-4 rounded-card border border-border bg-white shadow-card transition-all duration-150;
+}
+
+.action-tile:hover {
+  border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+  box-shadow: var(--shadow-elevated);
+}
+
+.action-tile-title {
+  @apply font-semibold text-sm text-foreground;
+}
+
+.action-tile-desc {
+  @apply text-xs text-muted-foreground mt-1;
+}
+
+.empty-state {
+  @apply text-center py-10 px-4 text-sm text-muted-foreground;
+}
+
+.page-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 9999px;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-panel {
+  @apply bg-white p-5 sm:p-6 rounded-card border border-border shadow-card;
+}
+
+.ui-input {
+  @apply w-full px-3 py-2.5 bg-white border border-border text-foreground text-sm;
+  border-radius: var(--radius-button);
+}
+
+.ui-input:focus {
+  outline: 2px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  outline-offset: 0;
+  border-color: var(--primary);
+}
+
+.work-nav {
+  @apply fixed bottom-0 inset-x-0 z-50;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.work-nav-inner {
+  @apply max-w-kiwami mx-auto flex items-stretch justify-around px-2;
+}
+
+.work-nav-item {
+  @apply flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium text-muted-foreground transition-colors min-h-[58px] max-w-[5.5rem];
+  font-family: var(--font-body);
+  border-radius: var(--radius-button);
+}
+
+.work-nav-item-active {
+  color: var(--primary);
+  font-weight: 700;
+  background: color-mix(in srgb, var(--primary) 8%, white);
+}
+
+.staff-nav {
+  @apply px-4 sm:px-6 py-2;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.staff-nav-inner {
+  @apply flex gap-1 p-1 rounded-card bg-white border border-border w-full max-w-none;
+}
+
+.staff-nav-item {
+  @apply flex-1 text-center px-3 py-2 text-sm font-medium rounded transition-colors text-muted-foreground;
+  border-radius: calc(var(--radius-button) - 1px);
+  font-family: var(--font-body);
+}
+
+.staff-nav-item-active {
+  @apply text-white font-semibold shadow-card;
+  background: var(--primary);
+}
+
+.staff-main {
+  @apply flex-1 px-4 sm:px-6 py-5 sm:py-6;
+  background: var(--surface);
+}
+
+.sub-tab-nav {
+  @apply flex gap-1.5 mb-5 overflow-x-auto pb-1 -mx-1 px-1;
+}
+
+.sub-tab {
+  @apply shrink-0 px-3.5 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors bg-white border border-border;
+  border-radius: 9999px;
+}
+
+.sub-tab-active {
+  @apply text-white font-semibold border-transparent;
+  background: var(--primary);
+}
+
+.legal-prose {
+  @apply space-y-8 text-sm leading-relaxed text-foreground;
+}
+
+.legal-prose p {
+  @apply text-muted-foreground;
+}
+
+.legal-prose h2 {
+  @apply font-heading text-xl text-foreground mb-3;
+}
+
+.legal-prose ul {
+  @apply list-disc space-y-2 pl-5 text-muted-foreground;
+}
+
+.legal-link {
+  @apply text-[var(--primary)] hover:underline;
+}
+
+.staging-banner {
+  @apply sticky top-0 z-[60] w-full text-center text-xs font-bold tracking-wide py-2 px-3;
+  background: #1a3a5c;
+  color: #fff;
+  border-bottom: 2px solid #f5a623;
+}

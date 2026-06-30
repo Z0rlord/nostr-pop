@@ -1,28 +1,21 @@
-const benefits = [
-  {
-    title: "Relay write access",
-    body: "Your npub is queued for the DojoPop relay pubkey whitelist so you can publish proof-of-practice events.",
-  },
-  {
-    title: "Members tag",
-    body: "Future kind 34567 events can carry a #dojopop-member tag for filtered feeds and leaderboards.",
-  },
-  {
-    title: "Early protocol access",
-    body: "First access to CLI tools, verification flows, and dojo-specific Nostr clients as they ship.",
-  },
-];
+"use client";
+
+import { useI18n } from "@/i18n/context";
 
 export function MembershipBenefits() {
+  const { t } = useI18n();
+
+  const benefits = [
+    { title: t("membership.publishTitle"), body: t("membership.publishBody") },
+    { title: t("membership.logTitle"), body: t("membership.logBody") },
+    { title: t("membership.earlyTitle"), body: t("membership.earlyBody") },
+  ];
+
   return (
     <section className="border-t border-white/5 bg-dojo-slate/30 px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <h2 className="font-display text-3xl text-white">What members get</h2>
-        <p className="mt-4 max-w-2xl text-dojo-mist/70">
-          v1 membership is intentionally minimal: pay, register your npub, and
-          you are on the list for relay access and upcoming proof-of-practice
-          features.
-        </p>
+        <h2 className="font-display text-3xl text-white">{t("membership.title")}</h2>
+        <p className="mt-4 max-w-2xl text-dojo-mist/70">{t("membership.subtitle")}</p>
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {benefits.map((b) => (
             <li

@@ -1,0 +1,11 @@
+/** Old event ids → replacement after thumbnail repair (kind 5 delete + republish). */
+export const PRACTICE_VIDEO_REDIRECTS: Record<string, string> = {
+  "141f9128179b08a7a00e20a0d77ece6f6a6a613ad9816aab2ba3f6d205229eae":
+    "0deab537524b581936caec82f64e6a38cefd6d53330f11e64f841a83030604e3",
+  "71f84156bf18cb99b4b79b2b1fc0a2201e20e2b2bb6e0868e2ab92529f637b02":
+    "bd58fd7238d2b8800fc7ba628a45a818fc98aeef93298179e4c4d73a25c8a10b",
+  "5b12b123aa3d3d61d6300a5d0b69ff072f994b398746e1e81664675cd5596d9c":
+    "e3f8a32d006435e8d5226594a931113a133723fbd1377812d4c6a9a955d592fe",
+  "6df36d0c3c8cff2a68bca900bf34b971e9d47a19474c085418f648d17cda5ed6":
+    "e4425c1f9ba94841d68997cb2b12b54c7efe88fd42f99123236e7f8323db2fbf",
+};

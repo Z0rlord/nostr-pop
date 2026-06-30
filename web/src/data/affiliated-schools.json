@@ -1,0 +1,57 @@
+{
+  "schools": [
+    {
+      "id": "hikari-warsaw",
+      "name": "Hikari Dojo",
+      "city": "Warsaw",
+      "country": "Poland",
+      "disciplines": ["aikido"],
+      "sensei": "Bartłomiej Gajowiec",
+      "senseiTitle": "3 dan AIKIKAI · Fukushidoin · physiotherapist",
+      "senseiTitlePl": "3 dan AIKIKAI · Fukushidoin · fizjoterapeuta",
+      "senseiTitleJa": "3段 AIKIKAI · Fukushidoin · 理学療法士",
+      "website": "https://hikaridojo.pl",
+      "contactPhone": "+48 602 786 988",
+      "description": "Aikido rooted in Japanese tradition with a modern, body-aware approach — safe warm-ups, practical self-defence, and training adapted to every age and level. Led by a practising physiotherapist with detailed attention to safe, ergonomic movement. No competition in class; a welcoming dojo for children, youth, and adults.",
+      "descriptionPl": "Aikido zakorzenione w japońskiej tradycji z nowoczesnym, świadomym ciałem podejściem — bezpieczna rozgrzewka, praktyczna samoobrona, trening dostosowany do wieku i poziomu. Prowadzone przez praktykującego fizjoterapeutę z dbałością o bezpieczny, ergonomiczny ruch. Brak rywalizacji; miejsce dla dzieci, młodzieży i dorosłych.",
+      "descriptionJa": "日本の伝統に根ざした合気道を、現代的で身体を意識したアプローチで — 安全な準備運動、実践的な護身、年齢とレベルに合わせた稽古。理学療法士として活動する指導者が、安全でエルゴノミックな動きに細心の注意を払います。競争なし。子ども、青少年、大人を歓迎する道場です。",
+      "highlights": [
+        "Training led by an experienced physiotherapist",
+        "Practical self-defence techniques",
+        "Conscious, safe body work for all ages",
+        "Founder of NEUROAIKI — aikido and neurophysiotherapy"
+      ],
+      "highlightsPl": [
+        "Treningi prowadzone przez doświadczonego fizjoterapeutę",
+        "Skuteczne i praktyczne techniki samoobrony",
+        "Świadoma, bezpieczna praca z ciałem dla każdego wieku",
+        "Założyciel NEUROAIKI — połączenie aikido i neurofizjoterapii"
+      ],
+      "highlightsJa": [
+        "経験豊富な理学療法士による指導",
+        "実践的な護身術",
+        "全年齢向けの意識的で安全な身体ワーク",
+        "NEUROAIKI 創設者 — 合気道と神経理学療法"
+      ],
+      "locations": [
+        {
+          "name": "Dojo Na Uboczu",
+          "address": "Warsaw, ul. Na Uboczu 3",
+          "schedule": ["Tue 18:00–21:00", "Thu 19:00–21:00"]
+        },
+        {
+          "name": "Dojo Trojdena",
+          "address": "Warsaw, CSR WUM, ul. Księcia Trojdena 2E",
+          "schedule": ["Mon 16:00–18:00", "Wed 19:30–21:30"]
+        },
+        {
+          "name": "Dojo Siennica",
+          "address": "Siennica, Zespół Szkół, ul. Mińska 38",
+          "schedule": ["Mon 19:00–21:00"]
+        }
+      ],
+      "status": "pilot",
+      "featured": true
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+---
+slug: sources/tenshinryu-net-p-147
+lang: fr
+title: 'Source: 天心流公式マスコットキャラクター「天心竜」登場!!の巻'
+pair: en/sources/tenshinryu-net-p-147
+tags:
+- source
+- website
+sources:
+- raw/web/tenshinryu-net-p-147.md
+updated: 2026-06-30
+---
+
+> **Traduction en cours** — Cette page n'est pas encore traduite en français (fr-FR).
+
+Consultez la version en [anglais](../../en/sources/tenshinryu-net-p-147.md) · [japonais](../../ja/sources/tenshinryu-net-p-147.md).
+
+**Source: 天心流公式マスコットキャラクター「天心竜」登場!!の巻** — Résumé provisoire : URL: https://tenshinryu.net/?p=147

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MEMBERSHIP_PRICE_USD } from "@/lib/constants";
 
 interface InvoiceResponse {
   id: string;
@@ -60,7 +61,9 @@ export default function LightningPage() {
               <p className="text-2xl font-medium text-dojo-gold">
                 {invoice.amountSats.toLocaleString()} sats
               </p>
-              <p className="mt-2 text-sm text-dojo-mist/60">~$0.99 / month</p>
+              <p className="mt-2 text-sm text-dojo-mist/60">
+                ~${MEMBERSHIP_PRICE_USD} / month
+              </p>
 
               {!invoice.configured && (
                 <div className="mt-6 rounded-lg bg-dojo-gold/10 p-4 text-left text-sm text-dojo-mist/80">
@@ -82,15 +85,10 @@ export default function LightningPage() {
                 />
               )}
 
-              {invoice.checkoutLink && (
-                <a
-                  href={invoice.checkoutLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-block rounded-lg bg-dojo-gold/20 px-6 py-3 text-dojo-gold hover:bg-dojo-gold/30 transition-colors"
-                >
-                  Open BTCPay checkout
-                </a>
+              {invoice.configured && (
+                <p className="mt-6 text-xs text-dojo-mist/50">
+                  Scan the QR or pay from any Lightning wallet.
+                </p>
               )}
 
               <p className="mt-6 text-xs text-dojo-mist/50">

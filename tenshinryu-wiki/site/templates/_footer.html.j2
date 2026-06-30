@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <nav class="footer-nav" aria-label="{{ nav_footer_label }}">
+    {% for item in nav_items %}
+    <a href="{{ item.href }}">{{ item.label }}</a>
+    {% endfor %}
+    <a href="/{{ lang }}/graph">{{ graph_label }}</a>
+  </nav>
+  <div class="footer-lang lang-switch">
+    <a href="{{ alternate.en }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
+    <a href="{{ alternate.ja }}"{% if lang == 'ja' %} class="active"{% endif %}>JA</a>
+    <a href="{{ alternate.es }}"{% if lang == 'es' %} class="active"{% endif %}>ES</a>
+    <a href="{{ alternate.el }}"{% if lang == 'el' %} class="active"{% endif %}>EL</a>
+    <a href="{{ alternate.fr }}"{% if lang == 'fr' %} class="active"{% endif %}>FR</a>
+    <a href="{{ alternate.de }}"{% if lang == 'de' %} class="active"{% endif %}>DE</a>
+    <a href="{{ alternate.it }}"{% if lang == 'it' %} class="active"{% endif %}>IT</a>
+  </div>
+  <p>{{ footer_lead }}</p>
+  <p><a href="https://tenshinryu.xyz">{{ footer_kiwami }}</a> · <a href="https://international.tenshinryu.net/">{{ footer_federation }}</a></p>
+</footer>

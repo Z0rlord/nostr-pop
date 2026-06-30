@@ -16,6 +16,18 @@ export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+/** NIP-05 identifier with required local part and dotted domain (e.g. name@domain.tld). */
+export const NIP05_INPUT_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+export function isValidNip05Input(input: string): boolean {
+  return NIP05_INPUT_PATTERN.test(input.trim());
+}
+
+export function isValidNostrIdentityInput(input: string): boolean {
+  const trimmed = input.trim();
+  return isValidNpub(trimmed) || isValidNip05Input(trimmed);
+}
+
 export function decodeNpubToHex(npub: string): string | null {
   if (!isValidNpub(npub)) return null;
   try {

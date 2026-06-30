@@ -1,0 +1,27 @@
+---
+slug: sources/tenshinryu-net-p-544
+lang: en
+title: "Source: まーこ先生モデルの抜刀写真フリー素材!!"
+pair: ja/sources/tenshinryu-net-p-544
+tags: ['source', 'website']
+sources:
+  - raw/web/tenshinryu-net-p-544.md
+updated: 2026-06-30
+---
+# Source summary — まーこ先生モデルの抜刀写真フリー素材!!
+
+**URL:** https://tenshinryu.net/?p=544  
+**Fetched:** 2026-06-30  
+**Raw:** `raw/web/tenshinryu-net-p-544.md`
+
+## Key takeaways
+
+- フリー素材の ぱくたそ 様にて、当流代範、まーこ先生こと滝沢洞風先生の写真素材が公開となりました。
+メイド抜刀その他、多くの反響を頂いており、今回は フリー素材 として登場です。
+ぜひ、多くのクリエーターのみなさまにご利用いただければ幸いです。
+｜抜刀の写真素材！　古武術天心流兵法代範まーこ先生| ぱくたそフリー素材
+https://www. pakutaso.com/battou.html
+
+## Wiki pages from this source
+
+- [[articles/p-544]]

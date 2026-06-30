@@ -1,0 +1,15 @@
+services:
+  albyhub:
+    image: ghcr.io/getalby/hub:latest
+    container_name: dojopop-albyhub
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./albyhub-data:/data
+    env_file:
+      - .env
+    environment:
+      - WORK_DIR=/data/albyhub
+      - AUTO_UNLOCK_PASSWORD=${ALBY_HUB_UNLOCK_PASSWORD}
+    stop_grace_period: 300s

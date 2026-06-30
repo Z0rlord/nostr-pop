@@ -1,0 +1,18 @@
+FROM node:20-alpine AS build
+WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@9 --activate
+COPY nsecbunker-admin-ui/package.json nsecbunker-admin-ui/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY nsecbunker-admin-ui/ .
+RUN pnpm run build
+
+FROM node:20-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
+COPY --from=build /app/build ./build
+COPY --from=build /app/package.json ./
+COPY --from=build /app/node_modules ./node_modules
+EXPOSE 3000
+CMD ["node", "build"]

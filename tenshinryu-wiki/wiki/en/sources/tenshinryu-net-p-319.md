@@ -1,0 +1,26 @@
+---
+slug: sources/tenshinryu-net-p-319
+lang: en
+title: "Source: 【天心流ラジオ】心と感情の違いについて #6"
+pair: ja/sources/tenshinryu-net-p-319
+tags: ['source', 'website']
+sources:
+  - raw/web/tenshinryu-net-p-319.md
+updated: 2026-06-30
+---
+# Source summary — 【天心流ラジオ】心と感情の違いについて #6
+
+**URL:** https://tenshinryu.net/?p=319  
+**Fetched:** 2026-06-30  
+**Raw:** `raw/web/tenshinryu-net-p-319.md`
+
+## Key takeaways
+
+- 今回は「心」と「感情」は別個として考えて、向き合ったほうが、感情をコントロール出来て楽しく生きやすくなるというお話です。
+感情のコントロールは後天的に獲得できる能力です。
+そのためには、まずそもそも心と感情を同一視しないことが肝心です。
+<iframe width=”1022″ height=”575″ src=”https://www.youtube.com/embed/E_OseM0KV0o” frameborder=”0″ allow=”accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture” all…
+
+## Wiki pages from this source
+
+- [[articles/p-319]]

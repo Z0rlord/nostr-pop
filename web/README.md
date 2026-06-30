@@ -1,12 +1,13 @@
 # DojoPop Landing Page
 
 Next.js 14 App Router site for [dojopop.live](https://dojopop.live) — proof-of-practice
-on Nostr with **$0.99/month** membership via Stripe or Lightning.
+on Nostr with **$9.99/month** membership via Stripe or Lightning.
 
 ## Features
 
 - Landing page: hero, how-it-works, relay + YakiHonne links
 - `/join` — collect npub (+ optional email), pay via Stripe Checkout or Lightning
+- `/films/yoga-sutra` — one-time film purchase (Lightning or Stripe), trailer + gated stream
 - Membership stored in JSON (`data/members.json`) on the host volume
 - Stripe subscription lifecycle via `/api/stripe/webhook`
 - Lightning via BTCPay Server (or scaffold mode when creds missing)
@@ -35,19 +36,24 @@ Set via Doppler project `dojopop`, config `prd_zorie`:
 | `NEXT_PUBLIC_APP_URL` | yes | Public URL (`https://dojopop.live`) |
 | `STRIPE_SECRET_KEY` | yes | Stripe API |
 | `STRIPE_WEBHOOK_SECRET` | yes | Webhook signature verification |
-| `STRIPE_PRICE_MEMBERSHIP` | recommended | $0.99/mo Price ID (auto-created if unset) |
-| `LIGHTNING_MEMBERSHIP_SATS` | no | Default `1000` sats |
-| `BTCPAY_URL` | Lightning | BTCPay base URL |
-| `BTCPAY_API_KEY` | Lightning | BTCPay API token |
-| `BTCPAY_STORE_ID` | Lightning | BTCPay store id |
-| `BTCPAY_WEBHOOK_SECRET` | Lightning | BTCPay webhook HMAC secret |
+| `STRIPE_PRICE_MEMBERSHIP` | recommended | $9.99/mo Price ID (auto-created if unset) |
+| `LIGHTNING_MEMBERSHIP_SATS` | no | Default `10000` sats |
+| `NWC_CONNECTION_SECRET` | Lightning | `nostr+walletconnect://…` from Alby Hub or Account |
 | `MEMBERSHIP_DATA_DIR` | no | Default `./data` (Docker: `/app/data`) |
 | `RELAY_CONFIG_PATH` | prod | `/relay/config.toml` (mounted from relay-2) |
 | `RELAY_CONTAINER_NAME` | prod | `dojopop-relay` |
 | `DOCKER_GID` | prod | Host docker group id for container restart |
+| `DOJOPOP_LOGIN_NSEC` | DM login | Dedicated login-bot key (not founder `NOSTR_NSEC`) |
+| `DOJOPOP_LOGIN_NPUB` | DM login | Login bot npub (optional; derived from nsec) |
+| `DM_LOGIN_SECRET` | DM login | HMAC secret for login session tokens |
+| `NEXT_PUBLIC_CDN_URL` | no | CDN origin for media URLs (defaults to Blossom URL) |
+| `FILM_YOGA_SUTRA_SATS` | film | Default `100000` sats for Yoga Sutra one-time unlock |
+| `FILM_YOGA_SUTRA_STRIPE_PRICE_ID` | film | Stripe Price ID (auto-created if unset) |
+| `FILM_YOGA_SUTRA_STRIPE_PRICE_CENTS` | film | Default `1499` ($14.99) when auto-creating price |
+| `FILM_YOGA_SUTRA_BLOSSOM_URL` | film | **Server-only** full film Blossom/CDN URL (never public) |
+| `FILM_YOGA_SUTRA_TRAILER_URL` | film | Public trailer embed URL |
 
-**Lightning:** No `BTCPAY_*` secrets in Doppler yet. Integration is production-ready;
-see `btcpay-server/README.md` for deploy or external BTCPay setup.
+**Lightning:** NWC (NIP-47) via `NWC_CONNECTION_SECRET`. See [docs/lightning-nwc.md](../docs/lightning-nwc.md).
 
 ## Local development
 
@@ -69,6 +75,7 @@ doppler run --project dojopop --config prd_zorie -- npm run dev
 2. Register webhook endpoint in [Stripe Dashboard → Webhooks](https://dashboard.stripe.com/test/webhooks):
    - URL: `https://dojopop.live/api/stripe/webhook` (or ngrok for local)
    - Events: `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+   - Film one-time payments also use `checkout.session.completed` (mode `payment`, metadata `filmId`)
    - Copy signing secret → Doppler `STRIPE_WEBHOOK_SECRET`
 3. Visit `/join`, enter a test npub, click **Pay with Stripe**.
 4. Use test card `4242 4242 4242 4242`, any future expiry/CVC.
@@ -76,12 +83,9 @@ doppler run --project dojopop --config prd_zorie -- npm run dev
 ## Deploy to relay-2
 
 ```bash
-# 1. Sync production .env to relay-2 (once)
-doppler secrets download --project dojopop --config prd_zorie --no-file --format env \
-  | grep -E '^(NEXT_PUBLIC_APP_URL|STRIPE_|BTCPAY_|LIGHTNING_|MEMBERSHIP_)' \
-  > /tmp/dojopop-web.env
-scp /tmp/dojopop-web.env relay-2:/opt/dojopop/web/.env
-ssh relay-2 'chmod 600 /opt/dojopop/web/.env'
+# 1. Sync production .env to relay-2 (requires NWC_CONNECTION_SECRET in Doppler for Lightning)
+chmod +x scripts/sync-production-env.sh
+doppler run --project dojopop --config prd_zorie -- ./scripts/sync-production-env.sh relay-2
 
 # 2. Update Cloudflare Tunnel ingress (adds dojopop.live → :3001)
 chmod +x scripts/update-tunnel-ingress.sh deploy.sh
@@ -101,7 +105,26 @@ Verify: `curl -sI https://dojopop.live | head -5`
 | `/api/stripe/webhook` | POST | Stripe subscription lifecycle |
 | `/api/lightning/invoice` | POST | Create Lightning invoice |
 | `/api/lightning/status/[id]` | GET | Poll invoice + QR |
-| `/api/lightning/webhook` | POST | BTCPay settlement callback |
+| `/api/lightning/webhook` | POST | No-op (NWC uses polling) |
+| `/api/films/yoga-sutra/stripe/checkout` | POST | One-time film Checkout (`{ npub?, email? }`) |
+| `/api/films/yoga-sutra/stripe/confirm-session` | POST | Backup film unlock after Stripe redirect |
+| `/api/films/yoga-sutra/lightning/invoice` | POST | Film Lightning invoice (`{ npub, email? }`) |
+| `/api/films/yoga-sutra/lightning/status/[id]` | GET | Poll film invoice + QR |
+| `/api/films/yoga-sutra/access` | GET | Check unlock (`?npub=` or `?token=`) |
+| `/api/films/yoga-sutra/stream` | GET | Gated stream URL (`?npub=` or `?token=`) |
+
+## DNS / NextDNS (Tailscale)
+
+If `dojopop.live` resolves to `0.0.0.0` on your Mac, NextDNS (via Tailscale) is
+sinkholing the domain. Permanent fix:
+
+```bash
+# Doppler: NEXTDNS_API_KEY + NEXTDNS_PROFILE_ID (2b4adf)
+doppler run --project dojopop --config prd_zorie -- ./scripts/nextdns-allow-dojopop.sh
+sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+```
+
+Emergency local override: `sudo ./scripts/fix-local-dns-dojopop.sh`
 
 ## Blockers / operator checklist
 

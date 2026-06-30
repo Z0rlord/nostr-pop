@@ -1,0 +1,87 @@
+# DojoPop Bunker46 — primary NIP-46 manager (bunker.dojopop.live :3005)
+# Build context: upstream/ (pinned dsbaars/bunker46 at COMMIT)
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: dojopop-bunker46-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bunker46
+      POSTGRES_PASSWORD: ${BUNKER46_POSTGRES_PASSWORD}
+      POSTGRES_DB: bunker46
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bunker46"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: dojopop-bunker46-redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: ./upstream
+      dockerfile: apps/server/Dockerfile
+    image: dojopop-bunker46-server:latest
+    container_name: dojopop-bunker46-server
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+      DATABASE_URL: postgresql://bunker46:${BUNKER46_POSTGRES_PASSWORD}@db:5432/bunker46
+      JWT_SECRET: ${BUNKER46_JWT_SECRET}
+      JWT_EXPIRES_IN: ${BUNKER46_JWT_EXPIRES_IN:-15m}
+      JWT_REFRESH_SECRET: ${BUNKER46_JWT_REFRESH_SECRET}
+      JWT_REFRESH_EXPIRES_IN: ${BUNKER46_JWT_REFRESH_EXPIRES_IN:-7d}
+      ENCRYPTION_KEY: ${BUNKER46_ENCRYPTION_KEY}
+      CORS_ORIGINS: ${BUNKER46_CORS_ORIGINS}
+      REDIS_URL: redis://redis:6379
+      WEBAUTHN_RP_NAME: ${BUNKER46_WEBAUTHN_RP_NAME:-Bunker46}
+      WEBAUTHN_RP_ID: ${BUNKER46_WEBAUTHN_RP_ID}
+      WEBAUTHN_ORIGIN: ${BUNKER46_WEBAUTHN_ORIGIN}
+      LOG_LEVEL: ${BUNKER46_LOG_LEVEL:-info}
+      ALLOW_REGISTRATION: ${BUNKER46_ALLOW_REGISTRATION:-true}
+      NOSTR_DEFAULT_RELAYS: ${BUNKER46_NOSTR_DEFAULT_RELAYS}
+      TRUST_PROXY: "true"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/auth/config').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  web:
+    build:
+      context: ./upstream
+      dockerfile: apps/web/Dockerfile
+    image: dojopop-bunker46-web:latest
+    container_name: dojopop-bunker46-web
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "3005:8080"
+
+volumes:
+  pgdata:

@@ -54,7 +54,17 @@ async function writeStore(store: MemberStore): Promise<void> {
 
 export async function findMemberByNpub(npub: string): Promise<Member | undefined> {
   const store = await readStore();
-  return store.members.find((m) => m.npub === npub);
+  const matches = store.members.filter((m) => m.npub === npub);
+  if (matches.length === 0) return undefined;
+  if (matches.length === 1) return matches[0];
+
+  const rank: Record<MemberStatus, number> = {
+    active: 0,
+    pending: 1,
+    canceled: 2,
+    expired: 3,
+  };
+  return matches.sort((a, b) => rank[a.status] - rank[b.status])[0];
 }
 
 export async function findMemberByStripeSubscription(

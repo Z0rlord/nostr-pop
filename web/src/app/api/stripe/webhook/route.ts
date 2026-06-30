@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { activateMember, updateMemberStatus } from "@/lib/membership";
+import { fulfillFilmStripeSession } from "@/lib/film-stripe";
 import { getStripe } from "@/lib/stripe";
 import { onMembershipChanged } from "@/lib/webhook-side-effects";
 
@@ -36,6 +37,12 @@ export async function POST(req: NextRequest) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
+
+        if (session.mode === "payment" && session.metadata?.filmId) {
+          await fulfillFilmStripeSession(session);
+          break;
+        }
+
         const npub = session.metadata?.npub;
         const memberId = session.metadata?.memberId;
         const subId =

@@ -7,6 +7,10 @@
   --font-sans: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-dojo-ink text-dojo-mist antialiased;
 }

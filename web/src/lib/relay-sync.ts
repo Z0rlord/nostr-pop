@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import http from "http";
 import { listActiveMembers } from "@/lib/membership";
 import { ADMIN_PUBKEY_HEX, decodeNpubToHex } from "@/lib/nostr";
+import { listSchools, staffNpubs } from "@/lib/schools";
 
 const RELAY_CONTAINER = process.env.RELAY_CONTAINER_NAME || "dojopop-relay";
 
@@ -13,6 +14,19 @@ export async function collectWhitelistHexPubkeys(): Promise<string[]> {
   const admin = process.env.RELAY_ADMIN_PUBKEY_HEX || ADMIN_PUBKEY_HEX;
   const seen = new Set<string>([admin.toLowerCase()]);
   const ordered = [admin.toLowerCase()];
+
+  const schools = await listSchools();
+  for (const school of schools) {
+    for (const npub of staffNpubs(school)) {
+      const hex = decodeNpubToHex(npub);
+      if (!hex) continue;
+      const normalized = hex.toLowerCase();
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        ordered.push(normalized);
+      }
+    }
+  }
 
   const members = await listActiveMembers();
   for (const member of members) {

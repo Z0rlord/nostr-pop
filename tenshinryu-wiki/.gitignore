@@ -1,0 +1,17 @@
+# All books from Google Drive (keep .meta.yaml sidecars and exported .txt)
+raw/books/**/*
+!raw/books/**/*.meta.yaml
+!raw/books/**/*.txt
+!raw/books/**/*.csv
+
+# Kata photos from Drive (JPG/PNG only; sync with --sync-kata-photos)
+raw/assets/**/*
+!raw/assets/**/*.meta.yaml
+
+# OAuth tokens (use ~/.config/dojopop/)
+config.json
+drive-oauth-token.json
+
+# Static site build output
+dist/
+.venv/

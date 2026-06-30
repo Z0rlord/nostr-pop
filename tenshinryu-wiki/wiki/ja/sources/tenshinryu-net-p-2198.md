@@ -1,0 +1,31 @@
+---
+slug: sources/tenshinryu-net-p-2198
+lang: ja
+title: "出典: 第六回 彰義隊墓前奉納演武"
+pair: en/sources/tenshinryu-net-p-2198
+tags: ['source', 'website']
+sources:
+  - raw/web/tenshinryu-net-p-2198.md
+updated: 2026-06-30
+---
+# 出典要約 — 第六回 彰義隊墓前奉納演武
+
+**URL:** https://tenshinryu.net/?p=2198  
+**取得日:** 2026-06-30  
+**原文:** `raw/web/tenshinryu-net-p-2198.md`
+
+## 要点
+
+- 10月9日（月曜日）スポーツの日
+13時より上野恩賜公園彰義隊墓所にて、第六回となります彰義隊墓前奉納演武会を挙行致します。
+本演武会はご観覧を目的としておりませんが、お時間ございましたら、在りし日の彰義隊の勇姿に思いを馳せ、英霊への祈りと共に、演武をお見守りいただけましたら幸いです
+10月9日（月曜日）スポーツの日
+13:00開始　14:30終了
+雨天決行　観覧無料
+場所： 上野恩賜公園彰義隊墓所
+
+## 関連ウィキページ
+
+- [[articles/p-2198]]
+
+英語: [../en/sources/tenshinryu-net-p-2198.md](../en/sources/tenshinryu-net-p-2198.md)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — Tenshinryu Hyoho Wiki</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="alternate" hreflang="en" href="{{ alternate.en }}">
+  <link rel="alternate" hreflang="ja" href="{{ alternate.ja }}">
+  <link rel="alternate" hreflang="es" href="{{ alternate.es }}">
+  <link rel="alternate" hreflang="el" href="{{ alternate.el }}">
+</head>
+<body class="lang-{{ lang }} graph-page">
+  {% include "_nav.html.j2" %}
+  <main class="graph-main">
+    {% include "_breadcrumbs.html.j2" %}
+    <div class="graph-toolbar">
+      <p class="graph-hint">{{ hint }}</p>
+      <div class="graph-legend" id="graph-legend"></div>
+    </div>
+    <canvas id="graph-canvas" aria-label="{{ graph_label }}"></canvas>
+  </main>
+  {% include "_footer.html.j2" %}
+  <script src="/assets/search.js" defer></script>
+  <script>window.WIKI_LANG = "{{ lang }}";</script>
+  <script src="/assets/nav.js" defer></script>
+  <script src="/assets/graph.js" defer></script>
+</body>
+</html>

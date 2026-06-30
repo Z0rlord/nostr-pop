@@ -1,0 +1,18 @@
+---
+slug: sources/tenshinryu-net-p-2380
+lang: fr
+title: 'Source: 週間稽古スケジュール11.11～'
+pair: en/sources/tenshinryu-net-p-2380
+tags:
+- source
+- website
+sources:
+- raw/web/tenshinryu-net-p-2380.md
+updated: 2026-06-30
+---
+
+> **Traduction en cours** — Cette page n'est pas encore traduite en français (fr-FR).
+
+Consultez la version en [anglais](../../en/sources/tenshinryu-net-p-2380.md) · [japonais](../../ja/sources/tenshinryu-net-p-2380.md).
+
+**Source: 週間稽古スケジュール11.11～** — Résumé provisoire : URL: https://tenshinryu.net/?p=2380

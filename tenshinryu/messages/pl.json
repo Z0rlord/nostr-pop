@@ -1,0 +1,439 @@
+{
+  "metadata": {
+    "title": "Tenshinryu KIWAMI - Tradycyjne Japońskie Sztuki Walki",
+    "description": "Najlepszy system online do nauki Tenshinryu Hyoho. Tradycyjna mądrość. Nowoczesna technologia."
+  },
+  "navigation": {
+    "signIn": "Zaloguj się",
+    "join": "Dołącz",
+    "home": "Strona główna",
+    "training": "Trening",
+    "legal": "Regulamin",
+    "contact": "Kontakt",
+    "backToHome": "← STRONA GŁÓWNA"
+  },
+  "hero": {
+    "badge": "Japońska Tradycja",
+    "title": "OPANUJ. DROGĘ. 極",
+    "subtitle": "Najlepszy system online do nauki Tenshinryu Hyoho.",
+    "description": "Tradycyjna mądrość. Nowoczesna technologia. Podążaj ścieżką, którą podążali samurajowie 400 lat temu.",
+    "features": {
+      "videos": "Program nauczania wideo z napisami w języku polskim",
+      "streaming": "Lekcje na żywo na YouTube",
+      "feedback": "Bezpośrednia opinia od sensei Tenshin"
+    },
+    "cta": {
+      "begin": "Rozpocznij trening",
+      "login": "Logowanie dla członków"
+    },
+    "tagline": "Tradycja jest niezmienna. Wzrost jest nieskończony."
+  },
+  "membership": {
+    "title": "CZŁONKOSTWO",
+    "subtitle": "Wybierz ścieżkę, która odpowiada Twojej podróży.",
+    "youtube": {
+      "name": "YOUTUBE",
+      "price": "$4.99",
+      "period": "/miesiąc",
+      "badge": "Wstęp",
+      "features": [
+        "Podstawowe filmy techniczne",
+        "Dostęp do społeczności YouTube",
+        "Miesięczne transmisje na żywo"
+      ]
+    },
+    "standard": {
+      "name": "STANDARD",
+      "price": "$35",
+      "period": "/miesiąc",
+      "badge": "Powagi",
+      "features": [
+        "Pełna biblioteka wideo",
+        "Materiały do pobrania",
+        "Śledzenie postępów",
+        "Bezpośrednie wiadomości"
+      ]
+    },
+    "pro": {
+      "name": "PRO",
+      "price": "$85",
+      "period": "/miesiąc",
+      "badge": "Zaangażowania",
+      "features": [
+        "Wszystko ze Standardu",
+        "Recenzje wideo 1 na 1",
+        "Priorytetowe wsparcie",
+        "Certyfikacja rangi",
+        "Niestandardowe plany treningowe"
+      ]
+    },
+    "choose": "Wybierz {plan}"
+  },
+  "features": {
+    "title": "FUNKCJE",
+    "items": {
+      "curriculum": {
+        "number": "01",
+        "title": "Strukturalny program nauczania",
+        "description": "Krok po kroku od podstawowych do zaawansowanych technik, zgodnie z tradycyjnym programem Tenshinryu."
+      },
+      "feedback": {
+        "number": "02",
+        "title": "Bezpośrednia opinia",
+        "description": "Prześlij swoje filmy treningowe i otrzymaj spersonalizowane poprawki od certyfikowanych instruktorów."
+      },
+      "community": {
+        "number": "03",
+        "title": "Globalna społeczność",
+        "description": "Połącz się z praktykującymi na całym świecie. Dziel się doświadczeniami i rozwijaj się razem."
+      },
+      "ranking": {
+        "number": "04",
+        "title": "System rang",
+        "description": "Zdobywaj uznawane pasy w miarę postępów. Śledź swoją podróż od białego do czarnego pasa."
+      }
+    }
+  },
+  "footer": {
+    "training": "Trening",
+    "legal": "Regulamin",
+    "terms": "Warunki",
+    "privacy": "Prywatność",
+    "contact": "Kontakt",
+    "dojo": "Międzynarodowe Dojo",
+    "copyright": "© 2026 JAPANESE TRADITION TENSHINRYU HYOHO. WSZELKIE PRAWA ZASTRZEŻONE."
+  },
+  "auth": {
+    "login": {
+      "title": "Witamy ponownie",
+      "signIn": "Zaloguj się do",
+      "google": "Kontynuuj z Google",
+      "apple": "Kontynuuj z Apple",
+      "noAccount": "Nie masz konta?",
+      "error": "Logowanie nie powiodło się. Spróbuj ponownie."
+    }
+  },
+  "student": {
+    "dashboard": "Panel ucznia",
+    "overview": "Przegląd",
+    "history": "Historia",
+    "ready": "Gotowy na zajęcia?",
+    "checkIn": {
+      "description": "Automatycznie znajdziemy Twoje zajęcia na podstawie czasu i lokalizacji",
+      "finding": "Wyszukiwanie zajęć...",
+      "found": "Znaleziono",
+      "success": "Zapisano obecność!",
+      "button": "Zapisz obecność",
+      "thisMonth": "W tym miesiącu",
+      "streak": "Dni z rzędu"
+    },
+    "videos": {
+      "title": "Filmy treningowe",
+      "subtitle": "Techniki i samouczki",
+      "visit": "Odwiedź YouTube Tenshinryu"
+    },
+    "instructorMode": "Tryb instruktora",
+    "logout": "Wyloguj się",
+    "upcomingClasses": {
+      "title": "Nadchodzące zajęcia",
+      "next": "Następne 5",
+      "instructor": "Instruktor",
+      "noClasses": "Brak zaplanowanych zajęć",
+      "checkWithInstructor": "Skontaktuj się z instruktorem, aby dowiedzieć się o następnej sesji"
+    },
+    "solo": {
+      "title": "Zapisz Trening",
+      "editTitle": "Edytuj Trening",
+      "practiceType": "Rodzaj Treningu",
+      "types": {
+        "kihon": "Kihon (Podstawy)",
+        "kata": "Kata (Formy)",
+        "sparring": "Sparring",
+        "meditation": "Meditacja",
+        "fitness": "Fitness",
+        "weapons": "Broń",
+        "footwork": "Praca Nóg",
+        "other": "Inne"
+      },
+      "duration": "Czas",
+      "minutes": "minut",
+      "intensity": "Intensywność",
+      "intensities": {
+        "light": "Lekka",
+        "medium": "Średnia",
+        "hard": "Wysoka"
+      },
+      "mood": "Nastrój",
+      "moods": {
+        "great": "Świetnie",
+        "good": "Dobrze",
+        "neutral": "Neutralnie",
+        "tired": "Zmęczony",
+        "exhausted": "Wyczerpany"
+      },
+      "energyLevel": "Poziom Energii",
+      "location": "Lokalizacja",
+      "locationPlaceholder": "Gdzie trenowałeś?",
+      "tags": "Tagi",
+      "tagsPlaceholder": "Dodaj tagi (naciśnij Enter)",
+      "notes": "Notatki",
+      "notesPlaceholder": "Jak poszło? Na czym się skupiłeś?",
+      "voiceNote": "Notatka Głosowa",
+      "recordVoice": "Nagraj",
+      "recording": "Nagrywanie...",
+      "stopRecording": "Zatrzymaj",
+      "photos": "Zdjęcia",
+      "addPhotos": "Dodaj Zdjęcia",
+      "photoLimit": "Max 3 zdjęcia, 5MB każde",
+      "practiceDate": "Data Treningu",
+      "timer": "Minutnik",
+      "startTimer": "Start",
+      "stopTimer": "Stop",
+      "resetTimer": "Reset",
+      "save": "Zapisz",
+      "saving": "Zapisywanie...",
+      "cancel": "Anuluj",
+      "stats": {
+        "totalSessions": "Wszystkich Sesji",
+        "totalHours": "Wszystkich Godzin",
+        "currentStreak": "Aktualna Seria",
+        "avgEnergy": "Śr. Energia"
+      },
+      "history": "Historia Treningów",
+      "noLogs": "Brak zapisanych treningów",
+      "logFirst": "Zapisz swój pierwszy trening!"
+    },
+    "journal": {
+      "title": "Nowy Wpis",
+      "editTitle": "Edytuj Wpis",
+      "entryType": "Rodzaj Wpisu",
+      "types": {
+        "general": "Ogólny",
+        "class_notes": "Notatki z Lekcji",
+        "technique_reflection": "Technika",
+        "goal": "Cel",
+        "insight": "Wgląd"
+      },
+      "titleLabel": "Tytuł",
+      "titlePlaceholder": "Dodaj tytuł...",
+      "content": "Treść",
+      "contentPlaceholder": "Napisz swoje przemyślenia...",
+      "isPrivate": "Prywatny Wpis",
+      "isPrivateDesc": "Tylko ty możesz zobaczyć prywatne wpisy",
+      "tags": "Tagi",
+      "tagsPlaceholder": "Dodaj tagi (naciśnij Enter)",
+      "voiceNote": "Notatka Głosowa",
+      "recordVoice": "Nagraj",
+      "recording": "Nagrywanie...",
+      "stopRecording": "Zatrzymaj",
+      "save": "Zapisz",
+      "saving": "Zapisywanie...",
+      "cancel": "Anuluj",
+      "history": "Wpisy w Dzienniku",
+      "noEntries": "Brak wpisów",
+      "writeFirst": "Napisz pierwszy wpis!"
+    }
+  },
+  "instructor": {
+    "dashboard": "PANEL INSTRUKTORA",
+    "welcome": "Witamy",
+    "studentMode": "🥋 Tryb ucznia",
+    "logout": "Wyloguj się",
+    "tabs": {
+      "checkin": "OBECNOŚĆ",
+      "classes": "ZAJĘCIA",
+      "attendance": "FREKWENCJA",
+      "notify": "POWIADOM"
+    },
+    "stats": {
+      "present": "Obecni dziś",
+      "absent": "Nieobecni",
+      "total": "Wszyscy uczniowie"
+    },
+    "checkin": {
+      "title": "Zarządzanie obecnością",
+      "selectedClass": "Wybrane zajęcia",
+      "noClass": "Nie wybrano zajęć",
+      "selectPrompt": "Wybierz zajęcia, aby włączyć zapisywanie obecności",
+      "qrTitle": "Kod QR zajęć",
+      "qrDesc": "Wyświetl do zeskanowania przez uczniów",
+      "generateQR": "Wygeneruj nowy QR",
+      "beaconTitle": "Bluetooth Beacon",
+      "beaconActive": "Nadawanie... Uczniowie mogą zapisać się automatycznie",
+      "beaconInactive": "Włącz beacon, aby umożliwić automatyczne zapisywanie obecności",
+      "startBeacon": "Włącz beacon",
+      "stopBeacon": "Wyłącz beacon",
+      "recent": "Ostatnie zapisy obecności",
+      "noCheckIns": "Dzisiaj jeszcze nie ma zapisów obecności"
+    },
+    "classes": {
+      "title": "Zarządzanie zajęciami",
+      "create": "Utwórz zajęcia",
+      "name": "Nazwa zajęć",
+      "schedule": "Harmonogram",
+      "location": "Lokalizacja",
+      "maxStudents": "Maks. liczba uczniów",
+      "recurring": "Powtarza się co tydzień",
+      "actions": "Akcje",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
+    },
+    "attendance": {
+      "title": "Rejestry frekwencji",
+      "markPresent": "Zaznacz jako obecny",
+      "markAbsent": "Zaznacz jako nieobecny",
+      "correction": "Korekta frekwencji",
+      "notes": "Notatki (opcjonalnie)"
+    },
+    "invite": {
+      "title": "Zaproś instruktora",
+      "button": "+ Zaproś instruktora",
+      "send": "Wyślij zaproszenie",
+      "sending": "Wysyłanie...",
+      "email": "Email",
+      "emailPlaceholder": "instructor@example.com",
+      "name": "Imię i nazwisko (opcjonalnie)",
+      "namePlaceholder": "Imię i nazwisko osoby",
+      "description": "Otrzymają link do utworzenia konta instruktora.",
+      "expires": "Zaproszenie wygasa po 7 dniach.",
+      "success": "Zaproszenie wysłane do {email}!",
+      "shareLink": "Udostępnij im ten link:",
+      "copyLink": "Kopiuj",
+      "linkCopied": "Link skopiowany!",
+      "sendAnother": "Wyślij kolejne zaproszenie",
+      "tabs": {
+        "send": "Wyślij zaproszenie",
+        "list": "Zaproszenia"
+      },
+      "status": {
+        "pending": "Oczekujące",
+        "accepted": "Zaakceptowane",
+        "expired": "Wygasłe"
+      },
+      "list": {
+        "empty": "Nie wysłano jeszcze żadnych zaproszeń.",
+        "sent": "Wysłano",
+        "expires": "Wygasa",
+        "accepted": "Zaakceptowano"
+      },
+      "errors": {
+        "invalidEmail": "Wprowadź prawidłowy adres email",
+        "alreadyInstructor": "Ten email jest już zarejestrowany jako instruktor",
+        "pendingInvite": "To zaproszenie jest już oczekujące dla tego emaila",
+        "generic": "Nie udało się utworzyć zaproszenia",
+        "sendFailed": "Nie udało się wysłać zaproszenia"
+      },
+      "accept": {
+        "title": "Dołącz jako instruktor",
+        "welcome": "Zostałeś zaproszony do dołączenia do",
+        "createAccount": "Utwórz konto",
+        "name": "Imię i nazwisko",
+        "password": "Hasło",
+        "passwordConfirm": "Potwierdź hasło",
+        "passwordHint": "Minimum 8 znaków",
+        "passwordMismatch": "Hasła nie pasują do siebie",
+        "showPassword": "Pokaż hasło",
+        "hidePassword": "Ukryj hasło",
+        "submit": "Utwórz konto",
+        "creating": "Tworzenie...",
+        "emailLocked": "Tego emaila nie można zmienić",
+        "success": "Witamy w Tenshinryu!",
+        "successDesc": "Twoje konto instruktora zostało pomyślnie utworzone.",
+        "goToDashboard": "Przejdź do panelu instruktora",
+        "invalid": "Nieprawidłowe zaproszenie",
+        "expired": "To zaproszenie wygasło",
+        "alreadyUsed": "To zaproszenie zostało już użyte",
+        "createFailed": "Nie udało się utworzyć konta",
+        "haveAccount": "Masz już konto?"
+      }
+    },
+    "notifications": {
+      "title": "Wyślij powiadomienie",
+      "recipient": "Odbiorca",
+      "allStudents": "Wszyscy uczniowie",
+      "specificClass": "Konkretne zajęcia",
+      "subject": "Temat",
+      "message": "Wiadomość",
+      "send": "Wyślij powiadomienie",
+      "history": "Historia powiadomień"
+    }
+  },
+  "home": {
+    "welcomeBack": "Witamy ponownie",
+    "quickAccess": "Szybki dostęp do narzędzi dojo",
+    "instructor": {
+      "checkIn": "Obecność",
+      "checkInDesc": "Zapisywanie obecności QR, NFC i BLE dla uczniów",
+      "classes": "Zajęcia",
+      "classesDesc": "Zarządzaj harmonogramem zajęć",
+      "attendance": "Frekwencja",
+      "attendanceDesc": "Przeglądaj i poprawiaj rejestry obecności",
+      "notifications": "Powiadomienia",
+      "notificationsDesc": "Wysyłaj powiadomienia do uczniów"
+    },
+    "student": {
+      "progress": "Moje postępy",
+      "progressDesc": "Przeglądaj swoją obecność i serię",
+      "history": "Historia obecności",
+      "historyDesc": "Zobacz swoje minione sesje treningowe"
+    },
+    "wiki": {
+      "title": "Wiki Hyoho",
+      "desc": "Studiuj techniki, historię i filozofię."
+    }
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "create": "Utwórz",
+    "add": "Dodaj",
+    "close": "Zamknij",
+    "confirm": "Potwierdź",
+    "back": "Wstecz",
+    "next": "Dalej"
+  },
+  "admin": {
+    "title": "Panel Zarządzania Biznesem",
+    "tabs": {
+      "overview": "Przegląd",
+      "students": "Uczniowie",
+      "finance": "Finanse",
+      "classes": "Zajęcia"
+    },
+    "kpi": {
+      "totalStudents": "Całkowita liczba uczniów",
+      "activeStudents": "Aktywni uczniowie",
+      "attendanceToday": "Wejścia dzisiaj",
+      "monthlyRevenue": "Przychód miesięczny"
+    },
+    "atRisk": {
+      "title": "Uczniowie zagrożeni",
+      "noShow14": "nie było ich ponad 14 dni"
+    },
+    "recentActivity": "Ostatnia aktywność",
+    "membershipDistribution": "Rozkład członkostwa",
+    "upcomingClasses": "Nadchodzące zajęcia",
+    "registered": "zarejestrowanych",
+    "never": "Nigdy",
+    "finance": {
+      "monthlyRecurring": "Miesięczny przychód stały",
+      "annualRecurring": "Roczny przychód stały",
+      "avgPerStudent": "Średni przychód na ucznia",
+      "revenueByTier": "Przychód według planu"
+    },
+    "table": {
+      "name": "Nazwa",
+      "tier": "Plan",
+      "lastCheckIn": "Ostatnie wejście",
+      "daysMissed": "Dni nieobecności",
+      "count": "Liczba",
+      "price": "Cena",
+      "revenue": "Przychód"
+    }
+  }
+}

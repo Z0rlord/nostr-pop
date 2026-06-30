@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — Tenshinryu Hyoho Wiki</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="alternate" hreflang="en" href="{{ alternate.en }}">
+  <link rel="alternate" hreflang="ja" href="{{ alternate.ja }}">
+  <link rel="alternate" hreflang="es" href="{{ alternate.es }}">
+  <link rel="alternate" hreflang="el" href="{{ alternate.el }}">
+</head>
+<body class="lang-{{ lang }}{% if is_index %} index-page{% endif %}">
+  {% include "_nav.html.j2" %}
+  <main>
+    {% include "_breadcrumbs.html.j2" %}
+    <div class="page-layout">
+      <article class="page-content">
+        {% if meta_line %}
+        <p class="page-meta">{{ meta_line | safe }}</p>
+        {% endif %}
+        {{ content | safe }}
+      </article>
+      <aside class="page-sidebar" aria-label="{{ toc_label }}">
+        <nav id="page-toc" class="page-toc">
+          <p class="toc-heading">{{ toc_label }}</p>
+        </nav>
+      </aside>
+    </div>
+  </main>
+  {% include "_footer.html.j2" %}
+  <script src="/assets/search.js" defer></script>
+  <script src="/assets/nav.js" defer></script>
+  <script>window.WIKI_LANG = "{{ lang }}";</script>
+</body>
+</html>

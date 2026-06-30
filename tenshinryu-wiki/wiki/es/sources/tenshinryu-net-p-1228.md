@@ -1,0 +1,30 @@
+---
+slug: sources/tenshinryu-net-p-1228
+lang: es
+title: 'Source: 1.08（金）柿生支部代替オンライン稽古!!'
+pair: en/sources/tenshinryu-net-p-1228
+tags:
+- source
+- website
+sources:
+- raw/web/tenshinryu-net-p-1228.md
+updated: '2026-06-30'
+---
+
+> **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
+
+# Resumen de la fuente — 1.08（金）柿生支部代替オンライン稽古!!
+
+**URL:** https://tenshinryu.net/?p=1228
+**Obtenido:** 2026-06-30
+**Archivo:** `raw/web/tenshinryu-net-p-1228.md`
+
+## Puntos clave
+
+- Contenido del artículo «1.08（金）柿生支部代替オンライン稽古!!» en international.tenshinryu.net.
+
+## Páginas del wiki relacionadas
+
+- [[articles/p-1228]]
+
+Versión completa: [inglés](../../en/sources/tenshinryu-net-p-1228.md) · [japonés](../../ja/sources/tenshinryu-net-p-1228.md)

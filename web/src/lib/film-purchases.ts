@@ -1,0 +1,186 @@
+import { promises as fs } from "fs";
+import path from "path";
+import { randomUUID } from "crypto";
+import { YOGA_SUTRA_FILM_ID } from "@/lib/films/yoga-sutra";
+
+export type FilmId = typeof YOGA_SUTRA_FILM_ID;
+export type FilmPaymentMethod = "stripe" | "lightning";
+export type FilmPurchaseStatus = "pending" | "unlocked";
+
+export interface FilmPurchase {
+  id: string;
+  filmId: FilmId;
+  npub?: string;
+  email?: string;
+  paymentMethod: FilmPaymentMethod;
+  status: FilmPurchaseStatus;
+  createdAt: string;
+  unlockedAt?: string;
+  stripeSessionId?: string;
+  lightningInvoiceId?: string;
+  /** Opaque token for Stripe buyers without npub (stored client-side). */
+  accessToken?: string;
+}
+
+interface FilmPurchaseStore {
+  purchases: FilmPurchase[];
+}
+
+function dataDir(): string {
+  return process.env.MEMBERSHIP_DATA_DIR || path.join(process.cwd(), "data");
+}
+
+function storePath(): string {
+  return path.join(dataDir(), "film-purchases.json");
+}
+
+async function ensureStore(): Promise<void> {
+  const dir = dataDir();
+  await fs.mkdir(dir, { recursive: true });
+  try {
+    await fs.access(storePath());
+  } catch {
+    const empty: FilmPurchaseStore = { purchases: [] };
+    await fs.writeFile(storePath(), JSON.stringify(empty, null, 2));
+  }
+}
+
+async function readStore(): Promise<FilmPurchaseStore> {
+  await ensureStore();
+  const raw = await fs.readFile(storePath(), "utf8");
+  return JSON.parse(raw) as FilmPurchaseStore;
+}
+
+async function writeStore(store: FilmPurchaseStore): Promise<void> {
+  await ensureStore();
+  await fs.writeFile(storePath(), JSON.stringify(store, null, 2));
+}
+
+export async function findUnlockedPurchase(input: {
+  filmId: FilmId;
+  npub?: string;
+  accessToken?: string;
+}): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  return store.purchases.find((p) => {
+    if (p.filmId !== input.filmId || p.status !== "unlocked") return false;
+    if (input.npub && p.npub === input.npub) return true;
+    if (input.accessToken && p.accessToken === input.accessToken) return true;
+    return false;
+  });
+}
+
+export async function findPurchaseById(
+  id: string
+): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  return store.purchases.find((p) => p.id === id);
+}
+
+export async function findPurchaseByStripeSession(
+  sessionId: string
+): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  return store.purchases.find((p) => p.stripeSessionId === sessionId);
+}
+
+export async function findPurchaseByLightningInvoice(
+  invoiceId: string
+): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  return store.purchases.find((p) => p.lightningInvoiceId === invoiceId);
+}
+
+export async function createPendingFilmPurchase(input: {
+  filmId: FilmId;
+  npub?: string;
+  email?: string;
+  paymentMethod: FilmPaymentMethod;
+  lightningInvoiceId?: string;
+  stripeSessionId?: string;
+}): Promise<FilmPurchase> {
+  const store = await readStore();
+
+  if (input.npub) {
+    const existing = store.purchases.find(
+      (p) =>
+        p.filmId === input.filmId &&
+        p.npub === input.npub &&
+        p.status === "unlocked"
+    );
+    if (existing) return existing;
+  }
+
+  const pending = store.purchases.find(
+    (p) =>
+      p.filmId === input.filmId &&
+      p.status === "pending" &&
+      p.paymentMethod === input.paymentMethod &&
+      ((input.npub && p.npub === input.npub) ||
+        (input.lightningInvoiceId &&
+          p.lightningInvoiceId === input.lightningInvoiceId) ||
+        (input.stripeSessionId && p.stripeSessionId === input.stripeSessionId))
+  );
+  if (pending) {
+    if (input.email && !pending.email) pending.email = input.email;
+    if (input.lightningInvoiceId)
+      pending.lightningInvoiceId = input.lightningInvoiceId;
+    if (input.stripeSessionId) pending.stripeSessionId = input.stripeSessionId;
+    await writeStore(store);
+    return pending;
+  }
+
+  const purchase: FilmPurchase = {
+    id: randomUUID(),
+    filmId: input.filmId,
+    npub: input.npub,
+    email: input.email,
+    paymentMethod: input.paymentMethod,
+    status: "pending",
+    createdAt: new Date().toISOString(),
+    lightningInvoiceId: input.lightningInvoiceId,
+    stripeSessionId: input.stripeSessionId,
+  };
+  store.purchases.push(purchase);
+  await writeStore(store);
+  return purchase;
+}
+
+export async function updateFilmPurchase(
+  id: string,
+  updates: Partial<FilmPurchase>
+): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  const purchase = store.purchases.find((p) => p.id === id);
+  if (!purchase) return undefined;
+  Object.assign(purchase, updates);
+  await writeStore(store);
+  return purchase;
+}
+
+export async function unlockFilmPurchase(
+  id: string,
+  updates: Partial<FilmPurchase> = {}
+): Promise<FilmPurchase | undefined> {
+  const store = await readStore();
+  const purchase = store.purchases.find((p) => p.id === id);
+  if (!purchase) return undefined;
+
+  const accessToken = purchase.accessToken || randomUUID();
+  Object.assign(purchase, updates, {
+    status: "unlocked" as FilmPurchaseStatus,
+    unlockedAt: new Date().toISOString(),
+    accessToken,
+  });
+  await writeStore(store);
+  return purchase;
+}
+
+export async function hasFilmAccess(input: {
+  filmId: FilmId;
+  npub?: string;
+  accessToken?: string;
+}): Promise<boolean> {
+  const purchase = await findUnlockedPurchase(input);
+  return Boolean(purchase);
+}

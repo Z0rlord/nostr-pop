@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DojoPop Admin</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1117;
+      --card: #1a1d27;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --accent: #f97316;
+      --border: #2d3340;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    main {
+      max-width: 32rem;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    h1 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+    p { color: var(--muted); line-height: 1.6; margin: 0 0 1.5rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li + li { margin-top: 0.75rem; }
+    a {
+      display: block;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.15s;
+    }
+    a:hover { border-color: var(--accent); }
+    a strong { color: var(--accent); }
+    .note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>DojoPop Admin</h1>
+    <p>Operations dashboard coming soon. Use the links below for now.</p>
+    <ul>
+      <li><a href="https://bunker.dojopop.live"><strong>Bunker46</strong> — NIP-46 key manager</a></li>
+      <li><a href="https://dojopop.live"><strong>dojopop.live</strong> — landing &amp; membership</a></li>
+      <li><a href="https://relay.dojopop.live"><strong>relay.dojopop.live</strong> — Nostr relay</a></li>
+      <li><a href="https://blossom.dojopop.live"><strong>blossom.dojopop.live</strong> — media server</a></li>
+      <li><a href="https://hub.dojopop.live"><strong>hub.dojopop.live</strong> — Alby Hub (NWC)</a></li>
+    </ul>
+    <p class="note">Legacy nsecbunker at admin.dojopop.live was decommissioned 2026-06-24. Bunker46 is at bunker.dojopop.live.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+---
+slug: dojo/shinanjo-tradition
+lang: es
+title: Shinanjo & Practice Halls (指南所)
+pair: en/dojo/shinanjo-tradition
+tags:
+- dojo
+sources:
+- raw/web/tenshinryu-net-p-35.md
+updated: '2026-06-30'
+---
+
+> **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
+
+# Shinanjo & Practice Halls (指南所)
+
+Why Tenshinryu uses **shinanjo** (指南所) rather than *dōjō*: Buddhist term repurposed in Meiji; Ishii Seizo preserved original vocabulary. Practice is self-directed; the hall is for *shinan* (guidance), not spectacle.
+現在では武術・武道を稽古する場所を「道場」と呼ぶのが一般的ですが、実はその呼び名が広まったのは明治以降の事だそうです。
+そもそも道場とは本来は仏教用語であり、サンスクリットの「Bodhimandala」を漢訳した「仏陀が悟った場所」を意味する言葉です。
+明治維新以前の日本の武藝における精神修養とは、あくまでも「武士（※武士階級以外も学びましたが）が生死の狭間において、如何に精神をコントロールし技藝を十分に発揮するか」という眼目の元に求められたものです。
+士（或いは人）としてのあり方は、あくまでも朱子学などによって編み出された士道の範疇において説かれ、学ぶべきものとされておりました。
+江戸期にも武術の徳育的側面を求める動きは一部にあったようですが、やはり徹底的な転換期は明治維新によります。
+講道館創設者であり教育者でもありました嘉納治五郎師範は、廃れ行く日本の伝統武藝、特に複数の柔術流派を整理再編する事で保存し、近代化に向けてひた走る近代体育教育の支柱として柔道確立されました。
+大日本武徳会が誕生し、剣術（或いは撃剣）は剣道へ、弓術は弓道へと改称し、武術、武藝は武道と統一して称されるようになりました。
+これによって、伝統的な武藝を下地としつつ、修練・試合を通じて「人格の完成」を目指す、体育と徳育を兼ね備えた道として近代日本に即した「武道」が誕生したのです。
+この流れに呼応するように、江戸期までは稽古場、演武場、撃剣場、指南所、武館などと呼ばれていた稽古の場も、人格完成の道を求め養うのに相応しい「道場」の名が好まれて用いられるようになって現代に至ります。
+石井先師は天心流の伝承を非常に大事にされた方であり、「教わった通りに教える」というのを口癖のようにしておられたそうです。
+中村師家も伝承を重視し、流儀の用語はそのままの意味、そのままの言葉として現在も用いております。
+本来仏教用語でありました道場が、武道の稽古場所としての意味合いに変化した事も含めて、石井先師は伝えており、天心流では現在も道場の名称を基本的には用いておりません。
+
+Versión completa: [inglés](../../en/dojo/shinanjo-tradition.md) · [japonés](../../ja/dojo/shinanjo-tradition.md)

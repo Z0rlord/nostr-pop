@@ -1,0 +1,31 @@
+---
+slug: reiho/tekoa
+lang: es
+title: TEKO(a covering for the back of wrist)
+pair: en/reiho/tekoa
+tags:
+- reiho
+sources:
+- raw/web/international-tenshinryu-net-tekoa-covering-for-the-back-of-wrist.md
+updated: '2026-06-30'
+---
+
+> **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
+
+# TEKO(a covering for the back of wrist) (手甲)
+
+## Resumen
+
+ *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*
+
+TEKO(a covering for the back of wrist)
+When Tenshin Sensei swept the house, he found a TEKO(手甲 ｰ a covering for the back of wrist) that used to be old.
+TENSHINRYU hides the shuriken of the stick(BoShuriken) inside the TEKO and takes out it.
+History
+TENSHINRYU Headquarters Practice # 4
+Nature Worship and the Spirit of Respect in Japan
+In Japan, heads are not displayed in homes.
+Keiko-Osame 稽古納め
+The…
+
+Versión completa: [inglés](../../en/reiho/tekoa.md) · [japonés](../../ja/reiho/tekoa.md)

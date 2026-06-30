@@ -1,0 +1,66 @@
+---
+url: https://tenshinryu.net/?p=2630
+fetched: 2026-06-30
+title: "所作、作法、礼法について"
+date: 2024-11-29
+wp_id: 2630
+source: website
+categories:
+  - "エッセイ"
+---
+
+# 所作、作法、礼法について
+
+> Auto-fetched via WP REST; review before ingest.
+
+> 所作、作法、礼法は武術の中において本来枝葉末節と言えます。 武術の本旨は強くなることであり、それらを磨きたければ、今川流、小笠原流、伊勢流（※）に代表される礼法などを学ぶべきです。 （武家礼法における代表的な三大礼法家、 […]
+
+所作、作法、礼法は武術の中において本来枝葉末節と言えます。 
+武術の本旨は強くなることであり、それらを磨きたければ、今川流、小笠原流、伊勢流（※）に代表される礼法などを学ぶべきです。 
+（武家礼法における代表的な三大礼法家、三大流儀。現存するのは小笠原流のみ。） 
+もちろん武術でも稽古場における統治が必要であり、稽古場内における共通の所作、作法、礼法を統一する必要があります。 
+それぞれバラバラでは稽古に支障が出るためです。 
+ですが天心流では事情が異なります。 
+強くなるのは当然のことながら、天心流の教えは、武家社会のお役目、儀式、生活の中における技法が多く存在します。 
+そして実際の役儀においても、武士としての儀礼を心得ることは重要であり、それは技法と密接に関わっています。 
+そのため、天心流では稽古内においてこれが大変重視されます。 
+そのように書くと勘違いされそうなのですが、一般的な意味での流儀内における人間関係としての礼儀作法はすごく緩いです。いわゆる体育会系とは真逆で、おそらくもっとも寛容な部類の流儀だと思います。 
+参考； 武術と体育会系 
+あくまでも設計として所作、作法、礼法があり、それは稽古の一環としての話です。 
+天心流に柳生宗矩公の言葉として伝わる、 「九礼に極意あり」 という言葉は、精神性のみにとどまらず、天心流の設計思想を色濃く表現していると言えます。 
+しかしなかなか稽古において所作、作法、礼法を正しく身につけられる人は居ません。 
+まずそれに充てられる時間が短いのが理由の一つです。 
+ですがそれ以上に問題なのは、「たかが」と考えてしまう精神です。 
+技に直接関係しないし… 
+やっても今は使わないし… 
+面白くないし… 
+覚えるの面倒くさいし… 
+やらない理由をあげれば枚挙に暇はありません。 
+以前セミナーでこのように伝えました。 
+所作、作法、礼法は技法より動きがはっきりしていて、謂わば簡単な動作です。 
+それを真似て、コピーするというのは、在る意味では学習の初歩でもあります。 
+その手順、動作が明瞭なものを真似できないのに、技法を模倣することなど出来るわけがありません。 
+その後の参加者の所作、作法、礼法への眼差しも真剣なものとなり、動作もよくなりました。 
+そして結果的に、技法に対してもより細かい部分に注意するようになりました。 
+私達は常にどこかで技を舐めています。 
+そのどこかの部分が総体的に技法の質を低くしています。 
+神経質に取り組んでいても、完全にフラットに情報を得て取り組むことは出来ないのが人間であり、この不均一、アンバランスさが弱さを生みます。 
+これはどれだけ上達しても同じです。 
+知れば知るほど、学べば学ぶほど、身につけば身につくほど、達すれば達するほどに、不足を知ることが大事であり、その自らの不足と努力を忘れた時、即ち退歩、迷離します。 
+
+Etiquette, manners, and ceremonial practices can be considered peripheral aspects of martial arts. The core purpose of martial arts is to become stronger. If one wishes to refine their manners and etiquette, they should study formal protocols such as those of the Imagawa-ryu, Ogasawara-ryu, or Ise-ryu schools(*). 
+*The three major schools of etiquette in samurai culture, representing the quintessential samurai ceremonial practices. Of these, only the Ogasawara-ryu remains today. 
+Of course, governance within the training hall is necessary in martial arts, and there must be a unified standard of etiquette, manners, and ceremonial practices to ensure smooth training. Discrepancies in these areas can disrupt practice. 
+However, Tenshinryu differs in its approach. While becoming stronger is a given, Tenshinryu teachings encompass many techniques rooted in the roles, rituals, and daily life of samurai society. In actual duties or ceremonies, understanding the etiquette of a samurai is crucial, as it is deeply intertwined with the techniques themselves. 
+The phrase “In the nine forms of etiquette lies the ultimate secret,” attributed to Yagyu Munenori and passed down in Tenshinryu, not only embodies a sense of spirituality but also strongly reflects the design philosophy of Tenshinryu. 
+Yet, few practitioners successfully internalize proper etiquette, manners, and ceremonial practices during training. One major reason is the limited time dedicated to these aspects. However, an even greater issue is the mindset that dismisses them as unimportant. 
+“It’s not directly related to the techniques…” 
+“We don’t use this nowadays…” 
+“It’s not interesting…” 
+“It’s too much trouble to learn…” 
+There is no shortage of excuses for not engaging in these practices. 
+At a previous seminar, I explained it as follows: 
+Etiquette, manners, and ceremonial practices are more defined and straightforward compared to techniques. In a sense, imitating and copying them serves as an elementary form of learning. If one cannot replicate these clear steps and movements, how could they possibly imitate more complex techniques? 
+Following this explanation, the participants’ attitudes toward etiquette, manners, and ceremonial practices became more serious, and their movements improved. Consequently, they also paid more attention to the finer details of the techniques. 
+We are always underestimating some aspect of our skills. These overlooked areas collectively lower the overall quality of our techniques. Even when one approaches training with meticulous care, humans are inherently incapable of fully engaging with information in an entirely neutral manner. This imbalance and inconsistency give rise to weakness. 
+This remains true no matter how much one improves. The more one learns, grows, and masters, the more important it becomes to recognize one’s own shortcomings. Forgetting these shortcomings and the effort required to address them leads to stagnation and decline.

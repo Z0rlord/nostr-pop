@@ -1,0 +1,3 @@
+[submodule "nsecbunker-admin-ui"]
+	path = nsecbunker-admin-ui
+	url = https://github.com/Z0rlord/nsecbunker-admin-ui.git

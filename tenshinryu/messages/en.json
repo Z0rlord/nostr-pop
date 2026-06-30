@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "title": "Tenshinryu KIWAMI - Traditional Japanese Martial Arts",
+    "description": "The ultimate online system for learning Tenshinryu Hyoho. Traditional wisdom. Modern technology."
+  },
+  "navigation": {
+    "signIn": "Sign In",
+    "join": "Join",
+    "home": "Home",
+    "training": "Training",
+    "legal": "Legal",
+    "contact": "Contact",
+    "backToHome": "← HOME",
+    "wiki": "Hyoho Wiki",
+    "instructor": "Instructor",
+    "owner": "Owner"
+  },
+  "hero": {
+    "badge": "Your School",
+    "title": "MASTER. THE PATH. 極",
+    "subtitle": "The ultimate online system for learning Tenshinryu Hyoho.",
+    "description": "Traditional wisdom. Modern technology. Walk the path the samurai walked 400 years ago.",
+    "features": {
+      "videos": "Video curriculum with English subtitles",
+      "streaming": "Live streaming lessons on YouTube",
+      "feedback": "Direct feedback from Tenshin Sensei"
+    },
+    "cta": {
+      "begin": "Begin Training",
+      "login": "Member Login"
+    },
+    "tagline": "Tradition is immutable. Growth is infinite."
+  },
+  "membership": {
+    "title": "Membership Plans",
+    "subtitle": "Choose the path that fits your journey.",
+    "entry": "Entry",
+    "fullAccess": "Full Access",
+    "ultimate": "Ultimate",
+    "period": "/month",
+    "youtube": {
+      "name": "YOUTUBE",
+      "price": "$4.99",
+      "period": "/month",
+      "badge": "Entry",
+      "features": [
+        "Basic technique videos",
+        "YouTube community access",
+        "Monthly live streams"
+      ]
+    },
+    "gold": {
+      "name": "GOLD",
+      "price": "$35",
+      "period": "/month",
+      "badge": "Popular",
+      "features": [
+        "Full video library",
+        "Downloadable materials",
+        "Tenshin Sensei direct lessons",
+        "Rank examination eligible"
+      ]
+    },
+    "royal": {
+      "name": "ROYAL",
+      "price": "$85",
+      "period": "/month",
+      "badge": "Ultimate",
+      "features": [
+        "Everything in GOLD",
+        "Direct feedback on your videos",
+        "Zoom lessons access",
+        "Priority rank examination"
+      ]
+    },
+    "joinGold": "Join GOLD",
+    "joinRoyal": "Join ROYAL"
+  },
+  "curriculum": {
+    "title": "Curriculum",
+    "subtitle": "Six pillars of Tenshinryu training.",
+    "kihon": {
+      "title": "Kihon - Basics",
+      "description": "Foundational stances, footwork, and sword handling."
+    },
+    "giho": {
+      "title": "Giho - Techniques",
+      "description": "Core cutting techniques and blade manipulation."
+    },
+    "keikoho": {
+      "title": "Keikoho - Practice Methods",
+      "description": "Solo and partnered training methodologies."
+    },
+    "shosa": {
+      "title": "Shosa - Movements",
+      "description": "Formal movements and ceremonial sword handling."
+    },
+    "philosophy": {
+      "title": "Philosophy",
+      "description": "The mental and spiritual aspects of the art."
+    },
+    "kurai": {
+      "title": "Kurai - Application",
+      "description": "Advanced combat applications and strategy."
+    }
+  },
+  "features": {
+    "title": "Features",
+    "items": {
+      "curriculum": {
+        "number": "01",
+        "title": "Structured Curriculum",
+        "description": "Step-by-step progression from basic to advanced techniques, following the traditional Tenshinryu syllabus."
+      },
+      "feedback": {
+        "number": "02", 
+        "title": "Direct Feedback",
+        "description": "Submit your practice videos and receive personalized corrections from certified instructors."
+      },
+      "community": {
+        "number": "03",
+        "title": "Global Community", 
+        "description": "Connect with fellow practitioners worldwide. Share experiences and grow together."
+      },
+      "ranking": {
+        "number": "04",
+        "title": "Ranking System",
+        "description": "Earn recognized belt ranks as you progress. Track your journey from white to black."
+      }
+    }
+  },
+  "footer": {
+    "description": "Japanese Tradition Tenshinryu Hyoho",
+    "training": "Training",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact": "Contact",
+    "rules": "Dojo Rules",
+    "support": "Support",
+    "donate": "Become a Patron",
+    "copyright": "© 2026 JAPANESE TRADITION TENSHINRYU HYOHO. ALL RIGHTS RESERVED."
+  },
+  "cta": {
+    "subtitle": "Start your journey in Tenshinryu Hyoho today.",
+    "button": "Begin Your Journey"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "signIn": "Sign In to",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "noAccount": "Don't have an account?",
+      "error": "Sign in failed. Please try again."
+    }
+  },
+  "student": {
+    "dashboard": "Training",
+    "ready": "Ready to train?",
+    "stripe": "stripe",
+    "stripes": "stripes",
+    "tabs": {
+      "overview": "Overview",
+      "history": "History",
+      "resources": "Resources",
+      "practice": "Practice",
+      "journal": "Journal",
+      "badges": "Badges",
+      "heatmap": "Heatmap",
+      "insights": "Insights"
+    },
+    "checkIn": {
+      "description": "We'll find your class automatically based on time and location",
+      "finding": "Finding class…",
+      "checkingIn": "Checking in…",
+      "found": "Class found",
+      "success": "Checked in",
+      "failed": "Check-in failed",
+      "error": "Something went wrong. Please try again.",
+      "noClassFound": "No active class found",
+      "button": "Check in now",
+      "thisMonth": "This month",
+      "streak": "Day streak"
+    },
+    "videos": {
+      "title": "Training videos",
+      "subtitle": "Techniques and tutorials",
+      "visit": "Visit Tenshinryu YouTube"
+    },
+    "history": {
+      "title": "Recent check-ins"
+    },
+    "upcomingClasses": {
+      "title": "Upcoming classes",
+      "next": "Next 5",
+      "instructor": "Instructor",
+      "noClasses": "No classes scheduled",
+      "checkWithInstructor": "Ask your instructor about the next session"
+    },
+    "solo": {
+      "title": "Log practice",
+      "editTitle": "Edit practice",
+      "practiceType": "Practice type",
+      "types": {
+        "kihon": "Kihon",
+        "kata": "Kata",
+        "sparring": "Sparring",
+        "meditation": "Meditation",
+        "fitness": "Fitness",
+        "weapons": "Weapons",
+        "footwork": "Footwork",
+        "other": "Other"
+      },
+      "duration": "Duration",
+      "minutes": "min",
+      "intensity": "Intensity",
+      "intensities": { "light": "Light", "medium": "Medium", "hard": "Hard" },
+      "mood": "Mood",
+      "moods": {
+        "great": "Great",
+        "good": "Good",
+        "neutral": "Neutral",
+        "tired": "Tired",
+        "exhausted": "Exhausted"
+      },
+      "energyLevel": "Energy level",
+      "location": "Location",
+      "locationPlaceholder": "Where did you practice?",
+      "tags": "Tags",
+      "tagsPlaceholder": "Add a tag (press Enter)",
+      "notes": "Notes",
+      "notesPlaceholder": "How did it go? What did you focus on?",
+      "voiceNote": "Voice note",
+      "recordVoice": "Record",
+      "recording": "Recording…",
+      "stopRecording": "Stop",
+      "photos": "Photos",
+      "addPhotos": "Add photos",
+      "photoLimit": "Up to 3 photos, 5MB each",
+      "practiceDate": "Practice date",
+      "timer": "Timer",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "stats": {
+        "totalSessions": "Sessions",
+        "totalHours": "Hours",
+        "currentStreak": "Streak",
+        "avgEnergy": "Avg energy"
+      },
+      "history": "Practice history",
+      "noLogs": "No practice logged yet",
+      "logFirst": "Log your first session"
+    },
+    "journal": {
+      "title": "New journal entry",
+      "editTitle": "Edit journal",
+      "entryType": "Type",
+      "types": {
+        "general": "General",
+        "class_notes": "Class notes",
+        "technique_reflection": "Technique",
+        "goal": "Goal",
+        "insight": "Insight"
+      },
+      "titleLabel": "Title",
+      "titlePlaceholder": "Entry title…",
+      "content": "Content",
+      "contentPlaceholder": "Write here…",
+      "isPrivateDesc": "Only you can see private entries",
+      "tags": "Tags",
+      "tagsPlaceholder": "Add a tag (press Enter)",
+      "voiceNote": "Voice note",
+      "recordVoice": "Record",
+      "recording": "Recording…",
+      "stopRecording": "Stop",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel"
+    },
+    "resources": {
+      "about": {
+        "title": "What is Tenshinryu?",
+        "description": "Tenshinryu is a traditional Japanese martial art with roughly 400 years of history. Whether you want to learn the techniques or support preserving the tradition, we welcome you."
+      },
+      "online": {
+        "title": "Tenshinryu Online",
+        "description": "Learn Tenshinryu from anywhere in the world through our online system.",
+        "royal": "Royal membership",
+        "royalDesc": "Full content access",
+        "gold": "Gold membership",
+        "goldDesc": "Core training content"
+      },
+      "youtube": {
+        "title": "YouTube membership",
+        "description": "For $4.99/month, access member-only videos and private lessons.",
+        "join": "Become a member",
+        "subscribe": "Subscribe to channel"
+      },
+      "playlists": {
+        "title": "Video playlists",
+        "techniques": "Technique videos",
+        "techniquesDesc": "Step-by-step tutorials",
+        "enbu": "Enbu & grading",
+        "enbuDesc": "Demonstration and grading videos"
+      },
+      "social": { "title": "Follow us", "blog": "Blog" },
+      "website": { "title": "Official website" }
+    }
+  },
+  "instructor": {
+    "dashboard": "Instructor dashboard",
+    "instructorTitle": "Instructor",
+    "welcome": "Welcome",
+    "studentMode": "Training",
+    "logout": "Sign out",
+    "tabs": {
+      "checkin": "Check-in",
+      "classes": "Classes",
+      "attendance": "Attendance",
+      "notify": "Notify"
+    },
+    "stats": {
+      "present": "Present today",
+      "absent": "Absent",
+      "total": "Total students"
+    },
+    "checkin": {
+      "title": "Class check-in",
+      "selectedClass": "Selected class",
+      "noClass": "No class selected",
+      "selectPrompt": "Select a class to enable check-in",
+      "change": "Change",
+      "qrTitle": "Class QR code",
+      "qrDesc": "Display for students to scan",
+      "qrAlt": "Class QR code",
+      "generateQR": "Generate new QR",
+      "qrError": "Failed to generate QR code",
+      "beaconTitle": "Bluetooth beacon",
+      "beaconActive": "Broadcasting — students can auto check-in",
+      "beaconInactive": "Enable beacon for automatic student check-in",
+      "startBeacon": "Start beacon",
+      "stopBeacon": "Stop beacon",
+      "recent": "Recent check-ins",
+      "noCheckIns": "No check-ins yet today"
+    },
+    "classes": {
+      "title": "Class management",
+      "schedule": "Schedule",
+      "create": "Create class",
+      "createNew": "Create new class",
+      "editClass": "Edit class",
+      "name": "Class name",
+      "namePlaceholder": "e.g. Adult fundamentals",
+      "selectDateTime": "Select date & time",
+      "selectWhenStarts": "When does class start?",
+      "location": "Location",
+      "searchLocation": "Search location…",
+      "maxStudents": "Max students",
+      "recurring": "Recurring",
+      "recurringLabel": "This is a recurring class",
+      "recurringDesc": "Repeats weekly at the same day and time.",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this class?",
+      "save": "Save",
+      "cancel": "Cancel",
+      "selectForCheckin": "Select for check-in",
+      "noClasses": "No classes yet. Create your first class to get started.",
+      "instructor": "Instructor",
+      "max": "Max",
+      "students": "students"
+    },
+    "attendance": {
+      "title": "Today's attendance",
+      "markPresent": "Mark present",
+      "edit": "Edit",
+      "remove": "Remove",
+      "removeConfirm": "Remove this check-in?",
+      "removeFailed": "Failed to remove check-in",
+      "correction": "Attendance correction",
+      "notes": "Notes (optional)",
+      "notCheckedIn": "Not checked in",
+      "status": { "present": "Present", "absent": "Absent", "late": "Late" }
+    },
+    "invite": {
+      "title": "Invite instructor",
+      "button": "Invite instructor",
+      "send": "Send invite",
+      "sending": "Sending…",
+      "email": "Email address",
+      "emailPlaceholder": "instructor@example.com",
+      "name": "Name (optional)",
+      "namePlaceholder": "Full name",
+      "description": "They'll receive a link to create an instructor account.",
+      "expires": "Invites expire after 7 days.",
+      "success": "Invite sent to {email}!",
+      "shareLink": "Or share this link:",
+      "copyLink": "Copy link",
+      "linkCopied": "Copied!",
+      "sendAnother": "Send another",
+      "tabs": { "send": "Send invite", "list": "Invites" },
+      "status": { "pending": "Pending", "accepted": "Accepted", "expired": "Expired" },
+      "list": {
+        "empty": "No invites sent yet.",
+        "sent": "Sent",
+        "expires": "Expires",
+        "accepted": "Accepted"
+      },
+      "errors": {
+        "invalidEmail": "Enter a valid email address",
+        "generic": "Failed to create invite",
+        "sendFailed": "Failed to send invite"
+      },
+      "accept": {
+        "title": "Join as instructor",
+        "welcome": "You've been invited to",
+        "name": "Full name",
+        "password": "Password",
+        "passwordConfirm": "Confirm password",
+        "passwordHint": "At least 8 characters",
+        "passwordMismatch": "Passwords don't match",
+        "showPassword": "Show password",
+        "hidePassword": "Hide password",
+        "submit": "Create account",
+        "creating": "Creating…",
+        "success": "Welcome to Tenshinryu!",
+        "successDesc": "Your instructor account is ready.",
+        "invalid": "Invalid invite",
+        "createFailed": "Failed to create account"
+      }
+    },
+    "notifications": {
+      "title": "Send notification",
+      "selectClass": "Select a class",
+      "chooseClass": "Choose class…",
+      "sendVia": "Send via",
+      "allChannels": "All channels",
+      "lineApp": "LINE app",
+      "type": "Notification type",
+      "types": {
+        "reminder": "Class reminder",
+        "locationChange": "Location change",
+        "cancellation": "Cancellation",
+        "custom": "Custom message"
+      },
+      "message": "Message",
+      "send": "Send to",
+      "sending": "Sending…",
+      "lineSetup": "LINE setup",
+      "lineSetupDesc": "Students must complete these steps to receive LINE messages:",
+      "lineStep1": "Add our LINE official account",
+      "lineStep2": "Link their account by sending their email",
+      "studentsConnected": "Students connected",
+      "allNote": "Sends SMS to phone numbers and email where available",
+      "lineNote": "Sends only to students connected via LINE"
+    }
+  },
+  "home": {
+    "welcomeBack": "Welcome back",
+    "quickAccess": "Quick access to your dojo tools",
+    "instructor": {
+      "checkIn": "Check-in",
+      "checkInDesc": "QR, NFC, and BLE student check-in",
+      "classes": "Classes",
+      "classesDesc": "Manage class schedule",
+      "attendance": "Attendance",
+      "attendanceDesc": "Review and correct attendance",
+      "notifications": "Notifications",
+      "notificationsDesc": "Message your students"
+    },
+    "student": {
+      "progress": "Training",
+      "progressDesc": "Check in and track your practice",
+      "history": "Check-in history",
+      "historyDesc": "Review past sessions"
+    },
+    "wiki": {
+      "title": "Hyoho Wiki",
+      "desc": "Study techniques, history, and philosophy."
+    }
+  },
+  "footer": {
+    "memberArea": "Member Area",
+    "connect": "Connect",
+    "internationalSite": "International Site",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "common": {
+    "loading": "Loading…",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "add": "Add",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "viewAll": "View all",
+    "error": "Something went wrong",
+    "networkError": "Network error"
+  },
+  "admin": {
+    "title": "Owner dashboard",
+    "tabs": {
+      "overview": "Overview",
+      "students": "Students",
+      "finance": "Finance",
+      "classes": "Classes"
+    },
+    "kpi": {
+      "totalStudents": "Total students",
+      "activeStudents": "Active students",
+      "attendanceToday": "Check-ins today",
+      "monthlyRevenue": "Monthly revenue"
+    },
+    "atRisk": {
+      "title": "At-risk students",
+      "noShow14": "haven't attended in 14+ days"
+    },
+    "recentActivity": "Recent activity",
+    "membershipDistribution": "Membership breakdown",
+    "upcomingClasses": "Upcoming classes",
+    "registered": "registered",
+    "never": "Never",
+    "finance": {
+      "monthlyRecurring": "Monthly recurring",
+      "annualRecurring": "Annual recurring",
+      "avgPerStudent": "Avg per student",
+      "revenueByTier": "Revenue by tier"
+    },
+    "table": {
+      "name": "Name",
+      "tier": "Tier",
+      "lastCheckIn": "Last check-in",
+      "daysMissed": "Days missed",
+      "count": "Count",
+      "price": "Price",
+      "revenue": "Revenue"
+    }
+  },
+  "aiInsights": {
+    "title": "Practice insights",
+    "description": "Ask about your practice and attendance patterns.",
+    "askPlaceholder": "Ask about your data…",
+    "ask": "Ask",
+    "poweredBy": "AI-powered analysis",
+    "disclaimer": "Analyzes your personal data only — not training advice."
+  }
+}

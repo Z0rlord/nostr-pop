@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — Tenshinryu Hyoho Wiki</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="alternate" hreflang="en" href="{{ alternate.en }}">
+  <link rel="alternate" hreflang="ja" href="{{ alternate.ja }}">
+  <link rel="alternate" hreflang="es" href="{{ alternate.es }}">
+  <link rel="alternate" hreflang="el" href="{{ alternate.el }}">
+</head>
+<body class="lang-{{ lang }} index-page">
+  {% include "_nav.html.j2" %}
+  <main>
+    {% include "_breadcrumbs.html.j2" %}
+    <section class="index-hero">
+      <h1>{{ index_hero_title }}</h1>
+      <p class="index-hero-lead">{{ index_hero_lead }}</p>
+      <a class="hero-cta" href="/{{ lang }}/guides/start-here">{{ index_cta_label }}</a>
+    </section>
+    <section class="category-cards" aria-label="{{ index_cards_label }}">
+      {% for card in index_cards %}
+      <a class="category-card" href="{{ card.href }}">
+        <span class="category-card-title">{{ card.title }}</span>
+        <span class="category-card-desc">{{ card.desc }}</span>
+      </a>
+      {% endfor %}
+    </section>
+    <article class="page-content index-full">
+      {% if meta_line %}
+      <p class="page-meta">{{ meta_line | safe }}</p>
+      {% endif %}
+      {{ content | safe }}
+    </article>
+  </main>
+  {% include "_footer.html.j2" %}
+  <script src="/assets/search.js" defer></script>
+  <script src="/assets/nav.js" defer></script>
+  <script>window.WIKI_LANG = "{{ lang }}";</script>
+</body>
+</html>

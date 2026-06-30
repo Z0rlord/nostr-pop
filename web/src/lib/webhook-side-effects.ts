@@ -1,3 +1,4 @@
+import { syncBlossomWhitelist } from "@/lib/blossom-sync";
 import { syncRelayWhitelist } from "@/lib/relay-sync";
 
 export async function onMembershipChanged(reason: string): Promise<void> {
@@ -8,5 +9,14 @@ export async function onMembershipChanged(reason: string): Promise<void> {
     );
   } catch (e) {
     console.error(`relay-sync failed (${reason})`, e);
+  }
+
+  try {
+    const result = await syncBlossomWhitelist();
+    console.log(
+      `blossom-sync (${reason}): ${result.memberCount} member(s), restarted=${result.restarted}`
+    );
+  } catch (e) {
+    console.error(`blossom-sync failed (${reason})`, e);
   }
 }
