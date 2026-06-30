@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build static HTML wiki from wiki/{en,ja,es,el} markdown."""
+"""Build static HTML wiki from wiki/{en,ja,es,el,fr,de,it} markdown."""
 
 from __future__ import annotations
 
@@ -20,7 +20,8 @@ TEMPLATES = ROOT / "site" / "templates"
 ASSETS = ROOT / "site" / "assets"
 RAW_ASSETS = ROOT / "raw" / "assets"
 
-LANGS = ("en", "ja", "es", "el")
+LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
+LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+?)(?:\|([^\]]+?))?\]\]")
@@ -104,7 +105,7 @@ def md_link_to_html(href: str, page_lang: str, page_slug: str) -> str:
     if href.startswith(("http://", "https://", "mailto:", "#")):
         return href
 
-    m = re.match(rf"^(?:\.\./)+(?:(en|ja|es|el)/)(.+?)(?:\.md)?(?:#.*)?$", href)
+    m = re.match(rf"^(?:\.\./)+((?:{LANG_ALT}))/(.+?)(?:\.md)?(?:#.*)?$", href)
     if m:
         link_lang = m.group(1)
         rest = m.group(2).replace(".md", "")
@@ -197,7 +198,15 @@ def pair_urls(page: Page, pages: dict[tuple[str, str], Page]) -> dict[str, str]:
 def meta_line_html(page: Page) -> str:
     if not page.updated:
         return ""
-    labels = {"en": "Updated", "ja": "更新", "es": "Actualizado", "el": "Ενημέρωση"}
+    labels = {
+        "en": "Updated",
+        "ja": "更新",
+        "es": "Actualizado",
+        "el": "Ενημέρωση",
+        "fr": "Mis à jour",
+        "de": "Aktualisiert",
+        "it": "Aggiornato",
+    }
     label = labels.get(page.lang, "Updated")
     return f"{label} {page.updated}"
 
@@ -264,6 +273,51 @@ def section_labels(lang: str) -> dict[str, str]:
             "overview": "Επισκόπηση",
             "synthesis": "Σύνθεση",
         },
+        "fr": {
+            "guides": "Guides",
+            "arts": "Arts",
+            "techniques": "Techniques",
+            "concepts": "Concepts",
+            "reiho": "Reiho",
+            "philosophy": "Philosophie",
+            "dojo": "Shinanjo (dojo)",
+            "history": "Histoire",
+            "people": "Personnes",
+            "articles": "Articles",
+            "sources": "Sources",
+            "overview": "Aperçu",
+            "synthesis": "Synthèse",
+        },
+        "de": {
+            "guides": "Leitfäden",
+            "arts": "Künste",
+            "techniques": "Techniken",
+            "concepts": "Konzepte",
+            "reiho": "Reiho",
+            "philosophy": "Philosophie",
+            "dojo": "Shinanjo (dojo)",
+            "history": "Geschichte",
+            "people": "Personen",
+            "articles": "Artikel",
+            "sources": "Quellen",
+            "overview": "Überblick",
+            "synthesis": "Synthese",
+        },
+        "it": {
+            "guides": "Guide",
+            "arts": "Arti",
+            "techniques": "Tecniche",
+            "concepts": "Concetti",
+            "reiho": "Reiho",
+            "philosophy": "Filosofia",
+            "dojo": "Shinanjo (dojo)",
+            "history": "Storia",
+            "people": "Persone",
+            "articles": "Articoli",
+            "sources": "Fonti",
+            "overview": "Panoramica",
+            "synthesis": "Sintesi",
+        },
     }
     return labels.get(lang, labels["en"])
 
@@ -322,6 +376,30 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
             ("articles", "Άρθρα", "articles/_index", False),
         ],
+        "fr": [
+            ("start_here", "Commencer", "guides/start-here", True),
+            ("curriculum", "Programme", "arts/_index", False),
+            ("reiho", "Reiho", "reiho/_index", False),
+            ("philosophy", "Philosophie", "philosophy/onko-chishin", False),
+            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
+            ("articles", "Articles", "articles/_index", False),
+        ],
+        "de": [
+            ("start_here", "Einstieg", "guides/start-here", True),
+            ("curriculum", "Lehrplan", "arts/_index", False),
+            ("reiho", "Reiho", "reiho/_index", False),
+            ("philosophy", "Philosophie", "philosophy/onko-chishin", False),
+            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
+            ("articles", "Artikel", "articles/_index", False),
+        ],
+        "it": [
+            ("start_here", "Inizia qui", "guides/start-here", True),
+            ("curriculum", "Programma", "arts/_index", False),
+            ("reiho", "Reiho", "reiho/_index", False),
+            ("philosophy", "Filosofia", "philosophy/onko-chishin", False),
+            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
+            ("articles", "Articoli", "articles/_index", False),
+        ],
     }
     items: list[dict] = []
     section = slug.split("/")[0] if "/" in slug else slug
@@ -344,12 +422,28 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
 def build_breadcrumbs(
     lang: str, slug: str, title: str, pages: dict[tuple[str, str], Page]
 ) -> list[dict]:
-    home_labels = {"en": "Home", "ja": "ホーム", "es": "Inicio", "el": "Αρχική"}
+    home_labels = {
+        "en": "Home",
+        "ja": "ホーム",
+        "es": "Inicio",
+        "el": "Αρχική",
+        "fr": "Accueil",
+        "de": "Start",
+        "it": "Home",
+    }
     crumbs: list[dict] = [{"label": home_labels.get(lang, "Home"), "href": url_for_slug(lang, "index")}]
     if slug == "index":
         return crumbs
     if slug == "graph":
-        graph_labels = {"en": "Graph", "ja": "グラフ", "es": "Grafo", "el": "Γράφος"}
+        graph_labels = {
+            "en": "Graph",
+            "ja": "グラフ",
+            "es": "Grafo",
+            "el": "Γράφος",
+            "fr": "Graphe",
+            "de": "Graph",
+            "it": "Grafo",
+        }
         crumbs.append({"label": graph_labels.get(lang, "Graph"), "href": ""})
         return crumbs
 
@@ -415,6 +509,36 @@ def index_cards_for(lang: str) -> list[dict]:
             ("Φιλοσοφία", "Δοκίμια πρακτικής", "philosophy/onko-chishin"),
             ("Shinanjo (dojo)", "Καταστήματα στην Ιαπωνία", "dojo/overview"),
             ("Άρθρα", "Αρχείο ιστολογίου", "articles/_index"),
+        ],
+        "fr": [
+            ("Commencer", "Semaine 1 et carte du programme", "guides/start-here"),
+            ("Arts", "Huit arts du hyōhō", "arts/_index"),
+            ("12 Seiho", "Programme battojutsu", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "Positions Miden", "concepts/miden-kurai-no-koto"),
+            ("Reiho", "Étiquette et conduite", "reiho/_index"),
+            ("Philosophie", "Essais sur la pratique", "philosophy/onko-chishin"),
+            ("Shinanjo (dojo)", "Dojos au Japon", "dojo/overview"),
+            ("Articles", "Archives du blog", "articles/_index"),
+        ],
+        "de": [
+            ("Einstieg", "Woche 1 & Lehrplanübersicht", "guides/start-here"),
+            ("Künste", "Acht Hyōhō-Künste", "arts/_index"),
+            ("12 Seiho", "Battojutsu-Lehrplan", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "Miden-Positionen", "concepts/miden-kurai-no-koto"),
+            ("Reiho", "Etikette & Verhalten", "reiho/_index"),
+            ("Philosophie", "Aufsätze zur Praxis", "philosophy/onko-chishin"),
+            ("Shinanjo (dojo)", "Dojos in Japan", "dojo/overview"),
+            ("Artikel", "Blog-Archiv", "articles/_index"),
+        ],
+        "it": [
+            ("Inizia qui", "Settimana 1 e mappa del programma", "guides/start-here"),
+            ("Arti", "Otto arti del hyōhō", "arts/_index"),
+            ("12 Seiho", "Programma battojutsu", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "Posizioni Miden", "concepts/miden-kurai-no-koto"),
+            ("Reiho", "Etichetta e condotta", "reiho/_index"),
+            ("Filosofia", "Saggi sulla pratica", "philosophy/onko-chishin"),
+            ("Shinanjo (dojo)", "Dojo in Giappone", "dojo/overview"),
+            ("Articoli", "Archivio del blog", "articles/_index"),
         ],
     }
     return [
@@ -513,6 +637,72 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cards_label": "Εξερεύνηση ανά θέμα",
             "index_full_heading": "Πλήρες ευρετήριο",
         },
+        "fr": {
+            "site_subtitle": "Wiki Hyōhō Tenshinryu",
+            "footer_lead": "Wiki Hyōhō Tenshinryu — compilé à partir de sources officielles. Ne remplace pas l'enseignement en présentiel.",
+            "footer_kiwami": "Tenshinryu KIWAMI",
+            "footer_federation": "Fédération internationale",
+            "search_placeholder": "Rechercher…",
+            "graph_label": "Graphe",
+            "home_label": "Accueil",
+            "graph_title": "Graphe",
+            "graph_hint": "Étiquettes visibles · glisser les nœuds · défilement pour zoomer · clic pour ouvrir",
+            "nav_menu_label": "Menu",
+            "nav_main_label": "Navigation principale",
+            "nav_lang_label": "Langue",
+            "nav_footer_label": "Navigation du pied de page",
+            "breadcrumb_label": "Fil d'Ariane",
+            "toc_label": "Sur cette page",
+            "index_hero_title": "Wiki Hyōhō Tenshinryu",
+            "index_hero_lead": "Base de connaissances pour les élèves — commencez par la Semaine 1, puis arts, seiho et kurai.",
+            "index_cta_label": "Commencer →",
+            "index_cards_label": "Explorer par thème",
+            "index_full_heading": "Index complet",
+        },
+        "de": {
+            "site_subtitle": "Tenshinryu Hyōhō Wiki",
+            "footer_lead": "Tenshinryu Hyōhō Wiki — zusammengestellt aus offiziellen Quellen. Ersetzt keine Unterricht vor Ort.",
+            "footer_kiwami": "Tenshinryu KIWAMI",
+            "footer_federation": "Internationale Föderation",
+            "search_placeholder": "Suchen…",
+            "graph_label": "Graph",
+            "home_label": "Start",
+            "graph_title": "Graph",
+            "graph_hint": "Beschriftungen sichtbar · Knoten ziehen · scrollen zum Zoomen · Klick zum Öffnen",
+            "nav_menu_label": "Menü",
+            "nav_main_label": "Hauptnavigation",
+            "nav_lang_label": "Sprache",
+            "nav_footer_label": "Fußzeilen-Navigation",
+            "breadcrumb_label": "Brotkrumen",
+            "toc_label": "Auf dieser Seite",
+            "index_hero_title": "Tenshinryu Hyōhō Wiki",
+            "index_hero_lead": "Wissensbasis für Schüler — beginnen Sie mit Woche 1, dann Künste, Seiho und Kurai.",
+            "index_cta_label": "Einstieg →",
+            "index_cards_label": "Nach Thema erkunden",
+            "index_full_heading": "Vollständiger Index",
+        },
+        "it": {
+            "site_subtitle": "Wiki Hyōhō Tenshinryu",
+            "footer_lead": "Wiki Hyōhō Tenshinryu — compilato da fonti ufficiali. Non sostituisce l'insegnamento dal vivo.",
+            "footer_kiwami": "Tenshinryu KIWAMI",
+            "footer_federation": "Federazione internazionale",
+            "search_placeholder": "Cerca…",
+            "graph_label": "Grafo",
+            "home_label": "Home",
+            "graph_title": "Grafo",
+            "graph_hint": "Etichette sempre visibili · trascina i nodi · scorri per zoomare · clic per aprire",
+            "nav_menu_label": "Menu",
+            "nav_main_label": "Navigazione principale",
+            "nav_lang_label": "Lingua",
+            "nav_footer_label": "Navigazione piè di pagina",
+            "breadcrumb_label": "Percorso",
+            "toc_label": "In questa pagina",
+            "index_hero_title": "Wiki Hyōhō Tenshinryu",
+            "index_hero_lead": "Base di conoscenza per gli allievi — inizia dalla Settimana 1, poi arti, seiho e kurai.",
+            "index_cta_label": "Inizia qui →",
+            "index_cards_label": "Esplora per argomento",
+            "index_full_heading": "Indice completo",
+        },
     }
     return strings.get(lang, strings["en"])
 
@@ -565,7 +755,7 @@ def extract_link_targets(body: str, page: Page, pages: dict[tuple[str, str], Pag
         href = m.group(2)
         if href.startswith(("http://", "https://", "mailto:", "#")):
             continue
-        cross = re.match(rf"^(?:\.\./)+(?:(en|ja|es|el)/)(.+?)(?:\.md)?", href)
+        cross = re.match(rf"^(?:\.\./)+((?:{LANG_ALT}))/(.+?)(?:\.md)?", href)
         if cross:
             link_lang, rest = cross.group(1), cross.group(2).replace(".md", "")
             if link_lang == page.lang:
@@ -584,7 +774,15 @@ def node_group(slug: str) -> str:
 
 
 def node_label(slug: str, title: str, lang: str) -> str:
-    index_labels = {"en": "Index", "ja": "索引", "es": "Índice", "el": "Ευρετήριο"}
+    index_labels = {
+        "en": "Index",
+        "ja": "索引",
+        "es": "Índice",
+        "el": "Ευρετήριο",
+        "fr": "Index",
+        "de": "Index",
+        "it": "Indice",
+    }
     if slug == "index":
         return index_labels.get(lang, "Index")
     if len(title) <= 30:

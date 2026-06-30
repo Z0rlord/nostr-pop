@@ -23,6 +23,9 @@ FRONTMATTER_RE = re.compile(r"^---\s*\n.*?\n---\s*\n", re.DOTALL)
 STUB_BANNER = {
     "es": "Traducción pendiente",
     "el": "Μετάφραση σε εξέλιξη",
+    "fr": "Traduction en cours",
+    "de": "Übersetzung ausstehend",
+    "it": "Traduzione in corso",
 }
 
 # Markers that should not appear on non-English pages (fully translated content)
@@ -60,6 +63,9 @@ ES_MARKERS = [
 ]
 
 EL_MARKERS = ES_MARKERS
+FR_MARKERS = ES_MARKERS
+DE_MARKERS = ES_MARKERS
+IT_MARKERS = ES_MARKERS
 
 # Common English function/content words (lowercase match)
 EN_WORD_RE = re.compile(
@@ -85,7 +91,7 @@ EN_PHRASES = [
 ]
 
 FOOTER_LINE_RE = re.compile(
-    r"^(出典:|英語:|日本語:|Español:|Ελληνικά:|> |\*\*URL:\*\*|\*\*取得日:\*\*|\*\*原文:\*\*)"
+    r"^(出典:|英語:|日本語:|Español:|Ελληνικά:|Français:|Deutsch:|Italiano:|> |\*\*URL:\*\*|\*\*取得日:\*\*|\*\*原文:\*\*)"
 )
 
 # Agent-added editorial hedges — should not appear in published wiki body text
@@ -258,6 +264,9 @@ def main() -> int:
         ("en", JA_MARKERS, "EN pages with Japanese markers"),
         ("es", ES_MARKERS, "ES pages with EN/JA markers"),
         ("el", EL_MARKERS, "EL pages with EN/JA/ES markers"),
+        ("fr", FR_MARKERS, "FR pages with EN/JA markers"),
+        ("de", DE_MARKERS, "DE pages with EN/JA markers"),
+        ("it", IT_MARKERS, "IT pages with EN/JA markers"),
     ]
     failed = False
     hedge_issues = lint_hedges()

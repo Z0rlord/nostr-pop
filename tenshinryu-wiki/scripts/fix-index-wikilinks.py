@@ -12,7 +12,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 WIKI = ROOT / "wiki"
-LANGS = ("en", "ja", "es", "el")
+LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
 TODAY = date.today().isoformat()
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
@@ -51,7 +51,15 @@ def fix_body(body: str, lang: str) -> tuple[str, int]:
 
     body = TABLE_LINK_RE.sub(sub_table, body)
     if SOURCES_LINK_RE.search(body):
-        title = {"en": "Sources", "ja": "ソース", "es": "Fuentes", "el": "Πηγές"}.get(lang, "Sources")
+        title = {
+            "en": "Sources",
+            "ja": "ソース",
+            "es": "Fuentes",
+            "el": "Πηγές",
+            "fr": "Sources",
+            "de": "Quellen",
+            "it": "Fonti",
+        }.get(lang, "Sources")
         body = SOURCES_LINK_RE.sub(f"[[sources|{title}]]", body)
         count += 1
     return body, count

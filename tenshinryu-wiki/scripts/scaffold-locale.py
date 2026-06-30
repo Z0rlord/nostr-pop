@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scaffold wiki/es or wiki/el from wiki/en — stub pages + updated frontmatter."""
+"""Scaffold wiki/{es,el,fr,de,it} from wiki/en — stub pages + updated frontmatter."""
 
 from __future__ import annotations
 
@@ -21,9 +21,11 @@ HUB_SLUGS = frozenset(
         "index",
         "overview",
         "synthesis",
+        "guides/start-here",
         "techniques/tachiai-12-kata",
         "concepts/miden-kurai-no-koto",
         "arts/_index",
+        "reiho/_index",
     }
 )
 
@@ -45,6 +47,33 @@ LOCALE = {
         "ja_label": "ιαπωνικά",
         "summary_prefix": "Προσωρινή περίληψη:",
         "default_summary": "Καταχώρηση wiki για αυτή την τεχνική ή θέμα του hyōhō του Tenshinryu.",
+    },
+    "fr": {
+        "lang": "fr",
+        "banner": "> **Traduction en cours** — Cette page n'est pas encore traduite en français (fr-FR).",
+        "stub_lead": "Consultez la version en",
+        "en_label": "anglais",
+        "ja_label": "japonais",
+        "summary_prefix": "Résumé provisoire :",
+        "default_summary": "Entrée du wiki sur cette technique ou ce thème du hyōhō Tenshinryu.",
+    },
+    "de": {
+        "lang": "de",
+        "banner": "> **Übersetzung ausstehend** — Diese Seite ist noch nicht ins Deutsche übersetzt.",
+        "stub_lead": "Siehe die Version auf",
+        "en_label": "Englisch",
+        "ja_label": "Japanisch",
+        "summary_prefix": "Vorläufige Zusammenfassung:",
+        "default_summary": "Wiki-Eintrag zu dieser Technik oder diesem Thema des Tenshinryu Hyōhō.",
+    },
+    "it": {
+        "lang": "it",
+        "banner": "> **Traduzione in corso** — Questa pagina non è ancora tradotta in italiano (it-IT).",
+        "stub_lead": "Consulta la versione in",
+        "en_label": "inglese",
+        "ja_label": "giapponese",
+        "summary_prefix": "Riassunto provvisorio:",
+        "default_summary": "Voce wiki su questa tecnica o tema dell'hyōhō Tenshinryu.",
     },
 }
 
@@ -117,8 +146,8 @@ def scaffold_slug(slug: str, target_lang: str, loc: dict, *, include_hubs: bool)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Scaffold es/el wiki from EN tree")
-    parser.add_argument("lang", choices=("es", "el"), help="Target locale")
+    parser = argparse.ArgumentParser(description="Scaffold es/el/fr/de/it wiki from EN tree")
+    parser.add_argument("lang", choices=("es", "el", "fr", "de", "it"), help="Target locale")
     parser.add_argument("--include-hubs", action="store_true", help="Also scaffold hub slugs (EN body + banner)")
     parser.add_argument("--dry-run", action="store_true", help="Print counts only")
     args = parser.parse_args()

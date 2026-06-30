@@ -21,13 +21,13 @@ tenshinryu-wiki/
 
 ## Language rules (v1)
 
-- **Parallel slugs**: `wiki/en/history/overview.md` ↔ `wiki/ja/history/overview.md` ↔ `wiki/es/...` ↔ `wiki/el/...`
+- **Parallel slugs**: `wiki/en/history/overview.md` ↔ `wiki/ja/history/overview.md` ↔ `wiki/es/...` ↔ `wiki/el/...` ↔ `wiki/fr/...` ↔ `wiki/de/...` ↔ `wiki/it/...`
 - **Frontmatter on every page**:
 
 ```yaml
 ---
 slug: history/overview
-lang: en          # en | ja | es | el
+lang: en          # en | ja | es | el | fr | de | it
 title: "Overview of Tenshinryu History"
 pair: ja/history/overview   # counterpart; es/el typically pair: en/<slug>
 tags: [history, lineage]
@@ -85,7 +85,7 @@ When the user says **ingest** `<path>`:
 
 1. Read the raw file under `raw/`.
 2. Discuss key takeaways briefly with the user if ambiguous.
-3. Create or update `wiki/en/sources/<basename>.md` and counterparts in `ja/`, `es/`, `el/` as needed (summary + key quotes; es/el may remain stubs).
+3. Create or update `wiki/en/sources/<basename>.md` and counterparts in `ja/`, `es/`, `el/`, `fr/`, `de/`, `it/` as needed (summary + key quotes; non-en locales may remain stubs).
 4. Update entity/concept/art/technique pages touched (EN + JA minimum; es/el when translating).
 5. Update `wiki/en/index.md` and `wiki/ja/index.md` (and localized indexes when present).
 6. Append to `log.md`:

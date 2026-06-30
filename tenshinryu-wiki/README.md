@@ -1,16 +1,16 @@
 # Tenshinryu Hyoho Wiki
 
-Multilingual (English / Japanese / Spanish / Greek) knowledge base for **天心流兵法** — built with the [Karpathy LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) pattern.
+Multilingual (English / Japanese / Spanish / Greek / French / German / Italian) knowledge base for **天心流兵法** — built with the [Karpathy LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) pattern.
 
 ## Three layers
 
 | Layer | Path | Who writes |
 |-------|------|------------|
 | Raw sources | `raw/` | You (immutable) |
-| Wiki pages | `wiki/en/`, `wiki/ja/`, `wiki/es/`, `wiki/el/` | LLM agent (you review) |
+| Wiki pages | `wiki/en/`, `wiki/ja/`, `wiki/es/`, `wiki/el/`, `wiki/fr/`, `wiki/de/`, `wiki/it/` | LLM agent (you review) |
 | Schema | [`WIKI.md`](./WIKI.md) | You + LLM (conventions) |
 
-Navigation: [`wiki/en/index.md`](./wiki/en/index.md) · [`wiki/ja/index.md`](./wiki/ja/index.md) · [`wiki/es/index.md`](./wiki/es/index.md) · [`wiki/el/index.md`](./wiki/el/index.md) · [`log.md`](./log.md)
+Navigation: [`wiki/en/index.md`](./wiki/en/index.md) · [`wiki/ja/index.md`](./wiki/ja/index.md) · [`wiki/es/index.md`](./wiki/es/index.md) · [`wiki/el/index.md`](./wiki/el/index.md) · [`wiki/fr/index.md`](./wiki/fr/index.md) · [`wiki/de/index.md`](./wiki/de/index.md) · [`wiki/it/index.md`](./wiki/it/index.md) · [`log.md`](./log.md)
 
 ## Sources
 

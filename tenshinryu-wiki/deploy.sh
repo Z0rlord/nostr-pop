@@ -95,7 +95,7 @@ ssh -o BatchMode=yes "$HOST" "
   sleep 2
   echo ''
   echo '==> Health check (localhost:3014):'
-  for path in / /en/ /ja/articles/_index /en/arts/kenjutsu /assets/logo-icon.png; do
+  for path in / /en/ /ja/articles/_index /en/arts/kenjutsu /fr/guides/start-here /de/guides/start-here /it/guides/start-here /assets/logo-icon.png; do
     curl -sS -o /dev/null -w \"HTTP %{http_code} \${path}\n\" \"http://127.0.0.1:3014\${path}\" || true
   done
 "

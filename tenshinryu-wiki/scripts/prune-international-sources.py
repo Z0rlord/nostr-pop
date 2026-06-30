@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 WIKI_ROOT = Path(__file__).resolve().parents[1]
-LANGS = ("en", "ja", "es", "el")
+LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from wiki_international_filter import (  # noqa: E402

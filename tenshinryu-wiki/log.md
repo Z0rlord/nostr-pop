@@ -2,6 +2,15 @@
 
 Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 
+## [2026-06-30] i18n | French, German, Italian locales (7 langs)
+
+- **Added** `fr`, `de`, `it` to `LANGS` in `scripts/build-site.py` — `ui_strings`, `nav_items_for`, `section_labels`, `index_cards_for`, breadcrumbs, graph labels; lang switcher in `_nav.html.j2`, `_footer.html.j2`, `home.html.j2`
+- **Scaffolded** `wiki/fr/`, `wiki/de/`, `wiki/it/` from EN tree via `scaffold-locale.py` (708 stubs + 8 hub pages each)
+- **Hub translations** (`scripts/seed-fr-de-it-hubs.py`): full `guides/start-here`; localized `index`, `synthesis`, `overview`, `arts/_index`, `reiho/_index`; partial `techniques/tachiai-12-kata`, `concepts/miden-kurai-no-koto` (Traduction partielle / Teilübersetzung / Traduzione parziale)
+- **Scripts:** `lint-wiki-lang.py`, `scaffold-locale.py`, `fix-index-wikilinks.py`, `prune-international-sources.py`; `deploy.sh` health checks for `/fr|de|it/guides/start-here`
+- **Lint:** OK · **Build:** 5008 pages (716 × EN/JA/FR/DE/IT; 714 ES/EL)
+- **Deploy:** relay-2 atomic tarball → wiki.tenshinryu.xyz
+
 ## [2026-06-30] ui | Nav label: Shinanjo (dojo)
 
 - **Renamed** nav/breadcrumb/index-card section label `Dojo` → **Shinanjo (dojo)** (en/es/el) and **指南所（道場）** (ja) in `scripts/build-site.py` — `section_labels()`, `nav_items_for()`, `index_cards_for()`; wiki folder `dojo/` and slugs unchanged
