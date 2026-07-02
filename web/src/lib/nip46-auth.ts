@@ -11,6 +11,7 @@ import { generateSecretKey, getPublicKey } from "nostr-tools/pure";
 import { SimplePool } from "nostr-tools/pool";
 import { bytesToHex, hexToBytes } from "nostr-tools/utils";
 import { appUrl } from "@/lib/constants";
+import { throwIfAborted, withTimeout } from "@/lib/promise-timeout";
 
 /** Relays Primal + most NIP-46 signers use. Never use relay.dojopop.live (blocks kind 24133). */
 export const NIP46_RELAYS = [
@@ -20,36 +21,100 @@ export const NIP46_RELAYS = [
   "wss://relay.damus.io",
 ];
 
+/** Primal's bunker listens here — NIP-46 fails if the browser cannot open this relay. */
+export const PRIMAL_NIP46_RELAY = "wss://relay.primal.net";
+
 export const NIP46_CONNECT_TIMEOUT_MS = 120_000;
 export const NIP46_RECONNECT_TIMEOUT_MS = 8_000;
+/** Per-relay WebSocket open — without this, ensureRelay can hang forever on mobile Safari. */
+export const NIP46_RELAY_CONNECT_TIMEOUT_MS = 10_000;
 /** Per sign_event / connect wait — Primal must approve on the phone (large uploads may need two approvals). */
 export const NIP46_SIGN_TIMEOUT_MS = 300_000;
 
 const BLOCKED_NIP46_RELAY = /relay\.dojopop\.live/i;
+
+function normalizeRelayUrl(relay: string): string {
+  try {
+    const u = new URL(relay);
+    u.pathname = u.pathname.replace(/\/+/g, "/").replace(/\/$/, "");
+    if (u.port === "80" && u.protocol === "ws:") u.port = "";
+    if (u.port === "443" && u.protocol === "wss:") u.port = "";
+    return u.toString();
+  } catch {
+    return relay;
+  }
+}
+
+/** Intersect bunker relays with relays the browser actually connected to; Primal first. */
+export function activeNip46Relays(
+  connected: string[],
+  bunkerRelays: string[]
+): string[] {
+  const connectedSet = new Set(connected.map(normalizeRelayUrl));
+  const ordered = Array.from(
+    new Set([...NIP46_RELAYS, ...bunkerRelays.filter((r) => !BLOCKED_NIP46_RELAY.test(r))])
+  );
+  const active = ordered.filter((relay) => connectedSet.has(normalizeRelayUrl(relay)));
+  return active.length > 0 ? active : connected;
+}
+
+function assertPrimalRelayReachable(connected: string[]): void {
+  const primalUp = connected.some(
+    (relay) => normalizeRelayUrl(relay) === normalizeRelayUrl(PRIMAL_NIP46_RELAY)
+  );
+  if (!primalUp) {
+    throw new Error(
+      "Could not reach relay.primal.net from this browser. Primal signing needs that relay — disable ad blockers or VPN, try another network, then tap Upload again — or sign out and use Remote Login."
+    );
+  }
+}
+
+export function isNip46TimeoutError(message: string): boolean {
+  const lower = message.toLowerCase();
+  return lower.includes("timed out") && lower.includes("primal");
+}
 
 export type Nip46SignerHooks = {
   /** Fires when Primal needs an in-app approval (open this URL on the phone). */
   onAuthUrl?: (url: string) => void;
 };
 
-function withTimeout<T>(
-  promise: Promise<T>,
-  ms: number,
-  message: string
-): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error(message)), ms);
-    promise.then(
-      (value) => {
-        clearTimeout(timer);
-        resolve(value);
-      },
-      (error) => {
-        clearTimeout(timer);
-        reject(error);
+/** Thrown when Primal never acks ping/connect — caller should clear stale nip46 session. */
+export class Nip46SessionTimeoutError extends Error {
+  readonly staleSession = true;
+  constructor(message: string) {
+    super(message);
+    this.name = "Nip46SessionTimeoutError";
+  }
+}
+
+/** Connect pool relays in parallel; succeeds when at least one relay is reachable. */
+export async function connectPoolRelays(
+  pool: SimplePool,
+  relays: string[],
+  signal?: AbortSignal
+): Promise<string[]> {
+  throwIfAborted(signal);
+  const connected: string[] = [];
+  await Promise.all(
+    relays.map(async (relay) => {
+      throwIfAborted(signal);
+      try {
+        await withTimeout(
+          pool.ensureRelay(relay, {
+            connectionTimeout: NIP46_RELAY_CONNECT_TIMEOUT_MS,
+          }),
+          NIP46_RELAY_CONNECT_TIMEOUT_MS + 2_000,
+          `Timed out connecting to ${relay}`,
+          signal
+        );
+        connected.push(relay);
+      } catch {
+        /* ignore single relay failure */
       }
-    );
-  });
+    })
+  );
+  return connected;
 }
 
 export type Nip46RelayStatus = {
@@ -105,35 +170,31 @@ function openBunkerSigner(
 
 async function ensureBunkerSession(
   signer: BunkerSigner,
-  signLabel?: string
+  signLabel?: string,
+  signal?: AbortSignal
 ): Promise<void> {
   const label = signLabel ?? "connection";
   if (signer.bp.secret) {
     signer.bp = { ...signer.bp, secret: null };
   }
   try {
-    await withTimeout(signer.ping(), 12_000, "ping");
+    await withTimeout(
+      signer.ping(),
+      5_000,
+      "ping",
+      signal
+    );
     return;
   } catch {
     /* ping failed — wake Primal with connect (empty secret, not nostrconnect token) */
   }
   await withTimeout(
     signer.connect(),
-    90_000,
-    `Timed out waiting for Primal to approve the ${label}. Open Primal on your phone, approve, then try again.`
+    60_000,
+    `Timed out waiting for Primal to approve the ${label}. Open Primal on your phone, approve, then try again.`,
+    signal
   );
-  try {
-    await withTimeout(
-      Promise.race([
-        signer.switchRelays(),
-        new Promise<void>((resolve) => setTimeout(resolve, 2_500)),
-      ]),
-      4_000,
-      "relay switch"
-    );
-  } catch {
-    /* optional */
-  }
+  // Never switchRelays here — Primal may move to relay.dojopop.live (blocks kind 24133).
 }
 
 function randomConnectSecret(): string {
@@ -207,15 +268,10 @@ export async function waitForNostrConnectSession(
 
   const pool = new SimplePool({ enableReconnect: true });
 
-  await Promise.all(
-    relays.map(async (relay) => {
-      try {
-        await pool.ensureRelay(relay);
-        relayStatus.connected.push(relay);
-      } catch {
-        relayStatus.failed.push(relay);
-      }
-    })
+  const connected = await connectPoolRelays(pool, relays, signal);
+  relayStatus.connected.push(...connected);
+  relayStatus.failed.push(
+    ...relays.filter((relay) => !connected.includes(relay))
   );
   reportStatus();
   if (relayStatus.connected.length === 0) {
@@ -224,6 +280,7 @@ export async function waitForNostrConnectSession(
       "Could not reach Nostr relays from this browser. Try another network, disable ad blockers, or use the bunker link option."
     );
   }
+  assertPrimalRelayReachable(connected);
 
   try {
     const signer = await new Promise<BunkerSigner>((resolve, reject) => {
@@ -301,7 +358,10 @@ export async function waitForNostrConnectSession(
   }
 }
 
-export async function connectViaBunkerInput(input: string) {
+export async function connectViaBunkerInput(
+  input: string,
+  signal?: AbortSignal
+) {
   const bunker = await parseBunkerInput(input.trim());
   if (!bunker) {
     throw new Error("Invalid bunker or NIP-05 identifier");
@@ -309,19 +369,41 @@ export async function connectViaBunkerInput(input: string) {
 
   const clientSecretKey = generateSecretKey();
   const pool = new SimplePool({ enableReconnect: true });
-  const relays = bunker.relays.length > 0 ? bunker.relays : NIP46_RELAYS;
+  const bp = normalizeBunkerPointer({
+    ...bunker,
+    relays: bunker.relays.length > 0 ? bunker.relays : NIP46_RELAYS,
+  });
+  const relays = bp.relays;
   try {
+    const connected = await connectPoolRelays(pool, relays, signal);
+    if (connected.length === 0) {
+      throw new Error(
+        "Could not reach Nostr relays from this browser. Try another network or use the QR login option."
+      );
+    }
+    assertPrimalRelayReachable(connected);
+    const activeRelays = activeNip46Relays(connected, relays);
     const signer = BunkerSigner.fromBunker(
       clientSecretKey,
-      { ...bunker, relays },
+      { ...bp, relays: activeRelays },
       {
         pool,
         skipSwitchRelays: true,
         onauth: (url) => window.open(url, "_blank", "noopener,noreferrer"),
       }
     );
-    await signer.connect();
-    const pubkeyHex = await signer.getPublicKey();
+    await withTimeout(
+      signer.connect(),
+      NIP46_CONNECT_TIMEOUT_MS,
+      "Timed out waiting for Primal to approve. Open Primal on your phone and try again.",
+      signal
+    );
+    const pubkeyHex = await withTimeout(
+      signer.getPublicKey(),
+      NIP46_RECONNECT_TIMEOUT_MS,
+      "Could not reach your Primal signer — open Primal and try again.",
+      signal
+    );
     const session: StoredNip46Session = {
       clientSecretKeyHex: bytesToHex(clientSecretKey),
       bunker: normalizeBunkerPointer({ ...signer.bp, secret: null }),
@@ -355,14 +437,16 @@ export function openSignerApprovalUrl(url: string, hooks?: Nip46SignerHooks) {
 function wrapSigner(
   signer: BunkerSigner,
   hooks?: Nip46SignerHooks,
-  label = "signing request"
+  label = "signing request",
+  signal?: AbortSignal
 ): BunkerSigner {
   const original = signer.signEvent.bind(signer);
   signer.signEvent = (template) =>
     withTimeout(
       original(template),
       NIP46_SIGN_TIMEOUT_MS,
-      `Timed out waiting for Primal to approve the ${label}. Open Primal on your phone, approve, then try again.`
+      `Timed out waiting for Primal to approve the ${label}. Open Primal on your phone, approve, then try again.`,
+      signal
     );
   return signer;
 }
@@ -372,35 +456,39 @@ export async function withNip46Signer<T>(
   session: StoredNip46Session,
   fn: (signer: BunkerSigner) => Promise<T>,
   hooks?: Nip46SignerHooks,
-  signLabel?: string
+  signLabel?: string,
+  signal?: AbortSignal
 ): Promise<T> {
+  throwIfAborted(signal);
   const clientSecretKey = hexToBytes(session.clientSecretKeyHex);
   const bunker = normalizeBunkerPointer(session.bunker);
   const relays = bunker.relays;
   const pool = new SimplePool({ enableReconnect: true });
 
-  const connected: string[] = [];
-  await Promise.all(
-    relays.map(async (relay) => {
-      try {
-        await pool.ensureRelay(relay);
-        connected.push(relay);
-      } catch {
-        /* ignore single relay failure */
-      }
-    })
-  );
+  const connected = await connectPoolRelays(pool, relays, signal);
   if (connected.length === 0) {
     pool.close(relays);
     throw new Error(
       "Could not reach Nostr relays from this browser. Check your network or ad blockers, then try again."
     );
   }
+  assertPrimalRelayReachable(connected);
 
-  const signer = openBunkerSigner(clientSecretKey, bunker, pool, hooks);
-  wrapSigner(signer, hooks, signLabel);
+  const activeRelays = activeNip46Relays(connected, relays);
+  const signer = openBunkerSigner(
+    clientSecretKey,
+    { ...bunker, relays: activeRelays },
+    pool,
+    hooks
+  );
+  wrapSigner(signer, hooks, signLabel, signal);
   try {
-    await ensureBunkerSession(signer, signLabel ?? "connection");
+    await withTimeout(
+      ensureBunkerSession(signer, signLabel ?? "connection", signal),
+      NIP46_CONNECT_TIMEOUT_MS,
+      `Timed out connecting to Primal. Open Primal on your phone, approve the request, then tap Upload again — or sign out and sign in fresh.`,
+      signal
+    );
     return await fn(signer);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
@@ -409,9 +497,9 @@ export async function withNip46Signer<T>(
         "Your Primal session expired. Sign out, then sign in again with Remote Login before publishing."
       );
     }
-    if (msg.toLowerCase().includes("timed out")) {
-      throw new Error(
-        "Timed out waiting for Primal. Open Primal on your phone, approve the signing request, then tap Upload again — or sign out and sign in fresh."
+    if (isNip46TimeoutError(msg)) {
+      throw new Nip46SessionTimeoutError(
+        "Timed out waiting for Primal. Open Primal on your phone, approve the signing request, then tap Upload again — or sign out and sign in fresh with Remote Login."
       );
     }
     if (
@@ -431,10 +519,14 @@ export async function withNip46Signer<T>(
 
 export async function reconnectNip46Session(session: StoredNip46Session) {
   const clientSecretKey = hexToBytes(session.clientSecretKeyHex);
-  const relays =
-    session.bunker.relays.length > 0 ? session.bunker.relays : NIP46_RELAYS;
   const pool = new SimplePool({ enableReconnect: true });
-  const signer = openBunkerSigner(clientSecretKey, session.bunker, pool);
+  const bunker = normalizeBunkerPointer(session.bunker);
+  const connected = await connectPoolRelays(pool, bunker.relays);
+  if (connected.length === 0) {
+    pool.close(bunker.relays);
+    return null;
+  }
+  const signer = openBunkerSigner(clientSecretKey, bunker, pool);
   try {
     const pubkeyHex = await withTimeout(
       signer.getPublicKey(),
@@ -451,7 +543,7 @@ export async function reconnectNip46Session(session: StoredNip46Session) {
     return null;
   } finally {
     await signer.close().catch(() => {});
-    pool.close(relays);
+    pool.close(bunker.relays);
   }
 }
 

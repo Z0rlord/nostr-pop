@@ -310,6 +310,10 @@ const pl: Dictionary = {
     cameraUnsupported:
       "Skanowanie QR kamerą nie jest obsługiwane w tej przeglądarce. Użyj Pokaż QR.",
     invalidNpub: "Wpisz prawidłowy npub (npub1…) lub adres NIP-05 (nazwa@domena).",
+    privateKeyRejected:
+      "Użyj npub lub adresu NIP-05 — nigdy klucza prywatnego (nsec).",
+    rawHexKeyRejected:
+      "To wygląda na surowy klucz hex. Użyj npub lub NIP-05 — nigdy klucza prywatnego.",
     noExtensionHelp:
       "Nie wykryto rozszerzenia Nostr. Zainstaluj Alby lub użyj logowania QR.",
     connectFailed: "Nie udało się połączyć. Spróbuj ponownie lub użyj logowania QR.",
@@ -466,6 +470,8 @@ const pl: Dictionary = {
     wizardDone: "Gotowe",
     failed: "Nie udało się opublikować. Spróbuj ponownie.",
     signOutRetry: "Wyloguj się i spróbuj ponownie",
+    staleNip46Hint:
+      "Your Primal remote-signer link was cleared. Open Primal → Remote Login, scan the QR on this page again, then retry upload.",
     dailyLimit: "Jedno wideo dziennie. Kolejny upload za {wait}.",
     emptyCta: "Opublikuj pierwszy film",
   },

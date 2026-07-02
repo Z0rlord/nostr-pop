@@ -310,6 +310,10 @@ const es: Dictionary = {
     cameraUnsupported:
       "Escaneo QR no compatible con este navegador. Usa Mostrar QR.",
     invalidNpub: "Introduce un npub válido (npub1…) o dirección NIP-05 (nombre@dominio).",
+    privateKeyRejected:
+      "Usa tu npub o dirección NIP-05 — nunca tu clave privada (nsec).",
+    rawHexKeyRejected:
+      "Parece una clave hex en bruto. Usa tu npub o NIP-05 — nunca una clave privada.",
     noExtensionHelp:
       "No se detectó extensión Nostr. Instala Alby o usa el inicio de sesión QR.",
     connectFailed: "No se pudo conectar. Inténtalo de nuevo o usa el inicio de sesión QR.",
@@ -466,6 +470,8 @@ const es: Dictionary = {
     wizardDone: "Listo",
     failed: "No se pudo publicar. Inténtalo de nuevo.",
     signOutRetry: "Cerrar sesión e intentar de nuevo",
+    staleNip46Hint:
+      "Your Primal remote-signer link was cleared. Open Primal → Remote Login, scan the QR on this page again, then retry upload.",
     dailyLimit: "Un vídeo de práctica al día. Puedes subir otro en {wait}.",
     emptyCta: "Publica tu primer vídeo",
   },

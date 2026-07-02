@@ -89,6 +89,16 @@ export function canSignPractice(identity: PracticeIdentity): boolean {
   return identity.source === "extension" || !!identity.nip46;
 }
 
+export function detachNip46Signer(identity: PracticeIdentity): PracticeIdentity {
+  if (!identity.nip46) return identity;
+  const next = { ...identity };
+  delete next.nip46;
+  if (next.source === "nip46") {
+    next.source = "dm";
+  }
+  return next;
+}
+
 export function attachNip46Signer(
   identity: PracticeIdentity,
   nip46: StoredNip46Session

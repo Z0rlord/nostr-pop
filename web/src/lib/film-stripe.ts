@@ -1,6 +1,8 @@
 import {
   YOGA_SUTRA_FILM_ID,
-  yogaSutraPriceCents,
+  yogaSutraBuyPriceCents,
+  yogaSutraRentPriceCents,
+  type FilmPurchaseTier,
 } from "@/lib/films/yoga-sutra";
 import {
   findPurchaseById,
@@ -11,53 +13,79 @@ import { getStripe } from "@/lib/stripe";
 import type { FilmId } from "@/lib/film-purchases";
 import type Stripe from "stripe";
 
-export async function ensureFilmPriceId(filmId: FilmId): Promise<string> {
-  if (filmId === YOGA_SUTRA_FILM_ID) {
-    const existing = process.env.FILM_YOGA_SUTRA_STRIPE_PRICE_ID?.trim();
-    if (existing) return existing;
+function tierEnvKey(tier: FilmPurchaseTier): string {
+  return tier === "buy"
+    ? "FILM_YOGA_SUTRA_BUY_STRIPE_PRICE_ID"
+    : "FILM_YOGA_SUTRA_RENT_STRIPE_PRICE_ID";
+}
 
-    const stripe = getStripe();
-    const products = await stripe.products.search({
-      query: 'name:"DojoPop Film — Yoga Sutra" AND active:"true"',
-    });
+function tierCents(tier: FilmPurchaseTier): number {
+  return tier === "buy" ? yogaSutraBuyPriceCents() : yogaSutraRentPriceCents();
+}
 
-    let product = products.data[0];
-    if (!product) {
-      product = await stripe.products.create({
-        name: "DojoPop Film — Yoga Sutra",
-        description: "One-time stream access — Yoga Sutra",
-        metadata: { service: "dojopop", filmId: YOGA_SUTRA_FILM_ID },
-      });
-    }
+function tierLabel(tier: FilmPurchaseTier): string {
+  return tier === "buy" ? "Own + download" : "Stream 48 hours";
+}
 
-    const cents = yogaSutraPriceCents();
-    const prices = await stripe.prices.list({
-      product: product.id,
-      active: true,
-      limit: 20,
-    });
-
-    const match = prices.data.find(
-      (p) =>
-        !p.recurring &&
-        p.unit_amount === cents &&
-        p.currency === "usd"
-    );
-    if (match) return match.id;
-
-    const created = await stripe.prices.create({
-      product: product.id,
-      unit_amount: cents,
-      currency: "usd",
-      metadata: {
-        service: "dojopop",
-        filmId: YOGA_SUTRA_FILM_ID,
-      },
-    });
-    return created.id;
+export async function ensureFilmPriceId(
+  filmId: FilmId,
+  tier: FilmPurchaseTier
+): Promise<string> {
+  if (filmId !== YOGA_SUTRA_FILM_ID) {
+    throw new Error(`Unknown film: ${filmId}`);
   }
 
-  throw new Error(`Unknown film: ${filmId}`);
+  const existing = process.env[tierEnvKey(tier)]?.trim();
+  if (existing) return existing;
+
+  const legacyBuy =
+    tier === "buy"
+      ? process.env.FILM_YOGA_SUTRA_STRIPE_PRICE_ID?.trim()
+      : undefined;
+  if (legacyBuy) return legacyBuy;
+
+  const stripe = getStripe();
+  const products = await stripe.products.search({
+    query: 'name:"DojoPop Film — Yoga Sutra" AND active:"true"',
+  });
+
+  let product = products.data[0];
+  if (!product) {
+    product = await stripe.products.create({
+      name: "DojoPop Film — Yoga Sutra",
+      description: "Yoga Sutra — own or 48-hour stream",
+      metadata: { service: "dojopop", filmId: YOGA_SUTRA_FILM_ID },
+    });
+  }
+
+  const cents = tierCents(tier);
+  const prices = await stripe.prices.list({
+    product: product.id,
+    active: true,
+    limit: 50,
+  });
+
+  const match = prices.data.find(
+    (p) =>
+      !p.recurring &&
+      p.unit_amount === cents &&
+      p.currency === "usd" &&
+      p.metadata?.tier === tier
+  );
+  if (match) return match.id;
+
+  const created = await stripe.prices.create({
+    product: product.id,
+    unit_amount: cents,
+    currency: "usd",
+    metadata: {
+      service: "dojopop",
+      filmId: YOGA_SUTRA_FILM_ID,
+      tier,
+    },
+    nickname: tierLabel(tier),
+  });
+  return created.id;
 }
 
 export async function fulfillFilmStripeSession(
@@ -65,6 +93,7 @@ export async function fulfillFilmStripeSession(
 ): Promise<{ unlocked: boolean; accessToken?: string; alreadyUnlocked?: boolean }> {
   const filmId = session.metadata?.filmId;
   const purchaseId = session.metadata?.purchaseId;
+  const tier = (session.metadata?.tier as FilmPurchaseTier | undefined) ?? "buy";
 
   if (!filmId || filmId !== YOGA_SUTRA_FILM_ID || !purchaseId) {
     return { unlocked: false };
@@ -94,6 +123,7 @@ export async function fulfillFilmStripeSession(
     stripeSessionId: session.id,
     npub: npub || undefined,
     paymentMethod: "stripe",
+    tier: purchase.tier ?? tier,
   });
 
   return {

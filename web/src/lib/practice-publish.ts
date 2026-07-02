@@ -475,7 +475,8 @@ async function publishWithSigner(
         result = { eventId: signed.id, title: params.title.trim() };
       },
       params.nip46Hooks,
-      "publish"
+      "publish",
+      params.signal
     );
     if (!result) throw new Error("Publish did not return an event id.");
     return result;

@@ -26,23 +26,24 @@ export async function GET(req: NextRequest) {
     accessToken: token || undefined,
   });
 
-  if (!access.unlocked) {
-    return NextResponse.json({ error: "Purchase required" }, { status: 403 });
+  if (!access.unlocked || !access.canDownload) {
+    return NextResponse.json(
+      { error: "Own + download purchase required" },
+      { status: 403 }
+    );
   }
 
-  const streamUrl = yogaSutraStreamUrl();
-  if (!streamUrl) {
+  const downloadUrl = yogaSutraStreamUrl();
+  if (!downloadUrl) {
     return NextResponse.json(
-      { error: "Stream not configured (FILM_YOGA_SUTRA_BLOSSOM_URL)" },
+      { error: "Download not configured (FILM_YOGA_SUTRA_BLOSSOM_URL)" },
       { status: 503 }
     );
   }
 
   return NextResponse.json({
-    streamUrl,
+    downloadUrl,
     filmId: YOGA_SUTRA_FILM_ID,
     tier: access.tier,
-    expiresAt: access.expiresAt,
-    canDownload: access.canDownload,
   });
 }

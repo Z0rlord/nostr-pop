@@ -17,6 +17,8 @@ BLOSSOM_PORT="${DOJOPOP_BLOSSOM_PORT:-3004}"
 ALBY_HUB_PORT="${DOJOPOP_ALBY_HUB_PORT:-8080}"
 TENSHINRYU_PORT="${TENSHINRYU_PORT:-3003}"
 TENSHINRYU_STAGING_PORT="${TENSHINRYU_STAGING_PORT:-3013}"
+TENSHINRYU_WIKI_PORT="${TENSHINRYU_WIKI_PORT:-3014}"
+TENSHINRYU_WIKI_HOST="${TENSHINRYU_WIKI_HOST:-wiki.tenshinryu.xyz}"
 TENSHINRYU_STAGING_HOST="${TENSHINRYU_STAGING_HOST:-staging.tenshinryu.xyz}"
 # bunker.dojopop.live → Bunker46 (:3005); admin.dojopop.live → ops placeholder (:3002).
 TENSHINRYU_APEX="${TENSHINRYU_APEX:-tenshinryu.xyz}"
@@ -55,6 +57,7 @@ PAYLOAD=$(cat <<EOF
       { "hostname": "${TENSHINRYU_WWW}", "service": "http://localhost:${TENSHINRYU_PORT}" },
       { "hostname": "${TENSHINRYU_HOST}", "service": "http://localhost:${TENSHINRYU_PORT}" },
       { "hostname": "${TENSHINRYU_STAGING_HOST}", "service": "http://localhost:${TENSHINRYU_STAGING_PORT}" },
+      { "hostname": "${TENSHINRYU_WIKI_HOST}", "service": "http://localhost:${TENSHINRYU_WIKI_PORT}" },
       { "service": "http_status:404" }
     ]
   }
@@ -105,7 +108,7 @@ if [[ -n "$TENSHINRYU_ZONE_ID" ]]; then
     echo "  deleted legacy A ${rid}"
   done
 
-  for NAME in "@" www kiwami staging; do
+  for NAME in "@" www kiwami staging wiki; do
     curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${TENSHINRYU_ZONE_ID}/dns_records" \
       -H "Authorization: Bearer $TOKEN" \
       -H "Content-Type: application/json" \

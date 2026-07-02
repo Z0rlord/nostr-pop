@@ -29,6 +29,7 @@ export async function GET(
         const updated = await unlockFilmPurchase(purchase.id, {
           lightningInvoiceId: invoice.id,
           paymentMethod: "lightning",
+          tier: purchase.tier ?? invoice.tier ?? "buy",
         });
         accessToken = updated?.accessToken;
         unlocked = true;
@@ -46,6 +47,7 @@ export async function GET(
     return NextResponse.json({
       id: invoice.id,
       amountSats: invoice.amountSats,
+      tier: invoice.tier,
       status: invoice.status,
       configured: filmLightningConfigured(),
       setupHint: filmLightningConfigured()

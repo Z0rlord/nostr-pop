@@ -310,6 +310,10 @@ const el: Dictionary = {
     cameraUnsupported:
       "Η σάρωση QR δεν υποστηρίζεται σε αυτόν τον browser. Χρησιμοποίησε Εμφάνιση QR.",
     invalidNpub: "Εισήγαγε έγκυρο npub (npub1…) ή διεύθυνση NIP-05 (όνομα@domain).",
+    privateKeyRejected:
+      "Χρησιμοποίησε το npub ή τη διεύθυνση NIP-05 — ποτέ το ιδιωτικό κλειδί (nsec).",
+    rawHexKeyRejected:
+      "Μοιάζει με ακατέργαστο hex κλειδί. Χρησιμοποίησε npub ή NIP-05 — ποτέ ιδιωτικό κλειδί.",
     noExtensionHelp:
       "Δεν βρέθηκε επέκταση Nostr. Εγκατάστησε Alby ή χρησιμοποίησε σύνδεση QR.",
     connectFailed: "Αποτυχία σύνδεσης. Δοκίμασε ξανά ή χρησιμοποίησε σύνδεση QR.",
@@ -466,6 +470,8 @@ const el: Dictionary = {
     wizardDone: "Τέλος",
     failed: "Αποτυχία δημοσίευσης. Δοκίμασε ξανά.",
     signOutRetry: "Αποσύνδεση και νέα προσπάθεια",
+    staleNip46Hint:
+      "Your Primal remote-signer link was cleared. Open Primal → Remote Login, scan the QR on this page again, then retry upload.",
     dailyLimit: "Ένα βίντεο την ημέρα. Επόμενο upload σε {wait}.",
     emptyCta: "Δημοσίευσε το πρώτο σου βίντεο",
   },

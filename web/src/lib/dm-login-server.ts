@@ -3,6 +3,7 @@ import { finalizeEvent, verifyEvent } from "nostr-tools";
 import { encrypt } from "nostr-tools/nip04";
 import { SimplePool } from "nostr-tools/pool";
 import {
+  assertLoginBotConfigured,
   loadLoginBotSecretKey,
   loginBotNpub,
   loginBotPubkeyHex,
@@ -113,12 +114,21 @@ export function createLoginChallenge(
   return { challenge: packSignedPayload(payload), expiresAt };
 }
 
+export function parseLoginChallenge(
+  challenge: string
+): ChallengePayload | null {
+  const data = verifySignedPayload<ChallengePayload>(challenge);
+  if (!data) return null;
+  if (!data.pubkeyHex || !data.codeHash || !data.exp) return null;
+  return data;
+}
+
 export function verifyLoginChallenge(
   challenge: string,
   pubkeyHex: string,
   code: string
 ): boolean {
-  const data = verifySignedPayload<ChallengePayload>(challenge);
+  const data = parseLoginChallenge(challenge);
   if (!data) return false;
   if (data.pubkeyHex !== pubkeyHex.toLowerCase()) return false;
   if (Date.now() > data.exp) return false;
@@ -266,6 +276,7 @@ export async function sendLoginDm(
   recipientPubkeyHex: string,
   code: string
 ): Promise<void> {
+  assertLoginBotConfigured();
   const secretKey = loadLoginBotSecretKey();
   await ensureLoginBotProfile();
   const botNpub = loginBotNpub();
