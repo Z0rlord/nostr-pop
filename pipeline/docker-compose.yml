@@ -1,0 +1,25 @@
+# YouTube PubSubHubbub callback — hooks.dojopop.live → localhost:3009
+# Deploy: ./deploy.sh relay-2
+services:
+  youtube-pubsub:
+    image: ghcr.io/astral-sh/uv:python3.12-bookworm
+    container_name: dojopop-youtube-pubsub
+    restart: unless-stopped
+    working_dir: /app
+    command:
+      - uv
+      - run
+      - --project
+      - pipeline
+      - pipeline/youtube_pubsub.py
+      - serve
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "3009"
+    ports:
+      - "127.0.0.1:3009:3009"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env

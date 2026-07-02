@@ -4,6 +4,10 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-07-02 | [youtube-pubsub-pipeline](./2026-07-02-youtube-pubsub-pipeline.md) | YouTube PubSub callback service, auto-trigger pipeline, renewal cadence |
+| 2026-07-01 | [social-cross-post-pipeline](./2026-07-01-social-cross-post-pipeline.md) | `social_post.py` MVP, Meta/TikTok stubs, no Zernio |
+| 2026-07-01 | [social-pipeline-own-build](./2026-07-01-social-pipeline-own-build.md) | Own social CLI, Nostr working, Meta/TikTok stubs, rejected Zernio |
+| 2026-07-01 | [zernio-social-automation](./2026-07-01-zernio-social-automation.md) | Zernio API eval, Doppler key, n8n + relay-2 architecture |
 | 2026-06-30 | [tenshinryu-wiki-vcs-app-integration](./2026-06-30-tenshinryu-wiki-vcs-app-integration.md) | Wiki in monorepo git, `/wiki` locale redirect, KIWAMI nav integration |
 | 2026-06-29 | [tenshinryu-wiki-deploy](./2026-06-29-tenshinryu-wiki-deploy.md) | wiki.tenshinryu.xyz static wiki, Python SSG, relay-2 :3014 |
 | 2026-06-18 | [tenshinryu-staging](./2026-06-18-tenshinryu-staging.md) | staging.tenshinryu.xyz on relay-2:3013, deploy-staging workflow |

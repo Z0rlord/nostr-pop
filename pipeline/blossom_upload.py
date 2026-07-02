@@ -104,7 +104,7 @@ def upload(
                 with open(file, "rb") as f:
                     resp = client.put(
                         f"{server}{path}",
-                        content=f.read(),
+                        content=f,
                         headers={
                             **headers,
                             "Content-Type": content_type,
