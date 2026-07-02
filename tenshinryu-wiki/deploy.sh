@@ -76,7 +76,7 @@ ssh -o BatchMode=yes "$HOST" "
     mv '${REMOTE_DIR}/dist' '${REMOTE_DIR}/dist-old'
   fi
   mv '${REMOTE_DIR}/${STAGING}' '${REMOTE_DIR}/dist'
-  rm -rf '${REMOTE_DIR}/dist-old'
+  # dist-old kept until next deploy — emergency server rollback without rebuild
 "
 
 rsync -az \
