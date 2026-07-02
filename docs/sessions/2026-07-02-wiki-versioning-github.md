@@ -19,7 +19,9 @@ Added lightweight version control for tenshinryu-wiki: `VERSION` file, `scripts/
 - Updated `deploy.sh` to retain `dist-old` on relay-2 for one generation
 - Documented rollback in `tenshinryu-wiki/README.md`
 - Committed wiki content, site scripts, and related monorepo changes
-- Tagged `wiki-v2026.07.02` and pushed to `origin` (+ `gitlab` if configured)
+- Tagged `wiki-v2026.07.02` and pushed to `gitlab` main + tag
+- GitHub `origin` push blocked: invalid keyring token (`gh auth login` required)
+- Drive backup completed (`backup-to-drive.py`)
 
 ## Open items
 
