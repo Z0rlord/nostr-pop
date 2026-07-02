@@ -10,7 +10,6 @@ updated: 2026-06-29
 ---
 
 # History & lineage
-
 ## Origins (Edo)
 
 Tokizawa **Yahei** served **Yagyu Munenori**, Ometsuke of the Tokugawa shogunate. Under Munenori's direction, Yahei synthesized techniques and strategic wisdom from multiple schools and covert practitioners, building on the Yagyu **Shinkageryu** foundation. The resulting system was named **Tenshinryu**.

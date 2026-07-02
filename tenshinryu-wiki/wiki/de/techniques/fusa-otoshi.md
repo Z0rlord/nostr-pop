@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/techniques/fusa-otoshi.md) · [Japanisch](../../ja/techniques/fusa-otoshi.md).
 
-**Fusa-Otoshi (房落)** — Vorläufige Zusammenfassung: Fusa-Otoshi (房落)│JAPANESE TRADITION TENSHINRYU HYOHO
+**Fusa-Otoshi (房落)** — Vorläufige Zusammenfassung: Fusa-Otoshi (房落)

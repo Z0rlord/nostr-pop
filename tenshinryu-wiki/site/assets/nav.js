@@ -2,7 +2,8 @@
   const toggle = document.querySelector(".nav-toggle");
   const panel = document.getElementById("site-nav-panel");
   if (toggle && panel) {
-    toggle.addEventListener("click", function () {
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
       const open = panel.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
@@ -13,6 +14,15 @@
       }
     });
   }
+
+  document.querySelectorAll(".lang-menu, .nav-dropdown").forEach(function (menu) {
+    menu.addEventListener("toggle", function () {
+      if (!menu.open) return;
+      document.querySelectorAll(".lang-menu, .nav-dropdown").forEach(function (other) {
+        if (other !== menu) other.removeAttribute("open");
+      });
+    });
+  });
 
   const article = document.querySelector("article.page-content");
   const tocNav = document.getElementById("page-toc");

@@ -54,6 +54,7 @@ Approfondissement optionnel : [[concepts/miden-kurai-no-koto|Miden Kurai-no-Koto
 ## Élèves internationaux (ONLINE / KIWAMI)
 
 - **Entraînement en direct :** [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) — espace membre pour le keiko en ligne.
+- **Vidéos officielles :** [Chaîne YouTube Tenshinryu](https://www.youtube.com/@tenshinryu/featured) — leçons, démonstrations et retransmissions (complète KIWAMI)
 - **Essais de philosophie** (état d'esprit, pas sport) :
   - [[philosophy/onko-chishin|Onko chishin 温故知新]] — apprendre de l'ancien pour connaître le nouveau
   - [[philosophy/datsuryoku|Datsuryoku]] — relâcher la tension inutile

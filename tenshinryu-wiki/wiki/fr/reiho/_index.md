@@ -8,7 +8,6 @@ updated: 2026-06-30
 ---
 
 # Reihō et culture
-
 Étiquette, tenue et conduite quotidienne dans Tenshinryu — à étudier tôt (voir [[guides/start-here|Commencer]]).
 
 | Page | Sujet |

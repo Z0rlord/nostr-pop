@@ -13,13 +13,10 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # Regarding Movement Inside the Dōjō (道場内の動き)
-
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*
 
-Regarding Movement Inside the Dōjō
-★Regarding Movement Inside the Dōjō
 As a general rule, please avoid walking near someone who is swinging a sword.
 The most dangerous situation is passing behind them.
 Even from the sides—or occasionally even the front—accidents can happen when the person is deeply focused or lost in thought and fails to notice others.

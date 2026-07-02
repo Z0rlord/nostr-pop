@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # A Discussion on Apologies (謝罪について)
-
-A Discussion on Apologies│JAPANESE TRADITION TENSHINRYU HYOHO
-A Discussion on Apologies
-A Discussion on Apologies
 **A Discussion on Apologies**
 This is a story about someone who previously defamed Tenshinryu. A person who had repeatedly defamed Tenshinryu on social media in the past recently contacted Tenshinryu through one of its students, expressing a desire to engage with the school.
 At some point, this individual got into arguments on social media with others who were also defaming Tenshinryu and eventually retracted their defamatory statements. However, it was already too late.
@@ -31,34 +27,3 @@ Regrettably, troublesome individuals of this sort have always plagued the martia
 Ishii-sensei often criticized those who pretended to embody bushido without any true foundation, calling them out as engaging in “samurai cosplay.” Unfortunately, such individuals loudly proclaim their own correctness. Many Japanese people today, lacking an understanding of historical traditions, are misled by the falsehoods of these individuals. Foreigners unfamiliar with Japan’s traditional culture are even more vulnerable to such misinformation.
 Even in the *Hagakure*, there are anecdotes about disputes at sakazuki ceremonies escalating into duels. The pride of the samurai was truly a matter of life and death. To insult others was to invite equivalent danger upon oneself.
 While such matters are indeed troublesome, they serve as a reminder of the importance of exercising caution when dealing with members of other schools. For Tenshinryu, let this serve as a lesson to exercise prudence and restraint in our conduct, particularly on social media, and to use such incidents as opportunities to reflect and improve.
-2024-11-17
-Ide’s  lessons#196
-2024-11-22
-The Culture of Kata(Forms) in Japan
-関連する記事
-2021-12-01
-Let’s be careful. Our words build our character.
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-15
-A concern is that students are not improving.
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-09-11
-Right in theory, wrong in practice
-2025-09-11
-Right in theory, wrong in practice
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-29
-for Creators
-2024-11-21
-A Discussion on Apologies

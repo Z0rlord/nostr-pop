@@ -5,7 +5,7 @@ title: "Synthesis"
 pair: ja/synthesis
 tags: ['synthesis']
 sources:
-updated: 2026-06-30
+updated: 2026-07-02
 ---
 # Synthesis
 
@@ -55,7 +55,7 @@ Concept pages: [[concepts/seiho]], [[concepts/tachiai]], [[concepts/kurai/fundam
 | III | [[guides/instructor-3rd-grade/vol-3-principles]] | Principles |
 | IV | [[guides/instructor-3rd-grade/vol-4-beginners]] | Teaching beginners (expanded) |
 
-Philosophy essays reinforce this path: [[philosophy/onko-chishin]] (温故知新 — learn the school's recipe before improvising), [[philosophy/student-improvement]], [[philosophy/correcting-mistakes]]. Consistent with [[dojo/shinanjo-tradition]] — transmission halls (*shinanjo* 指南所) over mere group drill.
+Philosophy essays reinforce this path: [[philosophy/onko-chishin]] (温故知新 — learn the school's recipe before improvising), [[philosophy/spirit-of-chugi]] (忠義 — chūgi and Hagakure, Kuwami Shike), [[philosophy/student-improvement]], [[philosophy/correcting-mistakes]]. Consistent with [[dojo/shinanjo-tradition]] — transmission halls (*shinanjo* 指南所) over mere group drill.
 
 ## Lineage & organization
 
@@ -78,7 +78,16 @@ Modern **Kanto** practice: [[dojo/overview]] — Honbu and seven branch pages. I
 
 [[articles/p-29]] — **bugō** (武号) naming culture; explains Nakamura Tenshin's martial name and Kuwami's surname adoption.
 
-[[philosophy/]] — thought essays from international.tenshinryu.net (datsuryoku, kata culture, nature worship, tradition vs change, …).
+[[philosophy/]] — thought essays from international.tenshinryu.net and instructor community (datsuryoku, kata culture, [[philosophy/spirit-of-chugi|chūgi / Hagakure]], nature worship, tradition vs change, …).
+
+## External resources
+
+Official channels outside this wiki:
+
+- [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) — scheduled online keiko and member curriculum
+- [Tenshinryu YouTube](https://www.youtube.com/@tenshinryu/featured) — public lessons, technique demos, and event streams
+- [international.tenshinryu.net](https://international.tenshinryu.net/) — federation branches and announcements
+- [[community/tenshinryu-hyoho-facebook|Tenshinryu Hyoho Official Community (Facebook)]] — private members forum
 
 ## Sources & maintenance
 

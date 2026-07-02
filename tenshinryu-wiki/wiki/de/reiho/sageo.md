@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/reiho/sageo.md) · [Japanisch](../../ja/reiho/sageo.md).
 
-**About the Sageo** — Vorläufige Zusammenfassung: About the Sageo│JAPANESE TRADITION TENSHINRYU HYOHO
+**About the Sageo** — Vorläufige Zusammenfassung: About the Sageo

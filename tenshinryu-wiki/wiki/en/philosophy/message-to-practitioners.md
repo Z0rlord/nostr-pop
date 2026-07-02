@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # A message to all Tenshin-ryu practitioners and those who are interested (修行者へのメッセージ)
-
-A message to all Tenshin-ryu practitioners and those who are interested│JAPANESE TRADITION TENSHINRYU HYOHO
-A message to all Tenshin-ryu practitioners and those who are interested
-A message to all Tenshin-ryu practitioners and those who are interested
 I would like to convey this message to all Tenshin-ryu practitioners and those who are interested.
 This is a special story unique to Tenshin-ryu, regardless of other schools.
 We have egos. This is important.
@@ -165,39 +161,3 @@ I’m not talking about any particular issue, but about everything.
 A long time ago, I belonged to a large martial arts organization. It’s a very problematic situation that has been going on for decades and probably still continues today.
 I recognize this as a bad example, and have been controlling Tenshin-ryu so far to prevent it from happening.
 This is the current Tenshin-ryu way of thinking, but at the same time, it is just a modern application of the teachings of Katsujinken included in Tenshin-ryu.
-Expressing this idea does not make the problems that arise go away.
-However, I hope that this can be prevented or the problem reduced in size.
-The important thing is that we always share our ideas.
-We are not afraid to make mistakes, face each problem one by one, and constantly grow.
-Tenshinryu Hyoho 10th Shike Kuwami Masakumo
-2024-03-06
-TEXO INFORMACION DRIVE TRH ONLINE ESPAÑOL
-2024-03-22
-Greek Keikokai Certification
-関連する記事
-2024-07-09
-Doubts about Changes in Tradition
-2025-01-19
-Onko Chishin 温故知新
-2024-11-21
-A Discussion on Apologies
-2025-05-26
-Regarding Movement Inside the Dōjō
-2024-11-15
-A concern is that students are not improving.
-2025-09-11
-Right in theory, wrong in practice
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-29
-for Creators
-2024-11-21
-A Discussion on Apologies

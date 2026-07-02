@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/reiho/traditional-costume.md) · [giapponese](../../ja/reiho/traditional-costume.md).
 
-**Traditional Costume Photo Album (Data Version) Vol. 2!** — Riassunto provvisorio: Traditional Costume Photo Album (Data Version) Vol. 2!│JAPANESE TRADITION TENSHINRYU HYOHO
+**Traditional Costume Photo Album (Data Version) Vol. 2!** — Riassunto provvisorio: Traditional Costume Photo Album (Data Version) Vol. 2!

@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consultez la version en [anglais](../../en/reiho/dojo-movement.md) · [japonais](../../ja/reiho/dojo-movement.md).
 
-**Regarding Movement Inside the Dōjō** — Résumé provisoire : Regarding Movement Inside the Dōjō│JAPANESE TRADITION TENSHINRYU HYOHO
+**Regarding Movement Inside the Dōjō** — Résumé provisoire : Regarding Movement Inside the Dōjō

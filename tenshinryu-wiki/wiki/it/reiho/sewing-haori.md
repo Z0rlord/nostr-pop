@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/reiho/sewing-haori.md) · [giapponese](../../ja/reiho/sewing-haori.md).
 
-**A scene of sewing.** — Riassunto provvisorio: A scene of sewing.│JAPANESE TRADITION TENSHINRYU HYOHO
+**A scene of sewing.** — Riassunto provvisorio: A scene of sewing.

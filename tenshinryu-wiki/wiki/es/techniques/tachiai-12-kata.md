@@ -12,7 +12,6 @@ updated: 2026-06-29
 ---
 
 # Tachiai Battojutsu — 12 Seihō (勢法)
-
 Currículo avanzado de desenfundado y corte de pie de [[arts/battojutsu]]. Panorama del autor por **Kuwami Masakumo**, 10.º Shike (copyright 2020). Enseñanza confidencial (門外不出).
 
 Véase [[concepts/seiho]] para terminología. El texto japonés añade **術歌** (*jutka*) para varias técnicas.

@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consultez la version en [anglais](../../en/philosophy/kata-culture.md) · [japonais](../../ja/philosophy/kata-culture.md).
 
-**The Culture of Kata(Forms) in Japan** — Résumé provisoire : The Culture of Kata(Forms) in Japan│JAPANESE TRADITION TENSHINRYU HYOHO
+**The Culture of Kata(Forms) in Japan** — Résumé provisoire : The Culture of Kata(Forms) in Japan

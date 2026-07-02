@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 1 — Omokage (面陰)
-
 ![Seiho 1: Omokage 面陰](/assets/tachiai-12-kata/omokage/%E9%9D%A2%E9%99%B0.jpg)
 
 | | |

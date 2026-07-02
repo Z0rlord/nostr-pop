@@ -2,6 +2,64 @@
 
 Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 
+## [2026-07-02] fix | Restore Start Here — persistent header CTA + home card
+
+- **Issue:** User report — Start Here not visible after nav UX fix (7bbdd438); category card removed from home; on ≤992px entire nav (incl. Start Here) hidden behind hamburger.
+- **Fix:** `nav-cta-persistent` in header row 1 (always visible, all viewports); solid accent CTA styling (matches hero button); restored Start Here as first category card (`category-card-cta`) in `index_cards_for()` all 7 langs; footer `footer-cta` emphasis; nav panel skips duplicate Start Here.
+- **Files:** `_nav.html.j2`, `index_page.html.j2`, `_footer.html.j2`, `style.css`, `build-site.py`
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 full atomic tarball (`DEPLOY_EXIT=0`, ~38 min) — HTML/CSS rsync applied fix live during upload
+- **Verify:** https://wiki.tenshinryu.xyz/en/ — `nav-cta-persistent`, `category-card-cta`, `footer-cta`; `/en/guides/start-here` active CTA; localized labels en/ja/es/el/fr/de/it
+
+## [2026-07-02] fix | Nav UX regression — header crowding + duplicate index H1
+
+- **Issue:** After adding FR/DE/IT lang switcher (7 codes inline), sticky header wrapped badly on desktop/tablet; home had triple Start Here (nav CTA + hero + card), duplicate H1 (`hero` + body `# Tenshinryu Hyoho Wiki (English)`), pointless Home-only breadcrumb; brand title hardcoded Japanese on all locales.
+- **Fix:** Two-row header grid — brand + search + lang dropdown (row 1), nav links (row 2); Curriculum → dropdown (Arts / 12 Seiho / Kurai); hamburger at ≤992px; removed Start Here from category cards (7 cards); strip index body H1 at build; hide index breadcrumbs; localized `site_subtitle` in nav; shorter nav labels (Shinanjo).
+- **Files:** `_nav.html.j2`, `style.css`, `nav.js`, `build-site.py` (`curriculum_subnav_for`, `nav_items_for`, `index_cards_for`, index H1 strip).
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 targeted rsync (assets + HTML; full 1.4G tarball skipped)
+- **Verify:** https://wiki.tenshinryu.xyz/en/ — single H1, lang dropdown, curriculum submenu, no Home breadcrumb
+
+## [2026-07-02] fix | Seiho photos + clickable bare URLs
+
+- **Issue:** ES/EL/FR/DE/IT seihō subpages had no kata reference photos (only EN/JA markdown had `![](/assets/tachiai-12-kata/…)`). Philosophy/article pages with bare `https://` lines (e.g. `correcting-mistakes`, `kata-culture`) rendered as plain text, not links.
+- **Fix:** `build-site.py` — `inject_seiho_photo()` copies hero image line from EN when locale omits it; `autolink_bare_urls()` wraps bare URLs (skips fenced code); `postprocess_html()` adds `target="_blank" rel="noopener noreferrer"` on external links and wraps seihō `<img>` in `<figure class="seiho-hero">`. `style.css` — `.page-content img` sizing/border.
+- **Verify:** `/es/techniques/tachiai-12-kata/omokage` shows 面陰 photo; `/en/philosophy/correcting-mistakes` Amazon link clickable; `/en/philosophy/spirit-of-chugi` Hagakure sagalibdb links open in new tab.
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2
+
+## [2026-07-02] resource | Official YouTube channel links
+
+- **URL:** [youtube.com/@tenshinryu/featured](https://www.youtube.com/@tenshinryu/featured)
+- **Pages updated:** `wiki/en|ja/guides/start-here`, `wiki/en|ja/index`, `wiki/en|ja/synthesis`, `wiki/en|ja/community/tenshinryu-hyoho-facebook`; `wiki/de|fr|it/guides/start-here`; `wiki/de|es|el|fr|it/index`
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 atomic deploy complete (`DEPLOY_EXIT=0`) — live `/en/guides/start-here` shows YouTube link
+
+## [2026-07-01] fix | Duplicate wiki titles — scrape boilerplate cleanup
+
+- **Root cause:** international.tenshinryu.net ingest left page chrome in markdown (repeated title lines, `│JAPANESE TRADITION TENSHINRYU HYOHO` banner, prev/next + `関連する記事` footers, duplicate kanji in H1 e.g. `温故知新 (温故知新)`). `clean-scrape-noise.py` only stripped lines immediately after a leading H1 — missed stub-banner pages (es/el) and mid-body title repeats.
+- **Fix:** `clean-scrape-noise.py` — find H1 after preamble, `filter_scrape_title_lines` body-wide, `dedupe_consecutive_headings`; batch-cleaned **142** wiki files. `build-site.py` — `sanitize_body()` at build time; `page.html.j2` renders `<h1 class="page-title">` only when body H1 exactly matches frontmatter `title` (else richer markdown H1 kept).
+- **Example:** `onko-chishin` — before: H1 + 3 title repeats + banner + footer junk; after: one `<h1 class="page-title">Onko Chishin (温故知新)</h1>` then prose.
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 partial rsync (`philosophy/` + `reiho/` all langs) after 1.4G tarball upload stalled — HTTP **200** live `/en/philosophy/onko-chishin`, no scrape banner
+
+## [2026-07-01] fix | Chūgi page — restore Hagakure section kanji headers
+
+- **Issue:** Ingest reformatted Hagakure passage labels to English-only `Section N — …` headings; body kanji were preserved but section headers lost `Hagakure (葉隠), Kikigaki Daiichi (聞書第一)` glosses from the Facebook original.
+- **Fix:** Restored full section headers, passage/commentary labels, and intro/conclusion headings on `wiki/en/philosophy/spirit-of-chugi.md`.
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 — HTTP **200** `/en/philosophy/spirit-of-chugi`
+
+## [2026-07-01] ingest | On the Spirit of Chūgi (Facebook)
+
+- **Raw:** `raw/community/kuwami-spirit-of-chugi-2025-06.md` — Kuwami Masakumo admin post, Tenshinryu Hyoho Official Community (Facebook), 2026-06-26
+- **Pages created:** `wiki/en/philosophy/spirit-of-chugi.md` (full EN lesson + 14 Hagakure passages), `wiki/ja/philosophy/spirit-of-chugi.md` (JA hub), `wiki/en|ja/community/tenshinryu-hyoho-facebook.md`, `wiki/en|ja/sources/kuwami-spirit-of-chugi-2025-06.md`; stubs es/el/fr/de/it
+- **Cross-links:** `people/kuwami-masakumo`, `synthesis`, `guides/start-here`, all locale indexes
+- **External:** [Saga Library Hagakure](https://www.sagalibdb.jp/hagakure/list02); brief DojoPop practice log note in community page
+- **Lint:** OK · **Build:** 5019 pages · **Deploy:** relay-2 atomic tarball — HTTP **200** `/en/philosophy/spirit-of-chugi`
+
+## [2026-07-01] ingest | On the Spirit of Chūgi (忠義) — Kuwami Masakumo
+
+- **Raw:** `raw/community/kuwami-spirit-of-chugi-2025-06.md` (Facebook group clip, UI stripped)
+- **Pages created:** `wiki/en/philosophy/spirit-of-chugi.md` (full EN), `wiki/ja/philosophy/spirit-of-chugi.md` (JA hub + summary), `wiki/en|ja/community/tenshinryu-hyoho-facebook.md`, `wiki/en|ja/sources/kuwami-spirit-of-chugi-2025-06.md`
+- **Locale stubs:** es/el/fr/de/it `philosophy/spirit-of-chugi`
+- **Cross-links:** `people/kuwami-masakumo`, `synthesis`, `guides/start-here`, en/ja `index`
+- **Notes:** Post date 2026-06-26 (group feed + Zorie practice shorts same week; DojoPop mention on community page only). Hagakure ref: sagalibdb.jp/hagakure/list02. JA full translation deferred.
+
 ## [2026-06-30] i18n | French, German, Italian locales (7 langs)
 
 - **Added** `fr`, `de`, `it` to `LANGS` in `scripts/build-site.py` — `ui_strings`, `nav_items_for`, `section_labels`, `index_cards_for`, breadcrumbs, graph labels; lang switcher in `_nav.html.j2`, `_footer.html.j2`, `home.html.j2`
@@ -288,3 +346,15 @@ Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 - **Files:** `wiki/en/index.md`, `wiki/es/index.md`, `wiki/el/index.md`, `wiki/en/history/instructors.md`
 - `en/synthesis.md` and es/el synthesis bullet lists were already correct; JA index lists only 9th shike
 - Lint OK; build + deploy to relay-2
+
+## [2026-07-01] deploy | Chūgi lesson pages live
+
+- Live check: `/en/philosophy/spirit-of-chugi` and `/en/community/tenshinryu-hyoho-facebook` were 404
+- `uv run python scripts/build-site.py` (5019 pages); `./deploy.sh relay-2` (concurrent rsync completed)
+- Verified both URLs 200
+
+## [2026-07-02] deploy | Full atomic relay-2
+
+- lint OK; build **5019** pages; `./deploy.sh relay-2 --skip-build` (~26m, Tailscale was down initially)
+- Staged **5343** files; docker recreate on :3014
+- Health (wiki.tenshinryu.xyz): `/` `/en/philosophy/onko-chishin` `/en/philosophy/spirit-of-chugi` `/fr/guides/start-here` `/ja/` — all 200

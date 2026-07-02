@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/philosophy/nature-worship.md) · [Japanisch](../../ja/philosophy/nature-worship.md).
 
-**Nature Worship and the Spirit of Respect in Japan** — Vorläufige Zusammenfassung: Nature Worship and the Spirit of Respect in Japan│JAPANESE TRADITION TENSHINRYU HYOHO
+**Nature Worship and the Spirit of Respect in Japan** — Vorläufige Zusammenfassung: Nature Worship and the Spirit of Respect in Japan

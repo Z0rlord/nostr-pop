@@ -11,7 +11,6 @@ sources:
 updated: 2026-06-29
 ---
 # 立相抜刀術 — 十二本の勢法
-
 ![12 Kata](/assets/promo/12%20kata%20promo.jpg)
 
 [[arts/battojutsu]] の上級立ち抜きカリキュラム。**第十世師家 鍬海政雲** による解説テキスト（門外不出）。

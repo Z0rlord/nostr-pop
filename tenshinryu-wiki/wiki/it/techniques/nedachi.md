@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/techniques/nedachi.md) · [giapponese](../../ja/techniques/nedachi.md).
 
-**&#8220;Nedachi (寝太刀)&#8221;** — Riassunto provvisorio: “Nedachi (寝太刀)”│JAPANESE TRADITION TENSHINRYU HYOHO
+**&#8220;Nedachi (寝太刀)&#8221;** — Riassunto provvisorio: “Nedachi (寝太刀)”

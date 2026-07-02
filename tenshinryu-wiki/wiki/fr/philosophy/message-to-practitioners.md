@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consultez la version en [anglais](../../en/philosophy/message-to-practitioners.md) · [japonais](../../ja/philosophy/message-to-practitioners.md).
 
-**A message to all Tenshin-ryu practitioners and those who are interested** — Résumé provisoire : A message to all Tenshin-ryu practitioners and those who are interested│JAPANESE TRADITION TENSHINRYU HYOHO
+**A message to all Tenshin-ryu practitioners and those who are interested** — Résumé provisoire : A message to all Tenshin-ryu practitioners and those who are interested

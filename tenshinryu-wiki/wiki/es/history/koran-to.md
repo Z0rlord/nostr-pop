@@ -12,8 +12,7 @@ updated: '2026-06-30'
 
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
-# &#8220;Koran-To (虎乱刀)&#8221; from TENSHINRYU (虎乱刀)
-
+# &#8220;Koran-To ()&#8221; from TENSHINRYU (虎乱刀)
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*

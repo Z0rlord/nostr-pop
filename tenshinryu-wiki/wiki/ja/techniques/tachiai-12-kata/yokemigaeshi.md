@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 五 — 避身返・逃身返
-
 ![勢法五：避身返・逃身返（よけみがえし・にげみがえし）](/assets/tachiai-12-kata/yokemigaeshi/%E9%99%B0/DSC_0244.JPG)
 
 | | |

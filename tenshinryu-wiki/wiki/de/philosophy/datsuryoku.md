@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/philosophy/datsuryoku.md) · [Japanisch](../../ja/philosophy/datsuryoku.md).
 
-**Datsuryoku: Releasing Unnecessary Tension** — Vorläufige Zusammenfassung: Datsuryoku: Releasing Unnecessary Tension│JAPANESE TRADITION TENSHINRYU HYOHO
+**Datsuryoku: Releasing Unnecessary Tension** — Vorläufige Zusammenfassung: Datsuryoku: Releasing Unnecessary Tension

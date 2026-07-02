@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # Misunderstandings and problems of Japanese traditional martial arts (古武道の誤解)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-Misunderstandings and problems of Japanese traditional martial arts
 I would like to introduce two theories.
 One is about the establishment of traditional martial arts that are only slow.
 The other is the neglect and decline of kata training that began especially after the middle of the Edo period.

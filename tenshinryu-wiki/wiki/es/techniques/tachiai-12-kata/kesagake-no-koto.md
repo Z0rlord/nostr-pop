@@ -15,7 +15,6 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # 12 — Kesagake-no-koto (袈裟懸ノ事)
-
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*

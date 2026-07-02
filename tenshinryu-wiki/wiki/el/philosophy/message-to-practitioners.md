@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # A message to all Tenshin-ryu practitioners and those who are interested (修行者へのメッセージ)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-A message to all Tenshin-ryu practitioners and those who are interested
 I would like to convey this message to all Tenshin-ryu practitioners and those who are interested.
 This is a special story unique to Tenshin-ryu, regardless of other schools.
 We have egos. This is important.

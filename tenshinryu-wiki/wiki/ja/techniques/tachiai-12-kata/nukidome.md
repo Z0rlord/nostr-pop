@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 三 — 抜留（ぬきどめ）
-
 ![勢法三：抜留（ぬきどめ）](/assets/tachiai-12-kata/nukidome/%E6%8A%9C%E7%95%99.jpg)
 
 | | |

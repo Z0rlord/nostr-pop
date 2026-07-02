@@ -25,8 +25,16 @@ LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+?)(?:\|([^\]]+?))?\]\]")
+H1_LINE_RE = re.compile(r"^#\s+")
 # Anchor group must not consume the closing ")" — old [#)] char-class broke table links.
 MD_LINK_RE = re.compile(r"(\[[^\]]+\]\()([^)#]+?\.md)(#[^)]*)?\)")
+IMG_MD_RE = re.compile(r"^!\[[^\]]*\]\(/assets/(?:tachiai-12-kata|promo)/[^)]+\)\s*$", re.M)
+BARE_URL_LINE_RE = re.compile(r"^(https?://\S+)\s*$", re.M)
+BARE_URL_INLINE_RE = re.compile(r'(?<![\[\(])(https?://[^\s<>\[\]()"\']+)(?![\]\)])')
+EXTERNAL_A_RE = re.compile(r'<a\s+href="(https?://[^"]+)"([^>]*)>')
+SEIHO_IMG_HTML_RE = re.compile(
+    r'<p>\s*(<img[^>]+src="/assets/(?:tachiai-12-kata|promo)/[^"]+"[^>]*>)\s*</p>'
+)
 
 
 @dataclass
@@ -130,7 +138,123 @@ def md_link_to_html(href: str, page_lang: str, page_slug: str) -> str:
     return url_for_slug(page_lang, href)
 
 
-def transform_markdown(body: str, page: Page, pages: dict[tuple[str, str], Page]) -> str:
+def find_body_h1_index(lines: list[str]) -> int | None:
+    for i, line in enumerate(lines):
+        if H1_LINE_RE.match(line) and not line.startswith("## "):
+            return i
+    return None
+
+
+def strip_duplicate_title_h1(body: str, title: str) -> tuple[str, bool]:
+    """Drop body H1 when it exactly matches frontmatter title (template renders one H1)."""
+    lines = body.splitlines()
+    h1_idx = find_body_h1_index(lines)
+    if h1_idx is None:
+        return body, False
+    h1_text = lines[h1_idx][2:].strip()
+    if h1_text != title.strip():
+        return body, False
+    new_lines = lines[:h1_idx] + lines[h1_idx + 1 :]
+    while h1_idx < len(new_lines) and not new_lines[h1_idx].strip():
+        new_lines.pop(h1_idx)
+    return "\n".join(new_lines), True
+
+
+def sanitize_body(body: str, title: str) -> tuple[str, bool]:
+    """Remove scrape boilerplate; return (body, strip_title_h1_for_template)."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "clean_scrape_noise", ROOT / "scripts" / "clean-scrape-noise.py"
+    )
+    if spec is None or spec.loader is None:
+        return body, False
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    cleaned, _ = mod.clean_body(body, title)
+    stripped, use_template_h1 = strip_duplicate_title_h1(cleaned, title)
+    return stripped, use_template_h1
+
+
+def seiho_image_line_from_en(slug: str) -> str | None:
+    """Return markdown image line for a seiho subpage or hub from the EN source."""
+    en_md = WIKI / "en" / f"{slug}.md"
+    if not en_md.is_file():
+        return None
+    _, body = parse_frontmatter(en_md.read_text(encoding="utf-8"))
+    m = IMG_MD_RE.search(body)
+    return m.group(0).strip() if m else None
+
+
+def inject_seiho_photo(body: str, slug: str) -> str:
+    """Add kata reference photo from EN when locale markdown omits it."""
+    if not slug.startswith("techniques/tachiai-12-kata"):
+        return body
+    if IMG_MD_RE.search(body):
+        return body
+    img_line = seiho_image_line_from_en(slug)
+    if not img_line:
+        return body
+    lines = body.splitlines()
+    h1_idx = find_body_h1_index(lines)
+    insert_at = (h1_idx + 1) if h1_idx is not None else 0
+    while insert_at < len(lines) and not lines[insert_at].strip():
+        insert_at += 1
+    lines.insert(insert_at, img_line)
+    lines.insert(insert_at + 1, "")
+    return "\n".join(lines)
+
+
+def autolink_bare_urls(body: str) -> str:
+    """Turn bare https?:// URLs into markdown links (skips fenced code blocks)."""
+
+    def line_sub(m: re.Match[str]) -> str:
+        url = m.group(1).rstrip(".,;:)」』、。")
+        return f"[{url}]({url})"
+
+    lines_out: list[str] = []
+    in_fence = False
+    for line in body.splitlines():
+        if line.strip().startswith("```"):
+            in_fence = not in_fence
+            lines_out.append(line)
+            continue
+        if in_fence or "](http" in line:
+            lines_out.append(line)
+            continue
+        if BARE_URL_LINE_RE.match(line):
+            lines_out.append(BARE_URL_LINE_RE.sub(line_sub, line))
+        else:
+            lines_out.append(BARE_URL_INLINE_RE.sub(line_sub, line))
+    return "\n".join(lines_out)
+
+
+def postprocess_html(html: str, page: Page) -> str:
+    """External-link safety, seiho figure styling."""
+
+    def external_attrs(m: re.Match[str]) -> str:
+        href, rest = m.group(1), m.group(2)
+        if 'target="' in rest:
+            return m.group(0)
+        return f'<a href="{href}" target="_blank" rel="noopener noreferrer"{rest}>'
+
+    html = EXTERNAL_A_RE.sub(external_attrs, html)
+
+    if page.slug.startswith("techniques/tachiai-12-kata"):
+
+        def seiho_figure(m: re.Match[str]) -> str:
+            return f'<figure class="seiho-hero">{m.group(1)}</figure>'
+
+        html = SEIHO_IMG_HTML_RE.sub(seiho_figure, html)
+
+    return html
+
+
+def transform_markdown(
+    body: str, page: Page, pages: dict[tuple[str, str], Page], *, use_template_h1: bool = False
+) -> str:
+    body = inject_seiho_photo(body, page.slug)
+
     def wikilink_sub(m: re.Match[str]) -> str:
         target, label = m.group(1), m.group(2)
         href, ok = resolve_wikilink(target, page.lang, pages)
@@ -152,12 +276,14 @@ def transform_markdown(body: str, page: Page, pages: dict[tuple[str, str], Page]
         return f"{prefix}{new_href}{suffix}"
 
     body = MD_LINK_RE.sub(md_link_sub, body)
+    body = autolink_bare_urls(body)
 
-    return markdown.markdown(
+    html = markdown.markdown(
         body,
         extensions=["tables", "fenced_code", "sane_lists", "nl2br"],
         output_format="html5",
     )
+    return postprocess_html(html, page)
 
 
 def copy_raw_assets() -> int:
@@ -341,71 +467,119 @@ def section_hub(lang: str, section: str) -> str | None:
     return url_for_slug(lang, target) if target else None
 
 
+def curriculum_subnav_for(lang: str) -> list[dict]:
+    """Curriculum dropdown links (arts, seiho, kurai)."""
+    defs = {
+        "en": [
+            ("Arts", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "ja": [
+            ("兵法", "arts/_index"),
+            ("十二勢法", "techniques/tachiai-12-kata"),
+            ("位", "concepts/miden-kurai-no-koto"),
+        ],
+        "es": [
+            ("Artes", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "el": [
+            ("Τέχνες", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "fr": [
+            ("Arts", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "de": [
+            ("Künste", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "it": [
+            ("Arti", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+    }
+    return [
+        {"label": label, "href": url_for_slug(lang, target)}
+        for label, target in defs.get(lang, defs["en"])
+    ]
+
+
 def nav_items_for(lang: str, slug: str) -> list[dict]:
     """Student-focused primary navigation."""
     defs = {
         "en": [
-            ("start_here", "Start Here", "guides/start-here", True),
-            ("curriculum", "Curriculum", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Philosophy", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Articles", "articles/_index", False),
+            ("start_here", "Start Here", "guides/start-here", True, False),
+            ("curriculum", "Curriculum", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Philosophy", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Articles", "articles/_index", False, False),
         ],
         "ja": [
-            ("start_here", "はじめに", "guides/start-here", True),
-            ("curriculum", "カリキュラム", "arts/_index", False),
-            ("reiho", "礼法", "reiho/_index", False),
-            ("philosophy", "思想", "philosophy/onko-chishin", False),
-            ("dojo", "指南所（道場）", "dojo/overview", False),
-            ("articles", "記事", "articles/_index", False),
+            ("start_here", "はじめに", "guides/start-here", True, False),
+            ("curriculum", "カリキュラム", "arts/_index", False, True),
+            ("reiho", "礼法", "reiho/_index", False, False),
+            ("philosophy", "思想", "philosophy/onko-chishin", False, False),
+            ("dojo", "指南所", "dojo/overview", False, False),
+            ("articles", "記事", "articles/_index", False, False),
         ],
         "es": [
-            ("start_here", "Empezar", "guides/start-here", True),
-            ("curriculum", "Currículo", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Filosofía", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Artículos", "articles/_index", False),
+            ("start_here", "Empezar", "guides/start-here", True, False),
+            ("curriculum", "Currículo", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Filosofía", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Artículos", "articles/_index", False, False),
         ],
         "el": [
-            ("start_here", "Ξεκινήστε", "guides/start-here", True),
-            ("curriculum", "Πρόγραμμα", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Φιλοσοφία", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Άρθρα", "articles/_index", False),
+            ("start_here", "Ξεκινήστε", "guides/start-here", True, False),
+            ("curriculum", "Πρόγραμμα", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Φιλοσοφία", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Άρθρα", "articles/_index", False, False),
         ],
         "fr": [
-            ("start_here", "Commencer", "guides/start-here", True),
-            ("curriculum", "Programme", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Philosophie", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Articles", "articles/_index", False),
+            ("start_here", "Commencer", "guides/start-here", True, False),
+            ("curriculum", "Programme", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Philosophie", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Articles", "articles/_index", False, False),
         ],
         "de": [
-            ("start_here", "Einstieg", "guides/start-here", True),
-            ("curriculum", "Lehrplan", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Philosophie", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Artikel", "articles/_index", False),
+            ("start_here", "Einstieg", "guides/start-here", True, False),
+            ("curriculum", "Lehrplan", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Philosophie", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Artikel", "articles/_index", False, False),
         ],
         "it": [
-            ("start_here", "Inizia qui", "guides/start-here", True),
-            ("curriculum", "Programma", "arts/_index", False),
-            ("reiho", "Reiho", "reiho/_index", False),
-            ("philosophy", "Filosofia", "philosophy/onko-chishin", False),
-            ("dojo", "Shinanjo (dojo)", "dojo/overview", False),
-            ("articles", "Articoli", "articles/_index", False),
+            ("start_here", "Inizia qui", "guides/start-here", True, False),
+            ("curriculum", "Programma", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Filosofia", "philosophy/onko-chishin", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Articoli", "articles/_index", False, False),
         ],
     }
     items: list[dict] = []
     section = slug.split("/")[0] if "/" in slug else slug
-    for key, label, target, cta in defs.get(lang, defs["en"]):
+    curriculum_sections = {"arts", "techniques", "concepts"}
+    for key, label, target, cta, sub in defs.get(lang, defs["en"]):
         active = slug == target or (key != "start_here" and section == target.split("/")[0])
         if key == "start_here" and slug.startswith("guides/"):
+            active = True
+        if key == "curriculum" and section in curriculum_sections:
             active = True
         items.append(
             {
@@ -414,6 +588,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
                 "href": url_for_slug(lang, target),
                 "active": active,
                 "cta": cta,
+                "sub": sub,
             }
         )
     return items
@@ -431,9 +606,9 @@ def build_breadcrumbs(
         "de": "Start",
         "it": "Home",
     }
-    crumbs: list[dict] = [{"label": home_labels.get(lang, "Home"), "href": url_for_slug(lang, "index")}]
     if slug == "index":
-        return crumbs
+        return []
+    crumbs: list[dict] = [{"label": home_labels.get(lang, "Home"), "href": url_for_slug(lang, "index")}]
     if slug == "graph":
         graph_labels = {
             "en": "Graph",
@@ -471,79 +646,79 @@ def build_breadcrumbs(
 def index_cards_for(lang: str) -> list[dict]:
     cards = {
         "en": [
-            ("Start Here", "Week 1 checklist & curriculum map", "guides/start-here"),
-            ("Arts", "Eight hyoho arts + battojutsu", "arts/_index"),
-            ("12 Seiho", "Tachiai battojutsu curriculum", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Miden body positions & stances", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Etiquette, dress, dojo conduct", "reiho/_index"),
-            ("Philosophy", "Essays on practice & tradition", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Japan branches & schedules", "dojo/overview"),
-            ("Articles", "Blog archive (291 posts)", "articles/_index"),
+            ("Start Here", "Week 1 checklist & curriculum map", "guides/start-here", True),
+            ("Arts", "Eight hyoho arts + battojutsu", "arts/_index", False),
+            ("12 Seiho", "Tachiai battojutsu curriculum", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Miden body positions & stances", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Etiquette, dress, dojo conduct", "reiho/_index", False),
+            ("Philosophy", "Essays on practice & tradition", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Japan branches & schedules", "dojo/overview", False),
+            ("Articles", "Blog archive (291 posts)", "articles/_index", False),
         ],
         "ja": [
-            ("はじめに", "第1週チェックリスト・カリキュラム", "guides/start-here"),
-            ("兵法", "八つの art と抜刀術", "arts/_index"),
-            ("十二勢法", "立相抜刀術カリキュラム", "techniques/tachiai-12-kata"),
-            ("位", "身伝・位の事", "concepts/miden-kurai-no-koto"),
-            ("礼法", "礼儀・装束・道場", "reiho/_index"),
-            ("思想", "修行と伝統のエッセイ", "philosophy/onko-chishin"),
-            ("指南所（道場）", "稽古場・日程", "dojo/overview"),
-            ("記事", "ブログアーカイブ（291件）", "articles/_index"),
+            ("はじめに", "第1週チェックリスト・カリキュラム", "guides/start-here", True),
+            ("兵法", "八つの art と抜刀術", "arts/_index", False),
+            ("十二勢法", "立相抜刀術カリキュラム", "techniques/tachiai-12-kata", False),
+            ("位", "身伝・位の事", "concepts/miden-kurai-no-koto", False),
+            ("礼法", "礼儀・装束・道場", "reiho/_index", False),
+            ("思想", "修行と伝統のエッセイ", "philosophy/onko-chishin", False),
+            ("指南所（道場）", "稽古場・日程", "dojo/overview", False),
+            ("記事", "ブログアーカイブ（291件）", "articles/_index", False),
         ],
         "es": [
-            ("Empezar", "Semana 1 y mapa del currículo", "guides/start-here"),
-            ("Artes", "Ocho artes de hyoho", "arts/_index"),
-            ("12 Seiho", "Currículo de battojutsu", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Posiciones del Miden", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Etiqueta y conducta", "reiho/_index"),
-            ("Filosofía", "Ensayos sobre la práctica", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Sedes en Japón", "dojo/overview"),
-            ("Artículos", "Archivo del blog", "articles/_index"),
+            ("Empezar", "Semana 1 y mapa del currículo", "guides/start-here", True),
+            ("Artes", "Ocho artes de hyoho", "arts/_index", False),
+            ("12 Seiho", "Currículo de battojutsu", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Posiciones del Miden", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Etiqueta y conducta", "reiho/_index", False),
+            ("Filosofía", "Ensayos sobre la práctica", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Sedes en Japón", "dojo/overview", False),
+            ("Artículos", "Archivo del blog", "articles/_index", False),
         ],
         "el": [
-            ("Ξεκινήστε", "Εβδομάδα 1 & χάρτης προγράμματος", "guides/start-here"),
-            ("Τέχνες", "Οκτώ τέχνες hyoho", "arts/_index"),
-            ("12 Seiho", "Πρόγραμμα battojutsu", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Θέσεις Miden", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Ετικέτα & συμπεριφορά", "reiho/_index"),
-            ("Φιλοσοφία", "Δοκίμια πρακτικής", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Καταστήματα στην Ιαπωνία", "dojo/overview"),
-            ("Άρθρα", "Αρχείο ιστολογίου", "articles/_index"),
+            ("Ξεκινήστε", "Εβδομάδα 1 & χάρτης προγράμματος", "guides/start-here", True),
+            ("Τέχνες", "Οκτώ τέχνες hyoho", "arts/_index", False),
+            ("12 Seiho", "Πρόγραμμα battojutsu", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Θέσεις Miden", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Ετικέτα & συμπεριφορά", "reiho/_index", False),
+            ("Φιλοσοφία", "Δοκίμια πρακτικής", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Καταστήματα στην Ιαπωνία", "dojo/overview", False),
+            ("Άρθρα", "Αρχείο ιστολογίου", "articles/_index", False),
         ],
         "fr": [
-            ("Commencer", "Semaine 1 et carte du programme", "guides/start-here"),
-            ("Arts", "Huit arts du hyōhō", "arts/_index"),
-            ("12 Seiho", "Programme battojutsu", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Positions Miden", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Étiquette et conduite", "reiho/_index"),
-            ("Philosophie", "Essais sur la pratique", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Dojos au Japon", "dojo/overview"),
-            ("Articles", "Archives du blog", "articles/_index"),
+            ("Commencer", "Semaine 1 et parcours élève", "guides/start-here", True),
+            ("Arts", "Huit arts du hyōhō", "arts/_index", False),
+            ("12 Seiho", "Programme battojutsu", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Positions Miden", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Étiquette et conduite", "reiho/_index", False),
+            ("Philosophie", "Essais sur la pratique", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Dojos au Japon", "dojo/overview", False),
+            ("Articles", "Archives du blog", "articles/_index", False),
         ],
         "de": [
-            ("Einstieg", "Woche 1 & Lehrplanübersicht", "guides/start-here"),
-            ("Künste", "Acht Hyōhō-Künste", "arts/_index"),
-            ("12 Seiho", "Battojutsu-Lehrplan", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Miden-Positionen", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Etikette & Verhalten", "reiho/_index"),
-            ("Philosophie", "Aufsätze zur Praxis", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Dojos in Japan", "dojo/overview"),
-            ("Artikel", "Blog-Archiv", "articles/_index"),
+            ("Einstieg", "Woche 1 & Lehrplan", "guides/start-here", True),
+            ("Künste", "Acht Hyōhō-Künste", "arts/_index", False),
+            ("12 Seiho", "Battojutsu-Lehrplan", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Miden-Positionen", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Etikette & Verhalten", "reiho/_index", False),
+            ("Philosophie", "Aufsätze zur Praxis", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Dojos in Japan", "dojo/overview", False),
+            ("Artikel", "Blog-Archiv", "articles/_index", False),
         ],
         "it": [
-            ("Inizia qui", "Settimana 1 e mappa del programma", "guides/start-here"),
-            ("Arti", "Otto arti del hyōhō", "arts/_index"),
-            ("12 Seiho", "Programma battojutsu", "techniques/tachiai-12-kata"),
-            ("Kurai (位)", "Posizioni Miden", "concepts/miden-kurai-no-koto"),
-            ("Reiho", "Etichetta e condotta", "reiho/_index"),
-            ("Filosofia", "Saggi sulla pratica", "philosophy/onko-chishin"),
-            ("Shinanjo (dojo)", "Dojo in Giappone", "dojo/overview"),
-            ("Articoli", "Archivio del blog", "articles/_index"),
+            ("Inizia qui", "Settimana 1 e percorso", "guides/start-here", True),
+            ("Arti", "Otto arti del hyōhō", "arts/_index", False),
+            ("12 Seiho", "Programma battojutsu", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Posizioni Miden", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Etichetta e condotta", "reiho/_index", False),
+            ("Filosofia", "Saggi sulla pratica", "philosophy/onko-chishin", False),
+            ("Shinanjo (dojo)", "Dojo in Giappone", "dojo/overview", False),
+            ("Articoli", "Archivio del blog", "articles/_index", False),
         ],
     }
     return [
-        {"title": t, "desc": d, "href": url_for_slug(lang, slug)}
-        for t, d, slug in cards.get(lang, cards["en"])
+        {"title": t, "desc": d, "href": url_for_slug(lang, slug), "cta": cta}
+        for t, d, slug, cta in cards.get(lang, cards["en"])
     ]
 
 
@@ -720,6 +895,7 @@ def template_context(
         "slug": slug,
         "alternate": alternate,
         "nav_items": nav_items_for(lang, slug),
+        "curriculum_subnav": curriculum_subnav_for(lang),
         "breadcrumbs": build_breadcrumbs(lang, slug, page.title, pages),
         "active_page": "graph" if slug == "graph" else "page",
         "is_index": slug == "index",
@@ -934,7 +1110,15 @@ def main() -> None:
     for (lang, slug), page in pages.items():
         md_path = WIKI / lang / f"{slug}.md"
         meta, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
-        html_content = transform_markdown(body, page, pages)
+        body, use_template_h1 = sanitize_body(body, page.title)
+        if slug == "index":
+            body, _ = strip_duplicate_title_h1(body, ui_strings(lang)["index_hero_title"])
+            if find_body_h1_index(body.splitlines()) is not None:
+                lines = body.splitlines()
+                h1_idx = find_body_h1_index(lines)
+                body = "\n".join(lines[:h1_idx] + lines[h1_idx + 1 :]).lstrip("\n")
+        body = inject_seiho_photo(body, page.slug)
+        html_content = transform_markdown(body, page, pages, use_template_h1=use_template_h1)
         alternate = pair_urls(page, pages)
         out_dir = DIST / lang / Path(slug).parent if slug != "index" else DIST / lang
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -948,6 +1132,7 @@ def main() -> None:
             description=description,
             content=html_content,
             meta_line=meta_line_html(page),
+            render_page_h1=use_template_h1,
             langs=LANGS,
             **ctx,
         )

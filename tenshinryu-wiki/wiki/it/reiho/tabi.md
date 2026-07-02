@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/reiho/tabi.md) · [giapponese](../../ja/reiho/tabi.md).
 
-**How to Wear Tabi** — Riassunto provvisorio: How to Wear Tabi│JAPANESE TRADITION TENSHINRYU HYOHO
+**How to Wear Tabi** — Riassunto provvisorio: How to Wear Tabi

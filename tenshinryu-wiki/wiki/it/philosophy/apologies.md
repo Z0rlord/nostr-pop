@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/philosophy/apologies.md) · [giapponese](../../ja/philosophy/apologies.md).
 
-**A Discussion on Apologies** — Riassunto provvisorio: A Discussion on Apologies│JAPANESE TRADITION TENSHINRYU HYOHO
+**A Discussion on Apologies** — Riassunto provvisorio: A Discussion on Apologies

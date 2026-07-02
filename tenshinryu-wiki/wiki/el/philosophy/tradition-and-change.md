@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # Doubts about Changes in Tradition (伝統の変化)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-Doubts about Changes in Tradition
 In the martial arts world, it is common to hear questions like, ‘Are the techniques being passed down now really the same as those of the founder?’ Such simple doubts are perfectly natural. They also reflect a sense of curiosity and have academic significance, so they should not be dismissed.
 However, they hold no more value than that.
 Martial arts that have been …

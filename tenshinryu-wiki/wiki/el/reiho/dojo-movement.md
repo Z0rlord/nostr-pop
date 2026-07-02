@@ -13,13 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # Regarding Movement Inside the Dōjō (道場内の動き)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-Regarding Movement Inside the Dōjō
-★Regarding Movement Inside the Dōjō
 As a general rule, please avoid walking near someone who is swinging a sword.
 The most dangerous situation is passing behind them.
 Even from the sides—or occasionally even the front—accidents can happen when the person is deeply focused or lost in thought and fails to notice others.

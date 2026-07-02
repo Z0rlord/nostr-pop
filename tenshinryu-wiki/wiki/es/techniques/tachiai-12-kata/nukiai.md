@@ -15,7 +15,6 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # 2 — Nukiai (抜合 / 抜相)
-
 ## Resumen
 
 ## Resumen

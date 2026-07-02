@@ -1,7 +1,7 @@
 ---
 slug: philosophy/onko-chishin
 lang: el
-title: Onko Chishin 温故知新
+title: "Onko Chishin (温故知新)"
 pair: en/philosophy/onko-chishin
 tags:
 - philosophy
@@ -12,10 +12,7 @@ updated: '2026-06-30'
 
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
-# Onko Chishin 温故知新 (温故知新)
-
-## Περίληψη
-
+# Onko Chishin (温故知新)
 ## Περίληψη
 
 Το **onko chishin** (温故知新) διδάσκει ότι η μάθηση ενός στυλ απαιτεί να ακολουθείς τη «συνταγή» του σχολείου πριν αυτοσχεδιάσεις. Όπως στη μαγειρική, η παράλειψη βημάτων χαλά το αποτέλεσμα.

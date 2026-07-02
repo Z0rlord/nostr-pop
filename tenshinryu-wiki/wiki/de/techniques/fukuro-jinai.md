@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/techniques/fukuro-jinai.md) · [Japanisch](../../ja/techniques/fukuro-jinai.md).
 
-**Fukuro Jinai** — Vorläufige Zusammenfassung: Fukuro Jinai│JAPANESE TRADITION TENSHINRYU HYOHO
+**Fukuro Jinai** — Vorläufige Zusammenfassung: Fukuro Jinai

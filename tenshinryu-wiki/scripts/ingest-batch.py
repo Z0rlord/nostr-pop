@@ -28,9 +28,11 @@ BOILERPLATE_RE = re.compile(
     r"^(?:HOME|CLOSE|キーワード|カテゴリー|タグ|検索|Prev|Next|Private:|"
     r"Introduction of technique|Thought|Tenshinryu Knowledge|"
     r"Japanese Culture|Martial Arts Culture|Movie|NEWS|Seminar|"
-    r"A Guide to Learning|TENSHINRYU ONLINE|What Is Tenshinryu).*$",
+    r"A Guide to Learning|TENSHINRYU ONLINE|What Is Tenshinryu|"
+    r"関連する記事|for Creators).*$",
     re.I,
 )
+BANNER_RE = re.compile(r"JAPANESE TRADITION TENSHINRYU HYOHO", re.I)
 
 # raw/web slug fragment → (entity_path, category, ja_title_hint)
 WEB_ENTITY_MAP: dict[str, tuple[str, str, str]] = {
@@ -140,6 +142,8 @@ def clean_body(body: str) -> str:
         if not s or s.startswith(">") or s.startswith("#"):
             continue
         if BOILERPLATE_RE.match(s):
+            continue
+        if BANNER_RE.search(s):
             continue
         if len(s) < 25 and s.isupper():
             continue

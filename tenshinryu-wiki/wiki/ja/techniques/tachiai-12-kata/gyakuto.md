@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 八 — 逆刀（ぎゃくとう）
-
 ![勢法八：逆刀（ぎゃくとう）](/assets/tachiai-12-kata/gyakuto/%E9%80%86%E5%88%80.jpg)
 
 | | |

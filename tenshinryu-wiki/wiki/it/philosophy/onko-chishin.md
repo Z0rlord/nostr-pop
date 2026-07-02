@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/philosophy/onko-chishin.md) · [giapponese](../../ja/philosophy/onko-chishin.md).
 
-**Onko Chishin 温故知新** — Riassunto provvisorio: Onko Chishin 温故知新│JAPANESE TRADITION TENSHINRYU HYOHO
+**Onko Chishin 温故知新** — Riassunto provvisorio: Onko Chishin 温故知新

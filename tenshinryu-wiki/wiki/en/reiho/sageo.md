@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # About the Sageo (下緒)
-
-About the Sageo│JAPANESE TRADITION TENSHINRYU HYOHO
-About the Sageo
-About the Sageo
 What is the Sageo?
 The Sageo is said to be a remnant of the Tachio (太刀緒), which was used to suspend a tachi (a type of Japanese sword) at the waist. To wear a tachi, the Tachio was tied around the waist, and the Sageo is thought to have evolved from this practice. The Tachio is also known as Hakio (佩緒).
 The style of suspending a sword at the waist can be traced back to the era of the Warabite-tō (蕨手刀), which is considered a prototype of the Japanese sword.
@@ -66,34 +62,3 @@ It is said that this practice emerged after the Meiji period, with one theory at
 This article represents what is considered “correct” within Tenshin-ryū and does not claim that this was the absolute norm or the sole orthodox practice during the samurai era. It simply introduces the traditions passed down in our school, and we have no intention of asserting that anything differing from this is incorrect.
 At present, we have not found historical sources, such as illustrations or documents on customs, that clearly define the binding of the Sageo. On the contrary, descriptions related to the handling of swords suggest that the Sageo was often not tied. For example, there are records stating that the sword and the Sageo were handed over together as a single bundle.
 While we will continue to investigate this topic, the absence of documentation does not necessarily mean such practices did not exist. Additionally, the teachings of a school are specific to that school, and we prioritize preserving and adhering to those teachings above all else.
-2024-11-25
-Tenshinryu Paris seminar
-2024-11-29
-Manners, Etiquette, and Rituals
-関連する記事
-2024-12-28
-Keiko-Osame 稽古納め
-2025-08-29
-How to Wear Tabi
-2025-04-16
-The Technique of Respect
-2024-06-14
-Kesa 袈裟
-2025-10-26
-Etiquette Toward the Kamiza
-2025-10-26
-Etiquette Toward the Kamiza
-2025-08-29
-How to Wear Tabi
-2025-04-16
-The Technique of Respect
-2025-04-09
-Nature Worship and the Spirit of Respect in Japan
-2025-03-22
-Ten Years Since Trademark Registration
-2025-03-06
-In Japan, heads are not displayed in homes.
-2024-12-28
-Keiko-Osame 稽古納め
-2024-11-26
-About the Sageo

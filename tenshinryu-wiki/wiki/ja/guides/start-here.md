@@ -7,7 +7,7 @@ tags: [guides, pedagogy, student]
 sources:
   - wiki/ja/techniques/tachiai-12-kata.md
   - wiki/ja/guides/instructor-3rd-grade/vol-2-training-flow.md
-updated: 2026-06-30
+updated: 2026-07-02
 ---
 
 # はじめに — 門人向け入門ガイド
@@ -54,6 +54,7 @@ updated: 2026-06-30
 ## 海外・オンライン門人
 
 - **稽古：** [天心流 ONLINE / KIWAMI](https://tenshinryu.xyz)
+- **公式動画：** [天心流公式 YouTube](https://www.youtube.com/@tenshinryu/featured) — 稽古・技法紹介・配信アーカイブ（KIWAMI の補助；師の指導に代わらない）
 - **思想：**
   - [[philosophy/onko-chishin|温故知新]]
   - [[philosophy/datsuryoku|脱力]]

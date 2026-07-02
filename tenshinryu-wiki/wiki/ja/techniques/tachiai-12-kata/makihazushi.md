@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 四 — 巻外・巻落
-
 ![勢法四：巻外・巻落（まきはずし・まきおとし）](/assets/tachiai-12-kata/makihazushi/%E5%90%8D%E7%A7%B0%E6%9C%AA%E8%A8%AD%E5%AE%9A%201.jpg)
 
 | | |
