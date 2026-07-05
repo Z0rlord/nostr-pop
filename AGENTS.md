@@ -33,7 +33,8 @@ nsecbunker/       # DEPRECATED — replaced by bunker46 (volume kept for rollbac
 nsecbunker-admin-ui/  # git submodule — legacy SvelteKit admin UI
 admin/            # DojoPop ops placeholder — admin.dojopop.live :3002 (future dashboard)
 bunker46/         # dsbaars/bunker46 NIP-46 manager — primary (bunker.dojopop.live :3005)
-pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project)
+pipeline/         # YouTube → Blossom → Nostr (NIP-71 kind 22) publisher (uv project);
+                  # PubSubHubbub webhook relay-2:3009, hooks.dojopop.live (auto-mirror @Z0rlord)
 alby-hub/         # Alby Hub — relay-2:8080, hub.dojopop.live (NWC wallet)
 blossom-server/   # self-hosted hzrd149/blossom-server — relay-2:3004, blossom.dojopop.live
 kosync/           # koreader/kosync progress sync — relay-2:3007, sync.krtrmesh.xyz
@@ -43,6 +44,8 @@ data/             # downloaded videos (gitignored); published.json tracked
 ```
 
 Publish videos: `doppler run -- uv run --project pipeline pipeline/pipeline.py --url <youtube-url>` (60 s / 480p transcode; see `pipeline/README.md`).
+
+YouTube auto-mirror: PubSubHubbub at `hooks.dojopop.live` → `pipeline/youtube_pubsub.py` on relay-2:3009 (channel `YOUTUBE_CHANNEL_ID` in Doppler).
 
 Retract a published video: `doppler run -- uv run --project pipeline pipeline/delete_published.py --yt-id <id> --reason "…"`.
 
