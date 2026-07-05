@@ -8,7 +8,6 @@ updated: 2026-06-30
 ---
 
 # Reihō & Kultur
-
 Etikette, Kleidung und tägliches Verhalten in Tenshinryu — früh studieren (siehe [[guides/start-here|Einstieg]]).
 
 | Seite | Thema |

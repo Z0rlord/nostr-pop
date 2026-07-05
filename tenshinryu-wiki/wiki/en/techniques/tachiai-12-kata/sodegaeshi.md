@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 6 — Sodegaeshi (袖返)
-
 ![Seiho 6: Sodegaeshi 袖返](/assets/tachiai-12-kata/sodegaeshi/%E6%8A%9C%E8%A8%8E/DSC_0267.JPG)
 
 | | |

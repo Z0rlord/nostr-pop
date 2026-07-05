@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 3 — Nukidome (抜留)
-
 ![Seiho 3: Nukidome 抜留](/assets/tachiai-12-kata/nukidome/%E6%8A%9C%E7%95%99.jpg)
 
 | | |

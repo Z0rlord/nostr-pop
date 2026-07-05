@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 六 — 袖返（そでがえし）
-
 ![勢法六：袖返（そでがえし）](/assets/tachiai-12-kata/sodegaeshi/%E6%8A%9C%E8%A8%8E/DSC_0267.JPG)
 
 | | |

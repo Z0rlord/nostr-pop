@@ -47,11 +47,17 @@ Set via Doppler project `dojopop`, config `prd_zorie`:
 | `DOJOPOP_LOGIN_NPUB` | DM login | Login bot npub (optional; derived from nsec) |
 | `DM_LOGIN_SECRET` | DM login | HMAC secret for login session tokens |
 | `NEXT_PUBLIC_CDN_URL` | no | CDN origin for media URLs (defaults to Blossom URL) |
-| `FILM_YOGA_SUTRA_SATS` | film | Default `100000` sats for Yoga Sutra one-time unlock |
-| `FILM_YOGA_SUTRA_STRIPE_PRICE_ID` | film | Stripe Price ID (auto-created if unset) |
-| `FILM_YOGA_SUTRA_STRIPE_PRICE_CENTS` | film | Default `1499` ($14.99) when auto-creating price |
+| `FILM_YOGA_SUTRA_TRAILER_VIMEO_ID` | film | Vimeo numeric ID for trailer embed (preferred) |
+| `FILM_YOGA_SUTRA_TRAILER_URL` | film | Trailer MP4 URL, or Vimeo URL (player/vimeo.com or vimeo.com/video/…) parsed as embed |
 | `FILM_YOGA_SUTRA_BLOSSOM_URL` | film | **Server-only** full film Blossom/CDN URL (never public) |
-| `FILM_YOGA_SUTRA_TRAILER_URL` | film | Public trailer embed URL |
+| `FILM_YOGA_SUTRA_BUY_SATS` | film | Default `100000` sats — own + download |
+| `FILM_YOGA_SUTRA_RENT_SATS` | film | Default `27000` sats — 48-hour stream |
+| `FILM_YOGA_SUTRA_BUY_STRIPE_PRICE_ID` | film | Stripe Price ID for buy tier (auto-created if unset) |
+| `FILM_YOGA_SUTRA_RENT_STRIPE_PRICE_ID` | film | Stripe Price ID for rent tier (auto-created if unset) |
+| `FILM_YOGA_SUTRA_BUY_STRIPE_PRICE_CENTS` | film | Default `1499` ($14.99) when auto-creating buy price |
+| `FILM_YOGA_SUTRA_RENT_STRIPE_PRICE_CENTS` | film | Default `399` ($3.99) when auto-creating rent price |
+
+Legacy (buy tier only): `FILM_YOGA_SUTRA_SATS`, `FILM_YOGA_SUTRA_STRIPE_PRICE_ID`, `FILM_YOGA_SUTRA_STRIPE_PRICE_CENTS`.
 
 **Lightning:** NWC (NIP-47) via `NWC_CONNECTION_SECRET`. See [docs/lightning-nwc.md](../docs/lightning-nwc.md).
 

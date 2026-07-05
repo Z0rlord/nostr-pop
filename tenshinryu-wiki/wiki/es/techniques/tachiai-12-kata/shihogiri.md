@@ -15,7 +15,6 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # 7 — Shihogiri (四方切)
-
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*

@@ -1,7 +1,11 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
-import { YOGA_SUTRA_FILM_ID, yogaSutraPriceSats } from "@/lib/films/yoga-sutra";
+import {
+  YOGA_SUTRA_FILM_ID,
+  yogaSutraTierSats,
+  type FilmPurchaseTier,
+} from "@/lib/films/yoga-sutra";
 import { INVOICE_EXPIRY_SEC, nwcConfigured, withNwcClient } from "@/lib/nwc-client";
 
 export type FilmLightningFilmId = typeof YOGA_SUTRA_FILM_ID;
@@ -9,6 +13,7 @@ export type FilmLightningFilmId = typeof YOGA_SUTRA_FILM_ID;
 export interface FilmLightningInvoice {
   id: string;
   filmId: FilmLightningFilmId;
+  tier: FilmPurchaseTier;
   npub: string;
   email?: string;
   amountSats: number;
@@ -52,14 +57,18 @@ async function writeStore(store: InvoiceStore): Promise<void> {
   await fs.writeFile(storePath(), JSON.stringify(store, null, 2));
 }
 
-function filmSats(filmId: FilmLightningFilmId): number {
-  if (filmId === YOGA_SUTRA_FILM_ID) return yogaSutraPriceSats();
-  return yogaSutraPriceSats();
+function filmSats(filmId: FilmLightningFilmId, tier: FilmPurchaseTier): number {
+  if (filmId === YOGA_SUTRA_FILM_ID) return yogaSutraTierSats(tier);
+  return yogaSutraTierSats(tier);
 }
 
 function filmTitle(filmId: FilmLightningFilmId): string {
   if (filmId === YOGA_SUTRA_FILM_ID) return "Yoga Sutra";
   return filmId;
+}
+
+function tierLabel(tier: FilmPurchaseTier): string {
+  return tier === "buy" ? "own + download" : "48h stream";
 }
 
 export function filmLightningConfigured(): boolean {
@@ -105,6 +114,7 @@ function isNwcInvoiceSettled(result: {
 
 export async function createFilmLightningInvoice(input: {
   filmId: FilmLightningFilmId;
+  tier: FilmPurchaseTier;
   npub: string;
   email?: string;
 }): Promise<{
@@ -113,12 +123,13 @@ export async function createFilmLightningInvoice(input: {
   setupHint?: string;
 }> {
   const id = randomUUID();
-  const amountSats = filmSats(input.filmId);
+  const amountSats = filmSats(input.filmId, input.tier);
 
   if (!nwcConfigured()) {
     const invoice: FilmLightningInvoice = {
       id,
       filmId: input.filmId,
+      tier: input.tier,
       npub: input.npub,
       email: input.email,
       amountSats,
@@ -135,7 +146,7 @@ export async function createFilmLightningInvoice(input: {
     };
   }
 
-  const memo = `DojoPop film — ${filmTitle(input.filmId)} — ${input.npub.slice(0, 16)}…`;
+  const memo = `DojoPop film — ${filmTitle(input.filmId)} (${tierLabel(input.tier)}) — ${input.npub.slice(0, 16)}…`;
   const tx = await withNwcClient((client) =>
     client.makeInvoice({
       amount: amountSats * 1000,
@@ -147,6 +158,7 @@ export async function createFilmLightningInvoice(input: {
   const invoice: FilmLightningInvoice = {
     id,
     filmId: input.filmId,
+    tier: input.tier,
     npub: input.npub,
     email: input.email,
     amountSats,

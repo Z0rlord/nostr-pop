@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 二 — 抜合・抜相（ぬきあい）
-
 ![勢法二：抜合・抜相（ぬきあい）](/assets/tachiai-12-kata/nukiai/%E5%90%8D%E7%A7%B0%E6%9C%AA%E8%A8%AD%E5%AE%9A%201.jpg)
 
 | | |

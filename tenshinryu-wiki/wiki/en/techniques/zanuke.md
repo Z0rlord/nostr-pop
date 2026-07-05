@@ -9,12 +9,10 @@ sources:
 updated: 2026-06-29
 ---
 # Zanuke (坐外)
-
 Attack an opponent **behind** you while concealing the sword from their view.
 
-“Zanuke (坐外)”│JAPANESE TRADITION TENSHINRYU HYOHO
+“Zanuke (坐外)”
 
-タグ #侍 #武士 #古武道 #古武術 #日本刀 #天心流 #martialarts #martialart #martialartist #Samurai #japanesemartialarts #Bushi #kobudo #tenshinryu #japanesetraditional #budo #kenjutsu #dojo BUSHI KOBUDO SAMURAI
 
 It is the technique to attack the opponent behind us.
 

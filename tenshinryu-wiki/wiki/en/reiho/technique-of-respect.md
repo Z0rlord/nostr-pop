@@ -9,11 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # The Technique of Respect (礼の技)
-
-The Technique of Respect│JAPANESE TRADITION TENSHINRYU HYOHO
-The Technique of Respect
-The Technique of Respect
-The Technique of Respect
 In traditional martial arts, there is an inseparable relationship with Bushido.
 At roots of Bushido lies Confucianism, and within Confucianism, one of the most emphasized values is “respect” and “reverence.”
 In Japanese, “respect” is called Sonkei (尊敬), and “reverence” is called Kei’i (敬意).
@@ -152,34 +147,3 @@ That is why I confidently promote Tenshin-ryu.
 However, at the same time, we must not use that as an excuse.
 We should strive to be more socially exemplary—and above all, to live as role models leading fulfilling lives.
 If you agree with what I’ve written, please click the “Like” button and leave your comment.
-2025-04-15
-Austria Keikokai
-2025-05-03
-Report on Tenshin Sensei
-関連する記事
-2025-03-22
-Ten Years Since Trademark Registration
-2021-09-09
-Online study With Takizawa Sensei#5
-2021-07-21
-Traditional Costume Photo Album (Data Version) Vol. 2!
-2024-12-28
-Keiko-Osame 稽古納め
-2024-06-14
-Kesa 袈裟
-2025-10-26
-Etiquette Toward the Kamiza
-2025-08-29
-How to Wear Tabi
-2025-04-16
-The Technique of Respect
-2025-04-09
-Nature Worship and the Spirit of Respect in Japan
-2025-03-22
-Ten Years Since Trademark Registration
-2025-03-06
-In Japan, heads are not displayed in homes.
-2024-12-28
-Keiko-Osame 稽古納め
-2024-11-26
-About the Sageo

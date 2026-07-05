@@ -9,11 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # A scene of sewing. (縫い物の場面)
-
-A scene of sewing.│JAPANESE TRADITION TENSHINRYU HYOHO
-A scene of sewing.
-A scene of sewing.
-A scene of sewing.
 There is a principle when sewing the sageo to ensure that it does not come undone unintentionally.
 When necessary, a slightly stronger pull will snap the thread and allow it to be undone.
 There are also principles for when the sageo 下緒 is not tied, but intentionally untying something and it coming undone by accident are entirely different matters. Moreover, a loosened sageo can become unexpectedly troublesome.
@@ -25,11 +20,3 @@ To reflect a peaceful world—and also because, unlike the tachi, an uchigatana 
 Although the sageo appears intricately and beautifully arranged when tied, it can be quickly undone in an emergency and used for a variety of practical purposes.
 If things of this nature—those dismissed as “you can understand it without doing it” or “it’s simple”—are neglected and not actually practiced, they will gradually be lost.
 Unless one acts immediately upon being told, one ends up becoming someone who merely “knows” without experience—top-heavy with knowledge alone.
-Accessing an online recipe website is not the same as actually cooking.
-2025-12-20
-Österreichisches Tenshinryū-Seminar 2026
-記事がありません
-関連する記事
-関連する記事はありませんでした。
-2026-03-21
-A scene of sewing.

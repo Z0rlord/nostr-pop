@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { hasFilmAccess } from "@/lib/film-purchases";
+import { getFilmAccessInfo } from "@/lib/film-purchases";
 import { YOGA_SUTRA_FILM_ID } from "@/lib/films/yoga-sutra";
 import { isValidNpub } from "@/lib/nostr";
 
@@ -17,11 +17,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Invalid npub" }, { status: 400 });
   }
 
-  const unlocked = await hasFilmAccess({
+  const access = await getFilmAccessInfo({
     filmId: YOGA_SUTRA_FILM_ID,
     npub: npub || undefined,
     accessToken: token || undefined,
   });
 
-  return NextResponse.json({ unlocked, filmId: YOGA_SUTRA_FILM_ID });
+  return NextResponse.json({ ...access, filmId: YOGA_SUTRA_FILM_ID });
 }

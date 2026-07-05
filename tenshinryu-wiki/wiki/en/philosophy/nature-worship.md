@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Nature Worship and the Spirit of Respect in Japan (自然崇拝と敬意)
-
-Nature Worship and the Spirit of Respect in Japan│JAPANESE TRADITION TENSHINRYU HYOHO
-Nature Worship and the Spirit of Respect in Japan
-Nature Worship and the Spirit of Respect in Japan
 I recently came across some sad news from Japan: foreign tourists were seen throwing stones at a sacred tree (goshinboku). Many Japanese people were rightfully outraged by this.
 I too feel anger toward such disrespectful visitors from abroad—but even more than that, I feel a deep sense of alarm.
 Have we, the Japanese people ourselves, not begun to lose our own sense of public-mindedness?
@@ -51,34 +47,3 @@ At the same time, respect that flows only one way often leads to condescension a
 In the end, it’s about balance.
 We now live in a time when, thankfully, it is possible to coexist without fighting, and even to share excess with one another.
 So whether or not this mindset is uniquely “Japanese,” I would like to help revive the culture of respectful treatment of things here in Japan—and, if possible, to spread it throughout the world.
-2025-04-02
-How to harmonize students’ thought
-2025-04-15
-Austria Keikokai
-関連する記事
-2025-04-16
-The Technique of Respect
-2021-09-09
-Online study With Takizawa Sensei#5
-2024-06-14
-Kesa 袈裟
-2025-03-22
-Ten Years Since Trademark Registration
-2025-08-29
-How to Wear Tabi
-2025-10-26
-Etiquette Toward the Kamiza
-2025-08-29
-How to Wear Tabi
-2025-04-16
-The Technique of Respect
-2025-04-09
-Nature Worship and the Spirit of Respect in Japan
-2025-03-22
-Ten Years Since Trademark Registration
-2025-03-06
-In Japan, heads are not displayed in homes.
-2024-12-28
-Keiko-Osame 稽古納め
-2024-11-26
-About the Sageo

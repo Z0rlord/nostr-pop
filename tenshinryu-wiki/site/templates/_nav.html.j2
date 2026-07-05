@@ -2,8 +2,32 @@
   <div class="site-header-inner">
     <a class="site-brand" href="/{{ lang }}/">
       <img class="site-logo" src="/assets/logo-icon.png" alt="Tenshinryu" width="36" height="36">
-      <span class="site-title">天心流兵法 Wiki</span>
+      <span class="site-title">{{ site_subtitle }}</span>
     </a>
+    {% for item in nav_items %}
+    {% if item.key == 'start_here' %}
+    <a class="nav-link nav-cta nav-cta-persistent{% if item.active %} active{% endif %}"
+       href="{{ item.href }}">{{ item.label }}</a>
+    {% endif %}
+    {% endfor %}
+    <div class="site-header-tools">
+      <div class="search-wrap">
+        <input id="search-input" type="search" placeholder="{{ search_placeholder }}" autocomplete="off" aria-label="{{ search_placeholder }}">
+        <div id="search-results" role="listbox"></div>
+      </div>
+      <details class="lang-menu">
+        <summary class="lang-menu-trigger" aria-label="{{ nav_lang_label }}">{{ lang | upper }}</summary>
+        <div class="lang-menu-panel" role="menu">
+          <a href="{{ alternate.en }}" role="menuitem"{% if lang == 'en' %} class="active" aria-current="true"{% endif %}>English</a>
+          <a href="{{ alternate.ja }}" role="menuitem"{% if lang == 'ja' %} class="active" aria-current="true"{% endif %}>日本語</a>
+          <a href="{{ alternate.es }}" role="menuitem"{% if lang == 'es' %} class="active" aria-current="true"{% endif %}>Español</a>
+          <a href="{{ alternate.el }}" role="menuitem"{% if lang == 'el' %} class="active" aria-current="true"{% endif %}>Ελληνικά</a>
+          <a href="{{ alternate.fr }}" role="menuitem"{% if lang == 'fr' %} class="active" aria-current="true"{% endif %}>Français</a>
+          <a href="{{ alternate.de }}" role="menuitem"{% if lang == 'de' %} class="active" aria-current="true"{% endif %}>Deutsch</a>
+          <a href="{{ alternate.it }}" role="menuitem"{% if lang == 'it' %} class="active" aria-current="true"{% endif %}>Italiano</a>
+        </div>
+      </details>
+    </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel" aria-label="{{ nav_menu_label }}">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
@@ -12,27 +36,23 @@
     <div class="site-nav-panel" id="site-nav-panel">
       <nav class="site-nav" aria-label="{{ nav_main_label }}">
         {% for item in nav_items %}
+        {% if item.key == 'start_here' %}
+        {% elif item.sub %}
+        <details class="nav-dropdown">
+          <summary class="nav-link nav-dropdown-trigger{% if item.active %} active{% endif %}">{{ item.label }}</summary>
+          <div class="nav-dropdown-panel">
+            {% for sub in curriculum_subnav %}
+            <a href="{{ sub.href }}">{{ sub.label }}</a>
+            {% endfor %}
+          </div>
+        </details>
+        {% else %}
         <a class="nav-link{% if item.active %} active{% endif %}{% if item.cta %} nav-cta{% endif %}"
-           href="{{ item.href }}"
-           {% if item.sub %}aria-haspopup="true"{% endif %}>{{ item.label }}</a>
+           href="{{ item.href }}">{{ item.label }}</a>
+        {% endif %}
         {% endfor %}
         <a class="nav-link{% if active_page == 'graph' %} active{% endif %}" href="/{{ lang }}/graph">{{ graph_label }}</a>
       </nav>
-      <div class="site-nav-tools">
-        <div class="search-wrap">
-          <input id="search-input" type="search" placeholder="{{ search_placeholder }}" autocomplete="off" aria-label="{{ search_placeholder }}">
-          <div id="search-results" role="listbox"></div>
-        </div>
-        <div class="lang-switch" aria-label="{{ nav_lang_label }}">
-          <a href="{{ alternate.en }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
-          <a href="{{ alternate.ja }}"{% if lang == 'ja' %} class="active"{% endif %}>JA</a>
-          <a href="{{ alternate.es }}"{% if lang == 'es' %} class="active"{% endif %}>ES</a>
-          <a href="{{ alternate.el }}"{% if lang == 'el' %} class="active"{% endif %}>EL</a>
-          <a href="{{ alternate.fr }}"{% if lang == 'fr' %} class="active"{% endif %}>FR</a>
-          <a href="{{ alternate.de }}"{% if lang == 'de' %} class="active"{% endif %}>DE</a>
-          <a href="{{ alternate.it }}"{% if lang == 'it' %} class="active"{% endif %}>IT</a>
-        </div>
-      </div>
     </div>
   </div>
 </header>

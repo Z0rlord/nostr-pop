@@ -2,6 +2,7 @@ import { nip19 } from "nostr-tools";
 import { queryProfile } from "nostr-tools/nip05";
 import { NIP05_DOMAIN, NIP05_NAMES } from "./nip05";
 import {
+  assertPublicIdentityInput,
   decodeNpubToHex,
   isValidNpub,
   NIP05_INPUT_PATTERN,
@@ -29,6 +30,7 @@ export async function resolveNostrIdentity(
   if (!trimmed) {
     throw new Error("Enter a npub or NIP-05 address (name@domain).");
   }
+  assertPublicIdentityInput(trimmed);
 
   if (isValidNpub(trimmed)) {
     const pubkeyHex = decodeNpubToHex(trimmed);

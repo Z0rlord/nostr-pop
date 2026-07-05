@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # Hold pride that is not arrogance,and humility that is not self-deprecation (驕りと謙虚)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-Hold pride that is not arrogance,and humility that is not self-deprecation
 Hold pride that is not arrogance,
 and humility that is not self-deprecation
 奢りではない自信と、卑屈ではない謙虚さ

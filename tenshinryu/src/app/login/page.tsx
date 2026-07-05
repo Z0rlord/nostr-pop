@@ -7,7 +7,7 @@ import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useI18n } from "@/components/I18nProvider";
-import { signInWithGoogle, signInWithApple } from "@/lib/firebase";
+import { signInWithGoogle, signInWithApple, signInWithEmail } from "@/lib/firebase";
 
 async function establishSession(user: {
   getIdToken: () => Promise<string>;
@@ -50,6 +50,8 @@ export default function LoginPage() {
   const { t } = useI18n();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignIn = async (provider: "google" | "apple") => {
     setLoading(true);
@@ -68,6 +70,26 @@ export default function LoginPage() {
         setError("Sign-in cancelled.");
       } else if (e.code === "auth/popup-blocked") {
         setError("Popup blocked — allow popups for tenshinryu.xyz and try again.");
+      } else {
+        setError(e.message || "Sign-in failed");
+      }
+      setLoading(false);
+    }
+  };
+
+  const handleEmailSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const user = await signInWithEmail(email.trim(), password);
+      await establishSession(user);
+    } catch (err: unknown) {
+      const e = err as { code?: string; message?: string };
+      if (e.code === "auth/invalid-credential" || e.code === "auth/wrong-password") {
+        setError("Invalid email or password.");
+      } else if (e.code === "auth/user-not-found") {
+        setError("No account found for this email.");
       } else {
         setError(e.message || "Sign-in failed");
       }
@@ -139,6 +161,56 @@ export default function LoginPage() {
               </svg>
               {loading ? t("common.loading") : "Continue with Apple"}
             </button>
+
+            <div className="relative py-2">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-muted-foreground">or email</span>
+              </div>
+            </div>
+
+            <form onSubmit={handleEmailSignIn} className="space-y-3">
+              <div>
+                <label htmlFor="login-email" className="block text-sm font-medium mb-1">
+                  Email
+                </label>
+                <input
+                  id="login-email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(ev) => setEmail(ev.target.value)}
+                  className="w-full px-3 py-2 border border-border rounded text-sm"
+                  style={{ borderRadius: "var(--radius-button)" }}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="login-password" className="block text-sm font-medium mb-1">
+                  Password
+                </label>
+                <input
+                  id="login-password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(ev) => setPassword(ev.target.value)}
+                  className="w-full px-3 py-2 border border-border rounded text-sm"
+                  style={{ borderRadius: "var(--radius-button)" }}
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full px-4 py-3 bg-primary text-primary-foreground rounded font-medium hover:opacity-90 transition disabled:opacity-50"
+                style={{ borderRadius: "var(--radius-button)" }}
+              >
+                {loading ? t("common.loading") : "Sign in with email"}
+              </button>
+            </form>
           </div>
 
           <p className="text-center text-muted-foreground text-xs leading-relaxed mt-6 max-w-md mx-auto">

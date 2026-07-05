@@ -8,7 +8,6 @@ updated: 2026-06-30
 ---
 
 # Reihō e cultura
-
 Etichetta, abbigliamento e condotta quotidiana in Tenshinryu — da studiare presto (vedi [[guides/start-here|Inizia qui]]).
 
 | Pagina | Argomento |

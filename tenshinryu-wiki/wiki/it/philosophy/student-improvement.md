@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/philosophy/student-improvement.md) · [giapponese](../../ja/philosophy/student-improvement.md).
 
-**A concern is that students are not improving.** — Riassunto provvisorio: A concern is that students are not improving.│JAPANESE TRADITION TENSHINRYU HYOHO
+**A concern is that students are not improving.** — Riassunto provvisorio: A concern is that students are not improving.

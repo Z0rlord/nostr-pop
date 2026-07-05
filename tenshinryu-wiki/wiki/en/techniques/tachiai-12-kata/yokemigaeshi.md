@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 5 — Yokemigaeshi / Nigemigaeshi (避身返・逃身返)
-
 ![Seiho 5: Yokemigaeshi / Nigemigaeshi 避身返・逃身返](/assets/tachiai-12-kata/yokemigaeshi/%E9%99%B0/DSC_0244.JPG)
 
 | | |

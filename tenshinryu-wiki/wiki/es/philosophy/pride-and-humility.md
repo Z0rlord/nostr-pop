@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # Hold pride that is not arrogance,and humility that is not self-deprecation (驕りと謙虚)
-
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*
 
-Hold pride that is not arrogance,and humility that is not self-deprecation
 Hold pride that is not arrogance,
 and humility that is not self-deprecation
 奢りではない自信と、卑屈ではない謙虚さ

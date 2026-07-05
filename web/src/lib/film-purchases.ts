@@ -1,25 +1,39 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
-import { YOGA_SUTRA_FILM_ID } from "@/lib/films/yoga-sutra";
+import {
+  YOGA_SUTRA_FILM_ID,
+  yogaSutraRentExpiresAt,
+  type FilmPurchaseTier,
+} from "@/lib/films/yoga-sutra";
 
 export type FilmId = typeof YOGA_SUTRA_FILM_ID;
 export type FilmPaymentMethod = "stripe" | "lightning";
 export type FilmPurchaseStatus = "pending" | "unlocked";
+export type { FilmPurchaseTier };
 
 export interface FilmPurchase {
   id: string;
   filmId: FilmId;
+  tier?: FilmPurchaseTier;
   npub?: string;
   email?: string;
   paymentMethod: FilmPaymentMethod;
   status: FilmPurchaseStatus;
   createdAt: string;
   unlockedAt?: string;
+  expiresAt?: string;
   stripeSessionId?: string;
   lightningInvoiceId?: string;
   /** Opaque token for Stripe buyers without npub (stored client-side). */
   accessToken?: string;
+}
+
+export interface FilmAccessInfo {
+  unlocked: boolean;
+  tier?: FilmPurchaseTier;
+  expiresAt?: string;
+  canDownload: boolean;
 }
 
 interface FilmPurchaseStore {
@@ -32,6 +46,18 @@ function dataDir(): string {
 
 function storePath(): string {
   return path.join(dataDir(), "film-purchases.json");
+}
+
+function effectiveTier(purchase: FilmPurchase): FilmPurchaseTier {
+  return purchase.tier ?? "buy";
+}
+
+export function isPurchaseActive(purchase: FilmPurchase, now = Date.now()): boolean {
+  if (purchase.status !== "unlocked") return false;
+  const tier = effectiveTier(purchase);
+  if (tier === "buy") return true;
+  if (!purchase.expiresAt) return true;
+  return new Date(purchase.expiresAt).getTime() > now;
 }
 
 async function ensureStore(): Promise<void> {
@@ -70,6 +96,16 @@ export async function findUnlockedPurchase(input: {
   });
 }
 
+export async function findActivePurchase(input: {
+  filmId: FilmId;
+  npub?: string;
+  accessToken?: string;
+}): Promise<FilmPurchase | undefined> {
+  const purchase = await findUnlockedPurchase(input);
+  if (!purchase || !isPurchaseActive(purchase)) return undefined;
+  return purchase;
+}
+
 export async function findPurchaseById(
   id: string
 ): Promise<FilmPurchase | undefined> {
@@ -91,8 +127,18 @@ export async function findPurchaseByLightningInvoice(
   return store.purchases.find((p) => p.lightningInvoiceId === invoiceId);
 }
 
+function existingUnlockCoversTier(
+  existing: FilmPurchase,
+  requestedTier: FilmPurchaseTier
+): boolean {
+  const existingTier = effectiveTier(existing);
+  if (existingTier === "buy") return true;
+  return requestedTier === "rent" && existingTier === "rent";
+}
+
 export async function createPendingFilmPurchase(input: {
   filmId: FilmId;
+  tier: FilmPurchaseTier;
   npub?: string;
   email?: string;
   paymentMethod: FilmPaymentMethod;
@@ -102,13 +148,15 @@ export async function createPendingFilmPurchase(input: {
   const store = await readStore();
 
   if (input.npub) {
-    const existing = store.purchases.find(
+    const active = store.purchases.find(
       (p) =>
         p.filmId === input.filmId &&
         p.npub === input.npub &&
-        p.status === "unlocked"
+        isPurchaseActive(p)
     );
-    if (existing) return existing;
+    if (active && existingUnlockCoversTier(active, input.tier)) {
+      return active;
+    }
   }
 
   const pending = store.purchases.find(
@@ -116,6 +164,7 @@ export async function createPendingFilmPurchase(input: {
       p.filmId === input.filmId &&
       p.status === "pending" &&
       p.paymentMethod === input.paymentMethod &&
+      p.tier === input.tier &&
       ((input.npub && p.npub === input.npub) ||
         (input.lightningInvoiceId &&
           p.lightningInvoiceId === input.lightningInvoiceId) ||
@@ -133,6 +182,7 @@ export async function createPendingFilmPurchase(input: {
   const purchase: FilmPurchase = {
     id: randomUUID(),
     filmId: input.filmId,
+    tier: input.tier,
     npub: input.npub,
     email: input.email,
     paymentMethod: input.paymentMethod,
@@ -166,11 +216,17 @@ export async function unlockFilmPurchase(
   const purchase = store.purchases.find((p) => p.id === id);
   if (!purchase) return undefined;
 
+  const tier = updates.tier ?? purchase.tier ?? "buy";
   const accessToken = purchase.accessToken || randomUUID();
+  const expiresAt =
+    tier === "rent" ? yogaSutraRentExpiresAt() : undefined;
+
   Object.assign(purchase, updates, {
+    tier,
     status: "unlocked" as FilmPurchaseStatus,
     unlockedAt: new Date().toISOString(),
     accessToken,
+    expiresAt,
   });
   await writeStore(store);
   return purchase;
@@ -181,6 +237,24 @@ export async function hasFilmAccess(input: {
   npub?: string;
   accessToken?: string;
 }): Promise<boolean> {
-  const purchase = await findUnlockedPurchase(input);
-  return Boolean(purchase);
+  return Boolean(await findActivePurchase(input));
+}
+
+export async function getFilmAccessInfo(input: {
+  filmId: FilmId;
+  npub?: string;
+  accessToken?: string;
+}): Promise<FilmAccessInfo> {
+  const purchase = await findActivePurchase(input);
+  if (!purchase) {
+    return { unlocked: false, canDownload: false };
+  }
+
+  const tier = effectiveTier(purchase);
+  return {
+    unlocked: true,
+    tier,
+    expiresAt: purchase.expiresAt,
+    canDownload: tier === "buy",
+  };
 }

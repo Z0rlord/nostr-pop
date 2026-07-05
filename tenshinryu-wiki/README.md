@@ -125,3 +125,50 @@ cd tenshinryu-wiki && uv run python scripts/lint-wiki-lang.py
 ```
 
 Production deploy path on relay-2 stays `/opt/dojopop/tenshinryu-wiki` — see [`deploy.sh`](./deploy.sh).
+
+## Releases and rollback
+
+Version: [`VERSION`](./VERSION) (e.g. `2026.07.02`). Git tags: `wiki-v2026.07.02`.
+
+### Tag a release (after meaningful deploy)
+
+```bash
+# From repo root — bumps VERSION if needed, creates annotated tag
+./scripts/tag-wiki-release.sh
+# or set an explicit date:
+./scripts/tag-wiki-release.sh 2026.07.15
+git push origin wiki-v2026.07.02   # push tag with commits
+```
+
+### Roll back via git (recommended)
+
+```bash
+git fetch --tags
+git checkout wiki-v2026.07.02          # or any earlier tag / commit
+cd tenshinryu-wiki
+uv run python scripts/build-site.py    # rebuild dist/ from that tree
+./deploy.sh relay-2 --skip-build       # rsync pre-built dist only
+```
+
+`--skip-build` skips `build-site.py` and deploys whatever is already in `dist/`.
+
+### Server-side emergency rollback (no rebuild)
+
+`deploy.sh` atomically swaps `dist-staging` → `dist` and renames the previous tree to **`dist-old`** on relay-2. `dist-old` is kept until the *next* deploy (not deleted immediately).
+
+```bash
+ssh relay-2 "
+  cd /opt/dojopop/tenshinryu-wiki
+  test -d dist-old || exit 1
+  mv dist dist-bad && mv dist-old dist
+  docker compose up -d --force-recreate
+"
+```
+
+Use this only when the last deploy was bad and `dist-old` still exists. For anything older, use git tags above.
+
+### List wiki releases
+
+```bash
+git tag -l 'wiki-v*' --sort=-version:refname
+```

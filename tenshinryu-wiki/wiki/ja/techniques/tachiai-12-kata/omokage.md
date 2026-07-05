@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 一 — 面陰（おもかげ）
-
 ![勢法一：面陰（おもかげ）](/assets/tachiai-12-kata/omokage/%E9%9D%A2%E9%99%B0.jpg)
 
 | | |

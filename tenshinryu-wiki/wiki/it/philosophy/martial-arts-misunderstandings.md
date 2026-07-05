@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/philosophy/martial-arts-misunderstandings.md) · [giapponese](../../ja/philosophy/martial-arts-misunderstandings.md).
 
-**Misunderstandings and problems of Japanese traditional martial arts** — Riassunto provvisorio: Misunderstandings and problems of Japanese traditional martial arts│JAPANESE TRADITION TENSHINRYU HYOHO
+**Misunderstandings and problems of Japanese traditional martial arts** — Riassunto provvisorio: Misunderstandings and problems of Japanese traditional martial arts

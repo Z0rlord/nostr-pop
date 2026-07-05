@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Μερική μετάφραση** — Περίληψη στα ελληνικά βασισμένη στην αγγλική έκδοση.
 
 # A concern is that students are not improving. (弟子の上達)
-
 ## Περίληψη
 
  *(Αυτόματη περίληψη· δείτε τα αγγλικά για λεπτομέρειες.)*
 
-A concern is that students are not improving.
 A Common Challenge in Teaching: “Students Are Not Improving”
 One of the common challenges in teaching is the concern that “students are not improving.” Of course, growth is not an easy achievement, especially given the limited practice time available in today’s world.
 I once heard someone say, “No matter how much I teach, my students just don’t improve…

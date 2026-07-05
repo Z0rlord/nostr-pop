@@ -1,7 +1,7 @@
 ---
 slug: philosophy/onko-chishin
 lang: es
-title: Onko Chishin 温故知新
+title: "Onko Chishin (温故知新)"
 pair: en/philosophy/onko-chishin
 tags:
 - philosophy
@@ -12,10 +12,7 @@ updated: '2026-06-30'
 
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
-# Onko Chishin 温故知新 (温故知新)
-
-## Resumen
-
+# Onko Chishin (温故知新)
 ## Resumen
 
 **Onko chishin** (温故知新) enseña que aprender un arte exige seguir la «receta» de la escuela antes de improvisar. Como en la cocina, saltarse pasos de un método probado arruina el resultado.

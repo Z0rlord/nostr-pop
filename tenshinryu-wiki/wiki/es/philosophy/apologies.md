@@ -13,12 +13,10 @@ updated: '2026-06-30'
 > **Traducción parcial** — Resumen en español (es-ES) basado en la versión inglesa.
 
 # A Discussion on Apologies (謝罪について)
-
 ## Resumen
 
  *(Resumen automático del texto fuente; consulte la versión inglesa para detalle.)*
 
-A Discussion on Apologies
 **A Discussion on Apologies**
 This is a story about someone who previously defamed Tenshinryu. A person who had repeatedly defamed Tenshinryu on social media in the past recently contacted Tenshinryu through one of its students, expressing a desire to engage with the school.
 At some point, this individual got into arguments on social media with others who were also defami…

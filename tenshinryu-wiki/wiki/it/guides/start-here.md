@@ -54,6 +54,7 @@ Approfondimenti: [[concepts/miden-kurai-no-koto|Miden Kurai-no-Koto]], [[guides/
 ## Allievi internazionali (ONLINE / KIWAMI)
 
 - **Allenamento live:** [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz)
+- **Video ufficiali:** [Canale YouTube Tenshinryu](https://www.youtube.com/@tenshinryu/featured) — lezioni e dimostrazioni (integra KIWAMI)
 - **Saggi di filosofia:**
   - [[philosophy/onko-chishin|Onko chishin 温故知新]]
   - [[philosophy/datsuryoku|Datsuryoku]]

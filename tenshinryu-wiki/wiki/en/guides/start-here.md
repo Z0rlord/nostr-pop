@@ -7,7 +7,7 @@ tags: [guides, pedagogy, student]
 sources:
   - wiki/en/techniques/tachiai-12-kata.md
   - wiki/en/guides/instructor-3rd-grade/vol-2-training-flow.md
-updated: 2026-06-30
+updated: 2026-07-02
 ---
 
 # Start Here — Student Entry Path
@@ -54,8 +54,10 @@ Optional depth: [[concepts/miden-kurai-no-koto|Miden Kurai-no-Koto]] (stance / �
 ## International students (ONLINE / KIWAMI)
 
 - **Live training:** [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) — member area for scheduled online keiko.
+- **Official video:** [Tenshinryu YouTube](https://www.youtube.com/@tenshinryu/featured) — lessons, technique demos, and event streams (complements KIWAMI; not a substitute for live instruction).
 - **Philosophy essays** (mindset, not sport):
   - [[philosophy/onko-chishin|Onko chishin 温故知新]] — learn from the old to know the new
+  - [[philosophy/spirit-of-chugi|Spirit of Chūgi 忠義]] — Hagakure and samurai duty (Kuwami Shike)
   - [[philosophy/datsuryoku|Datsuryoku]] — releasing unnecessary tension
 - **Recommended reading:** [[articles/p-29|Bugō culture]], [[articles/p-2605|Kata culture (part III)]], [[articles/p-35|Shinanjo tradition]] — see [[articles/_index#start-reading|Start reading]] on the blog archive.
 

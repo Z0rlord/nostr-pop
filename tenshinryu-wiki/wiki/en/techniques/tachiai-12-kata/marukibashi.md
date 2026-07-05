@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 9 — Marukibashi (丸木橋)
-
 ![Seiho 9: Marukibashi 丸木橋](/assets/tachiai-12-kata/marukibashi/%E4%B8%B8%E6%9C%A8%E6%A9%8B.jpg)
 
 | | |

@@ -9,11 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Misunderstandings and problems of Japanese traditional martial arts (古武道の誤解)
-
-Misunderstandings and problems of Japanese traditional martial arts│JAPANESE TRADITION TENSHINRYU HYOHO
-Misunderstandings and problems of Japanese traditional martial arts
-Misunderstandings and problems of Japanese traditional martial arts
-Misunderstandings and problems of Japanese traditional martial arts
 I would like to introduce two theories.
 One is about the establishment of traditional martial arts that are only slow.
 The other is the neglect and decline of kata training that began especially after the middle of the Edo period.
@@ -62,35 +57,3 @@ Well, in the first place, if they have time to criticize other schools, they sho
 If they don’t want to sweat and get tired, they should at least spend their time watching videos of many traditional martial arts and studying books closely, not posting knowingly on social networking sites about things they don’t know much about.
 However, this is also our responsibility. We only have a short amount of time to provide accurate information. This is because I spend most of my time practicing, teaching my students, and managing my style.
 The more ignorant people are, the louder their voices are. This is a truth that remains unchanged in both the East and the West.
-Kuwami Masakumo
-2024-01-07
-Tenshinryu Practice Swords (Imitation)
-2024-03-01
-Sobre la difusión del Tenshinryu en México
-関連する記事
-2024-07-09
-Doubts about Changes in Tradition
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2025-09-11
-Right in theory, wrong in practice
-2025-09-11
-Right in theory, wrong in practice
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-29
-for Creators
-2024-11-21
-A Discussion on Apologies

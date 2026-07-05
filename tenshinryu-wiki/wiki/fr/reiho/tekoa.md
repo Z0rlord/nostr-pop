@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consultez la version en [anglais](../../en/reiho/tekoa.md) · [japonais](../../ja/reiho/tekoa.md).
 
-**TEKO(a covering for the back of wrist)** — Résumé provisoire : TEKO(a covering for the back of wrist)│JAPANESE TRADITION TENSHINRYU HYOHO
+**TEKO(a covering for the back of wrist)** — Résumé provisoire : TEKO(a covering for the back of wrist)

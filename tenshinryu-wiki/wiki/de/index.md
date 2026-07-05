@@ -3,7 +3,7 @@ slug: index
 lang: de
 title: Tenshinryu Hyōhō Wiki — Index
 pair: en/index
-updated: '2026-06-30'
+updated: '2026-07-02'
 ---
 
 # Wiki de Hyōhō Tenshinryu (Deutsch)
@@ -11,6 +11,10 @@ updated: '2026-06-30'
 Strukturierte Wissensbasis sobre **Tenshinryu Hyōhō** (天心流兵法). LLM-Ingest aus offiziellen Quellen; menschlich geprüft.
 
 Weitere Sprachen: [Englisch](../en/index.md) · [Japanisch](../ja/index.md) · [Griechisch](../el/index.md)
+
+## Offizielle Ressourcen
+
+- [[guides/start-here|Start Here]] · [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) · [Offizieller YouTube-Kanal](https://www.youtube.com/@tenshinryu/featured) · [international.tenshinryu.net](https://international.tenshinryu.net/)
 
 ## Überblick
 
@@ -95,6 +99,7 @@ Weitere Sprachen: [Englisch](../en/index.md) · [Japanisch](../ja/index.md) · [
 | Seite | Zusammenfassung |
 |--------|---------|
 | [[philosophy/onko-chishin|Onko Chishin 温故知新]] | Onko chishin (温故知新) |
+| [[philosophy/spirit-of-chugi|On the Spirit of Chūgi (忠義)]] | Chūgi & Hagakure — Kuwami Shike |
 | [[philosophy/datsuryoku|Datsuryoku: Releasing Unnecessary Tension]] | Datsuryoku — soltar tensión |
 | [[philosophy/kata-culture|The Culture of Kata(Forms) in Japan]] | Cultura del kata en Japón |
 | [[philosophy/nature-worship|Nature Worship and the Spirit of Respect in Japan]] | Culto a la naturaleza y respeto |

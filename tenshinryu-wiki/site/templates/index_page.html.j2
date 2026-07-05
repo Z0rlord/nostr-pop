@@ -22,7 +22,7 @@
     </section>
     <section class="category-cards" aria-label="{{ index_cards_label }}">
       {% for card in index_cards %}
-      <a class="category-card" href="{{ card.href }}">
+      <a class="category-card{% if card.cta %} category-card-cta{% endif %}" href="{{ card.href }}">
         <span class="category-card-title">{{ card.title }}</span>
         <span class="category-card-desc">{{ card.desc }}</span>
       </a>

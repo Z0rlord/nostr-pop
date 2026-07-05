@@ -11,7 +11,6 @@ sources:
 updated: 2026-06-29
 ---
 # Tachiai Battojutsu — 12 Seiho (勢法)
-
 ![12 Kata](/assets/promo/12%20kata%20promo.jpg)
 
 Advanced standing draw-and-cut curriculum of [[arts/battojutsu]]. Authored overview by **10th Shike Kuwami Masakumo** (copyright 2020). Confidential teaching (門外不出).

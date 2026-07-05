@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/reiho/keiko-osame.md) · [giapponese](../../ja/reiho/keiko-osame.md).
 
-**Keiko-Osame 稽古納め** — Riassunto provvisorio: Keiko-Osame 稽古納め│JAPANESE TRADITION TENSHINRYU HYOHO
+**Keiko-Osame 稽古納め** — Riassunto provvisorio: Keiko-Osame 稽古納め

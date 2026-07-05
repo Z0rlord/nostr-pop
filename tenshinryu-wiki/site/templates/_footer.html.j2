@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <nav class="footer-nav" aria-label="{{ nav_footer_label }}">
     {% for item in nav_items %}
-    <a href="{{ item.href }}">{{ item.label }}</a>
+    <a href="{{ item.href }}"{% if item.cta %} class="footer-cta"{% endif %}>{{ item.label }}</a>
     {% endfor %}
     <a href="/{{ lang }}/graph">{{ graph_label }}</a>
   </nav>

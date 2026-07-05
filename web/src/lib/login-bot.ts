@@ -21,15 +21,32 @@ export function loadLoginBotSecretKey(): Uint8Array {
   return hexToBytes(raw.replace(/^0x/, ""));
 }
 
+/** Pubkey hex always derived from DOJOPOP_LOGIN_NSEC (signing identity). */
 export function loginBotPubkeyHex(): string {
-  const fromEnv = process.env.DOJOPOP_LOGIN_NPUB?.trim();
-  if (fromEnv?.startsWith("npub1")) {
-    const decoded = nip19.decode(fromEnv);
-    if (decoded.type === "npub" && typeof decoded.data === "string") {
-      return decoded.data;
-    }
-  }
   return getPublicKey(loadLoginBotSecretKey());
+}
+
+function assertLoginBotNpubMatchesSecret(): void {
+  const fromEnv = process.env.DOJOPOP_LOGIN_NPUB?.trim();
+  if (!fromEnv?.startsWith("npub1")) return;
+
+  const decoded = nip19.decode(fromEnv);
+  if (decoded.type !== "npub" || typeof decoded.data !== "string") {
+    throw new Error(
+      "Invalid DOJOPOP_LOGIN_NPUB (must match pubkey from DOJOPOP_LOGIN_NSEC)."
+    );
+  }
+  if (decoded.data !== loginBotPubkeyHex()) {
+    throw new Error(
+      "DOJOPOP_LOGIN_NPUB does not match DOJOPOP_LOGIN_NSEC — update Doppler so both come from generate-login-bot-key.mjs."
+    );
+  }
+}
+
+/** Call before signing/publishing so a stale npub env cannot break DM login. */
+export function assertLoginBotConfigured(): void {
+  loadLoginBotSecretKey();
+  assertLoginBotNpubMatchesSecret();
 }
 
 export function loginBotNpub(): string {

@@ -26,6 +26,7 @@ DOMAINS=(
   kiwami.tenshinryu.xyz
   staging.tenshinryu.xyz
   auth.tenshinryu.xyz
+  wiki.tenshinryu.xyz
 )
 
 if [[ -z "$API_KEY" ]]; then
@@ -47,9 +48,22 @@ if [[ -z "$PROFILE_ID" ]]; then
   fi
 fi
 
-echo "==> NextDNS profile ${PROFILE_ID}: allowlisting DojoPop domains..."
 
-for domain in "${DOMAINS[@]}"; do
+VSCODE_DOMAINS=(
+  marketplace.visualstudio.com
+  update.code.visualstudio.com
+  vscode.blob.core.windows.net
+  az764295.vo.msecnd.net
+  main.vscode-cdn.net
+  www.vscode-unpkg.net
+  vscode-unpkg.net
+  vscode-sync.trafficmanager.net
+  visualstudio.com
+)
+
+echo "==> NextDNS profile ${PROFILE_ID}: allowlisting DojoPop + VS Code domains..."
+
+for domain in "${DOMAINS[@]}" "${VSCODE_DOMAINS[@]}"; do
   HTTP=$(curl -sS -o /tmp/nextdns-allow.json -w "%{http_code}" \
     -X POST "${BASE}/allowlist" \
     -H "X-Api-Key: ${API_KEY}" \

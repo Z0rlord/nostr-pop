@@ -7,7 +7,8 @@ tags: ['people', 'lineage']
 sources:
   - raw/web/tenshinryu-net-page-806.md
   - raw/web/tenshinryu-net-page-132.md
-updated: 2026-06-29
+  - raw/community/kuwami-spirit-of-chugi-2025-06.md
+updated: 2026-07-01
 ---
 # 第十世 鍬海 政雲一心
 
@@ -31,4 +32,11 @@ updated: 2026-06-29
 
 兵法と触れ合う方が一人でも増える事で、流儀の流れは勢いを増して、本流をしっかりと末に伝える事が出来るのです。
 
-関連: [[people/nakamura-tenshin]]、[[history/instructors]]
+## 指導・コミュニティ論考
+
+- [[philosophy/spirit-of-chugi|忠義の精神]] — 葉隠より（Facebook コミュニティ、2026-06-26）
+- [[guides/teaching-beginners|初心者指導の心得]]
+- [[concepts/miden-kurai-no-koto|身伝位之事]]
+- [[techniques/tachiai-12-kata|立合抜刀術十二勢法]]
+
+関連: [[people/nakamura-tenshin]]、[[history/instructors]]、[[community/tenshinryu-hyoho-facebook]]

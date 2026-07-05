@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 10 — Ninotachigaeshi (二ノ太刀返)
-
 ![Seiho 10: Ninotachigaeshi 二ノ太刀返](/assets/tachiai-12-kata/ninotachigaeshi/%E4%BA%8C%E3%83%8E%E5%A4%AA%E5%88%80%E8%BF%94.jpg)
 
 | | |

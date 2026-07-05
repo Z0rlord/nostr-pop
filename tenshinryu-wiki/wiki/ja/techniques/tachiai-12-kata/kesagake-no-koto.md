@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 十二 — 袈裟懸ノ事
-
 ![勢法十二：袈裟懸ノ事（けさがけのこと）](/assets/tachiai-12-kata/kesagake-no-koto/%E9%98%B2%E5%88%80/DSC_0386.JPG)
 
 | | |

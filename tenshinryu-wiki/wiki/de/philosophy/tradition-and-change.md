@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/philosophy/tradition-and-change.md) · [Japanisch](../../ja/philosophy/tradition-and-change.md).
 
-**Doubts about Changes in Tradition** — Vorläufige Zusammenfassung: Doubts about Changes in Tradition│JAPANESE TRADITION TENSHINRYU HYOHO
+**Doubts about Changes in Tradition** — Vorläufige Zusammenfassung: Doubts about Changes in Tradition

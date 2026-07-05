@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Fukuro Jinai (袋印内)
-
-Fukuro Jinai│JAPANESE TRADITION TENSHINRYU HYOHO
-Fukuro Jinai
-Fukuro Jinai
 The fukuro-jinai 袋竹刀, used in the Shinkage-ryu lineage and said to be the prototype of the modern shinai commonly used in kendo, is also used in Tenshin-ryu, especially for kenjutsu practice. (It’s occasionally used for iai practice as well.)
 It consists of bamboo covered with cow or horse leather. Because its surface is said to resemble the skin of a toad (gama 蝦蟇), it’s also known as a hikihada-shinai 蟇肌竹刀(toad-skin shinai)—though I’m not sure how much it actually resembles a toad.
 The modern shinai used in kendo is said to have come into use around the mid-Edo period. While the fukuro-jinai is often considered its prototype, other styles besides Shinkage-ryu were also using bamboo practice swords around the same time.
@@ -43,11 +39,3 @@ Official site : https://international.tenshinryu.net/
 Facebook : https://www.facebook.com/Tenshinryuhyohoenglish/
 Instagram : https://www.instagram.com/tenshinryu/
 侍 #武士 #古武道 #古武術 #日本刀 #天心流 #martialarts #martialart #martialartist #Samurai #japanesemartialarts #Bushi
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-04-01
-Attention à tous les passionnés d’arts martiaux !
-関連する記事
-関連する記事はありませんでした。
-2025-03-26
-Fukuro Jinai

@@ -310,6 +310,10 @@ const ja: Dictionary = {
     cameraUnsupported:
       "このブラウザはQRカメラスキャンに未対応です。QR表示を使ってください。",
     invalidNpub: "有効な npub（npub1…）または NIP-05 アドレス（name@domain）を入力してください。",
+    privateKeyRejected:
+      "npub または NIP-05 アドレスを使用してください。秘密鍵（nsec）は絶対に入力しないでください。",
+    rawHexKeyRejected:
+      "生の hex 鍵のようです。npub または NIP-05 を使用してください。秘密鍵は入力しないでください。",
     noExtensionHelp:
       "Nostr 拡張機能が見つかりません。Alby を入れるか、QRサインインを使ってください。",
     connectFailed: "接続できませんでした。再試行するか QRサインインを使ってください。",
@@ -466,6 +470,8 @@ const ja: Dictionary = {
     wizardDone: "完了",
     failed: "公開できませんでした。もう一度お試しください。",
     signOutRetry: "サインアウトして再試行",
+    staleNip46Hint:
+      "Primalのリモート署名リンクをクリアしました。Primalでリモートログインを開き、このページのQRを再スキャンしてからアップロードしてください。",
     dailyLimit: "1日1本まで。次のアップロードまで {wait}。",
     emptyCta: "最初の動画を公開",
   },

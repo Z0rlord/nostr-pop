@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # A concern is that students are not improving. (弟子の上達)
-
-A concern is that students are not improving.│JAPANESE TRADITION TENSHINRYU HYOHO
-A concern is that students are not improving.
-A concern is that students are not improving.
 A Common Challenge in Teaching: “Students Are Not Improving”
 One of the common challenges in teaching is the concern that “students are not improving.” Of course, growth is not an easy achievement, especially given the limited practice time available in today’s world.
 I once heard someone say, “No matter how much I teach, my students just don’t improve at all. It became so frustrating that I decided to close my dojo.” This might sound a bit extreme, but as an instructor myself, I find myself constantly grappling with the question, “How can I help my students improve more?”
@@ -29,35 +25,3 @@ Stepping back and viewing things objectively, we sometimes realize, “Wow, they
 If a student truly isn’t improving, it could mean that the instructor’s teaching methods need work, or that the student is unable to practice properly due to external circumstances. While instructors can create a supportive teaching environment, they usually don’t interfere with students’ personal lives (though this was more common in the past). All instructors can really do is try to ensure that students don’t lose their passion for learning.
 I inherited the Tenshinryu style in 2012, and it has been 12 years since then. However, my own training has never ended—I must train even harder than my students. The same applies to teaching; I see it as part of my own ongoing training, and I must continue to evolve as an instructor.
 If, ten years from now, I hear, “Your teaching back then was terrible,” it would mean that I have truly grown as a teacher and that my efforts over the past decade have borne fruit.
-– Kuwami Masakumo
-2024-11-08
-Ide’s lessons
-2024-11-17
-Ide’s  lessons#196
-関連する記事
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-for Creators
-2024-02-09
-Misunderstandings and problems of Japanese traditional martial arts
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2025-09-11
-Right in theory, wrong in practice
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-29
-for Creators
-2024-11-21
-A Discussion on Apologies

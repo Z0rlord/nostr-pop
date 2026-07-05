@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Traditional Costume Photo Album (Data Version) Vol. 2! (伝統衣装)
-
-Traditional Costume Photo Album (Data Version) Vol. 2!│JAPANESE TRADITION TENSHINRYU HYOHO
-Traditional Costume Photo Album (Data Version) Vol. 2!
-Traditional Costume Photo Album (Data Version) Vol. 2!
 The second edition of the data photo collection(sale data) of traditional Japanese costumes is now available for purchase. The model is Sensei Takizawa of Tenshin-ryu Hyouhou.
 This is a photo collection of costumes that fully utilizes the collections of Takizawa-sensei and chigirachizuka.
 It is a very good resource for creators.
@@ -32,42 +28,3 @@ The “hitatare” is a male garment used mainly in samurai society, and is one 
 https://natsu39.booth.pm/items/3095434
 Kariginu is the everyday clothing of Kuge(公家
 a court noble) since the Heian period. Kariginu was originally worn for hunting, but gradually became a part of everyday wear because of its active nature. Later, as time went by, it came to be used as official dress and became the formal dress of the fourth-ranked Buke(武家 samurai family), succeeding the Hitatare.
-*Ikan(衣冠) – 1000yen
-https://natsu39.booth.pm/items/3095389
-Ikan is the court dress of nobles and officials from the Heian period onward.
-*Traditional Costume Photo Album (Data Version) Vol. 2! full set – 5000yen
-https://natsu39.booth.pm/items/3096851
-There is a second full set of posed photos available for limited sale only in July 2021.
-There are other items as well, including standard ones.
-https://t.co/FC0bEcuvNk
-2021-07-21
-Online lessons in English#58
-2021-07-21
-7.21 TENSHINRYU E-Dojo
-関連する記事
-2024-12-28
-Keiko-Osame 稽古納め
-2022-10-01
-Notice of lesson break
-2024-11-26
-About the Sageo
-2024-07-19
-2024 Seminario Tenshinryu México
-2019-03-25
-Arakawa Ganryu Daihan Inauguration
-2025-10-26
-Etiquette Toward the Kamiza
-2025-08-29
-How to Wear Tabi
-2025-04-16
-The Technique of Respect
-2025-04-09
-Nature Worship and the Spirit of Respect in Japan
-2025-03-22
-Ten Years Since Trademark Registration
-2025-03-06
-In Japan, heads are not displayed in homes.
-2024-12-28
-Keiko-Osame 稽古納め
-2024-11-26
-About the Sageo

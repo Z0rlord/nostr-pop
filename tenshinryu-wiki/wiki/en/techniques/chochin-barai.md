@@ -9,12 +9,10 @@ sources:
 updated: 2026-06-29
 ---
 # Chochin-Barai (提灯抜)
-
 Lantern-sweeping draw technique demonstrated at **Shinjuku branch** practice. Named *Chōchin-barai* (提灯抜) — sweeping past a hanging lantern without snagging.
 
-提灯抜 Chochin-Barai│JAPANESE TRADITION TENSHINRYU HYOHO
+提灯抜 Chochin-Barai
 
-タグ #侍 #武士 #古武道 #古武術 #日本刀 #天心流 #martialarts #martialart #martialartist #Samurai #japanesemartialarts #Bushi #kobudo #tenshinryu #japanesetraditional #budo #kenjutsu #dojo BUSHI KOBUDO SAMURAI
 
 From the Shinjuku Branch practice: A demonstration of “Chōchin-barai” (提灯抜 lantern sweeping) by the dashing Ide Shike, who looks great in a suit.
 

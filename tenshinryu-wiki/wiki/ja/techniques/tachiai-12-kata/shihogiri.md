@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # 七 — 四方切（しほうぎり）
-
 ![勢法七：四方切（しほうぎり）](/assets/tachiai-12-kata/shihogiri/%E5%88%A5%E3%82%A2%E3%83%B3%E3%82%B0%E3%83%AB.jpg)
 
 | | |

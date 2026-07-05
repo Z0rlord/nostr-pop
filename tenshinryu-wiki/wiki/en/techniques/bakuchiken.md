@@ -9,12 +9,10 @@ sources:
 updated: 2026-06-29
 ---
 # Bakuchiken (驀地剣)
-
 Common name for **Nukidome** (抜留), seiho #3 of [[techniques/tachiai-12-kata]]. Pre-empt the opponent's draw by targeting the drawing hand; low draw hides intent below the partner's sword brim.
 
-Bakuchiken 驀地剱│JAPANESE TRADITION TENSHINRYU HYOHO
+Bakuchiken 驀地剱
 
-タグ #侍 #武士 #古武道 #古武術 #日本刀 #天心流 #martialarts #martialart #martialartist #Samurai #japanesemartialarts #Bushi #kobudo #tenshinryu #japanesetraditional #budo #kenjutsu #dojo BUSHI KOBUDO SAMURAI
 
 The other day’s TENSHINRYUUHYOUHOU Of Shinjyuku branch, a practice.
 

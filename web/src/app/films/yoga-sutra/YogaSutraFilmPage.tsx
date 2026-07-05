@@ -5,14 +5,48 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import type {
+  FilmPurchaseTier,
+  YogaSutraTierConfig,
+  YogaSutraTrailerConfig,
+} from "@/lib/films/yoga-sutra";
 
 const ACCESS_TOKEN_KEY = "dojopop-film-yoga-sutra-token";
 const NPUB_KEY = "dojopop-film-yoga-sutra-npub";
 
 interface YogaSutraFilmPageProps {
-  trailerUrl?: string;
-  priceSats: number;
-  priceUsd: number;
+  trailer?: YogaSutraTrailerConfig;
+  synopsis: string;
+  tiers: YogaSutraTierConfig[];
+}
+
+function TrailerPlayer({ trailer }: { trailer: YogaSutraTrailerConfig }) {
+  if (trailer.type === "vimeo" && trailer.vimeoId) {
+    return (
+      <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
+        <iframe
+          src={`https://player.vimeo.com/video/${trailer.vimeoId}?title=0&byline=0&portrait=0`}
+          title="Yoga Sutra trailer"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          allowFullScreen
+          className="h-full w-full"
+        />
+      </div>
+    );
+  }
+
+  if (trailer.type === "video" && trailer.url) {
+    return (
+      <video
+        src={trailer.url}
+        controls
+        playsInline
+        className="aspect-video w-full rounded-lg bg-black"
+      />
+    );
+  }
+
+  return null;
 }
 
 interface StreamState {
@@ -21,18 +55,39 @@ interface StreamState {
   error: string | null;
 }
 
+interface AccessState {
+  unlocked: boolean;
+  tier?: FilmPurchaseTier;
+  expiresAt?: string;
+  canDownload: boolean;
+}
+
+function formatExpiry(iso: string): string {
+  return new Date(iso).toLocaleString(undefined, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+}
+
 export function YogaSutraFilmPage({
-  trailerUrl,
-  priceSats,
-  priceUsd,
+  trailer,
+  synopsis,
+  tiers,
 }: YogaSutraFilmPageProps) {
   const searchParams = useSearchParams();
   const [npub, setNpub] = useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState<"stripe" | "lightning" | null>(null);
+  const [loading, setLoading] = useState<{
+    method: "stripe" | "lightning";
+    tier: FilmPurchaseTier;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [unlocked, setUnlocked] = useState(false);
+  const [access, setAccess] = useState<AccessState>({
+    unlocked: false,
+    canDownload: false,
+  });
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [stream, setStream] = useState<StreamState>({
     url: "",
     loading: false,
@@ -60,6 +115,22 @@ export function YogaSutraFilmPage({
     []
   );
 
+  const loadDownload = useCallback(
+    async (opts: { npub?: string; token?: string }) => {
+      const params = new URLSearchParams();
+      if (opts.npub) params.set("npub", opts.npub);
+      if (opts.token) params.set("token", opts.token);
+      const res = await fetch(`/api/films/yoga-sutra/download?${params}`);
+      const data = await res.json();
+      if (res.ok && data.downloadUrl) {
+        setDownloadUrl(data.downloadUrl);
+      } else {
+        setDownloadUrl(null);
+      }
+    },
+    []
+  );
+
   const checkAccess = useCallback(
     async (opts: { npub?: string; token?: string }) => {
       const params = new URLSearchParams();
@@ -68,13 +139,22 @@ export function YogaSutraFilmPage({
       const res = await fetch(`/api/films/yoga-sutra/access?${params}`);
       const data = await res.json();
       if (data.unlocked) {
-        setUnlocked(true);
+        setAccess({
+          unlocked: true,
+          tier: data.tier,
+          expiresAt: data.expiresAt,
+          canDownload: Boolean(data.canDownload),
+        });
         await loadStream(opts);
+        if (data.canDownload) {
+          await loadDownload(opts);
+        }
         return true;
       }
+      setAccess({ unlocked: false, canDownload: false });
       return false;
     },
-    [loadStream]
+    [loadStream, loadDownload]
   );
 
   const confirmStripeSession = useCallback(
@@ -123,13 +203,13 @@ export function YogaSutraFilmPage({
     })();
   }, [searchParams, confirmStripeSession, checkAccess]);
 
-  async function pay(method: "stripe" | "lightning") {
+  async function pay(method: "stripe" | "lightning", tier: FilmPurchaseTier) {
     setError(null);
     if (method === "lightning" && !npub.trim()) {
       setError("Nostr npub required for Lightning unlock");
       return;
     }
-    setLoading(method);
+    setLoading({ method, tier });
     try {
       const endpoint =
         method === "stripe"
@@ -139,6 +219,7 @@ export function YogaSutraFilmPage({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          tier,
           npub: npub.trim() || undefined,
           email: email.trim() || undefined,
         }),
@@ -166,6 +247,9 @@ export function YogaSutraFilmPage({
     }
   }
 
+  const buyTier = tiers.find((t) => t.tier === "buy");
+  const rentTier = tiers.find((t) => t.tier === "rent");
+
   return (
     <>
       <Header />
@@ -181,37 +265,48 @@ export function YogaSutraFilmPage({
             Yoga Sutra
           </h1>
           <p className="mt-3 max-w-xl text-dojo-mist/70">
-            Stream the full film after a one-time purchase. Pay with Lightning or
-            card — own it forever on this device or tie access to your Nostr npub.
+            Own the film permanently with download, or rent a 48-hour stream.
+            Pay with Lightning or card.
           </p>
 
           <div className="card-glow mt-8 overflow-hidden rounded-2xl border border-white/5 bg-dojo-slate/60">
-            {unlocked && stream.url ? (
+            {access.unlocked && stream.url ? (
               <div className="p-4">
                 <p className="mb-3 text-sm font-medium text-dojo-gold">
-                  Full film — thank you for your purchase
+                  {access.tier === "buy"
+                    ? "Full film — own + download"
+                    : "Full film — 48-hour stream"}
                 </p>
+                {access.tier === "rent" && access.expiresAt && (
+                  <p className="mb-3 text-xs text-dojo-mist/60">
+                    Access expires {formatExpiry(access.expiresAt)}
+                  </p>
+                )}
                 <video
                   src={stream.url}
                   controls
                   playsInline
                   className="aspect-video w-full rounded-lg bg-black"
                 />
+                {access.canDownload && downloadUrl && (
+                  <a
+                    href={downloadUrl}
+                    download
+                    className="mt-4 inline-flex rounded-lg border border-dojo-gold/30 bg-dojo-gold/10 px-4 py-2 text-sm font-medium text-dojo-gold hover:bg-dojo-gold/20 transition-colors"
+                  >
+                    Download film
+                  </a>
+                )}
               </div>
-            ) : unlocked && stream.loading ? (
+            ) : access.unlocked && stream.loading ? (
               <div className="flex aspect-video items-center justify-center p-8 text-dojo-mist/60">
                 Loading stream…
               </div>
             ) : (
               <div className="p-4">
                 <p className="mb-3 text-sm text-dojo-mist/60">Trailer</p>
-                {trailerUrl ? (
-                  <video
-                    src={trailerUrl}
-                    controls
-                    playsInline
-                    className="aspect-video w-full rounded-lg bg-black"
-                  />
+                {trailer ? (
+                  <TrailerPlayer trailer={trailer} />
                 ) : (
                   <div className="flex aspect-video items-center justify-center rounded-lg bg-dojo-ink text-sm text-dojo-mist/50">
                     Trailer URL not configured
@@ -224,20 +319,16 @@ export function YogaSutraFilmPage({
             )}
           </div>
 
-          {!unlocked && (
+          <section className="card-glow mt-8 rounded-2xl border border-white/5 bg-dojo-slate/60 p-8">
+            <h2 className="text-sm font-medium text-dojo-mist/60">Synopsis</h2>
+            <p className="mt-3 text-dojo-mist/80 leading-relaxed">{synopsis}</p>
+          </section>
+
+          {!access.unlocked && (
             <form
-              className="card-glow mt-8 space-y-5 rounded-2xl border border-white/5 bg-dojo-slate/60 p-8"
+              className="card-glow mt-8 space-y-6 rounded-2xl border border-white/5 bg-dojo-slate/60 p-8"
               onSubmit={(e) => e.preventDefault()}
             >
-              <div className="text-center">
-                <p className="text-2xl font-medium text-dojo-gold">
-                  {priceSats.toLocaleString()} sats
-                </p>
-                <p className="mt-1 text-sm text-dojo-mist/60">
-                  or ${priceUsd.toFixed(2)} one-time
-                </p>
-              </div>
-
               <div>
                 <label
                   htmlFor="npub"
@@ -283,32 +374,93 @@ export function YogaSutraFilmPage({
                 </p>
               )}
 
-              <div className="grid gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => pay("stripe")}
-                  disabled={loading !== null}
-                  className="w-full rounded-lg bg-dojo-crimson py-3 font-medium text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
-                >
-                  {loading === "stripe" ? "Redirecting…" : "Pay with card (Stripe)"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => pay("lightning")}
-                  disabled={loading !== null}
-                  className="w-full rounded-lg border border-dojo-gold/30 bg-dojo-gold/10 py-3 font-medium text-dojo-gold hover:bg-dojo-gold/20 disabled:opacity-50 transition-colors"
-                >
-                  {loading === "lightning"
-                    ? "Creating invoice…"
-                    : "Pay with Lightning"}
-                </button>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {buyTier && (
+                  <div className="rounded-xl border border-dojo-gold/20 bg-dojo-ink/40 p-5">
+                    <h2 className="text-lg font-medium text-white">
+                      {buyTier.label}
+                    </h2>
+                    <p className="mt-1 text-sm text-dojo-mist/60">
+                      {buyTier.description}
+                    </p>
+                    <p className="mt-4 text-2xl font-medium text-dojo-gold">
+                      ${buyTier.usd.toFixed(2)}
+                    </p>
+                    <p className="text-sm text-dojo-mist/50">
+                      {buyTier.sats.toLocaleString()} sats
+                    </p>
+                    <div className="mt-4 grid gap-2">
+                      <button
+                        type="button"
+                        onClick={() => pay("stripe", "buy")}
+                        disabled={loading !== null}
+                        className="w-full rounded-lg bg-dojo-crimson py-2.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
+                      >
+                        {loading?.method === "stripe" && loading.tier === "buy"
+                          ? "Redirecting…"
+                          : "Buy with card"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => pay("lightning", "buy")}
+                        disabled={loading !== null}
+                        className="w-full rounded-lg border border-dojo-gold/30 bg-dojo-gold/10 py-2.5 text-sm font-medium text-dojo-gold hover:bg-dojo-gold/20 disabled:opacity-50 transition-colors"
+                      >
+                        {loading?.method === "lightning" && loading.tier === "buy"
+                          ? "Creating invoice…"
+                          : "Buy with Lightning"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {rentTier && (
+                  <div className="rounded-xl border border-white/10 bg-dojo-ink/40 p-5">
+                    <h2 className="text-lg font-medium text-white">
+                      {rentTier.label}
+                    </h2>
+                    <p className="mt-1 text-sm text-dojo-mist/60">
+                      {rentTier.description}
+                    </p>
+                    <p className="mt-4 text-2xl font-medium text-dojo-gold">
+                      ${rentTier.usd.toFixed(2)}
+                    </p>
+                    <p className="text-sm text-dojo-mist/50">
+                      {rentTier.sats.toLocaleString()} sats
+                    </p>
+                    <div className="mt-4 grid gap-2">
+                      <button
+                        type="button"
+                        onClick={() => pay("stripe", "rent")}
+                        disabled={loading !== null}
+                        className="w-full rounded-lg bg-dojo-crimson py-2.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
+                      >
+                        {loading?.method === "stripe" && loading.tier === "rent"
+                          ? "Redirecting…"
+                          : "Rent with card"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => pay("lightning", "rent")}
+                        disabled={loading !== null}
+                        className="w-full rounded-lg border border-dojo-gold/30 bg-dojo-gold/10 py-2.5 text-sm font-medium text-dojo-gold hover:bg-dojo-gold/20 disabled:opacity-50 transition-colors"
+                      >
+                        {loading?.method === "lightning" && loading.tier === "rent"
+                          ? "Creating invoice…"
+                          : "Rent with Lightning"}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </form>
           )}
 
-          {unlocked && accessToken && (
+          {access.unlocked && accessToken && (
             <p className="mt-6 text-center text-xs text-dojo-mist/50">
-              Access saved on this device. Return anytime to stream again.
+              {access.tier === "buy"
+                ? "Access saved on this device. Return anytime to stream or download."
+                : "48-hour stream access saved on this device."}
             </p>
           )}
         </div>

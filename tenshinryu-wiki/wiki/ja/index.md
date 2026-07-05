@@ -2,7 +2,7 @@
 slug: index
 lang: ja
 title: 天心流兵法ウィキ — 索引
-updated: '2026-06-30'
+updated: '2026-07-02'
 ---
 
 # 天心流兵法ウィキ（日本語）
@@ -10,6 +10,15 @@ updated: '2026-06-30'
 公式ソースからの LLM 取り込み；人間がレビュー。
 
 英語: [../../en/index.md](../../en/index.md)
+
+## 公式リソース
+
+| リソース | リンク |
+|----------|--------|
+| 入門ガイド | [[guides/start-here\|はじめに]] |
+| 天心流 ONLINE / KIWAMI | [tenshinryu.xyz](https://tenshinryu.xyz) |
+| 公式 YouTube | [youtube.com/@tenshinryu](https://www.youtube.com/@tenshinryu/featured) |
+| 国際連盟サイト | [international.tenshinryu.net](https://international.tenshinryu.net/) |
 
 <details class="full-index">
 <summary><strong>全文索引</strong> — セクション別の全ページ</summary>
@@ -98,6 +107,7 @@ updated: '2026-06-30'
 | ページ | 概要 |
 |--------|------|
 | [[philosophy/onko-chishin|温故知新]] | 温故知新 |
+| [[philosophy/spirit-of-chugi|忠義の精神]] | 忠義と葉隠 — 鍬海師家 |
 | [[philosophy/datsuryoku|脱力]] | 脱力 |
 | [[philosophy/kata-culture|型の文化]] | 型の文化 |
 | [[philosophy/nature-worship|自然崇拝と敬意]] | 自然崇拝と敬意 |

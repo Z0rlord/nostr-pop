@@ -7,7 +7,8 @@ tags: ['people', 'lineage']
 sources:
   - raw/web/tenshinryu-net-page-806.md
   - raw/web/tenshinryu-net-page-132.md
-updated: 2026-06-29
+  - raw/community/kuwami-spirit-of-chugi-2025-06.md
+updated: 2026-07-01
 ---
 # Kuwami Masakumo 鍬海政雲 — 10th Shike
 
@@ -29,4 +30,11 @@ updated: 2026-06-29
 
 私達は精一杯に汗を流して腕を伸ばす事で、伝承者たちの偉大なる創意工夫とその叡智に触れる事が出来るのです。
 
-See also: [[people/nakamura-tenshin]], [[history/instructors]]
+## Instructor & community essays
+
+- [[philosophy/spirit-of-chugi|On the Spirit of Chūgi (忠義)]] — Hagakure passages on loyalty (Facebook community, 2026-06-26)
+- [[guides/teaching-beginners|Guidelines for Teaching Beginners]]
+- [[concepts/miden-kurai-no-koto|Miden Kurai-no-Koto]]
+- [[techniques/tachiai-12-kata|Tachiai Battojutsu 12 Kata]]
+
+See also: [[people/nakamura-tenshin]], [[history/instructors]], [[community/tenshinryu-hyoho-facebook]]

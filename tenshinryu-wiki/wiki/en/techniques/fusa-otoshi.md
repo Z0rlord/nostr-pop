@@ -8,12 +8,7 @@ sources:
   - raw/web/international-tenshinryu-net-fusa-otoshi--e6-88-bf-e8-90-bd.md
 updated: 2026-06-29
 ---
-# Fusa-Otoshi (房落) (房落)
-
-Fusa-Otoshi (房落)│JAPANESE TRADITION TENSHINRYU HYOHO
-Fusa-Otoshi (房落)
-Fusa-Otoshi (房落)
-Fusa-Otoshi (房落)
+# Fusa-Otoshi () (房落)
 Fusa-Otoshi(房落) is a very interesting technique.
 This technique is used at a relatively close distance. Of course, if the opponent is farther away, you step forward or adjust the distance, but the basic practice begins with drawing the sword without using footwork.
 At the moment the person in front of you attempts to draw their sword, you respond by drawing yours as well. However, if you draw the sword in a normal manner, there is a risk that the hilts of both swords may interfere with each other. Additionally, a normal draw takes time for the tip of your blade to reach the opponent.
@@ -32,24 +27,3 @@ Now, regarding the name Fusa-Otoshi(房落):
 The target of this technique is slightly above the elbows on both upper arms, and the tassels of a samurai’s haori-himo would typically be at approximately this height.
 “Otoshi (落)” means “drop” or “fall.”
 Thus, the technique is called Fusa-Otoshi because it involves cutting the tassels and making them fall.
-2025-01-28
-提灯抜 Chochin-Barai
-2025-03-06
-In Japan, heads are not displayed in homes.
-関連する記事
-2019-10-19
-“Nedachi (寝太刀)”
-2019-02-24
-Niji-no-Hashikake
-2019-10-16
-“Koran-To (虎乱刀)” from TENSHINRYU
-2021-05-11
-Tenshinryu Combat Maid
-2025-06-14
-Traditional Comprehensive Martial Art Tenshin-ryu Hyoho
-2025-02-18
-Fusa-Otoshi (房落)
-2019-10-19
-“Nedachi (寝太刀)”
-2019-10-16
-“Koran-To (虎乱刀)” from TENSHINRYU

@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/philosophy/correcting-mistakes.md) · [Japanisch](../../ja/philosophy/correcting-mistakes.md).
 
-**To make a mistake and not correct it is to truly make a mistake.** — Vorläufige Zusammenfassung: To make a mistake and not correct it is to truly make a mistake.│JAPANESE TRADITION TENSHINRYU HYOHO
+**To make a mistake and not correct it is to truly make a mistake.** — Vorläufige Zusammenfassung: To make a mistake and not correct it is to truly make a mistake.

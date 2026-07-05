@@ -9,10 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Doubts about Changes in Tradition (伝統の変化)
-
-Doubts about Changes in Tradition│JAPANESE TRADITION TENSHINRYU HYOHO
-Doubts about Changes in Tradition
-Doubts about Changes in Tradition
 In the martial arts world, it is common to hear questions like, ‘Are the techniques being passed down now really the same as those of the founder?’ Such simple doubts are perfectly natural. They also reflect a sense of curiosity and have academic significance, so they should not be dismissed.
 However, they hold no more value than that.
 Martial arts that have been passed down through direct transmission from person to person are like a game of telephone. Sometimes, the words may change, and interpretations may shift. But in martial arts, we accept these changes. This isn’t a game of telephone played by outsiders. Granting licenses and full transmission is a testament to entrusting the inheritor with the style, including any changes.
@@ -34,35 +30,3 @@ There is no necessity to engage in life-or-death combat using swords and spears.
 Having such a level of resolve is admirable, but the desire to actively use it as a form of violence is antisocial behavior.
 Without rushing, you can face the traditions, techniques, and teachings, and practice diligently until you are fully convinced. And even if you fail or are unskilled, who can complain?
 If a teacher cannot create an environment where one can practice joyfully, people will leave that tradition, and it will eventually decline.
-This kind of leniency, in a sense, is what is required now.
-Kuwami Masakumo Isshin 鍬海 政雲 一心
-2024-07-05
-¡Primera Gira Sudamericana Tenshin Ryu Hyoho 2024!
-2024-07-16
-関連する記事
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-15
-A concern is that students are not improving.
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-for Creators
-2021-12-01
-Let’s be careful. Our words build our character.
-2025-09-11
-Right in theory, wrong in practice
-2025-09-10
-Datsuryoku: Releasing Unnecessary Tension
-2025-05-26
-Regarding Movement Inside the Dōjō
-2025-03-22
-Hold pride that is not arrogance,and humility that is not self-deprecation
-2025-01-19
-Onko Chishin 温故知新
-2024-11-29
-To make a mistake and not correct it is to truly make a mistake.
-2024-11-29
-for Creators
-2024-11-21
-A Discussion on Apologies

@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/history/koran-to.md) · [Japanisch](../../ja/history/koran-to.md).
 
-**&#8220;Koran-To (虎乱刀)&#8221; from TENSHINRYU** — Vorläufige Zusammenfassung: “Koran-To (虎乱刀)” from TENSHINRYU│JAPANESE TRADITION TENSHINRYU HYOHO
+**&#8220;Koran-To (虎乱刀)&#8221; from TENSHINRYU** — Vorläufige Zusammenfassung: “Koran-To (虎乱刀)” from TENSHINRYU

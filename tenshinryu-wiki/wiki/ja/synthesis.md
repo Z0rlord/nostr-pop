@@ -5,7 +5,7 @@ title: "総合ガイド"
 pair: en/synthesis
 tags: ['synthesis']
 sources:
-updated: 2026-06-30
+updated: 2026-07-02
 ---
 # 総合ガイド
 
@@ -45,5 +45,14 @@ updated: 2026-06-30
 ## 礼法・文化
 
 [[reiho/]]、[[articles/p-29]]（武号）、[[philosophy/]]。
+
+## 外部リソース
+
+ウィキ外の公式チャネル：
+
+- [天心流 ONLINE / KIWAMI](https://tenshinryu.xyz) — オンライン稽古・会員カリキュラム
+- [天心流公式 YouTube](https://www.youtube.com/@tenshinryu/featured) — 公開レッスン・技法デモ・イベント配信
+- [international.tenshinryu.net](https://international.tenshinryu.net/) — 連盟・支部情報
+- [[community/tenshinryu-hyoho-facebook|公式コミュニティ（Facebook）]] — 会員向け非公開フォーラム
 
 英語: [../en/synthesis.md](../en/synthesis.md)

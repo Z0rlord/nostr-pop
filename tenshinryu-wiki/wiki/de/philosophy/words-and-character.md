@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Siehe die Version auf [Englisch](../../en/philosophy/words-and-character.md) · [Japanisch](../../ja/philosophy/words-and-character.md).
 
-**Let&#8217;s be careful. Our words build our character.** — Vorläufige Zusammenfassung: Let’s be careful. Our words build our character.│JAPANESE TRADITION TENSHINRYU HYOHO
+**Let&#8217;s be careful. Our words build our character.** — Vorläufige Zusammenfassung: Let’s be careful. Our words build our character.

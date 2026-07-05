@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/philosophy/pride-and-humility.md) · [giapponese](../../ja/philosophy/pride-and-humility.md).
 
-**Hold pride that is not arrogance,and humility that is not self-deprecation** — Riassunto provvisorio: Hold pride that is not arrogance,and humility that is not self-deprecation│JAPANESE TRADITION TENSHINRYU HYOHO
+**Hold pride that is not arrogance,and humility that is not self-deprecation** — Riassunto provvisorio: Hold pride that is not arrogance,and humility that is not self-deprecation

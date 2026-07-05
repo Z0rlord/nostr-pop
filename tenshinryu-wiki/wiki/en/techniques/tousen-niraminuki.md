@@ -9,12 +9,10 @@ sources:
 updated: 2026-06-29
 ---
 # Tousen Niraminuki (尖睨抜)
-
 Long-sword (*nodachi* / *odachi*) technique: feign fear when threatened, then draw. Demonstrated with ~100 cm blade; no fixed length rule for nodachi/odachi beyond "longer than usual."
 
-“Tousen Niraminuki (尖睨抜)”│JAPANESE TRADITION TENSHINRYU HYOHO
+“Tousen Niraminuki (尖睨抜)”
 
-タグ #侍 #武士 #古武道 #古武術 #日本刀 #天心流 #martialarts #martialart #martialartist #Samurai #japanesemartialarts #Bushi #kobudo #tenshinryu #japanesetraditional #budo #kenjutsu #dojo BUSHI KOBUDO SAMURAI
 
 Technique using Nodachi Odachi”Tosen-Niraminuki”
 

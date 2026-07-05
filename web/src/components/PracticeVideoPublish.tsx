@@ -28,10 +28,12 @@ import {
   type PracticeLocationMeta,
 } from "@/lib/practice-publish";
 import type { PracticeIdentity } from "@/lib/practice-identity";
+import { detachNip46Signer, savePracticeIdentity } from "@/lib/practice-identity";
 import { canSignPractice } from "@/lib/practice-identity";
 import { PRACTICE_HASHTAGS, RELAY_URL } from "@/lib/constants";
 import { PostPublishWizard } from "@/components/PostPublishWizard";
 import { PracticeSignerConnect } from "@/components/PracticeSignerConnect";
+import { Nip46SessionTimeoutError } from "@/lib/nip46-auth";
 
 type Props = {
   identity: PracticeIdentity;
@@ -87,6 +89,7 @@ export function PracticeVideoPublish({ identity, onSignOut, onIdentityChange }: 
   const [showPrimalGuide, setShowPrimalGuide] = useState(false);
   const [locationMeta, setLocationMeta] = useState<PracticeLocationMeta | undefined>();
   const [metadataStripped, setMetadataStripped] = useState(false);
+  const [staleNip46Session, setStaleNip46Session] = useState(false);
   const publishAbortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
@@ -302,6 +305,7 @@ export function PracticeVideoPublish({ identity, onSignOut, onIdentityChange }: 
     setPublishing(true);
     setPublishProgress(null);
     setPrimalAuthUrl(null);
+    setStaleNip46Session(false);
     setError(null);
     setWizardOpen(false);
     setPublishedResult(null);
@@ -336,6 +340,12 @@ export function PracticeVideoPublish({ identity, onSignOut, onIdentityChange }: 
         });
     } catch (e) {
       if (!abort.signal.aborted) {
+        if (e instanceof Nip46SessionTimeoutError) {
+          setStaleNip46Session(true);
+          const cleared = detachNip46Signer(identity);
+          savePracticeIdentity(cleared);
+          onIdentityChange?.(cleared);
+        }
         setError(formatPublishError(e, t("publish.failed")));
       }
     } finally {
@@ -496,7 +506,7 @@ export function PracticeVideoPublish({ identity, onSignOut, onIdentityChange }: 
             <p className="text-xs text-dojo-gold/80">{t("publish.primalApproveHint")}</p>
           )}
 
-          {primalAuthUrl && (publishing || error) && (
+          {primalAuthUrl && publishing && (
             <div className="rounded-xl border border-dojo-gold/40 bg-dojo-gold/10 p-4 text-sm">
               <p className="font-medium text-dojo-gold">{t("publish.primalOpenTitle")}</p>
               <p className="mt-1 text-dojo-mist/75">{t("publish.primalOpenBody")}</p>
@@ -541,7 +551,12 @@ export function PracticeVideoPublish({ identity, onSignOut, onIdentityChange }: 
               role="alert"
             >
               <p>{error}</p>
-              {identity.source === "nip46" && onSignOut && (
+              {staleNip46Session && (
+                <p className="mt-2 text-dojo-mist/80">
+                  {t("publish.staleNip46Hint")}
+                </p>
+              )}
+              {(identity.source === "nip46" || staleNip46Session) && onSignOut && (
                 <button
                   type="button"
                   onClick={onSignOut}

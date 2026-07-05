@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consultez la version en [anglais](../../en/reiho/kesa.md) · [japonais](../../ja/reiho/kesa.md).
 
-**Kesa 袈裟** — Résumé provisoire : Kesa 袈裟│JAPANESE TRADITION TENSHINRYU HYOHO
+**Kesa 袈裟** — Résumé provisoire : Kesa 袈裟

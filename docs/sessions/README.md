@@ -4,6 +4,7 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-07-02 | [wiki-versioning-github](./2026-07-02-wiki-versioning-github.md) | Wiki VERSION + git tags, rollback docs, commit/push to GitHub |
 | 2026-07-02 | [youtube-pubsub-pipeline](./2026-07-02-youtube-pubsub-pipeline.md) | YouTube PubSub callback service, auto-trigger pipeline, renewal cadence |
 | 2026-07-01 | [social-cross-post-pipeline](./2026-07-01-social-cross-post-pipeline.md) | `social_post.py` MVP, Meta/TikTok stubs, no Zernio |
 | 2026-07-01 | [social-pipeline-own-build](./2026-07-01-social-pipeline-own-build.md) | Own social CLI, Nostr working, Meta/TikTok stubs, rejected Zernio |

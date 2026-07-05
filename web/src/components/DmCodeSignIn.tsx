@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useI18n } from "@/i18n/context";
-import { isValidNostrIdentityInput } from "@/lib/nostr";
+import { isValidNostrIdentityInput, isPrivateKeyInput, isRawHexKeyInput } from "@/lib/nostr";
 import type { PracticeIdentity } from "@/lib/practice-identity";
 
 type Props = {
@@ -61,6 +61,14 @@ export function DmCodeSignIn({ onSignedIn, onError, disabled }: Props) {
 
   async function requestCode() {
     const trimmed = npub.trim();
+    if (isPrivateKeyInput(trimmed)) {
+      showError(t("signIn.privateKeyRejected"));
+      return;
+    }
+    if (isRawHexKeyInput(trimmed)) {
+      showError(t("signIn.rawHexKeyRejected"));
+      return;
+    }
     if (!isValidNostrIdentityInput(trimmed)) {
       showError(t("signIn.invalidNpub"));
       return;
@@ -116,7 +124,6 @@ export function DmCodeSignIn({ onSignedIn, onError, disabled }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          npub: npub.trim(),
           code: code.trim(),
           challenge,
         }),

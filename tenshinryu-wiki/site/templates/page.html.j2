@@ -20,6 +20,9 @@
         {% if meta_line %}
         <p class="page-meta">{{ meta_line | safe }}</p>
         {% endif %}
+        {% if render_page_h1 %}
+        <h1 class="page-title">{{ title }}</h1>
+        {% endif %}
         {{ content | safe }}
       </article>
       <aside class="page-sidebar" aria-label="{{ toc_label }}">

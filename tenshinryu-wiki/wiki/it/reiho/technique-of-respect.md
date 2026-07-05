@@ -14,4 +14,4 @@ updated: 2026-06-29
 
 Consulta la versione in [inglese](../../en/reiho/technique-of-respect.md) · [giapponese](../../ja/reiho/technique-of-respect.md).
 
-**The Technique of Respect** — Riassunto provvisorio: The Technique of Respect│JAPANESE TRADITION TENSHINRYU HYOHO
+**The Technique of Respect** — Riassunto provvisorio: The Technique of Respect

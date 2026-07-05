@@ -8,7 +8,6 @@ updated: 2026-06-30
 ---
 
 # Reiho & Culture
-
 Etiquette, dress, and daily conduct in Tenshinryu — study these early (see [[guides/start-here|Start Here]]).
 
 | Page | Topic |

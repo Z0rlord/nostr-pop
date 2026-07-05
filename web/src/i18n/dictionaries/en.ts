@@ -313,6 +313,10 @@ const en = {
     cameraUnsupported:
       "QR camera scanning is not supported in this browser. Use Show QR code instead.",
     invalidNpub: "Enter a valid npub (npub1…) or NIP-05 address (name@domain).",
+    privateKeyRejected:
+      "Use your npub or NIP-05 address — never your private key (nsec).",
+    rawHexKeyRejected:
+      "This looks like a raw hex key. Use your npub or NIP-05 — never a private key.",
     noExtensionHelp:
       "No Nostr extension detected. Install Alby or use QR sign-in below.",
     connectFailed: "Could not connect. Try again or use QR sign-in.",
@@ -470,6 +474,8 @@ const en = {
     wizardDone: "Done",
     failed: "Could not publish. Try again.",
     signOutRetry: "Sign out and try again",
+    staleNip46Hint:
+      "Your Primal remote-signer link was cleared. Open Primal → Remote Login, scan the QR on this page again, then retry upload.",
     dailyLimit: "One practice video per day. You can upload again in {wait}.",
     emptyCta: "Publish your first video",
   },

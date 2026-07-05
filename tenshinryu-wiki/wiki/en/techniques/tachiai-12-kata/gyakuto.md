@@ -10,7 +10,6 @@ sources:
 updated: 2026-06-29
 ---
 # 8 — Gyakuto (逆刀)
-
 ![Seiho 8: Gyakuto 逆刀](/assets/tachiai-12-kata/gyakuto/%E9%80%86%E5%88%80.jpg)
 
 | | |

@@ -9,7 +9,6 @@ sources:
 updated: 2026-06-29
 ---
 # Instructor Lineage (師家・指導者)
-
 Shike (師家) and senior instructors from [tenshinryu.net](https://tenshinryu.net/).
 
 | Generation | Name | Page |

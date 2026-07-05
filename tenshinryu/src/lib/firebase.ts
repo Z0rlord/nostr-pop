@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   OAuthProvider,
   signInWithPopup,
+  signInWithEmailAndPassword,
   signOut,
   browserLocalPersistence,
   setPersistence,
@@ -90,6 +91,11 @@ export async function signInWithGoogle() {
 
 export async function signInWithApple() {
   const result = await signInWithPopup(getAuthInstance(), appleProvider);
+  return result.user;
+}
+
+export async function signInWithEmail(email: string, password: string) {
+  const result = await signInWithEmailAndPassword(getAuthInstance(), email, password);
   return result.user;
 }
 
