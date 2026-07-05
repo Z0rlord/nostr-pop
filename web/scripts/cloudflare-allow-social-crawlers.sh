@@ -38,14 +38,16 @@ CURRENT=$(curl -sS -H "Authorization: Bearer $TOKEN" \
 SUCCESS=$(echo "$CURRENT" | python3 -c "import json,sys; print(json.load(sys.stdin).get('success'))")
 
 if [[ "$SUCCESS" != "True" ]]; then
-  echo "WARN: API cannot read bot_management (token may lack Bot Management Write)."
+  echo "WARN: API cannot read bot_management (token needs Bot Management Write)."
   echo ""
   echo "Fix manually in Cloudflare dashboard for zone dojopop.live:"
   echo "  1. Security → Settings → Bots"
-  echo "  2. Under AI Crawl Control / Block AI bots → set to Off or add exception"
-  echo "  3. Ensure meta-externalagent is NOT blocked (403)"
-  echo "  4. Security → Bots → Configure robots.txt → allow social crawlers if offered"
-  echo "  5. Re-scrape a video URL in Facebook Sharing Debugger"
+  echo "  2. AI Crawl Control / Block AI bots → Off (or allow meta-externalagent)"
+  echo "  3. Re-run: $0 --check-only  (meta-externalagent should return HTTP 200)"
+  echo "  4. Re-scrape URLs in https://developers.facebook.com/tools/debug/"
+  echo ""
+  echo "Upgrade token: Cloudflare → My Profile → API Tokens → edit token →"
+  echo "  Zone → dojopop.live → Bot Management → Edit"
   exit 1
 fi
 

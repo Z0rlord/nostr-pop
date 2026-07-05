@@ -103,6 +103,23 @@ doppler run --project dojopop --config prd_zorie -- ./scripts/update-tunnel-ingr
 
 Verify: `curl -sI https://dojopop.live | head -5`
 
+## Sign in with Clave (iPhone)
+
+[Clave](https://clave.casa) is a NIP-46 remote signer for iPhone — keys stay in the
+Keychain; DojoPop never sees your nsec.
+
+**Desktop browser → iPhone signer:**
+
+1. On dojopop.live, open **Sign in** → **Show QR code**.
+2. On iPhone, install Clave from the App Store and open **Connect**.
+3. Scan the QR → tap **Approve** when DojoPop requests access.
+
+Same flow works for publishing practice videos after DM or extension sign-in.
+Primal Remote Login is an alternative; Clave is recommended on iPhone when you want
+a dedicated signer without the full Primal client.
+
+NIP-46 relay set includes `wss://relay.powr.build` for reliable Clave background wake-up.
+
 ## API routes
 
 | Route | Method | Purpose |
@@ -132,8 +149,33 @@ sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
 
 Emergency local override: `sudo ./scripts/fix-local-dns-dojopop.sh`
 
+## Facebook / Meta link previews
+
+`/v/[eventId]` pages use `generateMetadata` with dynamic `og:title`, `og:description`,
+`og:url`, and `og:image` (Blossom thumbnail or `/og/practice/[id].jpg` proxy).
+
+**If Facebook shows no title or thumbnail:** Cloudflare **AI Crawl Control** on
+`dojopop.live` returns HTTP **403** to Meta's `meta-externalagent/1.1` crawler
+(while `facebookexternalhit/1.1` may still get 200). Meta uses both; blocked
+image fetches mean missing previews.
+
+1. Cloudflare dashboard → **Security → Settings → Bots** → disable **Block AI bots**
+   / AI Crawl Control for `dojopop.live` (or add an exception for `meta-externalagent`).
+2. Or run (needs `CLOUDFLARE_API_TOKEN` with **Bot Management Write**):
+
+   ```bash
+   doppler run --project dojopop --config prd_zorie -- ./scripts/cloudflare-allow-social-crawlers.sh
+   ```
+
+3. Re-scrape each URL in [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+   (Facebook caches OG tags aggressively).
+
+Thumbnails on external CDNs (e.g. `blossom.yakihonne.com`) work without the Cloudflare
+fix; `blossom.dojopop.live` and `/og/practice/*` require step 1–2.
+
 ## Blockers / operator checklist
 
+- [ ] Allow Meta crawlers in Cloudflare (see Facebook link previews above)
 - [ ] Register Stripe webhook URL in dashboard (see above)
 - [ ] Run `stripe:ensure-price` and add `STRIPE_PRICE_MEMBERSHIP` to Doppler
 - [ ] Add BTCPay creds to Doppler for live Lightning
