@@ -31,13 +31,40 @@ export function isOgImageUrl(url: string): boolean {
   }
 }
 
+/** Meta's image crawler (meta-externalagent) is blocked on dojopop.live by Cloudflare AI Crawl Control. */
+function isMetaAccessibleOgHost(url: string): boolean {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    if (host === "dojopop.live" || host.endsWith(".dojopop.live")) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const OG_VIDEO_THUMB_WIDTH = 1280;
+const OG_VIDEO_THUMB_HEIGHT = 720;
+
 export function ogImageForPracticeVideo(
   eventId: string,
   thumbUrl?: string
 ): { url: string; width?: number; height?: number } {
   const normalized = normalizeMediaUrl(thumbUrl);
+  if (normalized && isOgImageUrl(normalized) && isMetaAccessibleOgHost(normalized)) {
+    // Direct CDN URL — Meta can fetch hosts outside dojopop.live (e.g. blossom.yakihonne.com).
+    return {
+      url: normalized,
+      width: OG_VIDEO_THUMB_WIDTH,
+      height: OG_VIDEO_THUMB_HEIGHT,
+    };
+  }
   if (normalized && isOgImageUrl(normalized)) {
-    return { url: `${siteUrl()}/og/practice/${eventId}.jpg` };
+    // Same-zone Blossom/CDN — proxy on dojopop.live until Cloudflare allows meta-externalagent.
+    return {
+      url: `${siteUrl()}/og/practice/${eventId}.jpg`,
+      width: OG_VIDEO_THUMB_WIDTH,
+      height: OG_VIDEO_THUMB_HEIGHT,
+    };
   }
   return { url: defaultOgImageUrl(), width: 1024, height: 576 };
 }
