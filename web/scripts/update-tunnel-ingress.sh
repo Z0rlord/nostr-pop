@@ -24,6 +24,11 @@ TENSHINRYU_STAGING_HOST="${TENSHINRYU_STAGING_HOST:-staging.tenshinryu.xyz}"
 TENSHINRYU_APEX="${TENSHINRYU_APEX:-tenshinryu.xyz}"
 TENSHINRYU_WWW="${TENSHINRYU_WWW:-www.tenshinryu.xyz}"
 TENSHINRYU_HOST="${TENSHINRYU_HOST:-kiwami.tenshinryu.xyz}"
+MEMBRANE_RELAY_HOST="${MEMBRANE_RELAY_HOST:-membrane-relay.dojopop.live}"
+MEMBRANE_RELAY_PORT="${MEMBRANE_RELAY_PORT:-7778}"
+HOOKS_PORT="${DOJOPOP_HOOKS_PORT:-3009}"
+KOSYNC_PORT="${DOJOPOP_KOSYNC_PORT:-3007}"
+KOSYNC_HOST="${DOJOPOP_KOSYNC_HOST:-sync.krtrmesh.xyz}"
 TENSHINRYU_ZONE_ID="${TENSHINRYU_ZONE_ID:-8773d460b9cf42569a9c895481c17785}"
 
 if [[ -z "$TOKEN" ]]; then
@@ -46,7 +51,10 @@ PAYLOAD=$(cat <<EOF
 {
   "config": {
     "ingress": [
+      { "hostname": "hooks.dojopop.live", "service": "http://localhost:${HOOKS_PORT}" },
+      { "hostname": "${KOSYNC_HOST}", "service": "http://localhost:${KOSYNC_PORT}" },
       { "hostname": "relay.dojopop.live", "service": "http://localhost:7777" },
+      { "hostname": "${MEMBRANE_RELAY_HOST}", "service": "http://localhost:${MEMBRANE_RELAY_PORT}" },
       { "hostname": "dojopop.live", "service": "http://localhost:${WEB_PORT}" },
       { "hostname": "www.dojopop.live", "service": "http://localhost:${WEB_PORT}" },
       { "hostname": "bunker.dojopop.live", "service": "http://localhost:${BUNKER_PORT}" },
@@ -84,7 +92,7 @@ python3 -m json.tool /tmp/cf-tunnel-resp.json | head -30
 
 echo ""
 echo "DNS (zone ${DOJOPOP_ZONE_ID}, not CLOUDFLARE_ZONE_ID which may be another domain):"
-for NAME in dojopop.live www admin bunker blossom hub; do
+for NAME in dojopop.live www admin bunker blossom hub membrane-relay; do
   TARGET="${TUNNEL_ID}.cfargotunnel.com"
   curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${DOJOPOP_ZONE_ID}/dns_records" \
     -H "Authorization: Bearer $TOKEN" \
