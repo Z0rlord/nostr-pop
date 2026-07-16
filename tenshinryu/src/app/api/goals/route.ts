@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireStudentAccess } from "@/lib/session";
 
-// GET /api/goals - Get practice goals for a student
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -9,13 +9,13 @@ export async function GET(req: NextRequest) {
     const isActive = searchParams.get("isActive");
 
     if (!studentId) {
-      return NextResponse.json(
-        { error: "studentId is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "studentId is required" }, { status: 400 });
     }
 
-    const where: any = { studentId };
+    const access = await requireStudentAccess(req, studentId);
+    if (access instanceof NextResponse) return access;
+
+    const where: Record<string, unknown> = { studentId };
     if (isActive !== null) {
       where.isActive = isActive === "true";
     }
@@ -26,16 +26,12 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({ goals });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[Goals] GET error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch goals" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch goals" }, { status: 500 });
   }
 }
 
-// POST /api/goals - Create a new goal
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -53,11 +49,11 @@ export async function POST(req: NextRequest) {
     } = body;
 
     if (!studentId || !title || !goalType || !targetValue || !unit) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    const access = await requireStudentAccess(req, studentId);
+    if (access instanceof NextResponse) return access;
 
     const goal = await prisma.practiceGoal.create({
       data: {
@@ -75,27 +71,27 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, goal });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[Goals] POST error:", error);
-    return NextResponse.json(
-      { error: "Failed to create goal" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to create goal" }, { status: 500 });
   }
 }
 
-// PUT /api/goals - Update a goal
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const { id, ...updateData } = body;
 
     if (!id) {
-      return NextResponse.json(
-        { error: "id is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
+
+    const existing = await prisma.practiceGoal.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    const access = await requireStudentAccess(req, existing.studentId);
+    if (access instanceof NextResponse) return access;
 
     const goal = await prisma.practiceGoal.update({
       where: { id },
@@ -108,38 +104,32 @@ export async function PUT(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, goal });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[Goals] PUT error:", error);
-    return NextResponse.json(
-      { error: "Failed to update goal" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to update goal" }, { status: 500 });
   }
 }
 
-// DELETE /api/goals - Delete a goal
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
 
     if (!id) {
-      return NextResponse.json(
-        { error: "id is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
 
-    await prisma.practiceGoal.delete({
-      where: { id },
-    });
+    const existing = await prisma.practiceGoal.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    const access = await requireStudentAccess(req, existing.studentId);
+    if (access instanceof NextResponse) return access;
 
+    await prisma.practiceGoal.delete({ where: { id } });
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[Goals] DELETE error:", error);
-    return NextResponse.json(
-      { error: "Failed to delete goal" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to delete goal" }, { status: 500 });
   }
 }

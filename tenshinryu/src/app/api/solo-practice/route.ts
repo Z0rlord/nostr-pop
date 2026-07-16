@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireStudentAccess } from "@/lib/session";
 
 // GET /api/solo-practice - Get practice logs for a student
 export async function GET(req: NextRequest) {
@@ -17,12 +18,16 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const where: any = { studentId };
+    const access = await requireStudentAccess(req, studentId);
+    if (access instanceof NextResponse) return access;
+
+    const where: Record<string, unknown> = { studentId };
 
     if (startDate || endDate) {
-      where.date = {};
-      if (startDate) where.date.gte = new Date(startDate);
-      if (endDate) where.date.lte = new Date(endDate);
+      const date: Record<string, Date> = {};
+      if (startDate) date.gte = new Date(startDate);
+      if (endDate) date.lte = new Date(endDate);
+      where.date = date;
     }
 
     if (practiceType) {
@@ -45,7 +50,7 @@ export async function GET(req: NextRequest) {
     };
 
     return NextResponse.json({ logs, stats });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[SoloPractice] GET error:", error);
     return NextResponse.json(
       { error: "Failed to fetch practice logs" },
@@ -83,6 +88,9 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    const access = await requireStudentAccess(req, studentId);
+    if (access instanceof NextResponse) return access;
 
     const log = await prisma.soloPracticeLog.create({
       data: {
@@ -131,6 +139,13 @@ export async function PUT(req: NextRequest) {
       );
     }
 
+    const existing = await prisma.soloPracticeLog.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    const access = await requireStudentAccess(req, existing.studentId);
+    if (access instanceof NextResponse) return access;
+
     const log = await prisma.soloPracticeLog.update({
       where: { id },
       data: {
@@ -161,6 +176,13 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    const existing = await prisma.soloPracticeLog.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    const access = await requireStudentAccess(req, existing.studentId);
+    if (access instanceof NextResponse) return access;
 
     await prisma.soloPracticeLog.delete({
       where: { id },

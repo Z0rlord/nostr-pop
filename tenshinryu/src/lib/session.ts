@@ -121,3 +121,30 @@ export async function ensureMembership(params: {
     },
   });
 }
+
+/**
+ * Student can access own records; staff can access students in their dojos.
+ * Returns NextResponse on failure, or { student } on success.
+ */
+export async function requireStudentAccess(req: NextRequest, studentId: string) {
+  const sessionId = req.cookies.get("session")?.value;
+  if (!sessionId) return unauthorized();
+
+  const student = await prisma.student.findUnique({ where: { id: studentId } });
+  if (!student) {
+    return NextResponse.json({ error: "Student not found" }, { status: 404 });
+  }
+
+  if (sessionId === studentId) {
+    return { student, as: "self" as const };
+  }
+
+  const staff = await requireStaff(req);
+  if (staff instanceof NextResponse) return forbidden("Not allowed to access this student");
+
+  if (!staff.dojoIds.includes(student.dojoId)) {
+    return forbidden("Student is not in your school");
+  }
+
+  return { student, as: "staff" as const, staff };
+}

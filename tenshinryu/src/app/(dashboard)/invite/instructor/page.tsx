@@ -67,7 +67,7 @@ function InstructorInviteContent() {
       return;
     }
 
-    if (password.length < 8) {
+    if (password.length < 6) {
       setError(t("instructor.invite.accept.passwordHint"));
       return;
     }
