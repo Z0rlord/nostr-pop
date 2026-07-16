@@ -108,21 +108,34 @@ export async function sendInviteEmail(params: {
   return true;
 }
 
-export async function assertCanInviteEmail(email: string) {
+export async function assertCanInviteEmail(email: string, dojoId?: string) {
   const normalized = email.toLowerCase().trim();
 
-  const existingInstructor = await prisma.instructor.findFirst({
-    where: { email: { equals: normalized, mode: "insensitive" } },
-  });
-  if (existingInstructor) {
-    throw new Error("This email is already registered");
-  }
-
   const pending = await prisma.instructorInvite.findFirst({
-    where: { email: normalized, status: "pending" },
+    where: {
+      email: normalized,
+      status: "pending",
+      ...(dojoId ? { dojoId } : {}),
+    },
   });
   if (pending) {
     throw new Error("A pending invite already exists for this email");
+  }
+
+  if (dojoId) {
+    const existingInstructor = await prisma.instructor.findFirst({
+      where: { email: { equals: normalized, mode: "insensitive" } },
+      include: { memberships: true },
+    });
+    if (existingInstructor) {
+      const alreadyMember =
+        existingInstructor.dojoId === dojoId ||
+        existingInstructor.memberships.some((m) => m.dojoId === dojoId);
+      if (alreadyMember) {
+        throw new Error("This email is already a member of this school");
+      }
+      // Allowed: same person invited to a different dojo
+    }
   }
 
   return normalized;

@@ -73,11 +73,14 @@ export async function POST(req: NextRequest) {
 
     const instructor = await prisma.instructor.findFirst({
       where: { email: { equals: email, mode: "insensitive" } },
+      include: { memberships: true },
     });
 
     if (instructor) {
       found = true;
-      role = instructor.isAdmin ? "admin" : "instructor";
+      const isAdminAnywhere =
+        instructor.isAdmin || instructor.memberships.some((m) => m.isAdmin);
+      role = isAdminAnywhere ? "admin" : "instructor";
       userId = instructor.id;
       userName = instructor.name;
       userEmail = instructor.email;
@@ -108,9 +111,25 @@ export async function POST(req: NextRequest) {
     }
 
     if (!found) {
-      const dojo = await prisma.dojo.findFirst();
+      // Require an explicit school — never assign to an arbitrary findFirst() dojo
+      const dojoId = typeof body.dojoId === "string" ? body.dojoId : undefined;
+      const dojoCode = typeof body.dojoCode === "string" ? body.dojoCode.trim() : undefined;
+
+      let dojo = null;
+      if (dojoId) {
+        dojo = await prisma.dojo.findUnique({ where: { id: dojoId } });
+      } else if (dojoCode) {
+        dojo = await prisma.dojo.findFirst({
+          where: { code: { equals: dojoCode, mode: "insensitive" } },
+        });
+      }
+
       if (!dojo) {
-        throw new AuthError("No dojo configured - cannot create account", "NO_DOJO", 500);
+        throw new AuthError(
+          "Choose a school (dojo code or invite) before creating an account",
+          "DOJO_REQUIRED",
+          400
+        );
       }
 
       const newStudent = await prisma.student.create({
@@ -150,14 +169,28 @@ export async function POST(req: NextRequest) {
         maxAge: 30 * 24 * 60 * 60,
       });
       
-      response.cookies.set("role", role, {
+    response.cookies.set("role", role, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 30 * 24 * 60 * 60,
+    });
+
+    if (instructor) {
+      const activeDojo =
+        instructor.memberships.find((m) => m.isAdmin)?.dojoId ||
+        instructor.memberships[0]?.dojoId ||
+        instructor.dojoId;
+      response.cookies.set("activeDojo", activeDojo, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60,
       });
-      console.log('[API Auth] Cookies set successfully');
+    }
+    console.log('[API Auth] Cookies set successfully');
     } catch (cookieErr: any) {
       console.error('[API Auth] Cookie error:', cookieErr);
       throw new AuthError("Failed to set session cookie: " + cookieErr.message, "COOKIE_ERROR", 500);

@@ -8,16 +8,18 @@ datasource db {
 }
 
 model Dojo {
-  id               String             @id @default(uuid())
+  id               String                     @id @default(uuid())
   name             String
   location         String?
-  timezone         String             @default("Europe/Warsaw")
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
+  timezone         String                     @default("Asia/Tokyo")
+  code             String?                    @unique
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
   checkIns         CheckIn[]
   classes          Class[]
   instructors      Instructor[]
   InstructorInvite InstructorInvite[]
+  memberships      InstructorDojoMembership[]
   leaderboards     Leaderboard[]
   students         Student[]
 }
@@ -61,16 +63,32 @@ model Student {
 }
 
 model Instructor {
-  id          String    @id @default(uuid())
-  dojoId      String
-  name        String
-  email       String    @unique
-  password    String
-  isAdmin     Boolean   @default(false)
-  firebaseUid String?   @unique
-  classes     Class[]
-  dojo        Dojo      @relation(fields: [dojoId], references: [id])
-  teachings   Lineage[] @relation("TeacherLineage")
+  id           String                     @id @default(uuid())
+  dojoId       String
+  name         String
+  email        String                     @unique
+  password     String
+  isAdmin      Boolean                    @default(false)
+  firebaseUid  String?                    @unique
+  classes      Class[]
+  dojo         Dojo                       @relation(fields: [dojoId], references: [id])
+  memberships  InstructorDojoMembership[]
+  teachings    Lineage[]                  @relation("TeacherLineage")
+}
+
+/// One instructor (person) can belong to many dojos.
+model InstructorDojoMembership {
+  id           String     @id @default(uuid())
+  instructorId String
+  dojoId       String
+  isAdmin      Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  instructor   Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  dojo         Dojo       @relation(fields: [dojoId], references: [id], onDelete: Cascade)
+
+  @@unique([instructorId, dojoId])
+  @@index([dojoId])
+  @@index([instructorId])
 }
 
 model Class {
@@ -176,7 +194,7 @@ model Lineage {
 
 model InstructorInvite {
   id         String    @id @default(uuid())
-  email      String    @unique
+  email      String
   name       String?
   token      String    @unique
   invitedBy  String
@@ -191,6 +209,7 @@ model InstructorInvite {
   @@index([token])
   @@index([email])
   @@index([status])
+  @@index([email, dojoId])
 }
 
 model NotificationLog {

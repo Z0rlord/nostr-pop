@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { requireStaff, isStaffForDojo } from "@/lib/session";
 
-const prisma = new PrismaClient();
-
-// Teacher correction endpoint
 export async function POST(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const body = await req.json();
     const { studentId, classId, checkedInAt, method } = body;
 
@@ -16,44 +17,42 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Verify student exists
-    const student = await prisma.student.findUnique({
-      where: { id: studentId },
-    });
-
-    if (!student) {
-      return NextResponse.json(
-        { error: "Student not found" },
-        { status: 404 }
-      );
+    const student = await prisma.student.findUnique({ where: { id: studentId } });
+    if (!student || !staff.dojoIds.includes(student.dojoId)) {
+      return NextResponse.json({ error: "Student not found" }, { status: 404 });
     }
 
-    // Check if already has a check-in today
+    if (!(await isStaffForDojo(staff.instructorId, student.dojoId))) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const cls = await prisma.class.findUnique({ where: { id: classId } });
+    if (!cls || cls.dojoId !== student.dojoId) {
+      return NextResponse.json({ error: "Invalid class for student dojo" }, { status: 400 });
+    }
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     const existingCheckIn = await prisma.checkIn.findFirst({
       where: {
         studentId,
-        checkedInAt: {
-          gte: today,
-        },
+        checkedInAt: { gte: today },
       },
     });
 
     let checkIn;
 
     if (existingCheckIn) {
-      // Update existing check-in
       checkIn = await prisma.checkIn.update({
         where: { id: existingCheckIn.id },
         data: {
           checkedInAt: checkedInAt ? new Date(checkedInAt) : new Date(),
           method: method || "manual",
+          classId,
         },
       });
     } else {
-      // Create new check-in
       checkIn = await prisma.checkIn.create({
         data: {
           studentId,
@@ -65,7 +64,6 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Award tokens for new check-in
       await prisma.tokenTransaction.create({
         data: {
           studentId,
@@ -75,7 +73,6 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Update student's stats
       await prisma.student.update({
         where: { id: studentId },
         data: {
@@ -95,11 +92,8 @@ export async function POST(req: NextRequest) {
         method: checkIn.method,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Correction error:", error);
-    return NextResponse.json(
-      { error: "Failed to correct attendance" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to correct attendance" }, { status: 500 });
   }
 }

@@ -5,28 +5,33 @@ import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
-    // Handle both JSON and form data
-    let name, email, password, firebaseUid, photoURL;
-    
+    let name: string | undefined;
+    let email: string | undefined;
+    let password: string | undefined;
+    let firebaseUid: string | undefined;
+    let dojoId: string | undefined;
+    let dojoCode: string | undefined;
+
     const contentType = req.headers.get("content-type") || "";
     const isJson = contentType.includes("application/json");
-    
+
     if (isJson) {
       const body = await req.json();
       name = body.name;
       email = body.email;
       password = body.password;
       firebaseUid = body.firebaseUid;
-      photoURL = body.photoURL;
+      dojoId = body.dojoId;
+      dojoCode = body.dojoCode;
     } else {
-      // Form data
       const formData = await req.formData();
       name = formData.get("name") as string;
       email = formData.get("email") as string;
       password = formData.get("password") as string;
+      dojoId = (formData.get("dojoId") as string) || undefined;
+      dojoCode = (formData.get("dojoCode") as string) || undefined;
     }
 
-    // Validation
     if (!name || !email || !password) {
       return NextResponse.json(
         { error: "Name, email, and password are required" },
@@ -41,9 +46,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if email already exists
     const existingStudent = await prisma.student.findFirst({
-      where: { email },
+      where: { email: { equals: email, mode: "insensitive" } },
     });
 
     if (existingStudent) {
@@ -53,29 +57,36 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    let dojo = null;
+    if (dojoId) {
+      dojo = await prisma.dojo.findUnique({ where: { id: dojoId } });
+    } else if (dojoCode) {
+      dojo = await prisma.dojo.findFirst({
+        where: { code: { equals: dojoCode.trim(), mode: "insensitive" } },
+      });
+    }
 
-    // Generate unique QR code
-    const qrCode = `dojo-${randomUUID()}`;
-
-    // Get default dojo
-    const defaultDojo = await prisma.dojo.findFirst();
-    if (!defaultDojo) {
+    if (!dojo) {
       return NextResponse.json(
-        { error: "No dojo available" },
+        {
+          error:
+            "School required — provide dojoCode (or dojoId). Open signup from your school’s invite link.",
+          code: "DOJO_REQUIRED",
+        },
         { status: 400 }
       );
     }
 
-    // Create student with FREE tier
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const qrCode = `dojo-${randomUUID()}`;
+
     const student = await prisma.student.create({
       data: {
         name,
         email,
         password: hashedPassword,
         qrCode,
-        dojoId: defaultDojo.id,
+        dojoId: dojo.id,
         beltRank: "WHITE",
         stripes: 0,
         dojoBalance: 0,
@@ -83,65 +94,55 @@ export async function POST(req: NextRequest) {
         totalSpent: 0,
         isActive: true,
         firebaseUid: firebaseUid || null,
-        // Membership defaults to FREE tier
         membershipTier: "FREE",
         membershipStatus: "active",
       },
     });
 
-    // If JSON request (React form), set session cookie and return JSON
     if (isJson) {
       const response = NextResponse.json({
         success: true,
-        student: { 
-          id: student.id, 
-          name: student.name, 
+        student: {
+          id: student.id,
+          name: student.name,
           email: student.email,
           tier: student.membershipTier,
-        }
+          dojoId: dojo.id,
+        },
       });
-      
+
       response.cookies.set("session", student.id, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60,
       });
-      
+
       response.cookies.set("role", "student", {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60,
       });
-      
+
       return response;
     }
 
-    // Return HTML success page for form submissions
     return new NextResponse(
-      `
-      <!DOCTYPE html>
-      <html>
-        <head><title>Success</title></head>
-        <body style="font-family: sans-serif; padding: 24px; background: #f5f5f5;">
-          <div style="max-width: 400px; margin: 0 auto; background: white; padding: 24px; text-align: center;">
-            <h1>Account Created!</h1>
-            <p>Welcome, ${student.name}!</p>
-            <p style="color: #666;">You're on the FREE tier. Upgrade anytime!</p>
-            <a href="/login" style="display: inline-block; margin-top: 16px; padding: 12px 24px; background: #000; color: #fff; text-decoration: none;">Go to Login</a>
-          </div>
-        </body>
-      </html>
-      `,
+      `<!DOCTYPE html><html><body style="font-family:sans-serif;padding:24px">
+        <h1>Account Created!</h1>
+        <p>Welcome, ${student.name}!</p>
+        <a href="/login">Go to Login</a>
+      </body></html>`,
       { headers: { "Content-Type": "text/html" } }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Create student error:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { error: "Failed to create account: " + (error.message || "Unknown error") },
+      { error: "Failed to create account: " + message },
       { status: 500 }
     );
   }

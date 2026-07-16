@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { requireStaff, unauthorized, forbidden } from "@/lib/session";
 import { existsSync, readdirSync } from "fs";
 import { join } from "path";
 
-const prisma = new PrismaClient();
-
-// GET all students with avatar URLs
-export async function GET() {
+// GET students for the active dojo (staff only)
+export async function GET(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const students = await prisma.student.findMany({
+      where: { dojoId: staff.dojoId },
       include: {
         dojo: {
           select: { name: true },
@@ -19,19 +22,16 @@ export async function GET() {
       },
     });
 
-    // Get list of avatar files
     const uploadsDir = join(process.cwd(), "public", "uploads", "avatars");
     let avatarFiles: string[] = [];
     try {
-      avatarFiles = readdirSync(uploadsDir);
+      if (existsSync(uploadsDir)) avatarFiles = readdirSync(uploadsDir);
     } catch {
       // Directory doesn't exist yet
     }
 
-    // Check for avatar files and add URLs
     const studentsWithAvatars = students.map((student) => {
-      // Find any file starting with student ID
-      const avatarFile = avatarFiles.find(f => f.startsWith(student.id));
+      const avatarFile = avatarFiles.find((f) => f.startsWith(student.id));
       const avatarUrl = avatarFile ? `/uploads/avatars/${avatarFile}` : null;
 
       return {
@@ -41,19 +41,18 @@ export async function GET() {
         beltRank: student.beltRank,
         qrCode: student.qrCode,
         avatarUrl,
+        dojoId: student.dojoId,
         dojoName: student.dojo.name,
-        createdAt: student.createdAt,
+        createdAt: student.joinedAt,
       };
     });
 
     return NextResponse.json({
       students: studentsWithAvatars,
+      dojoId: staff.dojoId,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Fetch students error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch students" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch students" }, { status: 500 });
   }
 }

@@ -4,6 +4,7 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-07-16 | [tenshinryu-staging-multidojo-audit](./2026-07-16-tenshinryu-staging-multidojo-audit.md) | Staging DB isolation, multi-dojo membership, locked staff APIs |
 | 2026-07-05 | [facebook-og-cloudflare](./2026-07-05-facebook-og-cloudflare.md) | Meta OG 403 from AI Crawl Control; external CDN og:image mitigation; token needs Bot Management Edit |
 | 2026-07-02 | [wiki-versioning-github](./2026-07-02-wiki-versioning-github.md) | Wiki VERSION + git tags, rollback docs, commit/push to GitHub |
 | 2026-07-02 | [youtube-pubsub-pipeline](./2026-07-02-youtube-pubsub-pipeline.md) | YouTube PubSub callback service, auto-trigger pipeline, renewal cadence |

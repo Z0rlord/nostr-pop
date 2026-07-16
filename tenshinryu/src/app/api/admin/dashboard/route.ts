@@ -1,27 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireStaff } from "@/lib/session";
 
-// GET /api/admin/dashboard - Get business metrics
+// GET /api/admin/dashboard - Get business metrics for active dojo
 export async function GET(req: NextRequest) {
   try {
-    // Get current user from session
-    const sessionCookie = req.cookies.get("session")?.value;
-    const roleCookie = req.cookies.get("role")?.value;
-    
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const staff = await requireStaff(req, { adminOnly: true });
+    if (staff instanceof NextResponse) return staff;
 
-    // Verify user is admin
-    const instructor = await prisma.instructor.findUnique({
-      where: { id: sessionCookie },
-    });
-
-    if (!instructor || !instructor.isAdmin) {
-      return NextResponse.json({ error: "Admin access required" }, { status: 403 });
-    }
-
-    const dojoId = instructor.dojoId;
+    const dojoId = staff.dojoId;
 
     // Get date ranges
     const now = new Date();

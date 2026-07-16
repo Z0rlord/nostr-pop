@@ -1,29 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { requireStaff, isStaffForDojo } from "@/lib/session";
 
-const prisma = new PrismaClient();
-
-// GET all classes
+// GET classes for active dojo (staff)
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const upcoming = searchParams.get("upcoming") === "true";
-    const limit = parseInt(searchParams.get("limit") || "100");
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
 
-    // Note: schedule is stored as a String (e.g., "Mon/Wed 16:00-17:00")
-    // not a DateTime, so we can't filter by date. We return all classes.
+    const { searchParams } = new URL(req.url);
+    const limit = parseInt(searchParams.get("limit") || "100", 10);
+
     const classes = await prisma.class.findMany({
+      where: { dojoId: staff.dojoId },
       include: {
         instructor: {
-          select: {
-            id: true,
-            name: true,
-          },
+          select: { id: true, name: true },
         },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: { createdAt: "desc" },
       take: limit,
     });
 
@@ -37,52 +32,34 @@ export async function GET(req: NextRequest) {
         isRecurring: c.isRecurring,
         instructorId: c.instructorId,
         instructorName: c.instructor?.name || "Unknown",
+        dojoId: c.dojoId,
       })),
+      dojoId: staff.dojoId,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Fetch classes error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch classes" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch classes" }, { status: 500 });
   }
 }
 
-// POST create new class
 export async function POST(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const body = await req.json();
     const { name, schedule, location, maxStudents, instructorId, isRecurring } = body;
 
     if (!name || !schedule) {
-      return NextResponse.json(
-        { error: "Name and schedule are required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Name and schedule are required" }, { status: 400 });
     }
 
-    // For now, use a default dojo and instructor
-    // In production, this would come from the session
-    const dojo = await prisma.dojo.findFirst();
-    if (!dojo) {
+    const targetInstructorId = instructorId || staff.instructorId;
+    if (!(await isStaffForDojo(targetInstructorId, staff.dojoId))) {
       return NextResponse.json(
-        { error: "No dojo found" },
+        { error: "Instructor is not a member of this dojo" },
         { status: 400 }
       );
-    }
-
-    let targetInstructorId = instructorId;
-    if (!targetInstructorId) {
-      const instructor = await prisma.instructor.findFirst({
-        where: { dojoId: dojo.id },
-      });
-      if (!instructor) {
-        return NextResponse.json(
-          { error: "No instructor found" },
-          { status: 400 }
-        );
-      }
-      targetInstructorId = instructor.id;
     }
 
     const newClass = await prisma.class.create({
@@ -92,16 +69,10 @@ export async function POST(req: NextRequest) {
         location,
         maxStudents: maxStudents || 999,
         isRecurring: isRecurring || false,
-        dojoId: dojo.id,
+        dojoId: staff.dojoId,
         instructorId: targetInstructorId,
       },
-      include: {
-        instructor: {
-          select: {
-            name: true,
-          },
-        },
-      },
+      include: { instructor: { select: { name: true } } },
     });
 
     return NextResponse.json({
@@ -116,44 +87,33 @@ export async function POST(req: NextRequest) {
         instructorName: newClass.instructor.name,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Create class error:", error);
-    return NextResponse.json(
-      { error: "Failed to create class" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to create class" }, { status: 500 });
   }
 }
 
-// PUT update class
 export async function PUT(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const body = await req.json();
     const { id, name, schedule, location, maxStudents, isRecurring } = body;
 
     if (!id) {
-      return NextResponse.json(
-        { error: "Class ID is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Class ID is required" }, { status: 400 });
+    }
+
+    const existing = await prisma.class.findUnique({ where: { id } });
+    if (!existing || !staff.dojoIds.includes(existing.dojoId)) {
+      return NextResponse.json({ error: "Class not found" }, { status: 404 });
     }
 
     const updatedClass = await prisma.class.update({
       where: { id },
-      data: {
-        name,
-        schedule,
-        location,
-        maxStudents,
-        isRecurring,
-      },
-      include: {
-        instructor: {
-          select: {
-            name: true,
-          },
-        },
-      },
+      data: { name, schedule, location, maxStudents, isRecurring },
+      include: { instructor: { select: { name: true } } },
     });
 
     return NextResponse.json({
@@ -168,41 +128,33 @@ export async function PUT(req: NextRequest) {
         instructorName: updatedClass.instructor.name,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Update class error:", error);
-    return NextResponse.json(
-      { error: "Failed to update class" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to update class" }, { status: 500 });
   }
 }
 
-// DELETE class
 export async function DELETE(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
 
     if (!id) {
-      return NextResponse.json(
-        { error: "Class ID is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Class ID is required" }, { status: 400 });
     }
 
-    await prisma.class.delete({
-      where: { id },
-    });
+    const existing = await prisma.class.findUnique({ where: { id } });
+    if (!existing || !staff.dojoIds.includes(existing.dojoId)) {
+      return NextResponse.json({ error: "Class not found" }, { status: 404 });
+    }
 
-    return NextResponse.json({
-      success: true,
-      message: "Class deleted successfully",
-    });
-  } catch (error: any) {
+    await prisma.class.delete({ where: { id } });
+    return NextResponse.json({ success: true, message: "Class deleted successfully" });
+  } catch (error: unknown) {
     console.error("Delete class error:", error);
-    return NextResponse.json(
-      { error: "Failed to delete class" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to delete class" }, { status: 500 });
   }
 }

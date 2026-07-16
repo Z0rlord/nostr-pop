@@ -266,7 +266,7 @@ export async function POST(req: NextRequest) {
         }
 
         try {
-          await assertCanInviteEmail(leaderEmail);
+          await assertCanInviteEmail(leaderEmail, dojoId);
         } catch (err: unknown) {
           return NextResponse.json(
             { error: err instanceof Error ? err.message : "Invalid email" },
@@ -316,7 +316,7 @@ export async function POST(req: NextRequest) {
       }
 
       case "createDojo": {
-        const { dojoName, leaderName, leaderEmail, timezone = "Europe/Warsaw" } = data;
+        const { dojoName, leaderName, leaderEmail, timezone = "Asia/Tokyo" } = data;
 
         try {
           await assertCanInviteEmail(leaderEmail);

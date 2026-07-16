@@ -47,15 +47,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    try {
-      await assertCanInviteEmail(email);
-    } catch (err: unknown) {
-      return NextResponse.json(
-        { error: err instanceof Error ? err.message : "Invalid email" },
-        { status: 400 }
-      );
-    }
-
     const invitingInstructor = await prisma.instructor.findUnique({
       where: { id: sessionCookie },
     });
@@ -67,14 +58,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const activeDojo =
+      req.cookies.get("activeDojo")?.value || invitingInstructor.dojoId;
+
+    try {
+      await assertCanInviteEmail(email, activeDojo);
+    } catch (err: unknown) {
+      return NextResponse.json(
+        { error: err instanceof Error ? err.message : "Invalid email" },
+        { status: 400 }
+      );
+    }
+
     const dojo = await prisma.dojo.findUnique({
-      where: { id: invitingInstructor.dojoId },
+      where: { id: activeDojo },
     });
 
     const { invite, inviteUrl } = await createDojoInvite({
       email,
       name,
-      dojoId: invitingInstructor.dojoId,
+      dojoId: activeDojo,
       invitedBy: sessionCookie,
       inviteRole: "instructor",
     });

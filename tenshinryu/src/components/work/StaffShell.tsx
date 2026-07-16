@@ -3,6 +3,7 @@
 import { AppHeader } from "@/components/app/AppHeader";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { signOutUser } from "@/lib/firebase";
+import { DojoSwitcher } from "./DojoSwitcher";
 import { StaffNav } from "./StaffNav";
 
 type StaffRole = "admin" | "instructor";
@@ -32,6 +33,7 @@ export function StaffShell({ children, role, title, subtitle, actions }: Props) 
         <AppHeader
           trailing={
             <>
+              <DojoSwitcher />
               <LocaleSwitcher />
               <button type="button" onClick={handleSignOut} className="app-sign-out">
                 Sign out

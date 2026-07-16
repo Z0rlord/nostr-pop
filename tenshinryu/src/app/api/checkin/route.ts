@@ -11,6 +11,10 @@ async function isInstructorForDojo(
   instructorId: string,
   dojoId: string
 ): Promise<boolean> {
+  const membership = await prisma.instructorDojoMembership.findUnique({
+    where: { instructorId_dojoId: { instructorId, dojoId } },
+  });
+  if (membership) return true;
   const instructor = await prisma.instructor.findFirst({
     where: { id: instructorId, dojoId },
   });

@@ -28,20 +28,11 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/setup") ||
     pathname.startsWith("/api/auth") ||
     pathname.startsWith("/api/setup") ||
-    pathname.startsWith("/api/student") ||
-    pathname.startsWith("/api/classes") ||
-    pathname.startsWith("/api/checkin") ||
-    pathname.startsWith("/api/attendance") ||
-    pathname.startsWith("/api/notifications") ||
-    pathname.startsWith("/api/admin") ||
-    pathname.startsWith("/api/instructor") ||
-    pathname.startsWith("/api/tiers") ||
     pathname.startsWith("/api/paypal/webhook") ||
     pathname.startsWith("/api/stripe/webhook") ||
-    pathname.startsWith("/api/superadmin") ||
-    pathname.startsWith("/payments") ||
+    pathname.startsWith("/api/health") ||
+    pathname.startsWith("/api/cron") ||
     pathname.startsWith("/invite") ||
-    pathname.startsWith("/superadmin") ||
     pathname.startsWith("/terms") ||
     pathname.startsWith("/privacy") ||
     pathname.startsWith("/wiki") ||
@@ -60,14 +51,48 @@ export async function middleware(req: NextRequest) {
     pathname === "/manifest.json" ||
     pathname === "/sw.js";
 
+  // Superadmin page + API: key-gated in route handlers (not cookie session)
+  if (pathname.startsWith("/superadmin") || pathname.startsWith("/api/superadmin")) {
+    return NextResponse.next();
+  }
+
   if (isPublic) {
     return NextResponse.next();
   }
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin") || pathname.startsWith("/instructor")) {
     const session = req.cookies.get("session")?.value;
+    const role = req.cookies.get("role")?.value;
     if (!session) {
       return NextResponse.redirect(new URL("/login", req.url));
+    }
+    if (pathname.startsWith("/admin") && role && role !== "admin") {
+      return NextResponse.redirect(new URL("/instructor", req.url));
+    }
+    return NextResponse.next();
+  }
+
+  // Staff APIs require a session cookie (route handlers enforce dojo scope)
+  if (
+    pathname.startsWith("/api/students") ||
+    pathname.startsWith("/api/classes") ||
+    pathname.startsWith("/api/checkin") ||
+    pathname.startsWith("/api/attendance") ||
+    pathname.startsWith("/api/admin") ||
+    pathname.startsWith("/api/instructor") ||
+    pathname.startsWith("/api/staff") ||
+    pathname.startsWith("/api/notifications")
+  ) {
+    // Invite validate/accept remain public (token-gated)
+    if (
+      pathname.startsWith("/api/instructor/invite/validate") ||
+      pathname.startsWith("/api/instructor/invite/accept")
+    ) {
+      return NextResponse.next();
+    }
+    const session = req.cookies.get("session")?.value;
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     return NextResponse.next();
   }

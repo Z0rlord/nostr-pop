@@ -1,32 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { requireStaff } from "@/lib/session";
 
-const prisma = new PrismaClient();
-
-// Get today's check-ins
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     const checkIns = await prisma.checkIn.findMany({
       where: {
-        checkedInAt: {
-          gte: today,
-        },
+        dojoId: staff.dojoId,
+        checkedInAt: { gte: today },
       },
       include: {
         student: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          },
+          select: { id: true, name: true, email: true },
         },
       },
-      orderBy: {
-        checkedInAt: "desc",
-      },
+      orderBy: { checkedInAt: "desc" },
     });
 
     return NextResponse.json({
@@ -38,12 +32,10 @@ export async function GET() {
         method: c.method,
         status: "present",
       })),
+      dojoId: staff.dojoId,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Fetch check-ins error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch check-ins" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch check-ins" }, { status: 500 });
   }
 }

@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { upsertFirebaseEmailUser } from "@/lib/firebase-users";
+import { ensureMembership } from "@/lib/session";
 
-// POST /api/instructor/invite/accept - Accept invite and create instructor/owner account
+// POST /api/instructor/invite/accept - Accept invite and create/link instructor account
 export async function POST(req: NextRequest) {
   try {
     const { token, name, password } = await req.json();
@@ -40,28 +42,53 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "This invite has expired" }, { status: 400 });
     }
 
-    const existingInstructor = await prisma.instructor.findFirst({
-      where: { email: { equals: invite.email, mode: "insensitive" } },
-    });
-
-    if (existingInstructor) {
-      return NextResponse.json(
-        { error: "This email is already registered" },
-        { status: 400 }
-      );
-    }
-
     const isOwner = invite.inviteRole === "owner";
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const instructor = await prisma.instructor.create({
-      data: {
+    let firebaseUid: string | undefined;
+    try {
+      firebaseUid = await upsertFirebaseEmailUser({
         email: invite.email,
-        name,
-        password: hashedPassword,
-        dojoId: invite.dojoId,
-        isAdmin: isOwner,
-      },
+        password,
+        displayName: name,
+      });
+    } catch (e) {
+      console.error("Firebase user create failed (continuing with DB account):", e);
+    }
+
+    let instructor = await prisma.instructor.findFirst({
+      where: { email: { equals: invite.email, mode: "insensitive" } },
+    });
+
+    if (instructor) {
+      // Existing person joining another dojo (or re-accept)
+      instructor = await prisma.instructor.update({
+        where: { id: instructor.id },
+        data: {
+          name,
+          password: hashedPassword,
+          ...(firebaseUid ? { firebaseUid } : {}),
+          // Keep primary dojo; memberships track access
+          ...(isOwner ? { isAdmin: true } : {}),
+        },
+      });
+    } else {
+      instructor = await prisma.instructor.create({
+        data: {
+          email: invite.email,
+          name,
+          password: hashedPassword,
+          dojoId: invite.dojoId,
+          isAdmin: isOwner,
+          firebaseUid: firebaseUid || null,
+        },
+      });
+    }
+
+    await ensureMembership({
+      instructorId: instructor.id,
+      dojoId: invite.dojoId,
+      isAdmin: isOwner,
     });
 
     await prisma.instructorInvite.update({
@@ -81,7 +108,8 @@ export async function POST(req: NextRequest) {
         id: instructor.id,
         name: instructor.name,
         email: instructor.email,
-        isAdmin: instructor.isAdmin,
+        isAdmin: isOwner,
+        dojoId: invite.dojoId,
       },
     });
 
@@ -94,6 +122,14 @@ export async function POST(req: NextRequest) {
     });
 
     response.cookies.set("role", role, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 30 * 24 * 60 * 60,
+    });
+
+    response.cookies.set("activeDojo", invite.dojoId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

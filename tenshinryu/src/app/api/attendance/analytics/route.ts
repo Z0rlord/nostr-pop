@@ -1,62 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { requireStaff } from "@/lib/session";
 
 const prisma = new PrismaClient();
 
 // GET attendance analytics
 export async function GET(req: NextRequest) {
   try {
+    const staff = await requireStaff(req);
+    if (staff instanceof NextResponse) return staff;
+
     const { searchParams } = new URL(req.url);
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
     const classId = searchParams.get("classId");
     const studentId = searchParams.get("studentId");
 
-    // Build date filter using checkedInAt
-    const dateFilter: any = {};
+    const dateFilter: Record<string, unknown> = { dojoId: staff.dojoId };
     if (startDate || endDate) {
-      dateFilter.checkedInAt = {};
-      if (startDate) dateFilter.checkedInAt.gte = new Date(startDate);
-      if (endDate) dateFilter.checkedInAt.lte = new Date(endDate);
+      const checkedInAt: Record<string, Date> = {};
+      if (startDate) checkedInAt.gte = new Date(startDate);
+      if (endDate) checkedInAt.lte = new Date(endDate);
+      dateFilter.checkedInAt = checkedInAt;
     }
+    if (classId) dateFilter.classId = classId;
+    if (studentId) dateFilter.studentId = studentId;
 
-    // Build class filter
-    if (classId) {
-      dateFilter.classId = classId;
-    }
-
-    // Build student filter
-    if (studentId) {
-      dateFilter.studentId = studentId;
-    }
-
-    // Fetch all check-ins with related data
     const checkIns = await prisma.checkIn.findMany({
       where: dateFilter,
       include: {
         student: {
-          select: {
-            id: true,
-            name: true,
-            beltRank: true,
-            avatar: true,
-          },
+          select: { id: true, name: true, beltRank: true, avatar: true },
         },
         class: {
-          select: {
-            id: true,
-            name: true,
-            schedule: true,
-          },
+          select: { id: true, name: true, schedule: true },
         },
       },
-      orderBy: {
-        checkedInAt: "desc",
-      },
+      orderBy: { checkedInAt: "desc" },
     });
 
-    // Fetch all students for analytics
     const students = await prisma.student.findMany({
+      where: { dojoId: staff.dojoId },
       select: {
         id: true,
         name: true,
@@ -66,23 +50,17 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    // Fetch all classes
     const classes = await prisma.class.findMany({
-      select: {
-        id: true,
-        name: true,
-        schedule: true,
-        location: true,
-      },
+      where: { dojoId: staff.dojoId },
+      select: { id: true, name: true, schedule: true, location: true },
     });
 
-    // Calculate analytics
     const analytics = {
       summary: calculateSummary(checkIns, students, classes),
       byClass: calculateByClass(checkIns, classes),
       byStudent: calculateByStudent(checkIns, students),
       byDate: calculateByDate(checkIns),
-      recentCheckIns: checkIns.slice(0, 50).map(c => ({
+      recentCheckIns: checkIns.slice(0, 50).map((c) => ({
         id: c.id,
         studentId: c.studentId,
         studentName: c.student?.name || "Unknown",
@@ -90,13 +68,15 @@ export async function GET(req: NextRequest) {
         timestamp: c.checkedInAt,
         method: c.method,
       })),
+      dojoId: staff.dojoId,
     };
 
     return NextResponse.json({ success: true, analytics });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Attendance analytics error:", error);
+    const message = error instanceof Error ? error.message : "unknown";
     return NextResponse.json(
-      { error: "Failed to fetch attendance analytics", details: error.message },
+      { error: "Failed to fetch attendance analytics", details: message },
       { status: 500 }
     );
   }

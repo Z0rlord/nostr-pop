@@ -17,7 +17,7 @@ def main() -> int:
 
     sa = json.loads(raw)
     creds = service_account.Credentials.from_service_account_info(
-        sa, scopes=["https://www.googleapis.com/auth.cloud-platform"]
+        sa, scopes=["https://www.googleapis.com/auth/cloud-platform"]
     )
     creds.refresh(Request())
     headers = {
@@ -36,6 +36,7 @@ def main() -> int:
     r.raise_for_status()
     email = r.json().get("signIn", {}).get("email", {})
     print("Email/password sign-in enabled:", email.get("enabled"))
+    print("passwordRequired:", email.get("passwordRequired"))
     return 0
 
 
