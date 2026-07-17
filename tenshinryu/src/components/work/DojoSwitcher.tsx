@@ -1,27 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  partitionDojosByGroup,
+  sortDojosByGroup,
+} from "@/lib/dojo-groups";
 
 type DojoOption = { id: string; name: string; code?: string | null };
-
-function isKeikokai(d: DojoOption) {
-  const code = (d.code || "").toUpperCase();
-  return code === "KEIKOKAI" || code === "INTL" || code === "GLOBAL";
-}
-
-function sortDojos(dojos: DojoOption[]) {
-  const rank = (d: DojoOption) => {
-    const c = (d.code || "").toUpperCase();
-    if (c === "HQ") return 0;
-    if (isKeikokai(d)) return 100;
-    return 10;
-  };
-  return [...dojos].sort((a, b) => {
-    const dr = rank(a) - rank(b);
-    if (dr !== 0) return dr;
-    return a.name.localeCompare(b.name);
-  });
-}
 
 export function DojoSwitcher() {
   const [dojos, setDojos] = useState<DojoOption[]>([]);
@@ -36,7 +21,7 @@ export function DojoSwitcher() {
         if (!res.ok) return;
         const data = await res.json();
         if (cancelled) return;
-        setDojos(sortDojos(data.dojos || []));
+        setDojos(sortDojosByGroup(data.dojos || []));
         setActiveId(data.activeDojoId || "");
       } catch {
         /* ignore */
@@ -51,8 +36,7 @@ export function DojoSwitcher() {
 
   if (loading || dojos.length <= 1) return null;
 
-  const japan = dojos.filter((d) => !isKeikokai(d));
-  const global = dojos.filter(isKeikokai);
+  const { japan, keikokai, foreign } = partitionDojosByGroup(dojos);
 
   const onChange = async (dojoId: string) => {
     setActiveId(dojoId);
@@ -88,9 +72,18 @@ export function DojoSwitcher() {
             ))}
           </optgroup>
         )}
-        {global.length > 0 && (
+        {keikokai.length > 0 && (
           <optgroup label="Global Keikokai (稽古会)">
-            {global.map((d) => (
+            {keikokai.map((d) => (
+              <option key={d.id} value={d.id}>
+                {optionLabel(d)}
+              </option>
+            ))}
+          </optgroup>
+        )}
+        {foreign.length > 0 && (
+          <optgroup label="Foreign schools (海外)">
+            {foreign.map((d) => (
               <option key={d.id} value={d.id}>
                 {optionLabel(d)}
               </option>

@@ -9,6 +9,7 @@
  *   '
  */
 import { PrismaClient } from "@prisma/client";
+import { FOREIGN_CODE_BY_ID, FOREIGN_SCHOOLS } from "./foreign-schools.mjs";
 
 const prisma = new PrismaClient();
 
@@ -21,6 +22,7 @@ const CODE_BY_ID = {
   "tenshinryu-shinyurigaoka": "SHINYURI",
   "tenshinryu-kawasaki": "KAWASAKI",
   "a329b2f2-6465-4369-99ab-90773f9d39a4": "KEIKOKAI",
+  ...FOREIGN_CODE_BY_ID,
 };
 
 const OWNER_EMAIL = "skskken@gmail.com";
@@ -30,6 +32,27 @@ async function main() {
   if (url.includes("tenshinryu_staging")) {
     console.error("Refusing: DATABASE_URL looks like staging. Use production URL.");
     process.exit(1);
+  }
+
+  // Ensure foreign schools exist (idempotent upsert)
+  for (const s of FOREIGN_SCHOOLS) {
+    await prisma.dojo.upsert({
+      where: { id: s.id },
+      create: {
+        id: s.id,
+        name: s.name,
+        location: s.location,
+        timezone: s.timezone,
+        code: s.code,
+      },
+      update: {
+        name: s.name,
+        location: s.location,
+        timezone: s.timezone,
+        code: s.code,
+      },
+    });
+    console.log("Foreign:", s.code, s.name);
   }
 
   const dojos = await prisma.dojo.findMany({ orderBy: { name: "asc" } });

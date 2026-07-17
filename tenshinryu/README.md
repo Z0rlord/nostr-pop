@@ -34,6 +34,28 @@ doppler run --project dojopop --config prd_zorie -- node scripts/invite-owner.mj
 
 Requires `RESEND_API_KEY` in Doppler for email delivery. Without it, the script prints the invite URL to copy manually.
 
+## Foreign-country schools
+
+Schools from [Foreign Country DOJO](https://international.tenshinryu.net/foreign-country-dojo) are seeded as their own dojos (codes like `ES`, `IT`, `CL`, …). UI groups them as **Foreign schools (海外)** — separate from Japan branches and Global Keikokai.
+
+```bash
+# Staging first
+doppler run --project dojopop --config prd_zorie -- bash -c '
+  export DATABASE_URL="$(doppler secrets get TENSHINRYU_STAGING_DATABASE_URL --plain)"
+  export NEXT_PUBLIC_APP_URL=https://staging.tenshinryu.xyz
+  node scripts/seed-foreign-dojos.mjs
+'
+
+# Production (after staging looks good)
+doppler run --project dojopop --config prd_zorie -- bash -c '
+  export DATABASE_URL="$(doppler secrets get TENSHINRYU_DATABASE_URL --plain)"
+  export NEXT_PUBLIC_APP_URL=https://tenshinryu.xyz
+  node scripts/seed-foreign-dojos.mjs --prod
+'
+```
+
+Leaders with emails on the international page get pending **owner** invites for their school only. Schools without emails stay invite-ready via `invite-owner.mjs --dojo-id …`. Kuwami Sensei remains admin across all schools.
+
 ## Staging vs production
 
 | | Production | Staging |

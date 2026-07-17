@@ -11,23 +11,36 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
+import { FOREIGN_SCHOOLS } from "./foreign-schools.mjs";
 
 const prisma = new PrismaClient();
 
-const SCHOOLS = [
-  { id: "tenshinryu-hq", name: "Tenshinryu Headquarters (緑スポーツセンター)", code: "HQ", location: "Tokyo" },
-  { id: "tenshinryu-setagaya", name: "Setagaya Branch (経堂南/桜丘)", code: "SETAGAYA", location: "Setagaya" },
-  { id: "tenshinryu-kawagoe", name: "Kawagoe Branch (六塚会館)", code: "KAWAGOE", location: "Kawagoe" },
-  { id: "tenshinryu-shinjuku", name: "Shinjuku Branch (コズミックスポーツセンター)", code: "SHINJUKU", location: "Shinjuku" },
-  { id: "tenshinryu-yokohama", name: "Yokohama Branch (神奈川/神之木)", code: "YOKOHAMA", location: "Yokohama" },
-  { id: "tenshinryu-shinyurigaoka", name: "Shinyurigaoka Branch (日吉分館)", code: "SHINYURI", location: "Shinyurigaoka" },
-  { id: "tenshinryu-kawasaki", name: "Kawasaki Branch (柿生武道館)", code: "KAWASAKI", location: "Kawasaki" },
+const JAPAN_AND_GLOBAL = [
+  { id: "tenshinryu-hq", name: "Tenshinryu Headquarters (緑スポーツセンター)", code: "HQ", location: "Tokyo", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-setagaya", name: "Setagaya Branch (経堂南/桜丘)", code: "SETAGAYA", location: "Setagaya", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-kawagoe", name: "Kawagoe Branch (六塚会館)", code: "KAWAGOE", location: "Kawagoe", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-shinjuku", name: "Shinjuku Branch (コズミックスポーツセンター)", code: "SHINJUKU", location: "Shinjuku", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-yokohama", name: "Yokohama Branch (神奈川/神之木)", code: "YOKOHAMA", location: "Yokohama", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-shinyurigaoka", name: "Shinyurigaoka Branch (日吉分館)", code: "SHINYURI", location: "Shinyurigaoka", timezone: "Asia/Tokyo" },
+  { id: "tenshinryu-kawasaki", name: "Kawasaki Branch (柿生武道館)", code: "KAWASAKI", location: "Kawasaki", timezone: "Asia/Tokyo" },
   {
     id: "a329b2f2-6465-4369-99ab-90773f9d39a4",
     name: "Global Keikokai (ONLINE)",
     code: "KEIKOKAI",
     location: "Worldwide / Online",
+    timezone: "UTC",
   },
+];
+
+const SCHOOLS = [
+  ...JAPAN_AND_GLOBAL,
+  ...FOREIGN_SCHOOLS.map((s) => ({
+    id: s.id,
+    name: s.name,
+    code: s.code,
+    location: s.location,
+    timezone: s.timezone,
+  })),
 ];
 
 const OWNER_EMAIL = "skskken@gmail.com";
@@ -45,19 +58,20 @@ async function main() {
   }
 
   for (const s of SCHOOLS) {
+    const timezone = s.timezone || "Asia/Tokyo";
     await prisma.dojo.upsert({
       where: { id: s.id },
       create: {
         id: s.id,
         name: s.name,
         location: s.location,
-        timezone: "Asia/Tokyo",
+        timezone,
         code: s.code,
       },
       update: {
         name: s.name,
         location: s.location,
-        timezone: "Asia/Tokyo",
+        timezone,
         code: s.code,
       },
     });

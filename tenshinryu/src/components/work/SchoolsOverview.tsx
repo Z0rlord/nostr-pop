@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  isJapanBranchDojo,
+  partitionDojosByGroup,
+} from "@/lib/dojo-groups";
 
 type DojoRow = {
   id: string;
@@ -9,9 +13,43 @@ type DojoRow = {
   location?: string | null;
 };
 
-function isKeikokai(d: DojoRow) {
-  const code = (d.code || "").toUpperCase();
-  return code === "KEIKOKAI" || code === "INTL" || code === "GLOBAL";
+function SchoolList({
+  rows,
+  activeId,
+  onSwitch,
+}: {
+  rows: DojoRow[];
+  activeId: string;
+  onSwitch: (id: string) => void;
+}) {
+  return (
+    <ul className="space-y-2">
+      {rows.map((d) => (
+        <li key={d.id}>
+          <button
+            type="button"
+            onClick={() => onSwitch(d.id)}
+            className={`w-full text-left px-3 py-2 border transition ${
+              d.id === activeId
+                ? "border-primary bg-primary/5"
+                : "border-border hover:border-primary/40"
+            }`}
+            style={{ borderRadius: "var(--radius-button)" }}
+          >
+            <span className="font-medium text-sm">
+              {d.code ? `${d.code} · ` : ""}
+              {d.name}
+            </span>
+            {d.location && (
+              <span className="block text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                {d.location}
+              </span>
+            )}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export function SchoolsOverview() {
@@ -42,14 +80,15 @@ export function SchoolsOverview() {
 
   if (loading || dojos.length === 0) return null;
 
-  const japan = dojos
-    .filter((d) => !isKeikokai(d))
-    .sort((a, b) => {
-      if (a.code === "HQ") return -1;
-      if (b.code === "HQ") return 1;
-      return a.name.localeCompare(b.name);
-    });
-  const global = dojos.filter(isKeikokai);
+  const { japan, keikokai, foreign } = partitionDojosByGroup(dojos);
+  const japanSorted = [...japan].sort((a, b) => {
+    if (isJapanBranchDojo(a) && a.code === "HQ") return -1;
+    if (isJapanBranchDojo(b) && b.code === "HQ") return 1;
+    return a.name.localeCompare(b.name);
+  });
+  const foreignSorted = [...foreign].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   const switchTo = async (dojoId: string) => {
     if (dojoId === activeId) return;
@@ -66,73 +105,39 @@ export function SchoolsOverview() {
       <div>
         <h3 className="card-title text-base">Schools</h3>
         <p className="text-sm text-muted-foreground mt-1">
-          Japan branches (支部) and Global Keikokai (稽古会). Switch to manage that school.
+          Japan branches, Global Keikokai, and foreign schools. Switch to manage
+          that school.
         </p>
       </div>
 
-      <div>
-        <p className="text-xs font-bold tracking-wide text-muted-foreground mb-2">
-          JAPAN BRANCHES
-        </p>
-        <ul className="space-y-2">
-          {japan.map((d) => (
-            <li key={d.id}>
-              <button
-                type="button"
-                onClick={() => switchTo(d.id)}
-                className={`w-full text-left px-3 py-2 border transition ${
-                  d.id === activeId
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/40"
-                }`}
-                style={{ borderRadius: "var(--radius-button)" }}
-              >
-                <span className="font-medium text-sm">
-                  {d.code ? `${d.code} · ` : ""}
-                  {d.name}
-                </span>
-                {d.location && (
-                  <span className="block text-xs text-muted-foreground mt-0.5 line-clamp-1">
-                    {d.location}
-                  </span>
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {japanSorted.length > 0 && (
+        <div>
+          <p className="text-xs font-bold tracking-wide text-muted-foreground mb-2">
+            JAPAN BRANCHES
+          </p>
+          <SchoolList rows={japanSorted} activeId={activeId} onSwitch={switchTo} />
+        </div>
+      )}
 
-      {global.length > 0 && (
+      {keikokai.length > 0 && (
         <div>
           <p className="text-xs font-bold tracking-wide text-muted-foreground mb-2">
             GLOBAL KEIKOKAI
           </p>
-          <ul className="space-y-2">
-            {global.map((d) => (
-              <li key={d.id}>
-                <button
-                  type="button"
-                  onClick={() => switchTo(d.id)}
-                  className={`w-full text-left px-3 py-2 border transition ${
-                    d.id === activeId
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/40"
-                  }`}
-                  style={{ borderRadius: "var(--radius-button)" }}
-                >
-                  <span className="font-medium text-sm">
-                    {d.code ? `${d.code} · ` : ""}
-                    {d.name}
-                  </span>
-                  {d.location && (
-                    <span className="block text-xs text-muted-foreground mt-0.5">
-                      {d.location}
-                    </span>
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <SchoolList rows={keikokai} activeId={activeId} onSwitch={switchTo} />
+        </div>
+      )}
+
+      {foreignSorted.length > 0 && (
+        <div>
+          <p className="text-xs font-bold tracking-wide text-muted-foreground mb-2">
+            FOREIGN SCHOOLS
+          </p>
+          <SchoolList
+            rows={foreignSorted}
+            activeId={activeId}
+            onSwitch={switchTo}
+          />
         </div>
       )}
     </div>

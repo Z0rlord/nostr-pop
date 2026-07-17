@@ -137,6 +137,18 @@ async function main() {
     data: { status: "accepted", acceptedAt: new Date() },
   });
 
+  await prisma.instructorDojoMembership.upsert({
+    where: {
+      instructorId_dojoId: { instructorId: instructor.id, dojoId: dojo.id },
+    },
+    create: {
+      instructorId: instructor.id,
+      dojoId: dojo.id,
+      isAdmin: true,
+    },
+    update: { isAdmin: true },
+  });
+
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tenshinryu.xyz";
   console.log("");
   console.log("Owner provisioned successfully");
