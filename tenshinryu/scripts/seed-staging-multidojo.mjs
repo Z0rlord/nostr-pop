@@ -24,9 +24,9 @@ const SCHOOLS = [
   { id: "tenshinryu-kawasaki", name: "Kawasaki Branch (柿生武道館)", code: "KAWASAKI", location: "Kawasaki" },
   {
     id: "a329b2f2-6465-4369-99ab-90773f9d39a4",
-    name: "Tenshinryu International",
-    code: "INTL",
-    location: "International",
+    name: "Global Keikokai (ONLINE)",
+    code: "KEIKOKAI",
+    location: "Worldwide / Online",
   },
 ];
 

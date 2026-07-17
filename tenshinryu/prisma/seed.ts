@@ -9,16 +9,36 @@ async function main() {
 
   console.log("Seeding Tenshinryu database...");
 
-  let dojo = await prisma.dojo.findFirst({ where: { name: "Tenshinryu International" } });
+  let dojo = await prisma.dojo.findFirst({
+    where: {
+      OR: [
+        { name: "Global Keikokai (ONLINE)" },
+        { name: "Tenshinryu International" },
+        { code: "KEIKOKAI" },
+      ],
+    },
+  });
   if (!dojo) {
     dojo = await prisma.dojo.create({
       data: {
-        name: "Tenshinryu International",
-        location: "Global / Online",
-        timezone: "Asia/Tokyo",
+        name: "Global Keikokai (ONLINE)",
+        location: "Worldwide / Online",
+        timezone: "UTC",
+        code: "KEIKOKAI",
       },
     });
     console.log("Created dojo:", dojo.name);
+  } else if (dojo.name !== "Global Keikokai (ONLINE)" || dojo.code !== "KEIKOKAI") {
+    dojo = await prisma.dojo.update({
+      where: { id: dojo.id },
+      data: {
+        name: "Global Keikokai (ONLINE)",
+        location: "Worldwide / Online",
+        timezone: "UTC",
+        code: "KEIKOKAI",
+      },
+    });
+    console.log("Updated dojo naming:", dojo.name);
   }
 
   let owner = await prisma.instructor.findFirst({

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useI18n } from "@/components/I18nProvider";
 import { StaffShell } from "@/components/work/StaffShell";
+import { SchoolsOverview } from "@/components/work/SchoolsOverview";
 import { PageLoading } from "@/components/ui/PageLoading";
 
 interface DashboardMetrics {
@@ -159,6 +160,8 @@ export default function AdminDashboard() {
         <div className="space-y-6">
           {activeTab === "overview" && metrics && (
             <>
+              <SchoolsOverview />
+
               {/* KPI Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <KpiCard

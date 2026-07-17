@@ -20,7 +20,7 @@ const CODE_BY_ID = {
   "tenshinryu-yokohama": "YOKOHAMA",
   "tenshinryu-shinyurigaoka": "SHINYURI",
   "tenshinryu-kawasaki": "KAWASAKI",
-  "a329b2f2-6465-4369-99ab-90773f9d39a4": "INTL",
+  "a329b2f2-6465-4369-99ab-90773f9d39a4": "KEIKOKAI",
 };
 
 const OWNER_EMAIL = "skskken@gmail.com";
@@ -37,6 +37,19 @@ async function main() {
 
   for (const d of dojos) {
     const code = CODE_BY_ID[d.id];
+    if (d.id === "a329b2f2-6465-4369-99ab-90773f9d39a4") {
+      await prisma.dojo.update({
+        where: { id: d.id },
+        data: {
+          name: "Global Keikokai (ONLINE)",
+          code: "KEIKOKAI",
+          location: "Worldwide / Online",
+          timezone: "UTC",
+        },
+      });
+      console.log("  Global Keikokai ←", d.name);
+      continue;
+    }
     if (code && !d.code) {
       await prisma.dojo.update({ where: { id: d.id }, data: { code } });
       console.log("  code", code, "→", d.name);
