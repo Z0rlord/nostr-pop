@@ -15,3 +15,6 @@ drive-oauth-token.json
 # Static site build output
 dist/
 .venv/
+
+# Deploy secrets (synced from Doppler on relay-2)
+.env

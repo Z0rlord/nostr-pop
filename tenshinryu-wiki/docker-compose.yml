@@ -1,9 +1,12 @@
 # Tenshinryu Hyoho Wiki — wiki.tenshinryu.xyz :3014
+# Ask API: nginx /api/ask → wiki-ask sidecar (Gemini RAG)
 services:
   wiki:
     image: nginx:1.27-alpine
     container_name: tenshinryu-wiki
     restart: unless-stopped
+    depends_on:
+      - wiki-ask
     ports:
       - "127.0.0.1:3014:80"
     volumes:
@@ -11,6 +14,27 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  wiki-ask:
+    build:
+      context: .
+      dockerfile: Dockerfile.ask
+    image: tenshinryu-wiki-ask:latest
+    container_name: tenshinryu-wiki-ask
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      WIKI_SEARCH_INDEX: /data/search-index.json
+      # Fallback chain: 2.5 models have fresh free-tier quota; 2.0 kept as legacy.
+      GEMINI_MODELS: gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite,gemini-2.0-flash
+    volumes:
+      - ./dist/assets/search-index.json:/data/search-index.json:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
       interval: 30s
       timeout: 5s
       retries: 3

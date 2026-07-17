@@ -2,6 +2,80 @@
 
 Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 
+## [2026-07-08] fix | Wiki Ask quota blocker — model fallback chain
+
+- **Root cause:** `gemini-2.0-flash` + `gemini-2.0-flash-lite` return **429 quota exceeded** on the free-tier key; `gemini-1.5-flash*` are **404** (retired). Current-gen `gemini-2.5-flash-lite` / `gemini-2.5-flash` return **200** — separate fresh free-tier quota buckets. No billing change needed.
+- **Fix:** `scripts/wiki_ask.py` now iterates an ordered **model fallback chain** (`GEMINI_MODELS` env, default `gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite,gemini-2.0-flash`). Advances to next model on **429/404/500/503** and on network errors; only 400/401/403 surface immediately. Clearer errors: quota-only → 503 "quota exceeded on all models", transient → 503 "temporarily busy", none usable → 502. `GEMINI_MODEL` (single) still honored, prepended to chain. `/health` now reports `models` list.
+- **Files:** `scripts/wiki_ask.py` (chain + retry logic), `docker-compose.yml` (`GEMINI_MODEL` → `GEMINI_MODELS` chain).
+- **Deploy:** targeted — rsync `scripts/wiki_ask.py` + `docker-compose.yml` to relay-2, `docker compose build wiki-ask` + `--force-recreate wiki-ask` (no static rebuild, no secret change; `GEMINI_API_KEY` already present).
+- **Verify (live):** `POST https://wiki.tenshinryu.xyz/api/ask` `{"question":"What is kurai?","lang":"en"}` → real answer + 5 citations (kurai technique pages). JA query → graceful "no matching excerpts" answer + disclaimer. No more 503.
+- **Note:** 2.0-flash quota resets are irrelevant now; if all models get busy the chain degrades to a clear 503. Free-tier 2.5-flash-lite has generous RPM; if sustained traffic exhausts it, enable billing at [Google AI Studio](https://aistudio.google.com/) or add a non-Gemini fallback (no GROQ/OpenAI/Anthropic key currently in Doppler).
+
+## [2026-07-08] feature | Wiki Ask (Gemini RAG sidecar)
+
+- **Feature:** Header **Ask** panel on every wiki page — RAG over `search-index.json` via Gemini 2.0 Flash (`scripts/wiki_ask.py` FastAPI sidecar). nginx `:3014` proxies `/api/` and `/health` → `wiki-ask` container; no Cloudflare tunnel change needed.
+- **Files:** `Dockerfile.ask`, `docker-compose.yml` (wiki + wiki-ask), `site/assets/ask.js`, `_nav.html.j2` Ask panel, `style.css` ask styles, localized strings (7 langs) in `build-site.py`, `CSS_VERSION = 20260708a`, cache-bust `?v=` on `ask.js`/CSS.
+- **Secrets:** `GEMINI_API_KEY` in Doppler `dojopop` / `prd_zorie`; `deploy.sh` syncs to relay-2 `.env` (chmod 600); `.env` added to `.gitignore`.
+- **Deploy:** relay-2 full atomic tarball — **5346** staged files; `docker compose build wiki-ask` + `--force-recreate`; containers healthy.
+- **Build:** **5021** pages (EN/JA 720, ES/EL 715, FR/DE/IT 717).
+- **Verify (infra):** `https://wiki.tenshinryu.xyz/health` → `ok: true`, `gemini_configured: true`, `index_loaded: true`. Static `/`, `/en/`, `/en/philosophy/_index` → **200**. Ask panel live on `/en/` (`ask-wrap`, `ask.js?v=20260708a`, `WIKI_ASK_STRINGS`).
+- **Blocker:** `POST /api/ask` returns **503** — Google Gemini API **429 quota exceeded** on key (tested `gemini-2.0-flash`, `gemini-2.0-flash-lite`). User must enable billing / raise quota in [Google AI Studio](https://aistudio.google.com/). Once quota restored, Ask answers + citations should work without redeploy.
+
+## [2026-07-03] fix | Wiki search relevance ranking
+
+- **Issue:** User report — search box always returned the same articles (Start Here, Tachiai 12 Seiho, Synthesis) regardless of query.
+- **Root cause:** `search.js` `score()` seeded every item with `item.boost` (10–25) before query matching; filter only required `s > 0`, so all boosted curriculum pages passed for any query and dominated the top 12.
+- **Fix:** `search.js` — relevance-first scoring (title +100, body +10 per term); require actual term match; section `boost` scaled ×0.01 as tiebreaker only; diacritic-insensitive `normalize()` (e.g. `chugi` → `chūgi`); 200 ms debounce; section label badge in results. `build-site.py` — `sectionLabel` on index entries; `CSS_VERSION = 20260703g`. `style.css` — `.search-section` pill.
+- **Lint:** OK · **Build:** 5021 pages · **Deploy:** relay-2 targeted rsync (`search.js`, `search-index.json`, `style.css`)
+- **Verify (live index simulation):** `omokage` → Seiho 1: Omokage; `chugi` → Spirit of Chūgi; `tabi` → How to Wear Tabi (distinct from omokage/chugi).
+
+## [2026-07-03] feature | Google Calendar on Shinanjo (dojo) overview
+
+- **Calendar:** Official Tenshinryu Hyoho practice & events calendar from tenshinryu.net 稽古日程 articles (`raw/web/tenshinryu-net-p-1161.md`, `tenshinryu-net-page-18.md`). ID `a45kjo3r9fof55lfgr1ot56074@group.calendar.google.com`; embed `…/embed?src=…&ctz=Asia/Tokyo`.
+- **Pages:** `wiki/{en,ja,es,el,fr,de,it}/dojo/overview.md` — section **Class schedule** / **稽古日程** with responsive `.calendar-embed` iframe + Google Calendar link; JST disclaimer. JA overview also gained branch table + shinanjo intro.
+- **Build:** `autolink_bare_urls` skips lines with HTML tags (iframe `src` was being markdown-linked). `style.css` — `.calendar-embed` responsive wrapper; `CSS_VERSION = 20260703f`.
+- **Lint:** OK · **Build:** 5021 pages · **Deploy:** relay-2 full atomic tarball + targeted rsync fix (`DEPLOY_EXIT=0`)
+- **Verify:** https://wiki.tenshinryu.xyz/en/dojo/overview — HTTP **200**, `calendar-embed` + valid iframe `src`; nav **Shinanjo (dojo)** → overview.
+
+## [2026-07-03] fix | Philosophy section index (13 essays)
+
+- **Issue:** User report — "philosophy page only has one entry." Clicking **Philosophy** in nav landed on a single essay (`onko-chishin`) with no section index; `[[philosophy/]]` wikilinks 404'd. Essay body was **not** truncated (full curry/recipe essay intact in md + live HTML).
+- **Root cause:** Missing `philosophy/_index.md` (unlike `reiho/_index`); `build-site.py` nav/hub/cards all pointed to `philosophy/onko-chishin` instead of a hub.
+- **Fix:** Created `wiki/en/philosophy/_index.md` + `wiki/ja/philosophy/_index.md` (13-row table). `build-site.py` — `SECTION_SLUG_HUBS`, `resolve_wikilink` maps `[[philosophy/]]` → hub; nav + home cards → `philosophy/_index`.
+- **Lint:** OK · **Build:** 5021 pages · **Deploy:** relay-2 atomic tarball (`DEPLOY_EXIT=0`, ~5.5 min)
+- **Verify:** https://wiki.tenshinryu.xyz/en/philosophy/_index — HTTP **200**, 13 essays listed; nav **Philosophy** → index; `/en/philosophy/onko-chishin` essay unchanged.
+
+## [2026-07-03] fix | Restore Start Here onboarding UX (20260703e)
+
+- **Issue:** User report — entire student-friendly Start Here onboarding UX lost during nav/Chrome fix iterations; category cards de-emphasized, footer CTA weak, broken wikilink in index table.
+- **Git note:** Session refs `0803067d` / `4d6c743a` are agent transcript IDs, not repo commits. Compared `d687ff3` (nav overhaul) vs working tree — markup (nav-cta-persistent, hero, 8 cards, footer, breadcrumbs, full-index details) was present locally but live CSS was stale and card CTA styling was too subtle (accent-soft only).
+- **Restored/strengthened:** `style.css` — solid burgundy `category-card-cta` (white text, matches hero/nav CTA); `footer-cta` pill styling; Chrome grid fixes retained (4-col centered, 900/480 breakpoints). `wiki/en|ja/index.md` — fixed escaped `\|` wikilinks. `build-site.py` — `CSS_VERSION = "20260703e"`. Templates — hreflang fr/de/it on index + page.
+- **Kept:** Lang dropdown (7 langs), two-row header, curriculum dropdown, persistent Start Here in row 1, absolute `/ja/` … `/it/` language links (45b6dc86 fix).
+- **Build:** 5019 pages · **Deploy:** relay-2 targeted rsync (HTML 7 langs + style.css/js/search/graph JSON, ~2 min, `DEPLOY_EXIT=0`).
+- **Verify:** https://wiki.tenshinryu.xyz/en/ — HTTP **200**; `nav-cta-persistent`, `hero-cta`, burgundy `category-card-cta`, `footer-cta`, 8 cards, `?v=20260703e`; `/en/guides/start-here` active CTA + breadcrumbs; no `../ja/index.md` in body.
+
+## [2026-07-03] fix | Full-index markdown render + Chrome flex fallback (20260703d)
+
+- **Issue:** User report — `/en/` still broken in Chrome after 20260703c grid/CSS deploy; Safari OK. Investigation: category grid OK in headless Chrome at desktop; mobile overflow only when viewport not set correctly; **full index** showed raw `##` / `| Page |` pipe markdown inside `<details class="full-index">` (Python-Markdown skips MD inside HTML blocks).
+- **Root cause:** `render_details_blocks()` summary regex used `.match()` on inner HTML that starts with leading newline before `<summary>` — never matched, so 10 index tables stayed unrendered. Long raw pipe lines caused horizontal overflow in Chrome (Safari wraps more aggressively).
+- **Fix:** `build-site.py` — strip inner before summary match; pre-render details body to HTML tables; `CSS_VERSION = "20260703d"`. `style.css` — flexbox wrap + `@supports (display:grid)` fallback for category cards; `details.full-index h2` spacing.
+- **Deploy:** Targeted rsync `dist/assets/style.css` + all 7 `*/index.html` to relay-2 (~1 min).
+- **Verify:** Live `/en/` — `?v=20260703d`, 11 `<table>` (1 official + 10 full-index), headless Chrome 1280×800 + 390×844 no horizontal overflow, full index expands with styled tables.
+
+## [2026-07-03] fix | Index language links + Chrome grid deploy (20260703c)
+
+- **Issue:** Live `/en/` still showed link text `../ja/index.md` (href was `/ja/`), category card grid 5+3 asymmetric in Chrome, stale CSS `?v=20260703`; prior deploy workers stalled on 1.4G tarball upload.
+- **Fix:** All 7 `wiki/*/index.md` — full “Other languages” bar with absolute `/en/` … `/it/` links (no relative `.md` paths). `style.css` — `.category-cards`/`.category-grid` `max-width: 56rem`, `gap: 1rem`, `repeat(4)` desktop / `2` at ≤900px / `1` at ≤480px; `details.full-index` table/chevron rules retained. `build-site.py` — `CSS_VERSION = "20260703c"` passed to all templates.
+- **Deploy:** Full tarball timed out (~17 min); targeted rsync HTML all 7 langs + `assets/style.css` + search/graph JSON to relay-2 `dist/` (`DEPLOY_EXIT=0`, ~3 min).
+- **Verify:** https://wiki.tenshinryu.xyz/en/ — HTTP **200**; `Other languages` + `/ja/` links, no `index.md` in body; stylesheet `?v=20260703c`; live CSS has `56rem` grid + `480px` breakpoint.
+
+## [2026-07-03] fix | Chrome index layout — grid/flex min-width + overflow
+
+- **Issue:** User report — `/en/` landing looks correct in Safari but broken in Chrome: category card grid misaligned, nav header crowding/overflow, full-index tables unreadable, horizontal scroll.
+- **Root cause (Chrome):** Grid/flex children default `min-width: auto` — Chrome won't shrink below content (Safari is more permissive). Header `1fr` column + search input + negative-margin nav panel caused overflow; `auto-fill` grid left orphan tracks; `details.full-index summary` native marker stacked with content; tables lacked `table-layout: fixed` / `overflow-wrap`.
+- **Fix (`style.css`):** `overflow-x: clip` on html/body/header; `minmax(0, …)` header grid + `min-width: 0` on tools/nav/cards/index; `auto-fit` + `min(10.5rem,100%)` category grid; custom `details.full-index` disclosure chevron; `table-layout: fixed` + `overflow-wrap: anywhere` on index tables; `inline-flex` on summary triggers; `flex: 0 0 auto` on nav dropdown.
+- **Deploy:** relay-2 targeted rsync — `dist/assets/` + `index.html` all 7 langs (~2 min); HTTP **200** live `/en/`, `/assets/style.css`; cache-bust `?v=20260703` on stylesheet links (templates) so Cloudflare serves fresh CSS on index pages
+
 ## [2026-07-02] fix | Restore Start Here — persistent header CTA + home card
 
 - **Issue:** User report — Start Here not visible after nav UX fix (7bbdd438); category card removed from home; on ≤992px entire nav (incl. Start Here) hidden behind hamburger.

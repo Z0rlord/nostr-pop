@@ -6,7 +6,9 @@ pair: ja/dojo/overview
 tags: ['dojo']
 sources:
   - raw/web/tenshinryu-net-page-18.md
-updated: 2026-06-29
+  - raw/web/tenshinryu-net-p-1161.md
+  - https://calendar.google.com/calendar/embed?src=a45kjo3r9fof55lfgr1ot56074%40group.calendar.google.com&ctz=Asia%2FTokyo
+updated: 2026-07-03
 ---
 # Japan Dojo & Practice Locations
 
@@ -24,6 +26,18 @@ Kanto-region **shinanjo** (指南所) and branch practice locations. Tenshinryu 
 | Yokohama Branch | [[dojo/yokohama]] |
 | Kawasaki Branch | [[dojo/kawasaki]] |
 | Machida Keikokai | [[dojo/machida]] |
+
+See also [[dojo/shinanjo-tradition|Shinanjo & practice halls]].
+
+## Class schedule
+
+Practice and event dates for all Japan branches are published on the official **Tenshinryu Hyoho practice & events calendar** (Google Calendar). Times are shown in **Japan Standard Time (JST)**; schedules may change — confirm before visiting or reserving a trial session.
+
+<div class="calendar-embed">
+<iframe src="https://calendar.google.com/calendar/embed?src=a45kjo3r9fof55lfgr1ot56074%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border:0" width="800" height="600" frameborder="0" scrolling="no" title="Tenshinryu Hyoho practice &amp; events calendar"></iframe>
+</div>
+
+[Open calendar in Google Calendar](https://calendar.google.com/calendar/u/0?cid=a45kjo3r9fof55lfgr1ot56074%40group.calendar.google.com)
 
 アクセス ： JR山手線・西武新宿線・東京メトロ東西線『高田馬場駅』より徒歩13分、東京メトロ副都心線『西早稲田駅』徒歩5分
 

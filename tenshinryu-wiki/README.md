@@ -126,6 +126,46 @@ cd tenshinryu-wiki && uv run python scripts/lint-wiki-lang.py
 
 Production deploy path on relay-2 stays `/opt/dojopop/tenshinryu-wiki` — see [`deploy.sh`](./deploy.sh).
 
+## Wiki Ask (AI Q&A)
+
+Optional study assistant: keyword retrieval over `search-index.json` (top 5 chunks) → **Gemini 2.0 Flash** → cited answer with instructor disclaimer.
+
+| Piece | Path |
+|-------|------|
+| API proxy | `scripts/wiki_ask.py` (FastAPI sidecar in docker-compose) |
+| UI | Header **Ask** panel on every wiki page (`site/assets/ask.js`) |
+| Secret | `GEMINI_API_KEY` in Doppler `dojopop` / `prd_zorie` |
+| Cost | **$0** on Gemini free tier (rate-limited server-side: 15 req/IP/hour) |
+
+### Local dev
+
+```bash
+cd tenshinryu-wiki
+uv sync
+uv run python scripts/build-site.py   # produces dist/assets/search-index.json
+
+# Terminal 1 — API
+doppler run --project dojopop --config prd_zorie -- \
+  env WIKI_SEARCH_INDEX=dist/assets/search-index.json \
+  uv run uvicorn scripts.wiki_ask:app --reload --port 8088
+
+# Terminal 2 — static site (Ask button calls /api/ask — proxy or same-origin test)
+python3 -m http.server 8089 --directory dist
+# For local API test, curl directly:
+curl -s localhost:8088/api/ask -H 'Content-Type: application/json' \
+  -d '{"question":"What is kurai?","lang":"en"}' | jq .
+```
+
+### Production deploy
+
+`deploy.sh` syncs `GEMINI_API_KEY` into relay-2 `.env`, builds the `wiki-ask` container, and nginx proxies `https://wiki.tenshinryu.xyz/api/ask` → sidecar. No extra tunnel hostname or port needed.
+
+```bash
+cd tenshinryu-wiki && ./deploy.sh relay-2
+```
+
+First-time: ensure [Google AI Studio](https://aistudio.google.com/apikey) key is stored as `GEMINI_API_KEY` in Doppler.
+
 ## Releases and rollback
 
 Version: [`VERSION`](./VERSION) (e.g. `2026.07.02`). Git tags: `wiki-v2026.07.02`.

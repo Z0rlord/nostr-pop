@@ -7,6 +7,10 @@
   let index = [];
   let loaded = false;
 
+  function normalize(s) {
+    return s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  }
+
   async function loadIndex() {
     if (loaded) return;
     try {
@@ -18,16 +22,33 @@
     }
   }
 
+  /** Relevance-first scoring; section boost is a tiny tiebreaker only. */
   function score(item, q) {
-    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-    let s = item.boost || 0;
-    const title = item.title.toLowerCase();
-    const text = item.text.toLowerCase();
+    const terms = normalize(q).split(/\s+/).filter(Boolean);
+    if (!terms.length) return 0;
+
+    const title = normalize(item.title);
+    const text = normalize(item.text);
+    let relevance = 0;
+    let matched = false;
+
     for (const t of terms) {
-      if (title.includes(t)) s += 10;
-      if (text.includes(t)) s += 1;
+      if (title.includes(t)) {
+        relevance += 100;
+        matched = true;
+      }
+      if (text.includes(t)) {
+        relevance += 10;
+        matched = true;
+      }
     }
-    return s;
+
+    if (!matched) return 0;
+    return relevance + (item.boost || 0) * 0.01;
+  }
+
+  function sectionLabel(item) {
+    return item.sectionLabel || item.section || "";
   }
 
   function render(items) {
@@ -43,7 +64,11 @@
     for (const item of items.slice(0, 12)) {
       const a = document.createElement("a");
       a.href = item.url;
+      const label = sectionLabel(item);
       a.innerHTML =
+        (label
+          ? '<span class="search-section">' + label + "</span>"
+          : "") +
         "<strong>" +
         item.title +
         '</strong><span class="hint"> ' +
@@ -83,7 +108,7 @@
           return x.item;
         });
       render(hits);
-    }, 120);
+    }, 200);
   });
 
   document.addEventListener("click", function (e) {

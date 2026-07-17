@@ -15,6 +15,16 @@
         <input id="search-input" type="search" placeholder="{{ search_placeholder }}" autocomplete="off" aria-label="{{ search_placeholder }}">
         <div id="search-results" role="listbox"></div>
       </div>
+      <details class="ask-wrap">
+        <summary class="ask-trigger" aria-label="{{ ask_label }}">{{ ask_label }}</summary>
+        <div class="ask-panel">
+          <form id="ask-form">
+            <textarea id="ask-input" rows="2" placeholder="{{ ask_placeholder }}" maxlength="500" aria-label="{{ ask_placeholder }}"></textarea>
+            <button id="ask-submit" type="submit">{{ ask_submit }}</button>
+          </form>
+          <div id="ask-result" aria-live="polite"></div>
+        </div>
+      </details>
       <details class="lang-menu">
         <summary class="lang-menu-trigger" aria-label="{{ nav_lang_label }}">{{ lang | upper }}</summary>
         <div class="lang-menu-panel" role="menu">

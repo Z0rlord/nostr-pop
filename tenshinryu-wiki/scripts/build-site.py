@@ -21,6 +21,7 @@ ASSETS = ROOT / "site" / "assets"
 RAW_ASSETS = ROOT / "raw" / "assets"
 
 LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
+CSS_VERSION = "20260708a"
 LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
@@ -98,13 +99,34 @@ def normalize_wikilink_target(target: str, lang: str) -> str:
     return target
 
 
+SECTION_SLUG_HUBS: dict[str, str] = {
+    "guides": "guides/start-here",
+    "arts": "arts/_index",
+    "techniques": "techniques/tachiai-12-kata",
+    "concepts": "concepts/miden-kurai-no-koto",
+    "reiho": "reiho/_index",
+    "philosophy": "philosophy/_index",
+    "dojo": "dojo/overview",
+    "history": "history/overview",
+    "people": "history/instructors",
+    "articles": "articles/_index",
+    "sources": "sources",
+}
+
+
 def resolve_wikilink(target: str, lang: str, pages: dict[tuple[str, str], Page]) -> tuple[str, bool]:
     target = normalize_wikilink_target(target, lang)
+    bare = target.rstrip("/")
+    hub_slug = SECTION_SLUG_HUBS.get(bare)
+    if hub_slug:
+        key = (lang, hub_slug)
+        if key in pages:
+            return pages[key].html_path, True
     key = (lang, target)
     if key in pages:
         return pages[key].html_path, True
-    if (lang, target.rstrip("/")) in pages:
-        return pages[(lang, target.rstrip("/"))].html_path, True
+    if (lang, bare) in pages:
+        return pages[(lang, bare)].html_path, True
     return url_for_slug(lang, target), False
 
 
@@ -222,6 +244,9 @@ def autolink_bare_urls(body: str) -> str:
         if in_fence or "](http" in line:
             lines_out.append(line)
             continue
+        if "<" in line and ">" in line:
+            lines_out.append(line)
+            continue
         if BARE_URL_LINE_RE.match(line):
             lines_out.append(BARE_URL_LINE_RE.sub(line_sub, line))
         else:
@@ -248,6 +273,38 @@ def postprocess_html(html: str, page: Page) -> str:
         html = SEIHO_IMG_HTML_RE.sub(seiho_figure, html)
 
     return html
+
+
+MD_EXTENSIONS = ["tables", "fenced_code", "sane_lists", "nl2br"]
+DETAILS_FULL_INDEX_RE = re.compile(
+    r'<details\s+class="full-index"[^>]*>(.*?)</details>',
+    re.DOTALL | re.IGNORECASE,
+)
+DETAILS_SUMMARY_RE = re.compile(r"(<summary>.*?</summary>)\s*", re.DOTALL | re.IGNORECASE)
+
+
+def render_markdown_fragment(fragment: str) -> str:
+    return markdown.markdown(fragment, extensions=MD_EXTENSIONS, output_format="html5")
+
+
+def render_details_blocks(body: str) -> str:
+    """Markdown inside <details> is skipped by the main pass — render inner content separately."""
+
+    def repl(m: re.Match[str]) -> str:
+        full = m.group(0)
+        open_end = full.find(">")
+        open_tag = full[: open_end + 1]
+        inner = m.group(1).strip()
+        sum_match = DETAILS_SUMMARY_RE.match(inner)
+        if not sum_match:
+            return m.group(0)
+        summary, content = sum_match.group(1), inner[sum_match.end() :].strip()
+        if not content:
+            return m.group(0)
+        rendered = render_markdown_fragment(content)
+        return f"{open_tag}{summary}{rendered}</details>"
+
+    return DETAILS_FULL_INDEX_RE.sub(repl, body)
 
 
 def transform_markdown(
@@ -277,12 +334,9 @@ def transform_markdown(
 
     body = MD_LINK_RE.sub(md_link_sub, body)
     body = autolink_bare_urls(body)
+    body = render_details_blocks(body)
 
-    html = markdown.markdown(
-        body,
-        extensions=["tables", "fenced_code", "sane_lists", "nl2br"],
-        output_format="html5",
-    )
+    html = render_markdown_fragment(body)
     return postprocess_html(html, page)
 
 
@@ -450,20 +504,7 @@ def section_labels(lang: str) -> dict[str, str]:
 
 def section_hub(lang: str, section: str) -> str | None:
     """Default hub page per top-level section (for breadcrumbs)."""
-    hubs = {
-        "guides": "guides/start-here",
-        "arts": "arts/_index",
-        "techniques": "techniques/tachiai-12-kata",
-        "concepts": "concepts/miden-kurai-no-koto",
-        "reiho": "reiho/_index",
-        "philosophy": "philosophy/onko-chishin",
-        "dojo": "dojo/overview",
-        "history": "history/overview",
-        "people": "history/instructors",
-        "articles": "articles/_index",
-        "sources": "sources",
-    }
-    target = hubs.get(section)
+    target = SECTION_SLUG_HUBS.get(section)
     return url_for_slug(lang, target) if target else None
 
 
@@ -519,7 +560,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Start Here", "guides/start-here", True, False),
             ("curriculum", "Curriculum", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Philosophy", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Philosophy", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Articles", "articles/_index", False, False),
         ],
@@ -527,7 +568,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "はじめに", "guides/start-here", True, False),
             ("curriculum", "カリキュラム", "arts/_index", False, True),
             ("reiho", "礼法", "reiho/_index", False, False),
-            ("philosophy", "思想", "philosophy/onko-chishin", False, False),
+            ("philosophy", "思想", "philosophy/_index", False, False),
             ("dojo", "指南所", "dojo/overview", False, False),
             ("articles", "記事", "articles/_index", False, False),
         ],
@@ -535,7 +576,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Empezar", "guides/start-here", True, False),
             ("curriculum", "Currículo", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Filosofía", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Filosofía", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Artículos", "articles/_index", False, False),
         ],
@@ -543,7 +584,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Ξεκινήστε", "guides/start-here", True, False),
             ("curriculum", "Πρόγραμμα", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Φιλοσοφία", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Φιλοσοφία", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Άρθρα", "articles/_index", False, False),
         ],
@@ -551,7 +592,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Commencer", "guides/start-here", True, False),
             ("curriculum", "Programme", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Philosophie", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Philosophie", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Articles", "articles/_index", False, False),
         ],
@@ -559,7 +600,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Einstieg", "guides/start-here", True, False),
             ("curriculum", "Lehrplan", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Philosophie", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Philosophie", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Artikel", "articles/_index", False, False),
         ],
@@ -567,7 +608,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("start_here", "Inizia qui", "guides/start-here", True, False),
             ("curriculum", "Programma", "arts/_index", False, True),
             ("reiho", "Reiho", "reiho/_index", False, False),
-            ("philosophy", "Filosofia", "philosophy/onko-chishin", False, False),
+            ("philosophy", "Filosofia", "philosophy/_index", False, False),
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Articoli", "articles/_index", False, False),
         ],
@@ -651,7 +692,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Tachiai battojutsu curriculum", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Miden body positions & stances", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Etiquette, dress, dojo conduct", "reiho/_index", False),
-            ("Philosophy", "Essays on practice & tradition", "philosophy/onko-chishin", False),
+            ("Philosophy", "Essays on practice & tradition", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Japan branches & schedules", "dojo/overview", False),
             ("Articles", "Blog archive (291 posts)", "articles/_index", False),
         ],
@@ -661,7 +702,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("十二勢法", "立相抜刀術カリキュラム", "techniques/tachiai-12-kata", False),
             ("位", "身伝・位の事", "concepts/miden-kurai-no-koto", False),
             ("礼法", "礼儀・装束・道場", "reiho/_index", False),
-            ("思想", "修行と伝統のエッセイ", "philosophy/onko-chishin", False),
+            ("思想", "修行と伝統のエッセイ", "philosophy/_index", False),
             ("指南所（道場）", "稽古場・日程", "dojo/overview", False),
             ("記事", "ブログアーカイブ（291件）", "articles/_index", False),
         ],
@@ -671,7 +712,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Currículo de battojutsu", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Posiciones del Miden", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Etiqueta y conducta", "reiho/_index", False),
-            ("Filosofía", "Ensayos sobre la práctica", "philosophy/onko-chishin", False),
+            ("Filosofía", "Ensayos sobre la práctica", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Sedes en Japón", "dojo/overview", False),
             ("Artículos", "Archivo del blog", "articles/_index", False),
         ],
@@ -681,7 +722,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Πρόγραμμα battojutsu", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Θέσεις Miden", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Ετικέτα & συμπεριφορά", "reiho/_index", False),
-            ("Φιλοσοφία", "Δοκίμια πρακτικής", "philosophy/onko-chishin", False),
+            ("Φιλοσοφία", "Δοκίμια πρακτικής", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Καταστήματα στην Ιαπωνία", "dojo/overview", False),
             ("Άρθρα", "Αρχείο ιστολογίου", "articles/_index", False),
         ],
@@ -691,7 +732,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Programme battojutsu", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Positions Miden", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Étiquette et conduite", "reiho/_index", False),
-            ("Philosophie", "Essais sur la pratique", "philosophy/onko-chishin", False),
+            ("Philosophie", "Essais sur la pratique", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Dojos au Japon", "dojo/overview", False),
             ("Articles", "Archives du blog", "articles/_index", False),
         ],
@@ -701,7 +742,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Battojutsu-Lehrplan", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Miden-Positionen", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Etikette & Verhalten", "reiho/_index", False),
-            ("Philosophie", "Aufsätze zur Praxis", "philosophy/onko-chishin", False),
+            ("Philosophie", "Aufsätze zur Praxis", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Dojos in Japan", "dojo/overview", False),
             ("Artikel", "Blog-Archiv", "articles/_index", False),
         ],
@@ -711,7 +752,7 @@ def index_cards_for(lang: str) -> list[dict]:
             ("12 Seiho", "Programma battojutsu", "techniques/tachiai-12-kata", False),
             ("Kurai (位)", "Posizioni Miden", "concepts/miden-kurai-no-koto", False),
             ("Reiho", "Etichetta e condotta", "reiho/_index", False),
-            ("Filosofia", "Saggi sulla pratica", "philosophy/onko-chishin", False),
+            ("Filosofia", "Saggi sulla pratica", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Dojo in Giappone", "dojo/overview", False),
             ("Articoli", "Archivio del blog", "articles/_index", False),
         ],
@@ -745,6 +786,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Start Here →",
             "index_cards_label": "Explore by topic",
             "index_full_heading": "Full index",
+            "ask_label": "Ask",
+            "ask_placeholder": "Ask about Tenshinryu…",
+            "ask_submit": "Ask",
+            "ask_loading": "Thinking…",
+            "ask_sources": "Sources",
+            "ask_error": "Could not get an answer. Try search instead.",
+            "ask_error_rate": "Too many questions — please wait and try again.",
         },
         "ja": {
             "site_subtitle": "天心流兵法ウィキ",
@@ -767,6 +815,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "はじめに →",
             "index_cards_label": "トピックから探す",
             "index_full_heading": "全文索引",
+            "ask_label": "質問",
+            "ask_placeholder": "天心流について質問…",
+            "ask_submit": "質問する",
+            "ask_loading": "考え中…",
+            "ask_sources": "出典",
+            "ask_error": "回答できませんでした。検索をお試しください。",
+            "ask_error_rate": "質問が多すぎます。しばらく待ってから再度お試しください。",
         },
         "es": {
             "site_subtitle": "Wiki de Hyōhō Tenshinryu",
@@ -789,6 +844,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Empezar →",
             "index_cards_label": "Explorar por tema",
             "index_full_heading": "Índice completo",
+            "ask_label": "Preguntar",
+            "ask_placeholder": "Pregunta sobre Tenshinryu…",
+            "ask_submit": "Preguntar",
+            "ask_loading": "Pensando…",
+            "ask_sources": "Fuentes",
+            "ask_error": "No se pudo obtener respuesta. Prueba la búsqueda.",
+            "ask_error_rate": "Demasiadas preguntas — espera e inténtalo de nuevo.",
         },
         "el": {
             "site_subtitle": "Wiki Hyōhō Tenshinryu",
@@ -811,6 +873,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Ξεκινήστε →",
             "index_cards_label": "Εξερεύνηση ανά θέμα",
             "index_full_heading": "Πλήρες ευρετήριο",
+            "ask_label": "Ερώτηση",
+            "ask_placeholder": "Ρωτήστε για το Tenshinryu…",
+            "ask_submit": "Ερώτηση",
+            "ask_loading": "Σκέψη…",
+            "ask_sources": "Πηγές",
+            "ask_error": "Δεν ήταν δυνατή η απάντηση. Δοκιμάστε την αναζήτηση.",
+            "ask_error_rate": "Πολλές ερωτήσεις — περιμένετε και δοκιμάστε ξανά.",
         },
         "fr": {
             "site_subtitle": "Wiki Hyōhō Tenshinryu",
@@ -833,6 +902,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Commencer →",
             "index_cards_label": "Explorer par thème",
             "index_full_heading": "Index complet",
+            "ask_label": "Demander",
+            "ask_placeholder": "Question sur Tenshinryu…",
+            "ask_submit": "Demander",
+            "ask_loading": "Réflexion…",
+            "ask_sources": "Sources",
+            "ask_error": "Impossible d'obtenir une réponse. Essayez la recherche.",
+            "ask_error_rate": "Trop de questions — attendez et réessayez.",
         },
         "de": {
             "site_subtitle": "Tenshinryu Hyōhō Wiki",
@@ -855,6 +931,13 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Einstieg →",
             "index_cards_label": "Nach Thema erkunden",
             "index_full_heading": "Vollständiger Index",
+            "ask_label": "Fragen",
+            "ask_placeholder": "Frage zu Tenshinryu…",
+            "ask_submit": "Fragen",
+            "ask_loading": "Denke nach…",
+            "ask_sources": "Quellen",
+            "ask_error": "Keine Antwort möglich. Versuchen Sie die Suche.",
+            "ask_error_rate": "Zu viele Fragen — bitte warten und erneut versuchen.",
         },
         "it": {
             "site_subtitle": "Wiki Hyōhō Tenshinryu",
@@ -877,9 +960,27 @@ def ui_strings(lang: str) -> dict[str, str]:
             "index_cta_label": "Inizia qui →",
             "index_cards_label": "Esplora per argomento",
             "index_full_heading": "Indice completo",
+            "ask_label": "Chiedi",
+            "ask_placeholder": "Domanda su Tenshinryu…",
+            "ask_submit": "Chiedi",
+            "ask_loading": "Riflessione…",
+            "ask_sources": "Fonti",
+            "ask_error": "Impossibile ottenere una risposta. Prova la ricerca.",
+            "ask_error_rate": "Troppe domande — attendi e riprova.",
         },
     }
     return strings.get(lang, strings["en"])
+
+
+def ask_js_strings(lang: str) -> str:
+    ui = ui_strings(lang)
+    payload = {
+        "loading": ui["ask_loading"],
+        "sources": ui["ask_sources"],
+        "error": ui["ask_error"],
+        "errorRate": ui["ask_error_rate"],
+    }
+    return json.dumps(payload, ensure_ascii=False)
 
 
 def template_context(
@@ -891,6 +992,7 @@ def template_context(
 ) -> dict:
     ui = ui_strings(lang)
     return {
+        "css_version": CSS_VERSION,
         "lang": lang,
         "slug": slug,
         "alternate": alternate,
@@ -900,6 +1002,7 @@ def template_context(
         "active_page": "graph" if slug == "graph" else "page",
         "is_index": slug == "index",
         "index_cards": index_cards_for(lang) if slug == "index" else [],
+        "ask_js_strings": ask_js_strings(lang),
         **ui,
     }
 
@@ -1040,6 +1143,7 @@ def build_search_index(pages: dict[tuple[str, str], Page]) -> list[dict]:
         boost += essentials_boost.get(slug, 0)
         if section == "articles":
             boost -= 5
+        labels = section_labels(lang)
         items.append(
             {
                 "lang": lang,
@@ -1047,6 +1151,7 @@ def build_search_index(pages: dict[tuple[str, str], Page]) -> list[dict]:
                 "url": page.html_path,
                 "text": plain,
                 "section": section,
+                "sectionLabel": labels.get(section, section),
                 "boost": boost,
             }
         )
@@ -1074,7 +1179,7 @@ def main() -> None:
     home_tpl = env.get_template("home.html.j2")
     graph_tpl = env.get_template("graph.html.j2")
 
-    (DIST / "index.html").write_text(home_tpl.render(), encoding="utf-8")
+    (DIST / "index.html").write_text(home_tpl.render(css_version=CSS_VERSION), encoding="utf-8")
 
     graph_alternate = graph_alternate_urls()
     for lang in LANGS:
