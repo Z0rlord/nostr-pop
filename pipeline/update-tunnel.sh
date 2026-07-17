@@ -27,6 +27,8 @@ TENSHINRYU_HOST="${TENSHINRYU_HOST:-kiwami.tenshinryu.xyz}"
 TENSHINRYU_ZONE_ID="${TENSHINRYU_ZONE_ID:-8773d460b9cf42569a9c895481c17785}"
 KOSYNC_HOST="${KOSYNC_HOST:-sync.krtrmesh.xyz}"
 KOSYNC_PORT="${KOSYNC_PORT:-3007}"
+BOUQUET_HOST="${BOUQUET_HOST:-bouquet.dojopop.live}"
+BOUQUET_PORT="${BOUQUET_PORT:-3015}"
 
 if [[ -z "$TOKEN" ]]; then
   echo "ERROR: CLOUDFLARE_DNS_TOKEN or CLOUDFLARE_API_TOKEN required"
@@ -37,6 +39,7 @@ PAYLOAD=$(cat <<EOF
 {
   "config": {
     "ingress": [
+      { "hostname": "${BOUQUET_HOST}", "service": "http://localhost:${BOUQUET_PORT}" },
       { "hostname": "${HOOKS_HOST}", "service": "http://localhost:${PUBSUB_PORT}" },
       { "hostname": "${KOSYNC_HOST}", "service": "http://localhost:${KOSYNC_PORT}" },
       { "hostname": "relay.dojopop.live", "service": "http://localhost:7777" },

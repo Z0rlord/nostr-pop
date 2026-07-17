@@ -21,6 +21,8 @@ DOMAINS=(
   bunker.dojopop.live
   blossom.dojopop.live
   hub.dojopop.live
+  hooks.dojopop.live
+  bouquet.dojopop.live
   tenshinryu.xyz
   www.tenshinryu.xyz
   kiwami.tenshinryu.xyz

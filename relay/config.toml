@@ -7,7 +7,7 @@
 # Direct tailnet access still works at ws://relay-2:7777.
 relay_url = "wss://relay.dojopop.live"
 name = "DojoPop Relay"
-description = "Primary relay for DojoPop proof-of-practice events (kind 34567) and practice video metadata."
+description = "Primary relay for DojoPop proof-of-practice events (kind 34567) and practice video metadata. Closed writes (member pubkey whitelist + kind allowlist). Prohibited: spam, abuse, and unlawful material under applicable law — report to admin@dojopop.live. Operators may delete events (NIP-09) and purge Blossom blobs without notice."
 # Administrative contact pubkey (hex of npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg)
 pubkey = "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a"
 # TODO: replace placeholder icon with a real hosted image.
@@ -24,35 +24,54 @@ data_directory = "/usr/src/app/db"
 [network]
 address = "0.0.0.0"
 port = 8080
+# Cloudflare Tunnel terminates TLS; use CF connecting IP for abuse logs.
+remote_ip_header = "cf-connecting-ip"
 
 [options]
 reject_future_seconds = 1800
 
 [limits]
-messages_per_sec = 50
+# Global create rate (not per-connection). Keep headroom for Cordn ephemeral traffic.
+messages_per_sec = 20
+# Cap subscription churn / scraper fan-out.
+subscriptions_per_min = 30
 max_event_bytes = 131072
 max_ws_message_bytes = 262144
 max_ws_frame_bytes = 262144
+# Prefer filters with authors/ids/#tags — reduces anonymous dump queries.
+limit_scrapers = true
 
 # Only the kinds DojoPop actually needs. Everything else is rejected.
 #     0  profile metadata (relay clients show author info)
-#     1  short text notes (announcements / test events)
+#     1  short text notes (announcements / Primal mirrors / test events)
 #     3  contact list
 #     5  deletion requests (NIP-09, lets us retract events)
 #    21  video event (NIP-71, current)
-#    22  short-form video event (NIP-71, current — pipeline publishes these)
-#  1063  file metadata (NIP-94, Blossom blob descriptors)
+#    22  short-form video event (NIP-71, current — pipeline + practice publish)
 # 10002  relay list metadata (NIP-65, so clients can discover this relay)
+# 10063  Blossom user server list (BUD-03 — Bouquet / NIP-B7 clients)
+# 10096  NIP-96 media server list (Bouquet)
 # 34235  addressable video event (NIP-71, legacy form)
-# 34236  addressable short video event (NIP-71, legacy form)
+# 34236  addressable short video event (NIP-71, trailers / addressable)
 # 34567  DojoPop proof-of-practice (protocol's own kind)
-# Deliberately excluded: 24242 (Blossom auth — consumed by the Blossom
-# server over HTTP, never published to a relay).
-event_kind_allowlist = [0, 1, 3, 5, 21, 22, 1063, 10002, 34235, 34236, 34567]
+# 11316–11320  ContextVM server announcements (Cordn coordinator)
+# 25910  ContextVM ephemeral messages (Cordn client ↔ coordinator transport)
+# Deliberately excluded:
+#   4 / 44 / 1059  — DMs / gift wraps (no private messaging on this relay)
+#   1063           — NIP-94 file metadata (unused; kind 22 imeta is enough)
+#   1984           — NIP-56 reports stay on Blossom PUT /report (BUD-09), not relay
+#   24242          — Blossom HTTP auth, never published to a relay
+# nostr-rs-relay 0.10 has no body content filter; moderation = whitelist + kinds
+# + optional [grpc] event_admission_server for external policy later.
+event_kind_allowlist = [0, 1, 3, 5, 21, 22, 10002, 10063, 10096, 11316, 11317, 11318, 11319, 11320, 25910, 34235, 34236, 34567]
 
 [authorization]
 # Only these authors may publish. Member pubkeys are auto-synced from web members.json
 # via web/scripts/sync-relay-whitelist.sh (admin pubkey always included).
+# Cordn coordinator + group admin are fixed extras (see sync-relay-whitelist.mjs).
+# NIP-42 AUTH is optional here; whitelist already blocks non-members from EVENT.
 pubkey_whitelist = [
   "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a",
+  "d969813a5c0e3e65dad03fc9e1d2db5933dda8b307ddce474e8da60b4e288259",
+  "9b8534d1e4338fa4292efb423ac1c2f2083fb72bf8e027eb2d312e76b0c7d217",
 ]

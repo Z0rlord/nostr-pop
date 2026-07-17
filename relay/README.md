@@ -9,7 +9,11 @@ proof-of-practice events (kind **34567**) and NIP-71 video events.
 - **Port:** `7777` on the host → `8080` in the container
 - **Writes:** restricted to whitelisted pubkeys (`authorization.pubkey_whitelist`)
 - **Kinds:** restricted by `limits.event_kind_allowlist` (see comments in
-  `config.toml` for the rationale per kind)
+  `config.toml` for the rationale per kind). DMs (4/44/1059) and NIP-94
+  kind 1063 are excluded.
+- **Abuse policy:** NIP-11 `description` states prohibited spam/abuse/unlawful
+  material; contact `admin@dojopop.live`. No body content filter in
+  nostr-rs-relay 0.10 — use whitelist + kinds + ops deletion (NIP-09).
 - **Data:** SQLite in the `relay-data` docker volume
 
 ## Deploy to relay-2

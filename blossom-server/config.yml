@@ -1,6 +1,12 @@
 # DojoPop self-hosted Blossom server (hzrd149/blossom-server)
 # Local dev: docker compose up -d   →   http://localhost:3000
 # See README.md in this directory for production notes (domain, TLS).
+#
+# Abuse / prohibited-content policy (ops): closed uploads (auth + pubkey rules),
+# video/* + image/* only, BUD-09 PUT /report for flags, operator delete via
+# BUD-02 DELETE /<sha256> (pipeline/delete_published.py) or admin dashboard.
+# Report contact: admin@dojopop.live — jurisdiction-dependent; we enforce a
+# prohibited-content policy, not a jurisdiction-specific legal determination.
 
 port: 3000
 host: 0.0.0.0
@@ -43,6 +49,9 @@ upload:
   maxJobsPerWorker: 4
   throughputWindowMs: 1000
 
+# BUD-04 mirror — keep enabled for admin pipeline
+# (pipeline/mirror_yakihonne_to_dojopop.py). Still gated by requireAuth +
+# requirePubkeyInRule (only storage-rule pubkeys).
 mirror:
   enabled: true
   requireAuth: true
@@ -52,10 +61,12 @@ mirror:
 delete:
   requireAuth: true
 
+# BUD-02 list — disabled (upstream default). Public listing aids blob
+# enumeration; clients fetch by known sha256 / event imeta URLs instead.
 list:
-  enabled: true
-  requireAuth: false
-  allowListOthers: true
+  enabled: false
+  requireAuth: true
+  allowListOthers: false
 
 # BUD-05 media optimisation (PUT /media only — NOT used by pipeline/ or large masters).
 # Server-side 480p cap applies only when clients call /media; PUT /upload is passthrough.
@@ -97,5 +108,18 @@ landing:
   enabled: true
   title: "DojoPop Blossom"
 
+# BUD-09 — clients PUT NIP-56 kind:1984 reports here (not on the relay).
+# Review via admin dashboard when enabled (credentials via env / Doppler only).
 report:
   enabled: true
+
+# Admin dashboard — leave disabled in git. To enable on relay-2 for report
+# review / force-delete, set dashboard.enabled + username/password from
+# Doppler (never commit the password), then restart dojopop-blossom.
+# dashboard:
+#   enabled: true
+#   username: admin
+#   password: "${BLOSSOM_ADMIN_PASSWORD}"
+#   lookupRelays:
+#     - wss://relay.dojopop.live
+#     - wss://purplepag.es

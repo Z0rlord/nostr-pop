@@ -22,11 +22,14 @@ doppler run -- uv run --project pipeline pipeline/blossom_upload.py \
 ```
 
 Uploads are **closed**: `upload.requireAuth: true` + `requirePubkeyInRule: true`
-with the storage rules scoped to the DojoPop pubkey
-(`npub1k0v9gnwatzt0whhkdsss7hqddhke77f9zclte0yfueutms0y334qg380wg`, hex
-`b3d8544d…c48c6a`). Any other key gets rejected. To add an uploader, append
-their hex pubkey to the `pubkeys` lists in `config.yml` and
-`docker compose restart`.
+with the storage rules scoped to the DojoPop pubkey plus active members synced
+via `web/scripts/sync-blossom-whitelist.mjs` (`video/*` and `image/*` only).
+Any other key or MIME gets rejected.
+
+**List endpoint** (`GET /list/:pubkey`) is **disabled** to reduce blob
+enumeration. **Reports:** `PUT /report` (BUD-09) is enabled; enable the
+optional admin dashboard on the host (Doppler password, never in git) to
+review reports and force-delete blobs.
 
 ## Deploy to relay-2
 

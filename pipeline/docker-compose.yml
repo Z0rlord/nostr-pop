@@ -2,7 +2,10 @@
 # Deploy: ./deploy.sh relay-2
 services:
   youtube-pubsub:
-    image: ghcr.io/astral-sh/uv:python3.12-bookworm
+    build:
+      context: .
+      dockerfile: Dockerfile.pubsub
+    image: dojopop-youtube-pubsub:latest
     container_name: dojopop-youtube-pubsub
     restart: unless-stopped
     working_dir: /app
@@ -23,3 +26,6 @@ services:
       - ./:/app
     env_file:
       - .env
+    environment:
+      PYTHONUNBUFFERED: "1"
+      YT_DLP_COOKIES_FILE: /app/data/youtube-cookies.txt

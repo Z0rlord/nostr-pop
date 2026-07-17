@@ -68,6 +68,18 @@ def bech32_decode(bech: str) -> tuple[str, bytes]:
     return hrp, bytes(decoded)
 
 
+def bech32_encode(hrp: str, data: bytes) -> str:
+    converted = _convertbits(list(data), 8, 5, pad=True)
+    combined = converted + [0] * 6
+    chk = _bech32_polymod(_bech32_hrp_expand(hrp) + combined) ^ 1
+    checksum = [(chk >> 5 * (5 - i)) & 31 for i in range(6)]
+    return hrp + "1" + "".join(_CHARSET[d] for d in combined + checksum)
+
+
+def hex_to_npub(pubkey_hex: str) -> str:
+    return bech32_encode("npub", bytes.fromhex(pubkey_hex))
+
+
 def npub_to_hex(npub: str) -> str:
     hrp, data = bech32_decode(npub)
     if hrp != "npub" or len(data) != 32:
@@ -95,17 +107,32 @@ class Signer:
             raise SystemExit(
                 f"{var} is not set. Run via Doppler: doppler run -- <command>"
             )
+        return cls.from_raw(raw, var)
+
+    @classmethod
+    def from_env_preferred(cls, *vars: str) -> "Signer":
+        for var in vars:
+            raw = os.environ.get(var)
+            if raw and raw.strip():
+                return cls.from_env(var)
+        names = ", ".join(vars)
+        raise SystemExit(
+            f"None of {names} is set. Run via Doppler: doppler run -- <command>"
+        )
+
+    @classmethod
+    def from_raw(cls, raw: str, label: str = "secret key") -> "Signer":
         raw = raw.strip()
         if raw.startswith("nsec1"):
             hrp, data = bech32_decode(raw)
             if hrp != "nsec" or len(data) != 32:
-                raise SystemExit(f"{var} is not a valid nsec")
+                raise SystemExit(f"{label} is not a valid nsec")
             secret = data
         else:
             try:
-                secret = bytes.fromhex(raw)
+                secret = bytes.fromhex(raw.removeprefix("0x").removeprefix("0X"))
             except ValueError:
-                raise SystemExit(f"{var} is neither nsec bech32 nor hex") from None
+                raise SystemExit(f"{label} is neither nsec bech32 nor hex") from None
         return cls(secret)
 
     def sign_event(

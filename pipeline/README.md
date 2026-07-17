@@ -58,6 +58,96 @@ doppler run -- uv run --project pipeline pipeline/delete_published.py \
 Sends NIP-09 kind-5 deletion, Blossom BUD-02 delete, and removes the entry from
 `data/published.json`.
 
+## Member practice → nostu.be (auto mirror)
+
+When a member publishes a practice video on [dojopop.live](https://dojopop.live),
+the web API cross-posts a **kind 22** repost signed by the **login-bot** identity
+(`DOJOPOP_LOGIN_NSEC` in Doppler — same key as DM login). Optional transition
+fallbacks: `DOJOPOP_ADMIN_NSEC` / `DOJO_ADMIN_PRIVATE_KEY`. nostu.be indexes
+kind 21/22 from public relays (damus, primal, nos.lol).
+
+**Setup:** sync login keys to web + whitelist the login-bot pubkey:
+
+```bash
+doppler run -- ./web/scripts/sync-production-env.sh relay-2
+doppler run -- ./web/scripts/sync-relay-whitelist.sh relay-2
+./web/deploy.sh relay-2
+```
+
+`sync-production-env.sh` requires `DOJOPOP_LOGIN_NSEC` for DM login and nostu.be
+mirrors. `sync-relay-whitelist.mjs` whitelists the login-bot pubkey derived from
+that nsec (and admin if still present).
+
+**Backfill** existing practice events:
+
+```bash
+doppler run -- uv run --project pipeline pipeline/mirror_practice_for_nostube.py --dry-run
+doppler run -- uv run --project pipeline pipeline/mirror_practice_for_nostube.py
+```
+
+Mirror events carry `#dojopop-nostube`, reference the source via `e` + `p` tags,
+reuse the member’s `imeta` (Blossom URLs), and link to `https://dojopop.live/v/<id>`.
+Sign in at [nostu.be](https://nostu.be) with the login-bot npub to view the DojoPop profile feed.
+
+Dedupe is against the **canonical login-bot pubkey** (`DOJOPOP_LOGIN_NSEC`), not
+whatever key the current process happens to use — so ADMIN/FOUNDER-era mirrors
+do not cause re-posts when backfill runs again.
+
+**Cleanup** duplicate `#dojopop-nostube` mirrors (NIP-09 kind 5; keep one LOGIN
+per source `e`):
+
+```bash
+doppler run -- uv run --project pipeline pipeline/cleanup_nostube_duplicates.py --dry-run
+doppler run -- uv run --project pipeline pipeline/cleanup_nostube_duplicates.py --promote
+```
+
+YouTube shorts published by `pipeline.py` (PubSub / catch-up) also emit a nostu.be
+mirror via the same `build_nostube_mirror_event` helper, signed with
+`DOJOPOP_LOGIN_NSEC` (deployed into the pubsub container `.env`).
+
+## Film trailers (kind 34236) + nostu.be
+
+Publish an official trailer as a NIP-71 **addressable** video (kind `34236`)
+with a paywall link — **not** the full film blossom URL.
+
+```bash
+# Yoga Sutra trailer (preset: blossom URL, d tag, paywall, hashtags)
+doppler run -- uv run --project pipeline pipeline/publish_film_trailer.py \
+  --film yoga-sutra --announce
+
+# Custom trailer (descriptor JSON or --video-url + --video-sha256 + --file)
+doppler run -- uv run --project pipeline pipeline/publish_film_trailer.py \
+  --d-tag my-film-trailer \
+  --title "My Film — Official Trailer" \
+  --paywall https://dojopop.live/films/my-film \
+  --video-url https://blossom.dojopop.live/<sha256>.mp4 \
+  --video-sha256 <sha256> \
+  --file /path/to/trailer.mp4 \
+  --dry-run
+```
+
+The script prints `event id`, `nevent`, and `naddr` after publish. Tags:
+`d`, `title`, `imeta` (url/x/m/dim/duration), `r` (paywall), `t` hashtags.
+`--announce` also publishes a kind-1 note with the same hook + paywall link.
+
+### Manual cross-post on [nostu.be](https://nostu.be)
+
+Use this when you want the trailer on nostu.be’s feed/index in addition to relay
+events (or instead of the CLI).
+
+1. Open [https://nostu.be](https://nostu.be) and sign in with a Nostr browser
+   extension (Alby, nos2x, Amber, etc.).
+2. Start a new post and choose **upload video** (local MP4).
+   - File: `The Yoga Sutra -A Zorie Barber Film Official Trailer 2.mp4` (or
+     re-export the same trailer).
+   - **Do not** upload the full feature master.
+3. **Title:** `The Yoga Sutra — Official Trailer`
+4. **Description / content:** short hook + paywall link:
+   `https://dojopop.live/films/yoga-sutra` (rent $3.99 / own $14.99).
+5. If prompted for format, pick **long-form / addressable video** (kind `34236`),
+   not a short vertical clip.
+6. Publish. Optionally add hashtags `yogasutra` `film` in the client UI.
+
 ## Large masters (feature films)
 
 Practice policy (480p / 60 s) is enforced in `common.prepare_video_for_upload`
@@ -115,6 +205,7 @@ doppler run -- uv run --project pipeline pipeline/social_post.py \
 | Platform | Status | Mechanism |
 |---|---|---|
 | `nostr` | **Working** | kind 1 (text/image), kind 22 + Primal mirror (video) → `DEFAULT_RELAYS` |
+| `youtube` | **Scaffolded** | YouTube Data API v3 OAuth — needs Brand Account + `YOUTUBE_*` secrets |
 | `instagram` | Blocked | Meta Graph API — `META_*` secrets in Doppler |
 | `facebook` | Blocked | Meta Graph API — `META_*` secrets in Doppler |
 | `tiktok` | Blocked | TikTok Content Posting API — `TIKTOK_*` secrets |
@@ -128,11 +219,13 @@ Reuses `blossom_upload.py`, `publish_video_event.build_video_event`, and
 `mirror_practice_for_primal.build_mirror_event`. Signing: `NOSTR_NSEC` via
 Doppler (`dojopop` / `prd_zorie`). Dry-run previews → `data/preview/`.
 
-### Doppler secret names (Meta/TikTok — Phase 2)
+### Doppler secret names (Meta/TikTok/YouTube upload)
 
 | Secret | Used by |
 |---|---|
 | `NOSTR_NSEC` | Nostr (existing) |
+| `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN` | Outbound YouTube upload |
+| `YOUTUBE_UPLOAD_CHANNEL_ID` | Optional — Brand Account UC… (ops pin; not inbound PubSub) |
 | `META_APP_ID`, `META_APP_SECRET`, `META_ACCESS_TOKEN` | Meta OAuth |
 | `META_IG_USER_ID`, `META_FB_PAGE_ID` | IG + Facebook Page |
 | `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET` | TikTok OAuth |
@@ -145,10 +238,98 @@ Doppler (`dojopop` / `prd_zorie`). Dry-run previews → `data/preview/`.
 | **Meta** (IG + FB) | [developers.facebook.com/apps](https://developers.facebook.com/apps/) | Business app → Instagram Graph API + Facebook Login; IG must be Business/Creator linked to a Page; `instagram_content_publish` needs [App Review](https://developers.facebook.com/docs/app-review/) |
 | **TikTok** | [developers.tiktok.com](https://developers.tiktok.com/) | Content Posting API + Direct Post; scopes `video.publish` / `video.upload`; [audit](https://developers.tiktok.com/doc/content-posting-api-get-started) for public posts |
 | **YouTube download** | — | `pipeline.py` uses **yt-dlp only** — no API keys |
-| **YouTube upload** | [console.cloud.google.com](https://console.cloud.google.com/) | Not implemented; would need YouTube Data API v3 OAuth (`YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN`) |
+| **YouTube upload** | [console.cloud.google.com](https://console.cloud.google.com/) | See [Outbound YouTube upload](#outbound-youtube-upload-dojopop--youtube) below |
 
-See `pipeline/meta_tiktok.py` for setup links. Pubkey must be on the relay
+See `pipeline/meta_tiktok.py` / `pipeline/youtube_upload.py` for setup links. Pubkey must be on the relay
 whitelist (`relay/config.toml`).
+
+## Outbound YouTube upload (DojoPop → YouTube)
+
+**Honest limit:** the API cannot create a YouTube channel. You create a **Brand
+Account** named "DojoPop" in the browser (separate from the personal/Z0rlord
+upload history). `YOUTUBE_CHANNEL_ID` in Doppler is the **inbound** PubSub
+source channel — do not overwrite it with the new Brand Account id; use
+`YOUTUBE_UPLOAD_CHANNEL_ID` for the outbound channel once known.
+
+### Manual steps (you do this once)
+
+1. **Create Brand Account channel**
+   - Open [YouTube Studio](https://studio.youtube.com/) signed into your Google account.
+   - Account menu → **Switch account** → **Create a channel** (or manage Brand Accounts
+     at [myaccount.google.com/brandaccounts](https://myaccount.google.com/brandaccounts)).
+   - Name it **DojoPop**. Complete channel basics (icon, description, links to
+     `https://dojopop.live`).
+2. **Google Cloud OAuth client**
+   - [Google Cloud Console](https://console.cloud.google.com/) → new or existing project.
+   - Enable **YouTube Data API v3**.
+   - APIs & Services → Credentials → **Create OAuth client ID** → type **Desktop app**.
+   - Add authorized redirect URI: `http://127.0.0.1:8765/` (for the bootstrap script).
+   - Copy client id + secret into Doppler (names only in chat/commits):
+
+```bash
+doppler secrets set YOUTUBE_CLIENT_ID --project dojopop --config prd_zorie
+doppler secrets set YOUTUBE_CLIENT_SECRET --project dojopop --config prd_zorie
+```
+
+3. **Refresh token (Brand Account)**
+
+```bash
+doppler run -- uv run --project pipeline pipeline/youtube_oauth_bootstrap.py
+# Authorize as the DojoPop Brand Account when Google asks (not personal).
+doppler secrets set YOUTUBE_REFRESH_TOKEN --project dojopop --config prd_zorie
+```
+
+4. **Verify + pin channel id**
+
+```bash
+doppler run -- uv run --project pipeline pipeline/youtube_upload.py --list-channels
+doppler secrets set YOUTUBE_UPLOAD_CHANNEL_ID=UC… --project dojopop --config prd_zorie
+```
+
+### Populate from existing practice videos
+
+Inventory (approx, 2026-07-13): ~183 founder kind-22 `#dojopop` + `#proofofpractice`
+on `wss://relay.dojopop.live` with Blossom `imeta` URLs (~156 yakihonne / ~27
+dojopop blossom); `data/published.json` has ~178 inbound YouTube→Nostr rows with
+video URLs. Default API quota ≈ 6 uploads/day — use `--limit`.
+
+```bash
+# Dry-run against relay inventory
+doppler run -- uv run --project pipeline pipeline/upload_practice_to_youtube.py \
+  --dry-run --limit 5
+
+# Upload a few as private (safe for first backfill)
+doppler run -- uv run --project pipeline pipeline/upload_practice_to_youtube.py --limit 3
+
+# Or from published.json Blossom URLs
+doppler run -- uv run --project pipeline pipeline/upload_practice_to_youtube.py \
+  --from-published --limit 3
+```
+
+Idempotency: `data/youtube_uploads.json` maps Nostr `event_id` → YouTube video id.
+
+Single-file / social CLI:
+
+```bash
+doppler run -- uv run --project pipeline pipeline/youtube_upload.py \
+  --file clip.mp4 --title "Day 42" --privacy private
+
+doppler run -- uv run --project pipeline pipeline/social_post.py \
+  --text "Day 42" --media clip.mp4 --platforms youtube
+```
+
+### Hook sketch (after Nostr publish)
+
+Outbound YouTube is **opt-in**, not automatic yet (quota + Brand Account must
+exist). After practice fan-out works, call from cron or a future pipeline flag:
+
+```bash
+# After new kind-22s land, upload newest N not yet in youtube_uploads.json
+doppler run -- uv run --project pipeline pipeline/upload_practice_to_youtube.py --limit 1
+```
+
+Once DojoPop→YouTube is primary for discovery, demote **YouTube→DojoPop PubSub**
+(`youtube_pubsub.py`) to optional catch-up for the personal/Z0rlord channel only.
 
 ## YouTube PubSubHubbub auto-mirroring
 
@@ -216,6 +397,26 @@ doppler run --project dojopop --config prd_zorie -- \
 
 Remote path: `/opt/dojopop/pipeline` (`docker-compose.yml`, `.env` from Doppler,
 `pipeline/` code, `data/published.json`).
+
+### YouTube cookies (required on relay-2)
+
+YouTube blocks datacenter IPs (Hetzner) without browser cookies. The pubsub
+image includes **deno + ffmpeg**; downloads also need a Netscape cookies file at
+`data/youtube-cookies.txt` on relay-2.
+
+Export from a logged-in browser (refresh every few weeks):
+
+```bash
+uv run --project pipeline yt-dlp --cookies-from-browser chrome \
+  --cookies /tmp/youtube-cookies.txt --skip-download \
+  "https://www.youtube.com/watch?v=ANY_VIDEO_ID"
+scp /tmp/youtube-cookies.txt relay-2:/opt/dojopop/pipeline/data/youtube-cookies.txt
+ssh relay-2 'chmod 600 /opt/dojopop/pipeline/data/youtube-cookies.txt'
+```
+
+Optional: store the file in Doppler as `YT_DLP_COOKIES` (full Netscape text);
+`deploy.sh` syncs it on deploy. Optional `YT_DLP_PROXY` for a residential proxy
+if cookies alone stop working.
 
 ### Renewal cron (every 5 days)
 

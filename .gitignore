@@ -11,6 +11,7 @@ pipeline/.venv/
 # pipeline artifacts (videos, thumbs, previews) — but track the publish state
 data/*
 !data/published.json
+!data/youtube_uploads.json
 
 # local blossom server runtime data
 blossom-server/data/

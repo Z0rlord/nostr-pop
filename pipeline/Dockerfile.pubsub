@@ -1,0 +1,12 @@
+# YouTube PubSub callback + pipeline runner (deno for yt-dlp EJS, ffmpeg for transcode).
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm
+
+RUN apt-get update -qq \
+    && apt-get install -y -qq --no-install-recommends ffmpeg curl ca-certificates unzip \
+    && curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/usr/local/bin:${PATH}"
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app

@@ -31,11 +31,15 @@ npx @getalby/hub-cli setup --url "$HUB_URL" --password "$HUB_PASS" --backend LDK
 npx @getalby/hub-cli start --url "$HUB_URL" --password "$HUB_PASS" --save
 npx @getalby/hub-cli create-app --name "DojoPop" --scopes "make_invoice,lookup_invoice"
 # → copy pairingUri to Doppler NWC_CONNECTION_SECRET
+
+# Optional: dedicated outgoing connection for streak sats rewards
+npx @getalby/hub-cli create-app --name "DojoPop Streak Sats" --scopes "pay_invoice,get_balance,get_info"
+# → copy pairingUri to Doppler STREAK_NWC_CONNECTION_SECRET
 ```
 
 `./deploy.sh` syncs `ALBY_HUB_UNLOCK_PASSWORD` into `alby-hub/.env` and sets `AUTO_UNLOCK_PASSWORD` so the node restarts unlocked.
 
-**Funding (when ready):** open https://hub.dojopop.live or use `get-onchain-address` / LSP in hub-cli. Invoices fail with `LiquidityRequestFailed` until the wallet has inbound liquidity.
+**Funding (when ready):** open https://hub.dojopop.live or use `get-onchain-address` / LSP in hub-cli. Invoices fail with `LiquidityRequestFailed` until the wallet has inbound liquidity. Outgoing streak pays also need outbound liquidity / channels.
 
 ## NWC → web (Doppler)
 

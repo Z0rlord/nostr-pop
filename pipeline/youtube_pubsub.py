@@ -15,7 +15,6 @@ import argparse
 import json
 import os
 import subprocess
-import sys
 import threading
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -31,7 +30,6 @@ DEFAULT_CALLBACK_PATH = "/youtube/pubsub/callback"
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 3009
 DEFAULT_LEASE_SECONDS = 864000  # 10 days
-PIPELINE_SCRIPT = REPO_ROOT / "pipeline" / "pipeline.py"
 YT_FEED_TEMPLATE = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
 YT_VIDEO_URL_TEMPLATE = "https://www.youtube.com/watch?v={video_id}"
 
@@ -100,9 +98,24 @@ def extract_video_ids(atom_xml: str) -> list[str]:
 
 def _pipeline_worker(video_id: str, video_url: str) -> None:
     try:
-        cmd = [sys.executable, str(PIPELINE_SCRIPT), "--url", video_url]
+        # Use uv run so the venv (yt-dlp, deno opts) matches the pubsub service.
+        cmd = [
+            "uv",
+            "run",
+            "--project",
+            "pipeline",
+            "pipeline/pipeline.py",
+            "--url",
+            video_url,
+        ]
         print(f"[pubsub] running pipeline for {video_id}: {' '.join(cmd)}")
-        proc = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        proc = subprocess.run(
+            cmd,
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            env=os.environ.copy(),
+        )
         print(f"[pubsub] pipeline exit={proc.returncode} video_id={video_id}")
         if proc.stdout:
             print(proc.stdout.rstrip())
@@ -241,6 +254,27 @@ def make_handler(callback_path: str):
     return Handler
 
 
+def catch_up_feed(channel_id: str | None) -> None:
+    """Scan the Atom feed and trigger pipeline for ids missing from published.json."""
+    if not channel_id:
+        print("[pubsub] catch-up skipped: YOUTUBE_CHANNEL_ID not set")
+        return
+    topic_url = build_topic_url(channel_id)
+    try:
+        with urlopen(topic_url, timeout=30) as resp:
+            feed = resp.read().decode("utf-8", errors="replace")
+        video_ids = extract_video_ids(feed)
+    except Exception as exc:
+        print(f"[pubsub] catch-up failed to fetch feed: {exc}")
+        return
+
+    triggered = sum(1 for vid in video_ids if maybe_trigger_pipeline(vid))
+    print(
+        f"[pubsub] catch-up scan topic={topic_url} "
+        f"entries={len(video_ids)} triggered={triggered}"
+    )
+
+
 def cmd_serve(args: argparse.Namespace) -> int:
     callback_path = normalize_callback_path(args.callback_path)
     server = ThreadingHTTPServer((args.host, args.port), make_handler(callback_path))
@@ -248,6 +282,10 @@ def cmd_serve(args: argparse.Namespace) -> int:
         f"[pubsub] listening on http://{args.host}:{args.port}{callback_path} "
         "(GET verify, POST notifications)"
     )
+    if not args.no_catch_up:
+        channel_id = env_or(None, "YOUTUBE_CHANNEL_ID")
+        t = threading.Thread(target=catch_up_feed, args=(channel_id,), daemon=True)
+        t.start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
@@ -291,7 +329,16 @@ def build_parser() -> argparse.ArgumentParser:
     serve.add_argument("--host", default=DEFAULT_HOST)
     serve.add_argument("--port", type=int, default=DEFAULT_PORT)
     serve.add_argument("--callback-path", default=DEFAULT_CALLBACK_PATH)
+    serve.add_argument(
+        "--no-catch-up",
+        action="store_true",
+        help="Skip startup feed scan for unpublished video ids",
+    )
     serve.set_defaults(func=cmd_serve)
+
+    catchup = sub.add_parser("catchup", help="Trigger pipeline for feed ids not in published.json")
+    catchup.add_argument("--channel-id", default=None)
+    catchup.set_defaults(func=lambda a: catch_up_feed(env_or(a.channel_id, "YOUTUBE_CHANNEL_ID")) or 0)
 
     subscribe = sub.add_parser("subscribe", help="Subscribe/renew a YouTube channel feed")
     subscribe.add_argument("--channel-id", default=None)

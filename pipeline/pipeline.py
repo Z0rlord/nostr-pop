@@ -28,6 +28,7 @@ from common import (
     MAX_VIDEO_DURATION_SEC,
     MAX_VIDEO_HEIGHT,
     PREVIEW_DIR,
+    PUBLIC_RELAY,
     THUMBS_DIR,
     VIDEOS_DIR,
     load_metadata_config,
@@ -40,6 +41,13 @@ from common import (
 from blossom_upload import build_upload_auth, upload
 from download_youtube import download
 from nostr_util import Signer
+from mirror_practice_for_nostube import (
+    NOSTU_RELAYS,
+    build_nostube_mirror_event,
+    login_mirror_exists,
+    nostube_signer,
+)
+from mirror_practice_for_primal import MIRROR_RELAYS, build_mirror_event
 from publish_video_event import build_video_event, publish, report
 
 
@@ -124,7 +132,39 @@ def process_video(
         if not accepted:
             raise RuntimeError("no relay accepted the event")
 
-        return {
+        mirror_id: str | None = None
+        mirror_relays: list[str] = []
+        try:
+            mirror = build_mirror_event(signer, event)
+            print(f"  kind-1 Primal mirror {mirror['id'][:16]}…")
+            mirror_results = asyncio.run(publish(mirror, MIRROR_RELAYS))
+            if report(mirror_results):
+                mirror_id = mirror["id"]
+                mirror_relays = [r for r, (ok, _) in mirror_results.items() if ok]
+            else:
+                print("  WARN: Primal mirror not accepted by any relay")
+        except Exception as exc:
+            print(f"  WARN: Primal mirror failed (kind-22 still published): {exc}")
+
+        nostube_id: str | None = None
+        nostube_relays: list[str] = []
+        try:
+            n_signer = nostube_signer()
+            if asyncio.run(login_mirror_exists(PUBLIC_RELAY, event["id"])):
+                print("  nostu.be mirror already exists (LOGIN) — skip")
+            else:
+                nostube = build_nostube_mirror_event(n_signer, event)
+                print(f"  kind-22 nostu.be mirror {nostube['id'][:16]}… (login-bot)")
+                nostube_results = asyncio.run(publish(nostube, NOSTU_RELAYS))
+                if report(nostube_results):
+                    nostube_id = nostube["id"]
+                    nostube_relays = [r for r, (ok, _) in nostube_results.items() if ok]
+                else:
+                    print("  WARN: nostu.be mirror not accepted by any relay")
+        except Exception as exc:
+            print(f"  WARN: nostu.be mirror failed (kind-22 still published): {exc}")
+
+        entry = {
             "event_id": event["id"],
             "kind": event["kind"],
             "video_url": video_desc["url"],
@@ -134,6 +174,13 @@ def process_video(
             "title": meta["title"],
             "published_at": event["created_at"],
         }
+        if mirror_id:
+            entry["mirror_id"] = mirror_id
+            entry["mirror_relays_accepted"] = mirror_relays
+        if nostube_id:
+            entry["nostube_mirror_id"] = nostube_id
+            entry["nostube_relays_accepted"] = nostube_relays
+        return entry
     finally:
         if prepared is not None and prepared[0].exists():
             prepared[0].unlink()

@@ -11,7 +11,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 import yt_dlp
@@ -19,11 +22,54 @@ import yt_dlp
 from common import VIDEOS_DIR, find_ffmpeg
 
 MP4_FORMAT = "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/b"
+DEFAULT_COOKIES_FILE = Path(__file__).resolve().parent.parent / "data" / "youtube-cookies.txt"
+
+
+def base_ydl_opts(**extra: object) -> dict:
+    """Shared yt-dlp options for headless/datacenter hosts (relay-2).
+
+    Requires a Netscape cookies file on the server (export from a logged-in browser).
+    Deno + EJS challenge solver is needed for YouTube signature/n challenges.
+    """
+    opts: dict = {
+        "ffmpeg_location": find_ffmpeg(),
+        "noprogress": True,
+        # Deno is installed in the pubsub Docker image; EJS scripts fetch on first run.
+        "js_runtimes": {"deno": {}},
+        "remote_components": ["ejs:github"],
+        "extractor_args": {"youtube": {"player_client": ["web"]}},
+    }
+    cookies = os.getenv("YT_DLP_COOKIES_FILE")
+    if cookies:
+        cookie_path = Path(cookies)
+    elif DEFAULT_COOKIES_FILE.exists():
+        cookie_path = DEFAULT_COOKIES_FILE
+    else:
+        cookie_path = None
+    if cookie_path and cookie_path.exists():
+        # yt-dlp may rewrite cookie files on exit; use a temp copy so a failed
+        # auth run cannot corrupt the relay-2 master file.
+        tmp = Path(tempfile.gettempdir()) / f"yt-dlp-cookies-{cookie_path.stat().st_mtime_ns}.txt"
+        if not tmp.exists():
+            shutil.copy2(cookie_path, tmp)
+        opts["cookiefile"] = str(tmp)
+        print(f"[yt-dlp] using cookies: {cookie_path}")
+    else:
+        print(
+            "[yt-dlp] WARN: no cookies file — datacenter IPs are often blocked by YouTube. "
+            "Export cookies to data/youtube-cookies.txt or set YT_DLP_COOKIES_FILE."
+        )
+    proxy = os.getenv("YT_DLP_PROXY", "").strip()
+    if proxy:
+        opts["proxy"] = proxy
+        print("[yt-dlp] using proxy")
+    opts.update(extra)
+    return opts
 
 
 def get_tab_video_ids(url: str) -> set[str]:
     """Authoritative id set for a channel-tab URL via a flat-playlist pass."""
-    with yt_dlp.YoutubeDL({"extract_flat": True, "quiet": True, "noprogress": True}) as ydl:
+    with yt_dlp.YoutubeDL(base_ydl_opts(extract_flat=True, quiet=True)) as ydl:
         info = ydl.extract_info(url, download=False)
     entries = info.get("entries") or []
     return {e["id"] for e in entries if e and e.get("id")}
@@ -48,15 +94,13 @@ def download(url: str, out_dir: Path, max_duration: int | None = None) -> list[d
             raise RuntimeError(f"shorts guard: flat-playlist returned no ids for {url}")
         print(f"[guard] shorts tab pinned to {len(allowed_ids)} video ids")
 
-    ydl_opts: dict = {
-        "format": MP4_FORMAT,
-        "merge_output_format": "mp4",
-        "outtmpl": str(out_dir / "%(id)s.%(ext)s"),
-        "writeinfojson": True,
-        "ignoreerrors": "only_download",
-        "ffmpeg_location": find_ffmpeg(),
-        "noprogress": True,
-    }
+    ydl_opts: dict = base_ydl_opts(
+        format=MP4_FORMAT,
+        merge_output_format="mp4",
+        outtmpl=str(out_dir / "%(id)s.%(ext)s"),
+        writeinfojson=True,
+        ignoreerrors="only_download",
+    )
     if max_duration is not None:
         ydl_opts["match_filter"] = yt_dlp.utils.match_filter_func(
             f"duration <= {max_duration}"
@@ -64,6 +108,12 @@ def download(url: str, out_dir: Path, max_duration: int | None = None) -> list[d
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
+
+    if not info:
+        raise RuntimeError(
+            f"yt-dlp returned no metadata for {url} — likely YouTube bot block on this IP. "
+            "Ensure data/youtube-cookies.txt is present and fresh."
+        )
 
     entries = info.get("entries") or [info]
     results: list[dict] = []

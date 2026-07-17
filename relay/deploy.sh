@@ -26,7 +26,7 @@ ssh -o BatchMode=yes "$HOST" "
     apt-get update -qq && apt-get install -y -qq docker-compose-v2
   fi
   cd '$REMOTE_DIR'
-  docker compose up -d --pull always
+  docker compose up -d --pull always --force-recreate relay
   docker compose ps
 "
 

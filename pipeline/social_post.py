@@ -1,16 +1,17 @@
-"""Unified social post CLI: Nostr (working) + Meta/TikTok stubs (direct APIs).
+"""Unified social post CLI: Nostr (working) + YouTube (OAuth) + Meta/TikTok stubs.
 
 Nostr:
   - Text only → kind 1 note
   - Video (--media) → Blossom upload, kind 22 (NIP-71), then kind-1 Primal mirror
 
-Other platforms delegate to pipeline/meta_tiktok.py (NotImplementedError + setup docs).
+YouTube: requires YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET / YOUTUBE_REFRESH_TOKEN
+  and --media (see pipeline/youtube_upload.py). Meta/TikTok remain stubs.
 
 Usage:
     doppler run -- uv run --project pipeline pipeline/social_post.py \\
         --text "Practice clip" \\
         [--media path/to/clip.mp4] \\
-        [--platforms nostr,instagram,facebook,tiktok] \\
+        [--platforms nostr,youtube,instagram,facebook,tiktok] \\
         [--server https://blossom.dojopop.live] \\
         [--relay wss://...] \\
         [--dry-run]
@@ -41,8 +42,9 @@ from meta_tiktok import post_facebook, post_instagram, post_tiktok
 from mirror_practice_for_primal import MIRROR_RELAYS, build_mirror_event
 from nostr_util import Signer, verify_event
 from publish_video_event import build_video_event, publish, report
+from youtube_upload import post_youtube
 
-SUPPORTED_PLATFORMS = ("nostr", "instagram", "facebook", "tiktok")
+SUPPORTED_PLATFORMS = ("nostr", "instagram", "facebook", "tiktok", "youtube")
 VIDEO_SUFFIXES = {".mp4", ".mov", ".webm", ".mkv", ".m4v"}
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 
@@ -234,6 +236,7 @@ PLATFORM_HANDLERS = {
     "instagram": post_instagram,
     "facebook": post_facebook,
     "tiktok": post_tiktok,
+    "youtube": post_youtube,
 }
 
 
