@@ -278,6 +278,36 @@
     "video_sha256": "503da9216ac75979739d768a06351c3c33e641149d404d110b592eda85b8501f",
     "video_url": "https://blossom.yakihonne.com/503da9216ac75979739d768a06351c3c33e641149d404d110b592eda85b8501f.mp4"
   },
+  "5Tech1XZ_yk": {
+    "event_id": "6f4eac19c7b47ff615b950b08303217a9cfac430b354fd8138b99585973a6784",
+    "kind": 22,
+    "mirror_id": "0cfcdf87a4a145e838de46d5694e00563e6a9abf2d3860ef59ca07b0bc626fec",
+    "mirror_relays_accepted": [
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nostr-01.yakihonne.com",
+      "wss://nos.lol"
+    ],
+    "nostube_mirror_id": "79b71309a16767a764639a77a6b4f6c0e86b0679a5ad48bea89297193857f186",
+    "nostube_relays_accepted": [
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "published_at": 1784275425,
+    "relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "thumb_url": "https://blossom.dojopop.live/ce0b20e3bf485f366611575f2bd457acda25f9469b1ea606b52ef6fb82f1942a.jpeg",
+    "title": "Day 1344 thank you @tenshinryu #sekiguchisensei #yasukunishrine #dojopop",
+    "video_sha256": "1a8657d2d442f3b83ccacf06d61def8a588862cdeaab41bee74642abc2ea4d6b",
+    "video_url": "https://blossom.dojopop.live/1a8657d2d442f3b83ccacf06d61def8a588862cdeaab41bee74642abc2ea4d6b.mp4"
+  },
   "5zSu_cICRiM": {
     "event_id": "ff10e340b17c9c740b4c02e2f42e0ee78679149e560a4b05718679c8794a7320",
     "kind": 22,
@@ -466,7 +496,7 @@
       "wss://nos.lol"
     ],
     "thumb_url": "https://blossom.yakihonne.com/32f1ce960a7d2048de2534fc0ce6da52a34d542dd060544fd8556dccf0a6cbcf.jpeg",
-    "title": "63rd all Japan Aikikai Aikido Enbu with Mitsuteru Ueshiba “Waka” Sensei Honbu Dojocho demonstrating",
+    "title": "63rd all Japan Aikikai Aikido Enbu with Mitsuteru Ueshiba \u201cWaka\u201d Sensei Honbu Dojocho demonstrating",
     "video_sha256": "922f04bdf6ccba102a9ec4a7b66b2aa937c148dbf930b573ff2aadbad4e66bb8",
     "video_url": "https://blossom.yakihonne.com/922f04bdf6ccba102a9ec4a7b66b2aa937c148dbf930b573ff2aadbad4e66bb8.mp4"
   },
@@ -557,6 +587,12 @@
     "title": "Day 1306 thank you @tenshinryu  #dojopop #battojutsu",
     "video_sha256": "e7e502935a9b6ef58ae399d3484df7e78c940f820d7e773be20604822641edfb",
     "video_url": "https://blossom.yakihonne.com/e7e502935a9b6ef58ae399d3484df7e78c940f820d7e773be20604822641edfb.mp4"
+  },
+  "BddRSznv3uk": {
+    "event_id": "608e97dfd015addca651970e895405c5450ac69bfa3931160e8e739d4f3ff901",
+    "kind": 22,
+    "published_at": 0,
+    "title": "Day 1332 (backfilled state stub)"
   },
   "BxfjCxQsPVw": {
     "event_id": "dc9001656b5d6ed71d451e646efac6185cedc2179979177dae00f24cdd6d6b9f",
@@ -1266,6 +1302,12 @@
     "video_sha256": "0fb70b8ea8ace32ba4f32853bbf7476a10a364a15e8215ee8d79e8655d6fca52",
     "video_url": "https://blossom.yakihonne.com/0fb70b8ea8ace32ba4f32853bbf7476a10a364a15e8215ee8d79e8655d6fca52.mp4"
   },
+  "R9OaJbAjhos": {
+    "event_id": "12ef4a05b51ec05f995e47c9016c2ef0165436870029a89dbe2b225f0ad529cf",
+    "kind": 22,
+    "published_at": 0,
+    "title": "Day 1333 (backfilled state stub)"
+  },
   "RbBDkMREAoY": {
     "event_id": "8f1f863c2eea675673b58b8e255bbdaca39f18078854b10a936a02522f67e53c",
     "kind": 22,
@@ -1455,6 +1497,12 @@
     "video_sha256": "08aa6184eb6175e20c007dd1288d7eeef278377fb61d65fae446e6ec5ec71f10",
     "video_url": "https://blossom.yakihonne.com/08aa6184eb6175e20c007dd1288d7eeef278377fb61d65fae446e6ec5ec71f10.mp4"
   },
+  "To4nlaJXYZ4": {
+    "event_id": "504b9d45f189d4e897c2cf29cb8c71a8d50c5f74607a01d207f235ba180a2f3c",
+    "kind": 22,
+    "published_at": 0,
+    "title": "Day 1331 (backfilled state stub)"
+  },
   "U4plDYTt91w": {
     "event_id": "9baa0128ce06915d24a7e7a91bb6638451d780bf359756e830de58b6f12cced4",
     "kind": 22,
@@ -1585,6 +1633,12 @@
     "title": "Day 1273 thank you @t@tenshinryu",
     "video_sha256": "1d4313d084c5c20eb9749b5c0ce7977285b2aba6673e5eec73a7d0c585145924",
     "video_url": "https://blossom.yakihonne.com/1d4313d084c5c20eb9749b5c0ce7977285b2aba6673e5eec73a7d0c585145924.mp4"
+  },
+  "W2uEIspDziM": {
+    "event_id": "d8aeebb7a8b65d95be5c019487ed7eabec7b0be091e16869c02094f8093e1c4f",
+    "kind": 22,
+    "published_at": 0,
+    "title": "Day 1334 (backfilled state stub)"
   },
   "WoVp2XcXmHU": {
     "event_id": "ecd5c470e7795fad14e8f2f06b28bd7a438e3fea25e7a673e0d463632b2d2534",
@@ -1758,6 +1812,36 @@
     "video_sha256": "c14702a466e151e3b55a1aeda568200db02ec76cdb4f25bf341136aafe5720a6",
     "video_url": "https://blossom.yakihonne.com/c14702a466e151e3b55a1aeda568200db02ec76cdb4f25bf341136aafe5720a6.mp4"
   },
+  "cbgzEDo8oCg": {
+    "event_id": "d0924f170fb4f76b01d68d8dc2280dcbbaddf80d87c8bbcac8e111e05f3011a0",
+    "kind": 22,
+    "mirror_id": "a631a6ce308ebdce44a5ad540acaf61f8942668b5d92e2b1a22c80479e654b83",
+    "mirror_relays_accepted": [
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "nostube_mirror_id": "39c86affe49967d5dfe404302f7bd1493a4fb084d2323b7b18841273db85a949",
+    "nostube_relays_accepted": [
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "published_at": 1784275372,
+    "relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.primal.net",
+      "wss://nos.lol"
+    ],
+    "thumb_url": "https://blossom.dojopop.live/3825b4c14428cce88e59fb1cc240873434f3956d14a97918d0477b77015627dc.jpeg",
+    "title": "Day 1343 thank you @tenshinryu  #dojopop",
+    "video_sha256": "c44b1249cb53e9347cf039c2982408adfb66b258c5caa27ba8946b341f4a608b",
+    "video_url": "https://blossom.dojopop.live/c44b1249cb53e9347cf039c2982408adfb66b258c5caa27ba8946b341f4a608b.mp4"
+  },
   "cnvG_7je3Kw": {
     "event_id": "00cc73b61af870718feb7ac8a6b64b5f8afcacc0686d78906c8375cb0fd990dc",
     "kind": 22,
@@ -1771,6 +1855,36 @@
     "title": "October 17, 2024",
     "video_sha256": "1dc7e818dca02d23d04d6dea1b7c75e4e3cce2a0b4a4400096c1033fd5a941fd",
     "video_url": "https://blossom.yakihonne.com/1dc7e818dca02d23d04d6dea1b7c75e4e3cce2a0b4a4400096c1033fd5a941fd.mp4"
+  },
+  "d0PF0lGSBtY": {
+    "event_id": "8bc1bbaba07b65cd30e29137357e2d40d0b7503c72fbb537ce0545dd86941d12",
+    "kind": 22,
+    "mirror_id": "0e005383858d82adf46aaba381f01de7abc85d2e88719355db9bd111154e3c85",
+    "mirror_relays_accepted": [
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nostr-01.yakihonne.com",
+      "wss://nos.lol"
+    ],
+    "nostube_mirror_id": "fbcfea5d6dacf267f76220fd5c0ff9f20d3fed205f68c10e6a8ea8b4dd05bbc0",
+    "nostube_relays_accepted": [
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "published_at": 1784275320,
+    "relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "thumb_url": "https://blossom.dojopop.live/c43fb6e6ea4fbaa67bede3eb92b9211e8e36b897cd50b86468b931344d1b1b5f.jpeg",
+    "title": "Day 1342 thank you @tenshinryu #dojopop",
+    "video_sha256": "c52b325409d17ac62b21c713903981d1502cc480d7146a173f04d18f46c8abf3",
+    "video_url": "https://blossom.dojopop.live/c52b325409d17ac62b21c713903981d1502cc480d7146a173f04d18f46c8abf3.mp4"
   },
   "dL8QtsAR9oM": {
     "event_id": "022eed7579956f20513c24d1f474ed8ace9d5d92c60668a88e978abc6b13869f",
@@ -2118,7 +2232,7 @@
       "wss://nos.lol"
     ],
     "thumb_url": "https://blossom.yakihonne.com/69bd7846bca18e984581060a9d7b8841d53fa60576791c111388547e0906a340.jpeg",
-    "title": "The DojoPop founder provides an update on the third DojoPop leaderboard, the new app, and…",
+    "title": "The DojoPop founder provides an update on the third DojoPop leaderboard, the new app, and\u2026",
     "video_sha256": "db5504c2913b2d718aa3597003995f65621e0e321a76828db4a23f148ce7c015",
     "video_url": "https://blossom.yakihonne.com/db5504c2913b2d718aa3597003995f65621e0e321a76828db4a23f148ce7c015.mp4"
   },
@@ -2249,7 +2363,7 @@
       "wss://nos.lol"
     ],
     "thumb_url": null,
-    "title": "The Yamas: Brahmacarya and meditation. Dm “one” for info on the 30 day meditation bootcamp!",
+    "title": "The Yamas: Brahmacarya and meditation. Dm \u201cone\u201d for info on the 30 day meditation bootcamp!",
     "video_sha256": "24408c51ddb05c1ebd1fc4643623e68d183ccee8845556a3489655ef34ec7a4f",
     "video_url": "https://blossom.yakihonne.com/24408c51ddb05c1ebd1fc4643623e68d183ccee8845556a3489655ef34ec7a4f.mp4"
   },
@@ -2786,29 +2900,5 @@
     "title": "Summer is hot and cicadas are fully tuned up. Thank you. Thank you @tenshinryu Ten 0.",
     "video_sha256": "f705f61d3e9143320bb0a9b653919748aeabfa42230ea1db69110aa5e932d2f3",
     "video_url": "https://blossom.yakihonne.com/f705f61d3e9143320bb0a9b653919748aeabfa42230ea1db69110aa5e932d2f3.mp4"
-  },
-  "To4nlaJXYZ4": {
-    "event_id": "504b9d45f189d4e897c2cf29cb8c71a8d50c5f74607a01d207f235ba180a2f3c",
-    "kind": 22,
-    "title": "Day 1331 (backfilled state stub)",
-    "published_at": 0
-  },
-  "BddRSznv3uk": {
-    "event_id": "608e97dfd015addca651970e895405c5450ac69bfa3931160e8e739d4f3ff901",
-    "kind": 22,
-    "title": "Day 1332 (backfilled state stub)",
-    "published_at": 0
-  },
-  "R9OaJbAjhos": {
-    "event_id": "12ef4a05b51ec05f995e47c9016c2ef0165436870029a89dbe2b225f0ad529cf",
-    "kind": 22,
-    "title": "Day 1333 (backfilled state stub)",
-    "published_at": 0
-  },
-  "W2uEIspDziM": {
-    "event_id": "d8aeebb7a8b65d95be5c019487ed7eabec7b0be091e16869c02094f8093e1c4f",
-    "kind": 22,
-    "title": "Day 1334 (backfilled state stub)",
-    "published_at": 0
   }
 }
