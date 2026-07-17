@@ -1,0 +1,23 @@
+# DojoPop Cordn MLS messaging coordinator — relay transport (no HTTP ingress).
+# Clients connect via Nostr relays (ContextVM). See README.md.
+#
+# Deploy: doppler run -- ./deploy.sh relay-2
+services:
+  cordn:
+    image: ghcr.io/cordn-msg/cordn:latest
+    container_name: dojopop-cordn
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - cordn-data:/data
+    networks:
+      - dojopop-internal
+
+volumes:
+  cordn-data:
+
+networks:
+  dojopop-internal:
+    external: true
+    name: dojopop-internal

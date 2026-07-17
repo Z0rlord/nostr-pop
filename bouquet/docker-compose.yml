@@ -1,0 +1,14 @@
+# Bouquet Blossom media UI — bouquet.dojopop.live → localhost:3015
+# Deploy: ./deploy.sh relay-2
+services:
+  bouquet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BOUQUET_COMMIT: ${BOUQUET_COMMIT:-main}
+    image: dojopop-bouquet:latest
+    container_name: dojopop-bouquet
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3015:80"

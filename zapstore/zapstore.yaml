@@ -1,0 +1,32 @@
+# DojoPop Zapstore publish config — used by: zsp publish zapstore/zapstore.yaml
+# Docs: https://zapstore.dev/docs/publish
+#
+# Before first publish:
+#   1. Set pubkey to your release identity npub (recommend new DOJOPOP_RELEASE_NSEC in Doppler).
+#   2. Commit this file to the repository URL below (relay whitelist check).
+#   3. Build APK: ./zapstore/build-apk.sh
+#   4. SIGN_WITH=bunker://... doppler run -- zsp publish zapstore/zapstore.yaml
+
+# Source repo (GitHub or GitLab — must match where this file is committed)
+repository: https://github.com/Z0rlord/nostr-pop
+
+# Nostr pubkey for signing kind 32267/30063/1063 events (npub, not hex)
+# Replace before publish — do NOT use DOJOPOP_LOGIN_NSEC (bot) without intent
+pubkey: npub1REPLACE_WITH_RELEASE_NPUB
+
+# Local APK from goapk wrapper (see build-apk.sh)
+release_source: ./zapstore/dist/dojopop-release.apk
+
+# Optional: override extracted metadata
+name: DojoPop
+summary: Proof-of-practice for martial artists on Nostr
+description: |
+  Film practice, publish kind-22 video events, verify training on the open web.
+  Membership, school attendance, and Nostr-native sign-in at dojopop.live.
+website: https://dojopop.live
+
+# Icon for store listing (add web/public/icons/icon-512x512.png or set path)
+# icon: ./web/public/icons/icon-512x512.png
+
+metadata_sources:
+  - github

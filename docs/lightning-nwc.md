@@ -25,6 +25,10 @@ LNbits is not required for NWC.
 |--------|---------|
 | `NWC_CONNECTION_SECRET` | Full `nostr+walletconnect://…` string (never commit) |
 | `LIGHTNING_MEMBERSHIP_SATS` | Default `10000` (~$9.99) |
+| `STREAK_NWC_CONNECTION_SECRET` | Optional dedicated NWC with `pay_invoice` for streak rewards |
+| `STREAK_PAYOUT_CRON_SECRET` | Auth for `POST /api/ops/streak-payouts` |
+
+Membership NWC is typically **receive-only** (`make_invoice`, `lookup_invoice`). Streak sats need **`pay_invoice`** — prefer a separate Hub connection as `STREAK_NWC_CONNECTION_SECRET`.
 
 Remove any legacy `BTCPAY_*` vars — they are ignored.
 

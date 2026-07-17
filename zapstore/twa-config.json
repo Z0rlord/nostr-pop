@@ -1,0 +1,21 @@
+{
+  "_comment": "Optional Bubblewrap / TWA reference if you later use Chrome tooling instead of goapk. Not used by build-apk.sh.",
+  "packageId": "live.dojopop.app",
+  "host": "dojopop.live",
+  "name": "DojoPop",
+  "launcherName": "DojoPop",
+  "display": "standalone",
+  "themeColor": "#c41e3a",
+  "navigationColor": "#0a0a0a",
+  "backgroundColor": "#0a0a0a",
+  "startUrl": "/",
+  "iconUrl": "https://dojopop.live/icons/icon-512x512.png",
+  "maskableIconUrl": "https://dojopop.live/icons/icon-512x512.png",
+  "splashScreenFadeOutDuration": 300,
+  "enableNotifications": false,
+  "webManifestUrl": "https://dojopop.live/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "portrait-primary"
+}

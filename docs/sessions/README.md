@@ -4,6 +4,10 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-07-17 | [streak-sats](./2026-07-17-streak-sats.md) | Streak sats v1: ledger, LNURL, NWC pay_invoice, dry-run cron API |
+| 2026-07-17 | [zapstore-listing](./2026-07-17-zapstore-listing.md) | Zapstore feasibility; goapk+zsp path; `zapstore/` scaffold |
+| 2026-07-17 | [relay-content-policy](./2026-07-17-relay-content-policy.md) | Abuse barriers: whitelist/kinds/Blossom; config hardenings; ops delete/report |
+| 2026-07-17 | [runstr-ideas](./2026-07-17-runstr-ideas.md) | RUNSTR research; streak sats + school challenges; open-protocol UI messaging (kind 22) |
 | 2026-07-17 | [tenshinryu-foreign-dojos](./2026-07-17-tenshinryu-foreign-dojos.md) | 17 foreign schools seeded; Japan/Keikokai/Foreign UI; owner invites |
 | 2026-07-16 | [tenshinryu-staging-multidojo-audit](./2026-07-16-tenshinryu-staging-multidojo-audit.md) | Staging DB isolation, multi-dojo membership, locked staff APIs |
 | 2026-07-05 | [facebook-og-cloudflare](./2026-07-05-facebook-og-cloudflare.md) | Meta OG 403 from AI Crawl Control; external CDN og:image mitigation; token needs Bot Management Edit |
