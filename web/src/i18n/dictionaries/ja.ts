@@ -12,6 +12,7 @@ const ja: Dictionary = {
   header: {
     myPractice: "マイトレーニング",
     watch: "視聴",
+    chat: "チャット",
     howItWorks: "使い方",
     schools: "道場",
     instructors: "指導者",
@@ -40,7 +41,7 @@ const ja: Dictionary = {
     title1: "あなたの稽古を、",
     title2: "オープンウェブへ。",
     ownership:
-      "動画はあなたの鍵の上にあります。私たちも削除できません。Apple も Google も。",
+      "Each practice clip is a signed Nostr event on the relays — not a row DojoPop locks away. Clients that speak short video can show the same proof without an export or API key.",
     description:
       "剣術、合気道、52vtk、HEMA、ロングソード、フェンシング、形 — 稽古するなら DojoPop はあなたのため。セッションを撮影し、動画を共有し、Nostr 上に検証可能な記録を残しましょう。",
     tagline:
@@ -148,7 +149,7 @@ const ja: Dictionary = {
     whatP1:
       "Nostr はアイデンティティと署名付きメッセージのオープンプロトコル — 携帯できるトレーニング ID と考えてください。DojoPop のパスワード不要、Facebook ログイン不要。npub はログ上の公開名、秘密鍵は拡張機能やアプリに残ります。",
     whatP2:
-      "DojoPop は Nostr を使い、稽古記録を検証可能であなたのものに — 秘密鍵は一切保持しません。",
+      "When you publish, your session becomes a NIP-71 short video (kind 22) tagged #dojopop and #proofofpractice — signed by your keys, stored on relays, not as a private DojoPop database row. Membership unlocks publishing; the record itself is open. YakiHonne, Primal, nostu.be, Damus (limited), and other video-aware clients can surface the same proof. No walled garden, no “download your data” ritual — your training log can travel with the protocol.",
     setupTitle: "5分セットアップ",
     setup1Title: "拡張機能またはアプリをインストール",
     setup1Body: "下から一つ選んでください。迷ったら Alby が最も簡単です。",
@@ -177,7 +178,7 @@ const ja: Dictionary = {
       "道場名簿やログ閲覧には不要。ソロメンバーシップはカード（Stripe）または Lightning — Lightning は任意です。",
     faqPhoneQ: "スマホで使える？",
     faqPhoneA:
-      "はい。Alby と Primal にモバイルアプリがあります。道場での QR 参加は、拡張機能対応のモバイルブラウザまたはアプリ内ブラウザをご利用ください。",
+      "はい。Alby と Primal にモバイルアプリがあります。iPhone では Clave（clave.casa）がデスクトップブラウザからの QR サインイン用 NIP-46 リモート署名者として使えます。道場での QR 参加は、拡張機能対応のモバイルブラウザまたはアプリ内ブラウザをご利用ください。",
     faqLostQ: "スマホをなくした — どうする？",
     faqLostA:
       "アカウント作成時に nsec（秘密鍵）をバックアップしていれば復元できます。なければ新しい npub が必要 — 鍵のバックアップは失いたくない帯のように大切に。",
@@ -185,6 +186,7 @@ const ja: Dictionary = {
     faqDataA:
       "仮名の公開 ID です。道場名簿に保存され、出席記録に使われます。プライバシーポリシーをご覧ください。",
     extAlby: "初心者に最適 — ブラウザ拡張 + モバイルアプリ",
+    extClave: "iPhone 用 NIP-46 リモート署名 — デスクトップから DojoPop の QR をスキャン（clave.casa）",
     extNos2x: "軽量 Chrome / Firefox 拡張",
     extPrimal: "モバイルアプリ（iOS / Android）、ウォレット内蔵",
     npubHow: "npub の見つけ方 →",
@@ -247,7 +249,7 @@ const ja: Dictionary = {
   signIn: {
     title: "DojoPop にサインイン",
     subtitle:
-      "パスワード不要 — Nostrアプリのワンタイムコード、拡張機能、または QR でサインイン。",
+      "パスワード不要 — iPhone では Clave での QR サインインを推奨（下記）。ワンタイムコード、拡張機能、Primal の QR も利用できます。",
     methodDm: "方法 2 — ワンタイムコード（スマホ向け）",
     methodDmHint:
       "npub または NIP-05 アドレス（例：you@dojopop.live）を入力。DojoPop から暗号化 DM で6桁コードを送ります — Primal 等で確認して入力。",
@@ -272,28 +274,31 @@ const ja: Dictionary = {
     dmResendCode: "新しいコードを送信",
     signerRequiredTitle: "アップロードには署名接続が必要",
     signerRequiredBody:
-      "ログインコードで npub を確認しました。動画を公開するには同じ鍵で Primal（QR/bunker）または拡張機能を接続してください。",
+      "ログインコードで npub を確認しました。動画を公開するには同じ鍵で Clave または Primal（QR/bunker）または拡張機能を接続してください。",
     signerWrongKey: "別の npub の署名者です。参加時と同じ鍵を使ってください。",
     hideQr: "QRコードを隠す",
     methodExtension: "方法 1 — Nostr 拡張機能（推奨）",
     methodExtensionHint: "このブラウザの Alby、nos2x、Primal。公開に最適。",
     connectExtension: "Nostr 拡張機能を接続",
     orDivider: "または",
-    methodQr: "方法 3 — QRコード",
+    methodQr: "方法 3 — QRコード（Clave または Primal）",
     methodQrHint:
-      "PC: QRを表示して Alby や Amethyst でスキャン。スマホ: bunker:// Nostr Connect コードを読み取り。",
+      "PC: QR を表示し、Clave（iPhone）、Primal、Alby、Amethyst でスキャン。",
     showQr: "QRコードを表示",
     scanQr: "カメラでスキャン",
     qrAlt: "Nostr Connect QRコード",
-    qrScanHint: "スマホ: Primal → Remote Login → このQRをスキャン → DojoPop を承認。",
+    qrScanHint: "スマホ: Clave または Primal でこの QR をスキャン → DojoPop を承認。",
+    qrClaveHint:
+      "iPhone + デスクトップ: Clave（clave.casa）をインストール → Connect → この QR をスキャン → 承認。",
     qrWaiting: "スマホからの接続を待っています…（最大2分）",
     qrExpired: "QRの有効期限切れ。QRを更新をタップ。",
     qrRefresh: "QRを更新",
     qrCopyLink: "Primal用リンクをコピー",
     qrCopied: "コピーしました",
     qrCopyFailed: "コピーできませんでした。",
-    qrPrimalHint: "Primalで Remote Login（サイドメニュー）を使い、ブラウザがサインインするまで Primal を開いたままに。",
-    qrRelayOk: "ブラウザが {count} リレーに接続 — Primal を待機中…",
+    qrPrimalHint:
+      "Primal を使う場合: Remote Login（サイドメニュー）→ スキャン → ブラウザがサインインするまで Primal を開いたままに。",
+    qrRelayOk: "ブラウザが {count} リレーに接続 — スマホを待機中…",
     qrRelayPending: "Nostr リレーに接続中…",
     bunkerTitle: "Primal が接続しない？ bunker リンクを試す",
     bunkerHint:
@@ -325,6 +330,15 @@ const ja: Dictionary = {
       "そのQRは公開 npub のみです — サインインできません。Nostr Connect または bunker:// コードを使ってください。",
     noAccount: "まだメンバーではない？",
     joinCta: "DojoPop に参加",
+    claveRecommended: "iPhone 向け推奨",
+    claveTitle: "Clave でサインイン",
+    claveBody:
+      "iPhone 専用 NIP-46 リモート署名 — 秘密鍵は Keychain に保持され、ブラウザには入りません。ノートPCやデスクトップから最適です。",
+    claveStep1: "App Store から Clave をインストール（無料）— clave.casa",
+    claveStep2: "このページで QRコードを表示 をタップ",
+    claveStep3: "Clave: Connect → QR をスキャン → DojoPop を承認",
+    claveGetApp: "Clave を入手",
+    claveShowQr: "QRコードを表示",
     signedInAs: "サインイン中",
     memberActive: "DojoPop アクティブメンバー — リレーに公開できます。",
     memberPending: "メンバーシップ状態: {status}。おかしい場合はサポートへ。",
@@ -385,7 +399,7 @@ const ja: Dictionary = {
   practice: {
     title: "マイトレーニング",
     description:
-      "個人の稽古ログ — Nostr アイデンティティでリレーから取得したセッション、連続日数、動画。",
+      "Your personal training log — sessions, streaks, and clips pulled from the relays under your npub. Proof lives on Nostr as signed short video; DojoPop is one door in, not a silo.",
     disconnect: "切断",
     signOut: "サインアウト",
     prompt:
@@ -401,7 +415,7 @@ const ja: Dictionary = {
   },
   primal: {
     title: "Primalを入手",
-    hint: "iPhone / Android向け無料Nostrアプリ — QRサインインとスマホからの投稿に最適。",
+    hint: "こちらも可: iPhone / Android の Primal — ソーシャルアプリ内蔵ウォレット。",
     downloads: "Primalを入手",
     ios: "App Store",
     android: "Google Play",

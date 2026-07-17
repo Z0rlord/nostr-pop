@@ -9,6 +9,8 @@ export interface Member {
   id: string;
   npub: string;
   email?: string;
+  /** Optional lightning address override (else kind-0 lud16) */
+  lud16?: string;
   paymentMethod: PaymentMethod;
   status: MemberStatus;
   createdAt: string;

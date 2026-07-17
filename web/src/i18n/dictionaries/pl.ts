@@ -12,6 +12,7 @@ const pl: Dictionary = {
   header: {
     myPractice: "Mój trening",
     watch: "Oglądaj",
+    chat: "Czat",
     howItWorks: "Jak to działa",
     schools: "Szkoły",
     instructors: "Instruktorzy",
@@ -40,7 +41,7 @@ const pl: Dictionary = {
     title1: "Twój trening,",
     title2: "w otwartej sieci.",
     ownership:
-      "Twoje filmy są na twoich kluczach. Nie możemy ich usunąć. Ani Apple, ani Google.",
+      "Each practice clip is a signed Nostr event on the relays — not a row DojoPop locks away. Clients that speak short video can show the same proof without an export or API key.",
     description:
       "Kenjutsu, aikido, 52vtk, HEMA, longsword, szermierka, kata bez broni — jeśli trenujesz, DojoPop jest dla Ciebie. Nagraj sesję, udostępnij wideo i buduj weryfikowalny log na Nostr.",
     tagline:
@@ -148,7 +149,7 @@ const pl: Dictionary = {
     whatP1:
       "Nostr to otwarty protokół tożsamości i podpisanych wiadomości — przenośny ID treningowy pod Twoją kontrolą. Bez hasła DojoPop, bez logowania przez Facebook. Twój npub to publiczna nazwa w logu; klucz prywatny zostaje w rozszerzeniu lub aplikacji.",
     whatP2:
-      "DojoPop używa Nostr, aby zapisy treningów były weryfikowalne i Twoje — nigdy nie przechowujemy klucza prywatnego.",
+      "When you publish, your session becomes a NIP-71 short video (kind 22) tagged #dojopop and #proofofpractice — signed by your keys, stored on relays, not as a private DojoPop database row. Membership unlocks publishing; the record itself is open. YakiHonne, Primal, nostu.be, Damus (limited), and other video-aware clients can surface the same proof. No walled garden, no “download your data” ritual — your training log can travel with the protocol.",
     setupTitle: "Konfiguracja w 5 minut",
     setup1Title: "Zainstaluj rozszerzenie lub aplikację",
     setup1Body: "Wybierz opcję poniżej. Alby jest najprostsze, jeśli nie masz pewności.",
@@ -177,7 +178,7 @@ const pl: Dictionary = {
       "Nie do list szkolnych ani podglądu logu. Solo członkostwo: karta (Stripe) lub Lightning — Lightning opcjonalnie.",
     faqPhoneQ: "Czy mogę użyć telefonu?",
     faqPhoneA:
-      "Tak. Alby i Primal mają aplikacje mobilne. Przy QR w dojo użyj przeglądarki w telefonie z obsługą rozszerzenia lub przeglądarki w aplikacji.",
+      "Tak. Alby i Primal mają aplikacje mobilne. Na iPhone Clave (clave.casa) działa jako zdalny podpis NIP-46 do logowania QR z przeglądarki na komputerze. Przy QR w dojo użyj przeglądarki w telefonie z obsługą rozszerzenia lub przeglądarki w aplikacji.",
     faqLostQ: "Zgubiłem telefon — co teraz?",
     faqLostA:
       "Jeśli zrobiłeś kopię nsec przy zakładaniu konta, możesz przywrócić. Jeśli nie — potrzebujesz nowego npub. Traktuj kopię klucza jak pas, którego nie chcesz stracić.",
@@ -185,6 +186,7 @@ const pl: Dictionary = {
     faqDataA:
       "To pseudonimowy publiczny ID. Listy szkół go przechowują do logu obecności. Zobacz Politykę prywatności.",
     extAlby: "Najłatwiejsze dla początkujących — rozszerzenie + aplikacja mobilna",
+    extClave: "Zdalny podpis NIP-46 na iPhone — zeskanuj QR DojoPop z komputera (clave.casa)",
     extNos2x: "Lekkie rozszerzenie Chrome / Firefox",
     extPrimal: "Aplikacja mobilna (iOS / Android) z portfelem",
     npubHow: "Jak znaleźć swój npub →",
@@ -247,7 +249,7 @@ const pl: Dictionary = {
   signIn: {
     title: "Zaloguj się do DojoPop",
     subtitle:
-      "Bez hasła — jednorazowy kod w aplikacji Nostr, rozszerzenie lub QR.",
+      "Bez hasła — na iPhone polecamy Clave (poniżej). Albo kod jednorazowy, rozszerzenie lub QR z Primal.",
     methodDm: "Opcja 2 — Kod jednorazowy (telefon)",
     methodDmHint:
       "Wpisz npub lub adres NIP-05 (np. ty@dojopop.live). Wyślemy 6-cyfrowy kod zaszyfrowanym DM — otwórz Primal i wklej kod.",
@@ -272,28 +274,31 @@ const pl: Dictionary = {
     dmResendCode: "Wyślij nowy kod",
     signerRequiredTitle: "Połącz podpis do przesyłania",
     signerRequiredBody:
-      "Zweryfikowano npub kodem. Aby publikować filmy, połącz Primal lub rozszerzenie tym samym kluczem.",
+      "Zweryfikowano npub kodem. Aby publikować filmy, połącz Clave lub Primal (QR/bunker) albo rozszerzenie tym samym kluczem.",
     signerWrongKey: "Ten podpis używa innego npub. Użyj klucza, którym dołączyłeś.",
     hideQr: "Ukryj kod QR",
     methodExtension: "Opcja 1 — Rozszerzenie Nostr (zalecane)",
     methodExtensionHint: "Alby, nos2x lub Primal w tej przeglądarce. Najlepsze do publikacji.",
     connectExtension: "Połącz rozszerzenie Nostr",
     orDivider: "lub",
-    methodQr: "Opcja 3 — Kod QR",
+    methodQr: "Opcja 3 — Kod QR (Clave lub Primal)",
     methodQrHint:
-      "Komputer: pokaż QR i zeskanuj w Alby lub Amethyst. Telefon: zeskanuj kod bunker:// Nostr Connect.",
+      "Komputer: pokaż QR i zeskanuj w Clave (iPhone), Primal, Alby lub Amethyst.",
     showQr: "Pokaż kod QR",
     scanQr: "Skanuj kamerą",
     qrAlt: "Kod QR Nostr Connect",
-    qrScanHint: "Na telefonie: Primal → Remote Login → zeskanuj ten QR → zatwierdź DojoPop.",
+    qrScanHint: "Na telefonie: zeskanuj ten QR w Clave lub Primal → zatwierdź DojoPop.",
+    qrClaveHint:
+      "iPhone + komputer: zainstaluj Clave (clave.casa), otwórz Connect, zeskanuj ten QR i zatwierdź.",
     qrWaiting: "Oczekiwanie na połączenie z telefonu… (do 2 minut)",
     qrExpired: "QR wygasł. Dotknij Odśwież QR.",
     qrRefresh: "Odśwież QR",
     qrCopyLink: "Kopiuj link dla Primal",
     qrCopied: "Skopiowano",
     qrCopyFailed: "Nie udało się skopiować.",
-    qrPrimalHint: "W Primal użyj Remote Login (menu boczne). Trzymaj Primal otwarte, aż przeglądarka się zaloguje.",
-    qrRelayOk: "Przeglądarka połączona z {count} relay — czekam na Primal…",
+    qrPrimalHint:
+      "Używasz Primal? Remote Login (menu boczne) → skanuj → trzymaj Primal otwarte, aż przeglądarka się zaloguje.",
+    qrRelayOk: "Przeglądarka połączona z {count} relay — czekam na telefon…",
     qrRelayPending: "Łączenie z relay Nostr…",
     bunkerTitle: "Primal nie łączy? Spróbuj linku bunker",
     bunkerHint:
@@ -325,6 +330,15 @@ const pl: Dictionary = {
       "Ten QR to tylko publiczny npub — nie może Cię zalogować. Użyj Nostr Connect lub zeskanuj kod bunker://.",
     noAccount: "Jeszcze nie jesteś członkiem?",
     joinCta: "Dołącz do DojoPop",
+    claveRecommended: "Polecane na iPhone",
+    claveTitle: "Zaloguj się przez Clave",
+    claveBody:
+      "Dedykowany podpis NIP-46 na iPhone — klucz prywatny zostaje w Keychain, nie w przeglądarce. Idealne z laptopa lub komputera.",
+    claveStep1: "Zainstaluj Clave z App Store (za darmo) — clave.casa",
+    claveStep2: "Dotknij Pokaż kod QR na tej stronie",
+    claveStep3: "W Clave: Connect → zeskanuj QR → zatwierdź DojoPop",
+    claveGetApp: "Pobierz Clave",
+    claveShowQr: "Pokaż kod QR",
     signedInAs: "Zalogowano",
     memberActive: "Aktywny członek DojoPop — możesz publikować na relay.",
     memberPending: "Status członkostwa: {status}. Skontaktuj się, jeśli to błąd.",
@@ -385,7 +399,7 @@ const pl: Dictionary = {
   practice: {
     title: "Mój trening",
     description:
-      "Twój osobisty log — sesje, serie dni i wideo z relay pod Twoją tożsamością Nostr.",
+      "Your personal training log — sessions, streaks, and clips pulled from the relays under your npub. Proof lives on Nostr as signed short video; DojoPop is one door in, not a silo.",
     disconnect: "Rozłącz",
     signOut: "Wyloguj się",
     prompt:
@@ -401,7 +415,7 @@ const pl: Dictionary = {
   },
   primal: {
     title: "Pobierz Primal",
-    hint: "Darmowa aplikacja Nostr na iPhone i Android — najlepsza do QR i publikacji z telefonu.",
+    hint: "Działa też: Primal na iPhone lub Android — aplikacja społecznościowa z portfelem.",
     downloads: "Pobierz Primal",
     ios: "App Store",
     android: "Google Play",

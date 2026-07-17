@@ -55,6 +55,7 @@ export function Header() {
   const navItems = [
     { href: "/practice", label: t("header.myPractice") },
     { href: "/watch", label: t("header.watch") },
+    { href: "/chat", label: t("header.chat") },
     { href: "/#how-it-works", label: t("header.howItWorks") },
     { href: "/schools", label: t("header.schools") },
     { href: "/#for-instructors", label: t("header.instructors") },

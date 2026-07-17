@@ -12,6 +12,7 @@ const el: Dictionary = {
   header: {
     myPractice: "Η πρακτική μου",
     watch: "Παρακολούθηση",
+    chat: "Συνομιλία",
     howItWorks: "Πώς λειτουργεί",
     schools: "Σχολές",
     instructors: "Εκπαιδευτές",
@@ -40,7 +41,7 @@ const el: Dictionary = {
     title1: "Η πρακτική σου,",
     title2: "στο ανοιχτό διαδίκτυο.",
     ownership:
-      "Τα βίντεό σου ζουν στα δικά σου κλειδιά. Δεν μπορούμε να τα διαγράψουμε. Ούτε η Apple ούτε η Google.",
+      "Each practice clip is a signed Nostr event on the relays — not a row DojoPop locks away. Clients that speak short video can show the same proof without an export or API key.",
     description:
       "Κεντζούτσου, αϊκίντο, 52vtk, HEMA, μακρύ ξίφος, ξιφασκία, κάτα χωρίς όπλο — αν προπονείσαι, το DojoPop είναι για σένα. Βιντεοσκόπησε τη συνεδρία, μοιράσου το βίντεο και δημιούργησε ένα επαληθεύσιμο αρχείο στο Nostr.",
     tagline:
@@ -148,7 +149,7 @@ const el: Dictionary = {
     whatP1:
       "Το Nostr είναι ένα ανοιχτό πρωτόκολλο για ταυτότητα και υπογεγραμμένα μηνύματα — σκέψου το ως ένα φορητό ID προπόνησης που ελέγχεις εσύ. Χωρίς κωδικό DojoPop, χωρίς σύνδεση Facebook. Το npub σου είναι το δημόσιο όνομά σου στο αρχείο· το ιδιωτικό κλειδί μένει στην επέκταση ή την εφαρμογή σου.",
     whatP2:
-      "Το DojoPop χρησιμοποιεί Nostr ώστε τα αρχεία πρακτικής σου να είναι επαληθεύσιμα και δικά σου — ποτέ δεν κρατάμε το ιδιωτικό κλειδί σου.",
+      "When you publish, your session becomes a NIP-71 short video (kind 22) tagged #dojopop and #proofofpractice — signed by your keys, stored on relays, not as a private DojoPop database row. Membership unlocks publishing; the record itself is open. YakiHonne, Primal, nostu.be, Damus (limited), and other video-aware clients can surface the same proof. No walled garden, no “download your data” ritual — your training log can travel with the protocol.",
     setupTitle: "Ρύθμιση πέντε λεπτών",
     setup1Title: "Εγκατάστησε επέκταση ή εφαρμογή",
     setup1Body: "Διάλεξε μία επιλογή παρακάτω. Το Alby είναι το πιο απλό αν δεν είσαι σίγουρος.",
@@ -177,7 +178,7 @@ const el: Dictionary = {
       "Όχι για μητρώα σχολών ή προβολή του αρχείου σου. Η ατομική συνδρομή πληρώνεται με κάρτα (Stripe) ή Lightning — το Lightning είναι προαιρετικό.",
     faqPhoneQ: "Μπορώ να χρησιμοποιήσω το κινητό;",
     faqPhoneA:
-      "Ναι. Τα Alby και Primal έχουν εφαρμογές για κινητά. Για εγγραφή με QR στο ντότζο, χρησιμοποίησε τον browser του κινητού με τον mobile browser της επέκτασης ή τον ενσωματωμένο browser της εφαρμογής όπου υποστηρίζεται.",
+      "Ναι. Τα Alby και Primal έχουν εφαρμογές για κινητά. Στο iPhone, το Clave (clave.casa) λειτουργεί ως απομακρυσμένος υπογραφέας NIP-46 για σύνδεση με QR από browser υπολογιστή. Για εγγραφή με QR στο ντότζο, χρησιμοποίησε τον browser του κινητού με τον mobile browser της επέκτασης ή τον ενσωματωμένο browser της εφαρμογής όπου υποστηρίζεται.",
     faqLostQ: "Έχασα το κινητό — τι τώρα;",
     faqLostA:
       "Αν έκανες αντίγραφο ασφαλείας του nsec (ιδιωτικού κλειδιού) όταν δημιούργησες τον λογαριασμό, μπορείς να το επαναφέρεις. Αλλιώς θα χρειαστείς νέο npub — αντιμετώπισε το backup κλειδιών σαν ζώνη που δεν θέλεις να χάσεις.",
@@ -185,6 +186,7 @@ const el: Dictionary = {
     faqDataA:
       "Είναι ένα ψευδώνυμο δημόσιο ID. Τα μητρώα σχολών το αποθηκεύουν ώστε το ντότζο να καταγράφει παρουσίες. Δες την Πολιτική απορρήτου μας.",
     extAlby: "Το πιο εύκολο για αρχάριους — επέκταση browser + εφαρμογή κινητού",
+    extClave: "Απομακρυσμένος υπογραφέας NIP-46 για iPhone — σκάναρε QR DojoPop από υπολογιστή (clave.casa)",
     extNos2x: "Ελαφριά επέκταση Chrome / Firefox",
     extPrimal: "Εφαρμογή κινητού (iOS / Android) με ενσωματωμένο πορτοφόλι",
     npubHow: "Πώς να βρεις το npub σου →",
@@ -247,7 +249,7 @@ const el: Dictionary = {
   signIn: {
     title: "Σύνδεση στο DojoPop",
     subtitle:
-      "Χωρίς κωδικό — εφάπαξ κωδικός στην εφαρμογή Nostr, επέκταση ή QR.",
+      "Χωρίς κωδικό — στο iPhone συνιστούμε Clave για QR (παρακάτω). Ή εφάπαξ κωδικός, επέκταση ή QR με Primal.",
     methodDm: "Επιλογή 2 — Εφάπαξ κωδικός (κινητό)",
     methodDmHint:
       "Εισάγετε το npub ή τη διεύθυνση NIP-05 (π.χ. εσυ@dojopop.live). Στέλνουμε 6ψήφιο κωδικό με κρυπτογραφημένο DM — ανοίξτε το Primal και επικολλήστε.",
@@ -272,28 +274,31 @@ const el: Dictionary = {
     dmResendCode: "Αποστολή νέου κωδικού",
     signerRequiredTitle: "Σύνδεση υπογραφέα για μεταφόρτωση",
     signerRequiredBody:
-      "Επαληθεύσατε το npub με κωδικό. Για δημοσίευση βίντεο, συνδέστε Primal ή επέκταση με το ίδιο κλειδί.",
+      "Επαληθεύσατε το npub με κωδικό. Για δημοσίευση βίντεο, συνδέστε Clave ή Primal (QR/bunker) ή επέκταση με το ίδιο κλειδί.",
     signerWrongKey: "Αυτός ο υπογραφέας χρησιμοποιεί διαφορετικό npub. Χρησιμοποιήστε το ίδιο κλειδί με την εγγραφή.",
     hideQr: "Απόκρυψη QR",
     methodExtension: "Επιλογή 1 — Επέκταση Nostr (προτείνεται)",
     methodExtensionHint: "Alby, nos2x ή Primal σε αυτόν τον browser. Καλύτερο για δημοσίευση.",
     connectExtension: "Σύνδεση επέκτασης Nostr",
     orDivider: "ή",
-    methodQr: "Επιλογή 3 — QR code",
+    methodQr: "Επιλογή 3 — QR code (Clave ή Primal)",
     methodQrHint:
-      "Υπολογιστής: δείξε QR και σκάναρε με Alby ή Amethyst. Κινητό: σκάναρε bunker:// Nostr Connect.",
+      "Υπολογιστής: δείξε QR και σκάναρε με Clave (iPhone), Primal, Alby ή Amethyst.",
     showQr: "Εμφάνιση QR",
     scanQr: "Σάρωση με κάμερα",
     qrAlt: "QR Nostr Connect",
-    qrScanHint: "Στο κινητό: Primal → Remote Login → σκάναρε αυτό το QR → έγκρινε DojoPop.",
+    qrScanHint: "Στο κινητό: σκάναρε αυτό το QR με Clave ή Primal → έγκρινε DojoPop.",
+    qrClaveHint:
+      "iPhone + υπολογιστής: εγκατάστησε Clave (clave.casa), άνοιξε Connect, σκάναρε αυτό το QR και έγκρινε.",
     qrWaiting: "Αναμονή σύνδεσης από κινητό… (έως 2 λεπτά)",
     qrExpired: "Το QR έληξε. Πάτα Ανανέωση QR.",
     qrRefresh: "Ανανέωση QR",
     qrCopyLink: "Αντιγραφή συνδέσμου για Primal",
     qrCopied: "Αντιγράφηκε",
     qrCopyFailed: "Αποτυχία αντιγραφής.",
-    qrPrimalHint: "Στο Primal χρησιμοποίησε Remote Login (πλευρικό μενού). Κράτα το Primal ανοιχτό μέχρι να συνδεθεί ο browser.",
-    qrRelayOk: "Ο browser συνδέθηκε σε {count} relay — αναμονή Primal…",
+    qrPrimalHint:
+      "Χρησιμοποιείς Primal; Remote Login (πλευρικό μενού) → σκάναρε → κράτα το Primal ανοιχτό μέχρι να συνδεθεί ο browser.",
+    qrRelayOk: "Ο browser συνδέθηκε σε {count} relay — αναμονή κινητού…",
     qrRelayPending: "Σύνδεση σε Nostr relays…",
     bunkerTitle: "Το Primal δεν συνδέεται; Δοκίμασε bunker link",
     bunkerHint:
@@ -325,6 +330,15 @@ const el: Dictionary = {
       "Αυτό το QR είναι μόνο δημόσιο npub — δεν μπορεί να σε συνδέσει. Χρησιμοποίησε Nostr Connect ή bunker://.",
     noAccount: "Δεν είσαι ακόμα μέλος;",
     joinCta: "Εγγραφή στο DojoPop",
+    claveRecommended: "Προτείνεται για iPhone",
+    claveTitle: "Σύνδεση με Clave",
+    claveBody:
+      "Απομακρυσμένος υπογραφέας NIP-46 για iPhone — το ιδιωτικό κλειδί μένει στο Keychain, όχι στον browser. Ιδανικό από laptop ή desktop.",
+    claveStep1: "Εγκατάστησε Clave από App Store (δωρεάν) — clave.casa",
+    claveStep2: "Πάτα Εμφάνιση QR σε αυτή τη σελίδα",
+    claveStep3: "Στο Clave: Connect → σκάναρε το QR → έγκρινε DojoPop",
+    claveGetApp: "Λήψη Clave",
+    claveShowQr: "Εμφάνιση QR",
     signedInAs: "Συνδεδεμένος",
     memberActive: "Ενεργό μέλος DojoPop — μπορείς να δημοσιεύεις στο relay.",
     memberPending: "Κατάσταση συνδρομής: {status}. Επικοινώνησε αν φαίνεται λάθος.",
@@ -385,7 +399,7 @@ const el: Dictionary = {
   practice: {
     title: "Η πρακτική μου",
     description:
-      "Το προσωπικό σου αρχείο προπόνησης — συνεδρίες, σειρές και βίντεο από το relay υπό την ταυτότητά σου στο Nostr.",
+      "Your personal training log — sessions, streaks, and clips pulled from the relays under your npub. Proof lives on Nostr as signed short video; DojoPop is one door in, not a silo.",
     disconnect: "Αποσύνδεση",
     signOut: "Αποσύνδεση",
     prompt:
@@ -401,7 +415,7 @@ const el: Dictionary = {
   },
   primal: {
     title: "Λήψη Primal",
-    hint: "Δωρεάν εφαρμογή Nostr για iPhone και Android — ιδανική για QR και δημοσίευση από κινητό.",
+    hint: "Εναλλακτικά: Primal σε iPhone ή Android — κοινωνική εφαρμογή με ενσωματωμένο πορτοφόλι.",
     downloads: "Λήψη Primal",
     ios: "App Store",
     android: "Google Play",

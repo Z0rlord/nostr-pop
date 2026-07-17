@@ -5,6 +5,7 @@ import { useI18n } from "@/i18n/context";
 
 const extensions = [
   { name: "Alby", url: "https://getalby.com", noteKey: "nostr.extAlby" as const },
+  { name: "Clave", url: "https://clave.casa", noteKey: "nostr.extClave" as const },
   { name: "nos2x", url: "https://github.com/fiatjaf/nos2x", noteKey: "nostr.extNos2x" as const },
   { name: "Primal", url: "https://primal.net", noteKey: "nostr.extPrimal" as const },
 ];

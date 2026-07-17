@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useI18n } from "@/i18n/context";
@@ -11,6 +11,7 @@ import {
   type PracticeIdentity,
 } from "@/lib/practice-identity";
 import { connectViaBunkerInput } from "@/lib/nip46-auth";
+import { ClaveSignInCallout } from "@/components/ClaveSignInCallout";
 import { NostrLoginCallout } from "@/components/NostrLoginCallout";
 import { NostrConnectQrPanel } from "@/components/NostrConnectQrPanel";
 import { NostrQrScanner } from "@/components/NostrQrScanner";
@@ -25,11 +26,20 @@ type Props = {
 export function PracticeSignIn({ onSignedIn, variant = "page" }: Props) {
   const { t } = useI18n();
   const router = useRouter();
+  const qrSectionRef = useRef<HTMLDivElement>(null);
   const [publicNpubInput, setPublicNpubInput] = useState("");
   const [bunkerInput, setBunkerInput] = useState("");
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [qrMode, setQrMode] = useState<"none" | "show" | "scan">("none");
+
+  function openClaveQr() {
+    setError(null);
+    setQrMode("show");
+    requestAnimationFrame(() => {
+      qrSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   function completeSignIn(identity: PracticeIdentity) {
     savePracticeIdentity(identity);
@@ -90,10 +100,13 @@ export function PracticeSignIn({ onSignedIn, variant = "page" }: Props) {
             {t("signIn.title")}
           </h1>
           <p className="mt-3 text-dojo-mist/70">{t("signIn.subtitle")}</p>
+          <div className="mt-6">
+            <ClaveSignInCallout onShowQr={openClaveQr} />
+          </div>
         </>
       )}
 
-      <div className={isPage ? "mt-8" : ""}>
+      <div className={isPage ? "mt-6" : ""}>
         <NostrLoginCallout variant="practice" />
       </div>
 
@@ -137,7 +150,7 @@ export function PracticeSignIn({ onSignedIn, variant = "page" }: Props) {
           <div className="absolute inset-x-0 top-1/2 -z-10 border-t border-white/10" />
         </div>
 
-        <div>
+        <div ref={qrSectionRef}>
           <p className="text-sm font-medium text-white">{t("signIn.methodQr")}</p>
           <p className="mt-1 text-xs text-dojo-mist/55">{t("signIn.methodQrHint")}</p>
           <div className="mt-4">

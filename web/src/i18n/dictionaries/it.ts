@@ -12,6 +12,7 @@ const it: Dictionary = {
   header: {
     myPractice: "La mia pratica",
     watch: "Guarda",
+    chat: "Chat",
     howItWorks: "Come funziona",
     schools: "Scuole",
     instructors: "Istruttori",
@@ -40,7 +41,7 @@ const it: Dictionary = {
     title1: "La tua pratica,",
     title2: "sul web aperto.",
     ownership:
-      "I tuoi video vivono sulle tue chiavi. Non possiamo cancellarli. Né Apple né Google.",
+      "Each practice clip is a signed Nostr event on the relays — not a row DojoPop locks away. Clients that speak short video can show the same proof without an export or API key.",
     description:
       "Kenjutsu, aikido, 52vtk, HEMA, spada lunga, scherma, kata a mani nude — se ti alleni, DojoPop fa per te. Filma la sessione, condividi il video e costruisci un registro verificabile su Nostr.",
     tagline:
@@ -148,7 +149,7 @@ const it: Dictionary = {
     whatP1:
       "Nostr è un protocollo aperto per identità e messaggi firmati — pensalo come un ID di allenamento portatile che controlli tu. Niente password DojoPop, niente login Facebook. Il tuo npub è il tuo nome pubblico sul registro; la chiave privata resta nella tua estensione o app.",
     whatP2:
-      "DojoPop usa Nostr così i tuoi record di pratica sono verificabili e tuoi — non conserviamo mai la tua chiave privata.",
+      "When you publish, your session becomes a NIP-71 short video (kind 22) tagged #dojopop and #proofofpractice — signed by your keys, stored on relays, not as a private DojoPop database row. Membership unlocks publishing; the record itself is open. YakiHonne, Primal, nostu.be, Damus (limited), and other video-aware clients can surface the same proof. No walled garden, no “download your data” ritual — your training log can travel with the protocol.",
     setupTitle: "Configurazione in cinque minuti",
     setup1Title: "Installa un'estensione o un'app",
     setup1Body: "Scegli un'opzione qui sotto. Alby è la più semplice se non sei sicuro.",
@@ -177,7 +178,7 @@ const it: Dictionary = {
       "No per i registri scuola o per vedere il tuo registro. L'iscrizione individuale si paga con carta (Stripe) o Lightning — Lightning è facoltativo.",
     faqPhoneQ: "Posso usare il telefono?",
     faqPhoneA:
-      "Sì. Alby e Primal hanno app mobili. Per l'iscrizione via QR al dojo, usa il browser del telefono con il browser mobile dell'estensione o il browser in-app dove supportato.",
+      "Sì. Alby e Primal hanno app mobili. Su iPhone, Clave (clave.casa) funziona come firmatario remoto NIP-46 per l'accesso QR da browser desktop. Per l'iscrizione via QR al dojo, usa il browser del telefono con il browser mobile dell'estensione o il browser in-app dove supportato.",
     faqLostQ: "Ho perso il telefono — e adesso?",
     faqLostA:
       "Se hai fatto backup del tuo nsec (chiave privata) quando hai creato l'account, puoi ripristinarlo. Altrimenti ti servirà un nuovo npub — tratta il backup delle chiavi come una cintura che non vuoi perdere.",
@@ -185,6 +186,7 @@ const it: Dictionary = {
     faqDataA:
       "È un ID pubblico pseudonimo. I registri scuola lo conservano così il dojo può registrare le presenze. Vedi la nostra Informativa sulla privacy.",
     extAlby: "Il più semplice per principianti — estensione browser + app mobile",
+    extClave: "Firmatario NIP-46 remoto per iPhone — scansiona il QR DojoPop dal desktop (clave.casa)",
     extNos2x: "Estensione leggera per Chrome / Firefox",
     extPrimal: "App mobile (iOS / Android) con wallet integrato",
     npubHow: "Come trovare il tuo npub →",
@@ -247,7 +249,7 @@ const it: Dictionary = {
   signIn: {
     title: "Accedi a DojoPop",
     subtitle:
-      "Nessuna password — codice monouso nell'app Nostr, estensione o QR.",
+      "Nessuna password — su iPhone consigliamo Clave (sotto). Oppure codice monouso, estensione o QR con Primal.",
     methodDm: "Opzione 2 — Codice monouso (telefono)",
     methodDmHint:
       "Inserisci il tuo npub o indirizzo NIP-05 (es. tu@dojopop.live). Inviamo un codice a 6 cifre via DM crittografato — aprilo in Primal e incollalo qui.",
@@ -272,28 +274,31 @@ const it: Dictionary = {
     dmResendCode: "Invia un nuovo codice",
     signerRequiredTitle: "Collega un firmatario per caricare",
     signerRequiredBody:
-      "Hai verificato il npub con un codice. Per pubblicare video, collega Primal o un'estensione con la stessa chiave.",
+      "Hai verificato il npub con un codice. Per pubblicare video, collega Clave o Primal (QR/bunker) o un'estensione con la stessa chiave.",
     signerWrongKey: "Quel firmatario usa un npub diverso. Usa la stessa chiave con cui ti sei iscritto.",
     hideQr: "Nascondi codice QR",
     methodExtension: "Opzione 1 — Estensione Nostr (consigliata)",
     methodExtensionHint: "Alby, nos2x o Primal in questo browser. Ideale per pubblicare.",
     connectExtension: "Connetti estensione Nostr",
     orDivider: "oppure",
-    methodQr: "Opzione 3 — Codice QR",
+    methodQr: "Opzione 3 — Codice QR (Clave o Primal)",
     methodQrHint:
-      "Desktop: mostra un QR e scansionalo con Alby o Amethyst. Mobile: scansiona un codice bunker:// Nostr Connect.",
+      "Desktop: mostra un QR e scansionalo con Clave (iPhone), Primal, Alby o Amethyst.",
     showQr: "Mostra codice QR",
     scanQr: "Scansiona con fotocamera",
     qrAlt: "Codice QR Nostr Connect",
-    qrScanHint: "Sul telefono: Primal → Remote Login → scansiona questo QR → approva DojoPop.",
+    qrScanHint: "Sul telefono: scansiona questo QR con Clave o Primal → approva DojoPop.",
+    qrClaveHint:
+      "iPhone + desktop: installa Clave (clave.casa), apri Connect, scansiona questo QR e approva.",
     qrWaiting: "In attesa del telefono… (fino a 2 minuti)",
     qrExpired: "QR scaduto. Tocca Aggiorna QR.",
     qrRefresh: "Aggiorna QR",
     qrCopyLink: "Copia link per Primal",
     qrCopied: "Copiato",
     qrCopyFailed: "Impossibile copiare.",
-    qrPrimalHint: "In Primal usa Remote Login (menu laterale). Tieni Primal aperto finché il browser non accede.",
-    qrRelayOk: "Browser connesso a {count} relay — in attesa di Primal…",
+    qrPrimalHint:
+      "Usi Primal? Remote Login (menu laterale) → scansiona → tieni Primal aperto finché il browser non accede.",
+    qrRelayOk: "Browser connesso a {count} relay — in attesa del telefono…",
     qrRelayPending: "Connessione ai relay Nostr…",
     bunkerTitle: "Primal non si connette? Prova il link bunker",
     bunkerHint:
@@ -325,6 +330,15 @@ const it: Dictionary = {
       "Quel QR è solo un npub pubblico — non può effettuare l'accesso. Usa Nostr Connect o scansiona un codice bunker://.",
     noAccount: "Non sei ancora membro?",
     joinCta: "Iscriviti a DojoPop",
+    claveRecommended: "Consigliato per iPhone",
+    claveTitle: "Accedi con Clave",
+    claveBody:
+      "Firmatario NIP-46 dedicato per iPhone — la chiave privata resta nel Keychain, non nel browser. Ideale da laptop o desktop.",
+    claveStep1: "Installa Clave dall'App Store (gratis) — clave.casa",
+    claveStep2: "Tocca Mostra codice QR in questa pagina",
+    claveStep3: "In Clave: Connect → scansiona il QR → approva DojoPop",
+    claveGetApp: "Scarica Clave",
+    claveShowQr: "Mostra codice QR",
     signedInAs: "Accesso effettuato",
     memberActive: "Membro DojoPop attivo — puoi pubblicare sul relay.",
     memberPending: "Stato abbonamento: {status}. Contatta il supporto se non è corretto.",
@@ -385,7 +399,7 @@ const it: Dictionary = {
   practice: {
     title: "La mia pratica",
     description:
-      "Il tuo registro di allenamento personale — sessioni, serie consecutive e video recuperati dal relay sotto la tua identità Nostr.",
+      "Your personal training log — sessions, streaks, and clips pulled from the relays under your npub. Proof lives on Nostr as signed short video; DojoPop is one door in, not a silo.",
     disconnect: "Disconnetti",
     signOut: "Esci",
     prompt:
@@ -401,7 +415,7 @@ const it: Dictionary = {
   },
   primal: {
     title: "Scarica Primal",
-    hint: "App Nostr gratuita per iPhone e Android — ideale per QR e pubblicare dal telefono.",
+    hint: "Funziona anche Primal su iPhone o Android — app social con wallet integrato.",
     downloads: "Scarica Primal",
     ios: "App Store",
     android: "Google Play",

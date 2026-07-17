@@ -5,11 +5,20 @@
  */
 import { readFile, writeFile } from "fs/promises";
 import http from "http";
-import { nip19 } from "nostr-tools";
+import { getPublicKey, nip19 } from "nostr-tools";
+import { hexToBytes } from "nostr-tools/utils";
 
 const ADMIN_HEX =
   process.env.RELAY_ADMIN_PUBKEY_HEX ||
   "b3d8544ddd5896f75ef66c210f5c0d6ded9f7925163ebcbc89e678bdc1e48c6a";
+/** Fixed relay publishers (Cordn coordinator + group admin). */
+const EXTRA_PUBKEYS_HEX = (
+  process.env.RELAY_EXTRA_PUBKEYS_HEX ||
+  "d969813a5c0e3e65dad03fc9e1d2db5933dda8b307ddce474e8da60b4e288259,9b8534d1e4338fa4292efb423ac1c2f2083fb72bf8e027eb2d312e76b0c7d217"
+)
+  .split(",")
+  .map((pk) => pk.trim().toLowerCase())
+  .filter((pk) => /^[0-9a-f]{64}$/.test(pk));
 const MEMBERS_PATH =
   process.env.MEMBERSHIP_DATA_PATH ||
   process.env.MEMBERS_JSON_PATH ||
@@ -28,11 +37,42 @@ function decodeNpub(npub) {
   return Buffer.from(data).toString("hex").toLowerCase();
 }
 
+function pubkeyFromSecret(raw) {
+  if (!raw?.trim()) return null;
+  const t = raw.trim();
+  let sk;
+  if (t.startsWith("nsec1")) {
+    const decoded = nip19.decode(t);
+    if (decoded.type !== "nsec") return null;
+    sk = typeof decoded.data === "string" ? hexToBytes(decoded.data) : decoded.data;
+  } else {
+    sk = hexToBytes(t.replace(/^0x/, ""));
+  }
+  return getPublicKey(sk).toLowerCase();
+}
+
 async function loadActivePubkeys() {
   const raw = await readFile(MEMBERS_PATH, "utf8");
   const store = JSON.parse(raw);
   const seen = new Set([ADMIN_HEX.toLowerCase()]);
   const ordered = [ADMIN_HEX.toLowerCase()];
+
+  const extraHex = [...EXTRA_PUBKEYS_HEX];
+  // nostu.be practice mirrors + DM login bot (primary)
+  const loginBot = pubkeyFromSecret(process.env.DOJOPOP_LOGIN_NSEC);
+  if (loginBot) extraHex.push(loginBot);
+  // optional legacy admin publisher
+  const dojoAdmin = pubkeyFromSecret(
+    process.env.DOJOPOP_ADMIN_NSEC || process.env.DOJO_ADMIN_PRIVATE_KEY
+  );
+  if (dojoAdmin) extraHex.push(dojoAdmin);
+
+  for (const hex of extraHex) {
+    if (!seen.has(hex)) {
+      seen.add(hex);
+      ordered.push(hex);
+    }
+  }
 
   for (const m of store.members || []) {
     if (m.status !== "active") continue;

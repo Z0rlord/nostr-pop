@@ -46,6 +46,13 @@ export RELAY_CONFIG_PATH="/opt/dojopop/relay/config.toml"
 export RELAY_CONTAINER_NAME="dojopop-relay"
 export DOCKER_SOCKET="/var/run/docker.sock"
 
+if [[ -f /opt/dojopop/web/.env ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source /opt/dojopop/web/.env
+  set +a
+fi
+
 if ! command -v node >/dev/null; then
   echo "ERROR: node required on relay-2"
   exit 1

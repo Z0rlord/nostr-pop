@@ -39,12 +39,19 @@ Set via Doppler project `dojopop`, config `prd_zorie`:
 | `STRIPE_PRICE_MEMBERSHIP` | recommended | $9.99/mo Price ID (auto-created if unset) |
 | `LIGHTNING_MEMBERSHIP_SATS` | no | Default `10000` sats |
 | `NWC_CONNECTION_SECRET` | Lightning | `nostr+walletconnect://…` from Alby Hub or Account |
+| `STREAK_NWC_CONNECTION_SECRET` | Streak sats (optional) | Dedicated NWC with `pay_invoice` (falls back to `NWC_CONNECTION_SECRET`) |
+| `STREAK_PAYOUT_CRON_SECRET` | Streak sats cron | Shared secret for `POST /api/ops/streak-payouts` |
+| `STREAK_PAYOUT_DRY_RUN` | Streak sats | Default `1` (no real pays); set `0` to enable |
+| `STREAK_SATS_AMOUNT` | Streak sats | Default `21` |
+| `STREAK_SATS_MIN_STREAK` | Streak sats | Default `1` |
+| `STREAK_SATS_DAILY_BUDGET` | Streak sats | Default `10000` |
 | `MEMBERSHIP_DATA_DIR` | no | Default `./data` (Docker: `/app/data`) |
 | `RELAY_CONFIG_PATH` | prod | `/relay/config.toml` (mounted from relay-2) |
 | `RELAY_CONTAINER_NAME` | prod | `dojopop-relay` |
 | `DOCKER_GID` | prod | Host docker group id for container restart |
-| `DOJOPOP_LOGIN_NSEC` | DM login | Dedicated login-bot key (not founder `NOSTR_NSEC`) |
+| `DOJOPOP_LOGIN_NSEC` | DM login + nostu.be | Dedicated login-bot key (not founder `NOSTR_NSEC`); also signs practice nostu.be mirrors |
 | `DOJOPOP_LOGIN_NPUB` | DM login | Login bot npub (optional; derived from nsec) |
+| `DOJOPOP_ADMIN_NSEC` | optional legacy | Transition fallback for nostu.be mirrors only if LOGIN unset (`DOJO_ADMIN_PRIVATE_KEY` also) |
 | `DM_LOGIN_SECRET` | DM login | HMAC secret for login session tokens |
 | `NEXT_PUBLIC_CDN_URL` | no | CDN origin for media URLs (defaults to Blossom URL) |
 | `FILM_YOGA_SUTRA_TRAILER_VIMEO_ID` | film | Vimeo numeric ID for trailer embed (preferred) |
@@ -60,6 +67,15 @@ Set via Doppler project `dojopop`, config `prd_zorie`:
 Legacy (buy tier only): `FILM_YOGA_SUTRA_SATS`, `FILM_YOGA_SUTRA_STRIPE_PRICE_ID`, `FILM_YOGA_SUTRA_STRIPE_PRICE_CENTS`.
 
 **Lightning:** NWC (NIP-47) via `NWC_CONNECTION_SECRET`. See [docs/lightning-nwc.md](../docs/lightning-nwc.md).
+
+**Streak sats:** daily micro-rewards for active members with a practice streak. See [docs/sessions/2026-07-17-streak-sats.md](../docs/sessions/2026-07-17-streak-sats.md). Cron:
+
+```bash
+curl -sS -X POST https://dojopop.live/api/ops/streak-payouts \
+  -H "x-streak-payout-secret: $STREAK_PAYOUT_CRON_SECRET" \
+  -H 'Content-Type: application/json' \
+  -d '{"dryRun":true}'
+```
 
 ## Local development
 

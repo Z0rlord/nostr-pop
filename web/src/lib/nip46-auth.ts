@@ -13,8 +13,9 @@ import { bytesToHex, hexToBytes } from "nostr-tools/utils";
 import { appUrl } from "@/lib/constants";
 import { throwIfAborted, withTimeout } from "@/lib/promise-timeout";
 
-/** Relays Primal + most NIP-46 signers use. Never use relay.dojopop.live (blocks kind 24133). */
+/** Relays NIP-46 signers use (Primal, Clave, bunker46). Never relay.dojopop.live (blocks kind 24133). */
 export const NIP46_RELAYS = [
+  "wss://relay.powr.build",
   "wss://relay.primal.net",
   "wss://purplepag.es",
   "wss://nos.lol",
@@ -58,11 +59,29 @@ export function activeNip46Relays(
   return active.length > 0 ? active : connected;
 }
 
-function assertPrimalRelayReachable(connected: string[]): void {
-  const primalUp = connected.some(
-    (relay) => normalizeRelayUrl(relay) === normalizeRelayUrl(PRIMAL_NIP46_RELAY)
-  );
-  if (!primalUp) {
+/** True when the signer expects traffic on relay.primal.net (Primal remote login). */
+function signerUsesPrimalRelay(signerRelays: string[]): boolean {
+  const primal = normalizeRelayUrl(PRIMAL_NIP46_RELAY);
+  return signerRelays.some((relay) => normalizeRelayUrl(relay) === primal);
+}
+
+/** Require at least one signer relay reachable; Primal-only hint when that relay is in the set. */
+function assertSignerRelaysReachable(
+  connected: string[],
+  signerRelays: string[]
+): void {
+  const connectedSet = new Set(connected.map(normalizeRelayUrl));
+  const normalizedSigner = signerRelays.map(normalizeRelayUrl);
+  const anySignerRelayUp = normalizedSigner.some((relay) => connectedSet.has(relay));
+  if (normalizedSigner.length > 0 && !anySignerRelayUp) {
+    throw new Error(
+      "Could not reach your remote signer's Nostr relay(s) from this browser. Try another network, disable ad blockers or VPN, then try again."
+    );
+  }
+  if (
+    signerUsesPrimalRelay(signerRelays) &&
+    !connectedSet.has(normalizeRelayUrl(PRIMAL_NIP46_RELAY))
+  ) {
     throw new Error(
       "Could not reach relay.primal.net from this browser. Primal signing needs that relay — disable ad blockers or VPN, try another network, then tap Upload again — or sign out and use Remote Login."
     );
@@ -280,7 +299,7 @@ export async function waitForNostrConnectSession(
       "Could not reach Nostr relays from this browser. Try another network, disable ad blockers, or use the bunker link option."
     );
   }
-  assertPrimalRelayReachable(connected);
+  assertSignerRelaysReachable(connected, relays);
 
   try {
     const signer = await new Promise<BunkerSigner>((resolve, reject) => {
@@ -297,7 +316,7 @@ export async function waitForNostrConnectSession(
             new Error(
               relayStatus.connected.length === 0
                 ? "Could not reach Nostr relays from this browser. Try another network or use the bunker link option."
-                : "Timed out waiting for Primal to approve. Refresh the QR and try again."
+                : "Timed out waiting for your phone to approve. Refresh the QR and try again."
             )
           )
         );
@@ -381,7 +400,7 @@ export async function connectViaBunkerInput(
         "Could not reach Nostr relays from this browser. Try another network or use the QR login option."
       );
     }
-    assertPrimalRelayReachable(connected);
+    assertSignerRelaysReachable(connected, relays);
     const activeRelays = activeNip46Relays(connected, relays);
     const signer = BunkerSigner.fromBunker(
       clientSecretKey,
@@ -472,7 +491,7 @@ export async function withNip46Signer<T>(
       "Could not reach Nostr relays from this browser. Check your network or ad blockers, then try again."
     );
   }
-  assertPrimalRelayReachable(connected);
+  assertSignerRelaysReachable(connected, relays);
 
   const activeRelays = activeNip46Relays(connected, relays);
   const signer = openBunkerSigner(

@@ -134,6 +134,7 @@ export function NostrConnectQrPanel({ onConnected, onError }: Props) {
         </div>
       )}
       <p className="mt-4 text-sm text-dojo-mist/80">{t("signIn.qrScanHint")}</p>
+      <p className="mt-2 text-xs text-dojo-mist/55">{t("signIn.qrClaveHint")}</p>
       {waiting ? (
         <p className="mt-2 text-xs text-dojo-gold">{t("signIn.qrWaiting")}</p>
       ) : (

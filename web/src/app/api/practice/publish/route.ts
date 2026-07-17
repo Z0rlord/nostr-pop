@@ -6,6 +6,7 @@ import {
   assertCanUploadPracticeVideo,
   PracticeUploadLimitError,
 } from "@/lib/practice-upload-limit";
+import { mirrorPracticeToNostube } from "@/lib/nostube-mirror";
 import { publishEventToRelay } from "@/lib/relay-publish";
 
 export const runtime = "nodejs";
@@ -39,6 +40,11 @@ export async function POST(req: Request) {
     }
 
     await publishEventToRelay(event);
+
+    void mirrorPracticeToNostube(event).catch((err) => {
+      console.error("nostu.be mirror failed:", err);
+    });
+
     return NextResponse.json({ ok: true, id: event.id });
   } catch (e) {
     if (e instanceof PracticeUploadLimitError) {

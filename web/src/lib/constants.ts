@@ -29,6 +29,9 @@ export const PRIMAL_IOS_URL = "https://apps.apple.com/app/primal/id1673134518";
 export const PRIMAL_ANDROID_URL =
   "https://play.google.com/store/apps/details?id=net.primal.android.primal";
 
+/** iOS NIP-46 remote signer — recommended for desktop-browser sign-in. */
+export const CLAVE_URL = "https://clave.casa";
+
 export function appUrl(): string {
   return (
     process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ||

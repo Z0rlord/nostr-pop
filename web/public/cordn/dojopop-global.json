@@ -1,0 +1,18 @@
+{
+  "alias": "dojopop-global",
+  "gid": "efe026b2-5eae-4859-b6ca-0c96307465a9",
+  "name": "DojoPop Global",
+  "description": "Encrypted global channel for DojoPop practitioners",
+  "icon": "🥋",
+  "coordinatorPubkey": "d969813a5c0e3e65dad03fc9e1d2db5933dda8b307ddce474e8da60b4e288259",
+  "relays": [
+    "wss://relay.dojopop.live",
+    "wss://relay.primal.net",
+    "wss://relay.damus.io",
+    "wss://nos.lol"
+  ],
+  "adminPubkey": "9b8534d1e4338fa4292efb423ac1c2f2083fb72bf8e027eb2d312e76b0c7d217",
+  "adminNpub": "npub1nwznf50yxw86g2fwldpr4swz7gyrldetlrsz06edxyh8dvx86gts3wvyxg",
+  "createdAt": "2026-07-09T05:53:54.266Z",
+  "sharePath": "/chat-app/chat/efe026b2-5eae-4859-b6ca-0c96307465a9?c=nprofile1qyv8wumn8ghj7un9d3shjtnyda4x7ur0wqhxc6tkv5q3vamnwvaz7tmjv4kxz7fwwpexjmtpdshxuet5qy28wumn8ghj7un9d3shjtnyv9kh2uewd9hszrthwden5te0dehhxtnvdakqqgxedxqn5hqw8eja45ple8sa9k6ex0w63vc8mh8ywn5d5c95u2yztyvu9ryn&m=eyJuYW1lIjoiRG9qb1BvcCBHbG9iYWwiLCJpY29uIjoi8J-liyJ9"
+}

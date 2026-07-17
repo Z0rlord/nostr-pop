@@ -10,6 +10,7 @@ const en = {
   header: {
     myPractice: "My practice",
     watch: "Watch",
+    chat: "Chat",
     howItWorks: "How it works",
     schools: "Schools",
     instructors: "Instructors",
@@ -38,7 +39,7 @@ const en = {
     title1: "Your practice,",
     title2: "on the open web.",
     ownership:
-      "Your videos live on your own keys. We can't delete them. Neither can Apple or Google.",
+      "Each practice clip is a signed Nostr event on the relays — not a row DojoPop locks away. Clients that speak short video can show the same proof without an export or API key.",
     description:
       "Kenjutsu, aikido, 52vtk, HEMA, longsword, fencing, empty-hand kata — if you train, DojoPop is for you. Join, film a short session, publish — your verifiable log on Nostr.",
     tagline:
@@ -148,7 +149,7 @@ const en = {
     whatP1:
       "Nostr is an open protocol for identity and signed messages — think of it as a portable training ID you control. No DojoPop password, no Facebook login. Your npub is your public name on the log; your private key stays in your extension or app.",
     whatP2:
-      "DojoPop uses Nostr so your practice records are verifiable and yours — we never hold your private key.",
+      "When you publish, your session becomes a NIP-71 short video (kind 22) tagged #dojopop and #proofofpractice — signed by your keys, stored on relays, not as a private DojoPop database row. Membership unlocks publishing; the record itself is open. YakiHonne, Primal, nostu.be, Damus (limited), and other video-aware clients can surface the same proof. No walled garden, no “download your data” ritual — your training log can travel with the protocol.",
     setupTitle: "Five-minute setup",
     setup1Title: "Install an extension or app",
     setup1Body: "Pick one option below. Alby is the simplest if you're unsure.",
@@ -177,7 +178,7 @@ const en = {
       "No for school rosters or viewing your log. Solo membership is paid via card (Stripe) or Lightning — Lightning is optional.",
     faqPhoneQ: "Can I use my phone?",
     faqPhoneA:
-      "Yes. Alby and Primal have mobile apps. For QR join at the dojo, use your phone's browser with the extension's mobile browser or in-app browser where supported.",
+      "Yes. Alby and Primal have mobile apps. On iPhone, Clave (clave.casa) works as a dedicated NIP-46 signer for QR sign-in from a desktop browser. For QR join at the dojo, use your phone's browser with the extension's mobile browser or in-app browser where supported.",
     faqLostQ: "I lost my phone — what now?",
     faqLostA:
       "If you backed up your nsec (private key) when creating the account, you can restore. If not, you'll need a new npub — treat key backup like a belt you don't want to lose.",
@@ -185,6 +186,7 @@ const en = {
     faqDataA:
       "It's a pseudonymous public ID. School rosters store it so the dojo can log attendance. See our Privacy Policy.",
     extAlby: "Easiest for beginners — browser extension + mobile app",
+    extClave: "iPhone NIP-46 remote signer — scan DojoPop QR from desktop (clave.casa)",
     extNos2x: "Lightweight Chrome / Firefox extension",
     extPrimal: "Mobile app (iOS / Android) with built-in wallet",
     npubHow: "How to find your npub →",
@@ -247,7 +249,7 @@ const en = {
   signIn: {
     title: "Sign in to DojoPop",
     subtitle:
-      "No password — sign in with a one-time code in your Nostr app, a browser extension, or QR.",
+      "No password — on iPhone, sign in with Clave (recommended below). Or use a one-time code, browser extension, or QR with Primal.",
     methodDm: "Option 2 — One-time code (best on phone)",
     methodDmHint:
       "Enter your npub or NIP-05 address (e.g. you@dojopop.live). We send a 6-digit code as an encrypted DM from DojoPop — open Primal, Damus, or Amethyst and paste the code here.",
@@ -272,7 +274,7 @@ const en = {
     dmResendCode: "Send a new code",
     signerRequiredTitle: "Connect a signer to upload",
     signerRequiredBody:
-      "You proved your npub with a login code. To publish videos, connect Primal (QR or bunker link) or a browser extension with the same key.",
+      "You proved your npub with a login code. To publish videos, connect Clave or Primal (QR or bunker link) or a browser extension with the same key.",
     signerWrongKey:
       "That signer uses a different npub than you signed in with. Use the same key you joined with.",
     hideQr: "Hide QR code",
@@ -280,14 +282,16 @@ const en = {
     methodExtensionHint: "Alby, nos2x, or Primal in this browser. Best for publishing.",
     connectExtension: "Connect Nostr extension",
     orDivider: "or",
-    methodQr: "Option 3 — QR code",
+    methodQr: "Option 3 — QR code (Clave or Primal)",
     methodQrHint:
-      "Desktop: show a QR code and scan with Primal, Alby, or Amethyst on your phone.",
+      "Desktop: show a QR code and scan with Clave (iPhone), Primal, Alby, or Amethyst on your phone.",
     showQr: "Show QR code",
     scanQr: "Scan with camera",
     qrAlt: "Nostr Connect QR code",
     qrScanHint:
-      "On your phone: Primal → Remote Login → scan this QR → approve DojoPop.",
+      "On your phone: scan this QR with Clave or Primal → approve DojoPop.",
+    qrClaveHint:
+      "iPhone + desktop browser: install Clave (clave.casa), open Connect, scan this QR, tap approve.",
     qrWaiting: "Waiting for your phone to connect… (up to 2 minutes)",
     qrExpired: "This QR expired. Tap Refresh QR to try again.",
     qrRefresh: "Refresh QR",
@@ -295,8 +299,8 @@ const en = {
     qrCopied: "Copied",
     qrCopyFailed: "Could not copy — select and copy the link manually.",
     qrPrimalHint:
-      "In Primal, use Remote Login (side menu). Keep Primal open until the browser signs in.",
-    qrRelayOk: "Browser connected to {count} Nostr relay(s) — waiting for Primal…",
+      "Using Primal instead? Remote Login (side menu) → scan → keep Primal open until the browser signs in.",
+    qrRelayOk: "Browser connected to {count} Nostr relay(s) — waiting for your phone…",
     qrRelayPending: "Connecting to Nostr relays…",
     bunkerTitle: "Primal not connecting? Try bunker link",
     bunkerHint:
@@ -328,6 +332,15 @@ const en = {
       "That QR is only a public npub — it cannot sign you in. Use Nostr Connect or scan a bunker:// code.",
     noAccount: "Not a member yet?",
     joinCta: "Join DojoPop",
+    claveRecommended: "Recommended for iPhone",
+    claveTitle: "Sign in with Clave",
+    claveBody:
+      "Dedicated NIP-46 signer for iPhone — your private key stays in the Keychain, not in the browser. Ideal when you're on a laptop or desktop.",
+    claveStep1: "Install Clave from the App Store (free) — clave.casa",
+    claveStep2: "Tap Show QR code on this page",
+    claveStep3: "In Clave: Connect → scan the QR → approve DojoPop",
+    claveGetApp: "Get Clave",
+    claveShowQr: "Show QR code",
     signedInAs: "Signed in",
     memberActive: "Active DojoPop member — you can publish to the relay.",
     memberPending: "Membership status: {status}. Contact support if this looks wrong.",
@@ -388,7 +401,7 @@ const en = {
   practice: {
     title: "My practice",
     description:
-      "Your personal training log — sessions, streaks, and videos pulled from the relay under your Nostr identity.",
+      "Your personal training log — sessions, streaks, and clips pulled from the relays under your npub. Proof lives on Nostr as signed short video; DojoPop is one door in, not a silo.",
     disconnect: "Disconnect",
     signOut: "Sign out",
     prompt:
@@ -404,7 +417,7 @@ const en = {
   },
   primal: {
     title: "Get Primal",
-    hint: "Free Nostr app for iPhone and Android — best for QR sign-in and posting from your phone.",
+    hint: "Also works: Primal on iPhone or Android — social app with built-in wallet.",
     downloads: "Get Primal",
     ios: "App Store",
     android: "Google Play",

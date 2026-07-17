@@ -10,6 +10,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "==> Deploying web app to ${HOST}:${REMOTE_DIR}"
 
+CHAT_UI_BUILD="${CHAT_UI_BUILD:-1}"
+if [[ "$CHAT_UI_BUILD" == "1" ]]; then
+  echo "==> Building Cordn chat UI (chat-ui/build.sh)"
+  "$SCRIPT_DIR/../chat-ui/build.sh"
+fi
+
 ssh -o BatchMode=yes "$HOST" "mkdir -p '$REMOTE_DIR'"
 
 rsync -az --delete \

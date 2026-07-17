@@ -8,6 +8,8 @@ export type NostrProfile = {
   picture?: string;
   nip05?: string;
   about?: string;
+  /** Lightning address (user@domain) from kind-0 */
+  lud16?: string;
 };
 
 function parseProfileContent(event: Event): NostrProfile {
@@ -24,6 +26,7 @@ function parseProfileContent(event: Event): NostrProfile {
       picture: typeof data.picture === "string" ? data.picture : undefined,
       nip05: typeof data.nip05 === "string" ? data.nip05 : undefined,
       about: typeof data.about === "string" ? data.about : undefined,
+      lud16: typeof data.lud16 === "string" ? data.lud16.trim() : undefined,
     };
   } catch {
     return {};

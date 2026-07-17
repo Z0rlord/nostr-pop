@@ -6,3 +6,6 @@ out/
 !.env.example
 data/members.json
 data/lightning-invoices.json
+data/streak-payouts.json
+data/.streak-payouts.lock
+public/chat-app/

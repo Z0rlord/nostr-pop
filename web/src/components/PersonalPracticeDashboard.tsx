@@ -244,6 +244,15 @@ export function PersonalPracticeDashboard({
         />
       </div>
 
+      {personal.currentStreak > 0 && (
+        <p className="text-sm text-dojo-mist/60">
+          Streak reward: active members earn a small daily sats tip when they
+          keep practicing (set a Lightning address on your Nostr profile).
+          Current streak: {personal.currentStreak} day
+          {personal.currentStreak === 1 ? "" : "s"}.
+        </p>
+      )}
+
       {sessions.length === 0 ? (
         <div className="card-glow rounded-2xl border border-dojo-gold/20 bg-dojo-gold/5 p-8 text-center">
           <h2 className="font-display text-xl text-white">No sessions yet</h2>
