@@ -1352,6 +1352,38 @@
     "video_sha256": "0d2c10c97e075f55b2c4257cc9413be01360793840f271ccd4a26c5c97fdc4b5",
     "video_url": "https://blossom.yakihonne.com/0d2c10c97e075f55b2c4257cc9413be01360793840f271ccd4a26c5c97fdc4b5.mp4"
   },
+  "RsxrnQkiRHk": {
+    "event_id": "539895c21a5adc1e70971fd5d315d11445071e04b89dfca005b85a1e31c64149",
+    "kind": 22,
+    "mirror_id": "ce576eb1c8aaeddc2078195f2604ffcdc08b71cf2efe6b537d3ba5ebd361e5a9",
+    "mirror_relays_accepted": [
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "nostube_mirror_id": "37aaf29c9a604a168b66ecb4c21c4be3fad7dfd02505ced0451fd1a14aff891e",
+    "nostube_relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nos.lol"
+    ],
+    "published_at": 1784519740,
+    "relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "thumb_url": "https://blossom.dojopop.live/9f41bad45944358e5b1e08d0dc3da45b26585cca57262656ecabf3d47fd85db8.jpeg",
+    "title": "Day 1346 thank you @tenshinryu",
+    "video_sha256": "463e391765579d1e11ee4bac7823734feb70feabe7c0b2e8d58c3c928cd755c4",
+    "video_url": "https://blossom.dojopop.live/463e391765579d1e11ee4bac7823734feb70feabe7c0b2e8d58c3c928cd755c4.mp4"
+  },
   "RtPwxW0ec4g": {
     "event_id": "49be9032ce70512d7b4e04aee7f00507651848db8863f3de94b8df88a83ba003",
     "kind": 22,
@@ -2508,6 +2540,37 @@
     "title": "Day 1284 thank you @tenshinryu",
     "video_sha256": "cf2b8652e1723eb1f5f093da6883f6a8fbb96fca7f1229481006446c07d750fa",
     "video_url": "https://blossom.yakihonne.com/cf2b8652e1723eb1f5f093da6883f6a8fbb96fca7f1229481006446c07d750fa.mp4"
+  },
+  "tPDQf6X-eWU": {
+    "event_id": "8cd0ca58c937995d62d10ff57dc54311dcd06e8d4c98419648b7b3208f3e1947",
+    "kind": 22,
+    "mirror_id": "78d4ae5259d14e33c5b066ccdacfff2387945a70b6a99a59a30c595c29941a3c",
+    "mirror_relays_accepted": [
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://nostr-01.yakihonne.com",
+      "wss://nos.lol"
+    ],
+    "nostube_mirror_id": "f87839b50125eb2a515db0340966773c27a97470ffcbc0da2bec1d2526dd1655",
+    "nostube_relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://relay.primal.net",
+      "wss://relay.damus.io",
+      "wss://nos.lol"
+    ],
+    "published_at": 1784519690,
+    "relays_accepted": [
+      "ws://relay-2:7777",
+      "wss://relay.dojopop.live",
+      "wss://nostr-01.yakihonne.com",
+      "wss://relay.primal.net",
+      "wss://nos.lol"
+    ],
+    "thumb_url": "https://blossom.dojopop.live/3a9c2cd97c33c47f5d6467bbdce6d1f535db208952eb71ffaaf2191d5c97d46c.jpeg",
+    "title": "Day 1345 thank you @tenshinryu #dojopop",
+    "video_sha256": "8a3ad9e0cc846aa9d8cebf9db4aae377bfa1c3f974d66abfecd68efcc3fcff0b",
+    "video_url": "https://blossom.dojopop.live/8a3ad9e0cc846aa9d8cebf9db4aae377bfa1c3f974d66abfecd68efcc3fcff0b.mp4"
   },
   "tkgE4dYsP1I": {
     "event_id": "0d663610c3be81ed7626f1c597ee2d2b2ceb73c91257f9100f951bb29076a223",
