@@ -1,15 +1,15 @@
 import { BLOSSOM_URL } from "@/lib/constants";
-import { siteUrl } from "@/lib/media-url";
+import { ogImageOrigin } from "@/lib/media-url";
 
 const BLOSSOM_HOST = new URL(BLOSSOM_URL).hostname;
 
-/** Same-origin OG image URL — Facebook fetches this, we proxy Blossom internally. */
+/** OG image path — Facebook fetches via DNS-only og.dojopop.live; we proxy Blossom internally. */
 export function practiceOgImagePath(eventId: string): string {
   return `/og/practice/${eventId}.jpg`;
 }
 
 export function practiceOgImageUrl(eventId: string): string {
-  return `${siteUrl()}${practiceOgImagePath(eventId)}`;
+  return `${ogImageOrigin()}${practiceOgImagePath(eventId)}`;
 }
 
 export function toInternalBlossomUrl(publicUrl: string): string {

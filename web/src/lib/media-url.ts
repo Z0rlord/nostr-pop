@@ -13,9 +13,23 @@ export function siteUrl(): string {
   return raw;
 }
 
+/**
+ * DNS-only origin for og:image (bypasses Cloudflare AI Crawl Control).
+ * meta-externalagent gets 403 on proxied *.dojopop.live; og.dojopop.live is grey-cloud → origin.
+ */
+export function ogImageOrigin(): string {
+  const raw =
+    process.env.NEXT_PUBLIC_OG_IMAGE_ORIGIN?.replace(/\/$/, "") ||
+    "https://og.dojopop.live";
+  if (raw.startsWith("http://") && !raw.includes("localhost") && !raw.includes("127.0.0.1")) {
+    return raw.replace("http://", "https://");
+  }
+  return raw;
+}
+
 /** Default link-preview image (Facebook requires og:image). */
 export function defaultOgImageUrl(): string {
-  return `${siteUrl()}/hero-dojo.jpg`;
+  return `${ogImageOrigin()}/hero-dojo.jpg`;
 }
 
 const VIDEO_EXT = /\.(qt|mov|mp4|webm|m4v|avi|mkv)(\?|$)/i;
@@ -31,10 +45,14 @@ export function isOgImageUrl(url: string): boolean {
   }
 }
 
-/** Meta's image crawler (meta-externalagent) is blocked on dojopop.live by Cloudflare AI Crawl Control. */
+/**
+ * Meta's image crawler (meta-externalagent) is blocked on Cloudflare-proxied *.dojopop.live
+ * (AI Crawl Control). External CDNs and DNS-only og.dojopop.live are reachable.
+ */
 function isMetaAccessibleOgHost(url: string): boolean {
   try {
     const host = new URL(url).hostname.toLowerCase();
+    if (host === "og.dojopop.live") return true;
     if (host === "dojopop.live" || host.endsWith(".dojopop.live")) return false;
     return true;
   } catch {
@@ -51,7 +69,7 @@ export function ogImageForPracticeVideo(
 ): { url: string; width?: number; height?: number } {
   const normalized = normalizeMediaUrl(thumbUrl);
   if (normalized && isOgImageUrl(normalized) && isMetaAccessibleOgHost(normalized)) {
-    // Direct CDN URL — Meta can fetch hosts outside dojopop.live (e.g. blossom.yakihonne.com).
+    // Direct CDN URL — Meta can fetch hosts outside proxied dojopop.live (e.g. blossom.yakihonne.com).
     return {
       url: normalized,
       width: OG_VIDEO_THUMB_WIDTH,
@@ -59,9 +77,9 @@ export function ogImageForPracticeVideo(
     };
   }
   if (normalized && isOgImageUrl(normalized)) {
-    // Same-zone Blossom/CDN — proxy on dojopop.live until Cloudflare allows meta-externalagent.
+    // Same-zone Blossom/CDN — serve via DNS-only og.dojopop.live proxy (Meta-reachable).
     return {
-      url: `${siteUrl()}/og/practice/${eventId}.jpg`,
+      url: `${ogImageOrigin()}/og/practice/${eventId}.jpg`,
       width: OG_VIDEO_THUMB_WIDTH,
       height: OG_VIDEO_THUMB_HEIGHT,
     };

@@ -17,9 +17,10 @@ Partial mitigation shipped: `ogImageForPracticeVideo()` in `web/src/lib/media-ur
 - GitHub `main` push blocked (branch protection); local commit deployed directly.
 
 ## Open items
-- [ ] Operator: disable AI Crawl Control in Cloudflare dashboard (see 3-step instructions in chat / `web/README.md`).
+- [x] Mitigation: DNS-only `og.dojopop.live` for og:image (see `2026-07-20-facebook-og.md`).
+- [ ] Operator: disable AI Crawl Control in Cloudflare dashboard (optional for page scrapes; see `web/README.md`).
 - [ ] Upgrade `CLOUDFLARE_API_TOKEN` with Bot Management Edit for future API runs.
-- [ ] Re-scrape affected URLs in Facebook Sharing Debugger after Cloudflare fix.
+- [ ] Re-scrape affected URLs in Facebook Sharing Debugger after changes.
 
 ## References
 - `web/src/lib/media-url.ts` — `isMetaAccessibleOgHost()`, `ogImageForPracticeVideo()`

@@ -1,35 +1,38 @@
 #!/usr/bin/env bash
-# Allow Facebook / Meta link-preview crawlers on dojopop.live (+ blossom.dojopop.live).
+# Probe / optionally disable Cloudflare AI Crawl Control blocking Meta crawlers.
 #
-# Cloudflare "AI Crawl Control" blocks meta-externalagent with HTTP 403, which breaks
-# Facebook share previews (no title, no thumbnail). facebookexternalhit may still work
-# for pages but Meta increasingly uses meta-externalagent for images too.
+# Images: og:image uses DNS-only https://og.dojopop.live (Meta-reachable).
+# Pages: proxied dojopop.live still 403s meta-externalagent until AI Crawl Control is off.
 #
-# Requires CLOUDFLARE_API_TOKEN with Zone Settings Write + Bot Management Write.
+# Requires CLOUDFLARE_API_TOKEN with Bot Management Edit to change settings (not for --check-only).
 #
 # Usage:
+#   ./scripts/cloudflare-allow-social-crawlers.sh --check-only
 #   doppler run -- ./scripts/cloudflare-allow-social-crawlers.sh
-#   doppler run -- ./scripts/cloudflare-allow-social-crawlers.sh --check-only
 set -euo pipefail
 
 TOKEN="${CLOUDFLARE_API_TOKEN:-}"
 ZONE="${DOJOPOP_ZONE_ID:-cf2b671698354bbaafb5c606945dbb2c}"
 CHECK_ONLY="${1:-}"
 
-if [[ -z "$TOKEN" ]]; then
-  echo "ERROR: set CLOUDFLARE_API_TOKEN"
-  exit 1
-fi
+EVENT="${OG_PROBE_EVENT_ID:-539895c21a5adc1e70971fd5d315d11445071e04b89dfca005b85a1e31c64149}"
 
-echo "==> Probing crawlers (expect meta-externalagent 403 before fix)…"
+echo "==> Probing crawlers…"
 for ua in "meta-externalagent/1.1" "facebookexternalhit/1.1"; do
-  code=$(curl -sS -A "$ua" -o /dev/null -w "%{http_code}" \
-    "https://dojopop.live/v/0deab537524b581936caec82f64e6a38cefd6d53330f11e64f841a83030604e3")
-  echo "  $ua → HTTP $code"
+  page=$(curl -sS -A "$ua" -o /dev/null -w "%{http_code}" \
+    "https://dojopop.live/v/$EVENT")
+  og=$(curl -sS -A "$ua" -o /dev/null -w "%{http_code}" \
+    "https://og.dojopop.live/og/practice/${EVENT}.jpg")
+  echo "  $ua → page $page, og.dojopop.live image $og"
 done
 
 if [[ "$CHECK_ONLY" == "--check-only" ]]; then
   exit 0
+fi
+
+if [[ -z "$TOKEN" ]]; then
+  echo "ERROR: set CLOUDFLARE_API_TOKEN"
+  exit 1
 fi
 
 echo "==> Reading bot_management config…"
@@ -60,6 +63,9 @@ curl -sS -X PUT -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/
 echo "==> Re-probe meta-externalagent…"
 sleep 2
 code=$(curl -sS -A "meta-externalagent/1.1" -o /dev/null -w "%{http_code}" \
-  "https://dojopop.live/og/practice/0deab537524b581936caec82f64e6a38cefd6d53330f11e64f841a83030604e3.jpg")
-echo "  og image → HTTP $code (want 200)"
+  "https://dojopop.live/v/$EVENT")
+og=$(curl -sS -A "meta-externalagent/1.1" -o /dev/null -w "%{http_code}" \
+  "https://og.dojopop.live/og/practice/${EVENT}.jpg")
+echo "  dojopop.live page → HTTP $code (200 if AI Crawl Control off)"
+echo "  og.dojopop.live image → HTTP $og (want 200)"
 echo "Done. Scrape once: https://developers.facebook.com/tools/debug/"

@@ -4,6 +4,7 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-07-20 | [facebook-og](./2026-07-20-facebook-og.md) | DNS-only og.dojopop.live for Meta og:image; AI Crawl Control still blocks pages |
 | 2026-07-20 | [youtube-catchup](./2026-07-20-youtube-catchup.md) | Catch-up Days 1345–1346; laptop publish; relay published.json merge |
 | 2026-07-17 | [youtube-catchup](./2026-07-17-youtube-catchup.md) | Catch-up Days 1342–1344; laptop publish; relay published.json merge |
 | 2026-07-17 | [streak-sats](./2026-07-17-streak-sats.md) | Streak sats v1: ledger, LNURL, NWC pay_invoice, dry-run cron API |

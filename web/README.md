@@ -168,26 +168,31 @@ Emergency local override: `sudo ./scripts/fix-local-dns-dojopop.sh`
 ## Facebook / Meta link previews
 
 `/v/[eventId]` pages use `generateMetadata` with dynamic `og:title`, `og:description`,
-`og:url`, and `og:image` (Blossom thumbnail or `/og/practice/[id].jpg` proxy).
+`og:url`, and `og:image` (external CDN thumb or `https://og.dojopop.live/og/practice/[id].jpg`).
 
-**If Facebook shows no title or thumbnail:** Cloudflare **AI Crawl Control** on
-`dojopop.live` returns HTTP **403** to Meta's `meta-externalagent/1.1` crawler
-(while `facebookexternalhit/1.1` may still get 200). Meta uses both; blocked
-image fetches mean missing previews.
+**Root cause:** Cloudflare **AI Crawl Control** on proxied `*.dojopop.live` returns HTTP
+**403** to `meta-externalagent/1.1` (while `facebookexternalhit/1.1` often still gets 200).
+Meta uses both; blocked image fetches mean missing thumbnails.
+
+**Mitigation (shipped):** `og:image` URLs use DNS-only `og.dojopop.live` (grey-cloud A record →
+relay-2 nginx → web `:3001`), which Meta can fetch without going through Cloudflare bot
+blocking. Share page URLs stay on `https://dojopop.live/v/...`.
+
+**If previews still fail (title/description missing):** allow Meta on the main zone:
 
 1. Cloudflare dashboard → **Security → Settings → Bots** → disable **Block AI bots**
-   / AI Crawl Control for `dojopop.live` (or add an exception for `meta-externalagent`).
-2. Or run (needs `CLOUDFLARE_API_TOKEN` with **Bot Management Write**):
+   / AI Crawl Control for `dojopop.live` (or allow `meta-externalagent`).
+2. Or run (needs `CLOUDFLARE_API_TOKEN` with **Bot Management Edit**):
 
    ```bash
    doppler run --project dojopop --config prd_zorie -- ./scripts/cloudflare-allow-social-crawlers.sh
    ```
 
 3. Re-scrape each URL in [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
-   (Facebook caches OG tags aggressively).
+   (Facebook caches OG tags aggressively). Click **Scrape Again**.
 
-Thumbnails on external CDNs (e.g. `blossom.yakihonne.com`) work without the Cloudflare
-fix; `blossom.dojopop.live` and `/og/practice/*` require step 1–2.
+Ops: nginx `conf.d/og-dojopop.conf` on relay-2; cert via `certbot --dns-cloudflare` for
+`og.dojopop.live`. Probe: `./scripts/cloudflare-allow-social-crawlers.sh --check-only`.
 
 ## Blockers / operator checklist
 
