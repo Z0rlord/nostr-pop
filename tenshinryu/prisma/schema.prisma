@@ -22,6 +22,8 @@ model Dojo {
   memberships      InstructorDojoMembership[]
   leaderboards     Leaderboard[]
   students         Student[]
+  bulletinPosts    BulletinPost[]
+  newsItems        NewsItem[]
 }
 
 model Student {
@@ -101,9 +103,72 @@ model Class {
   createdAt    DateTime   @default(now())
   location     String?
   isRecurring  Boolean    @default(false)
+  /// PHYSICAL dojo floor vs ONLINE (Zoom/YouTube/etc.)
+  mode         ClassMode  @default(PHYSICAL)
+  /// Join URL for online classes (Zoom, Meet, YouTube Live, etc.)
+  meetingUrl   String?
   checkIns     CheckIn[]
   dojo         Dojo       @relation(fields: [dojoId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
+
+  @@index([dojoId])
+}
+
+/// Student Q&A / bulletin board post (scoped to one dojo).
+/// authorId is session id (student or instructor) — no FK so staff can post too.
+model BulletinPost {
+  id         String          @id @default(uuid())
+  dojoId     String
+  authorId   String
+  authorRole String          @default("student")
+  authorName String
+  title      String
+  body       String
+  isPinned   Boolean         @default(false)
+  isHidden   Boolean         @default(false)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  dojo       Dojo            @relation(fields: [dojoId], references: [id], onDelete: Cascade)
+  replies    BulletinReply[]
+
+  @@index([dojoId, createdAt])
+  @@index([dojoId, isPinned])
+  @@index([authorId])
+}
+
+model BulletinReply {
+  id           String       @id @default(uuid())
+  postId       String
+  authorId     String
+  authorRole   String       @default("student")
+  authorName   String
+  body         String
+  isStaffReply Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  post         BulletinPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId, createdAt])
+  @@index([authorId])
+}
+
+/// Staff announcements / breaking news (per dojo).
+model NewsItem {
+  id          String    @id @default(uuid())
+  dojoId      String
+  authorId    String
+  authorName  String
+  title       String
+  body        String
+  isBreaking  Boolean   @default(false)
+  publishedAt DateTime  @default(now())
+  expiresAt   DateTime?
+  isHidden    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  dojo        Dojo      @relation(fields: [dojoId], references: [id], onDelete: Cascade)
+
+  @@index([dojoId, publishedAt])
+  @@index([dojoId, isBreaking])
 }
 
 model CheckIn {
@@ -327,6 +392,11 @@ model ZoomLesson {
 
   @@index([instructorId])
   @@index([scheduledAt])
+}
+
+enum ClassMode {
+  PHYSICAL
+  ONLINE
 }
 
 enum MembershipTier {

@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
         location: c.location,
         maxStudents: c.maxStudents,
         isRecurring: c.isRecurring,
+        mode: c.mode,
+        meetingUrl: c.meetingUrl,
         instructorId: c.instructorId,
         instructorName: c.instructor?.name || "Unknown",
         dojoId: c.dojoId,
@@ -48,7 +50,8 @@ export async function POST(req: NextRequest) {
     if (staff instanceof NextResponse) return staff;
 
     const body = await req.json();
-    const { name, schedule, location, maxStudents, instructorId, isRecurring } = body;
+    const { name, schedule, location, maxStudents, instructorId, isRecurring, mode, meetingUrl } =
+      body;
 
     if (!name || !schedule) {
       return NextResponse.json({ error: "Name and schedule are required" }, { status: 400 });
@@ -69,6 +72,8 @@ export async function POST(req: NextRequest) {
         location,
         maxStudents: maxStudents || 999,
         isRecurring: isRecurring || false,
+        mode: mode === "ONLINE" ? "ONLINE" : "PHYSICAL",
+        meetingUrl: meetingUrl || null,
         dojoId: staff.dojoId,
         instructorId: targetInstructorId,
       },
@@ -84,6 +89,8 @@ export async function POST(req: NextRequest) {
         location: newClass.location,
         maxStudents: newClass.maxStudents,
         isRecurring: newClass.isRecurring,
+        mode: newClass.mode,
+        meetingUrl: newClass.meetingUrl,
         instructorName: newClass.instructor.name,
       },
     });
@@ -99,7 +106,7 @@ export async function PUT(req: NextRequest) {
     if (staff instanceof NextResponse) return staff;
 
     const body = await req.json();
-    const { id, name, schedule, location, maxStudents, isRecurring } = body;
+    const { id, name, schedule, location, maxStudents, isRecurring, mode, meetingUrl } = body;
 
     if (!id) {
       return NextResponse.json({ error: "Class ID is required" }, { status: 400 });
@@ -112,7 +119,15 @@ export async function PUT(req: NextRequest) {
 
     const updatedClass = await prisma.class.update({
       where: { id },
-      data: { name, schedule, location, maxStudents, isRecurring },
+      data: {
+        name,
+        schedule,
+        location,
+        maxStudents,
+        isRecurring,
+        ...(mode === "ONLINE" || mode === "PHYSICAL" ? { mode } : {}),
+        ...(meetingUrl !== undefined ? { meetingUrl: meetingUrl || null } : {}),
+      },
       include: { instructor: { select: { name: true } } },
     });
 
@@ -125,6 +140,8 @@ export async function PUT(req: NextRequest) {
         location: updatedClass.location,
         maxStudents: updatedClass.maxStudents,
         isRecurring: updatedClass.isRecurring,
+        mode: updatedClass.mode,
+        meetingUrl: updatedClass.meetingUrl,
         instructorName: updatedClass.instructor.name,
       },
     });

@@ -612,3 +612,24 @@
   color: #fff;
   border-bottom: 2px solid #f5a623;
 }
+
+.breaking-banner {
+  @apply mb-4 rounded-lg border border-crimson/40 overflow-hidden;
+  background: color-mix(in srgb, var(--primary-container) 80%, transparent);
+}
+
+.breaking-banner-inner {
+  @apply flex items-start gap-3 p-3 sm:p-4;
+}
+
+.breaking-badge {
+  @apply shrink-0 text-[10px] font-bold uppercase tracking-wider text-primary-foreground bg-primary px-2 py-1 rounded;
+}
+
+.breaking-link {
+  @apply flex flex-col gap-0.5 min-w-0 text-foreground hover:text-crimson transition-colors;
+}
+
+.breaking-body {
+  @apply text-sm text-muted-foreground;
+}

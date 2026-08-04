@@ -18,7 +18,11 @@ export function WorkShell({ children, title }: Props) {
   const pathname = usePathname();
   const [staffRole, setStaffRole] = useState<"admin" | "instructor" | null>(null);
   const showBottomNav =
-    pathname.startsWith("/student") || pathname.startsWith("/member");
+    pathname.startsWith("/student") ||
+    pathname.startsWith("/member") ||
+    pathname.startsWith("/board") ||
+    pathname.startsWith("/schedule") ||
+    pathname.startsWith("/news");
 
   useEffect(() => {
     fetch("/api/auth/me")

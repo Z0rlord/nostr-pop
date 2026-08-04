@@ -220,18 +220,14 @@ function StudentDashboardInner() {
   
   useEffect(() => {
     setLoadingClasses(true);
-    fetch("/api/classes?upcoming=true&limit=5")
-      .then(res => res.json())
-      .then(data => {
-        console.log("[Upcoming Classes] API response:", data);
-        if (data.classes) {
-          setUpcomingClasses(data.classes);
-          console.log("[Upcoming Classes] Set classes:", data.classes.length);
-        } else {
-          console.log("[Upcoming Classes] No classes array in response");
+    fetch("/api/schedule?limit=5")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.classes) {
+          setUpcomingClasses(data.classes.slice(0, 5));
         }
       })
-      .catch(err => console.error("[Upcoming Classes] Failed to fetch:", err))
+      .catch((err) => console.error("[Upcoming Classes] Failed to fetch:", err))
       .finally(() => setLoadingClasses(false));
   }, []);
 
@@ -523,9 +519,13 @@ function StudentDashboardInner() {
             <DashboardCard
               title={t("student.upcomingClasses.title")}
               action={
-                <span className="text-xs font-medium text-crimson bg-primary-container px-3 py-1 rounded-full">
-                  {t("student.upcomingClasses.next")}
-                </span>
+                <button
+                  type="button"
+                  onClick={() => router.push("/schedule")}
+                  className="text-xs font-medium text-crimson bg-primary-container px-3 py-1 rounded-full hover:underline"
+                >
+                  {t("community.nav.schedule")} →
+                </button>
               }
             >
               {loadingClasses ? (
@@ -541,7 +541,16 @@ function StudentDashboardInner() {
                         key={cls.id}
                         className="p-4 rounded-lg border border-border bg-surface/80"
                       >
-                        <h3 className="font-semibold text-foreground">{cls.name}</h3>
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          {cls.mode && (
+                            <span className="text-[10px] font-medium uppercase tracking-wide text-crimson bg-primary-container px-2 py-0.5 rounded">
+                              {cls.mode === "ONLINE"
+                                ? t("community.schedule.online")
+                                : t("community.schedule.physical")}
+                            </span>
+                          )}
+                          <h3 className="font-semibold text-foreground">{cls.name}</h3>
+                        </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground flex-wrap mt-2">
                           <span className="flex items-center gap-1">
                             <CalendarIcon size={14} />
@@ -602,6 +611,21 @@ function StudentDashboardInner() {
               >
                 <p className="action-tile-title">View progress</p>
                 <p className="action-tile-desc">Badges, heatmap, history</p>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              <button type="button" onClick={() => router.push("/board")} className="action-tile">
+                <p className="action-tile-title">{t("community.links.boardTitle")}</p>
+                <p className="action-tile-desc">{t("community.links.boardDesc")}</p>
+              </button>
+              <button type="button" onClick={() => router.push("/schedule")} className="action-tile">
+                <p className="action-tile-title">{t("community.links.scheduleTitle")}</p>
+                <p className="action-tile-desc">{t("community.links.scheduleDesc")}</p>
+              </button>
+              <button type="button" onClick={() => router.push("/news")} className="action-tile">
+                <p className="action-tile-title">{t("community.links.newsTitle")}</p>
+                <p className="action-tile-desc">{t("community.links.newsDesc")}</p>
               </button>
             </div>
 

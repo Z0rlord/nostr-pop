@@ -148,3 +148,69 @@ export async function requireStudentAccess(req: NextRequest, studentId: string) 
 
   return { student, as: "staff" as const, staff };
 }
+
+export type MemberSession =
+  | {
+      kind: "staff";
+      userId: string;
+      name: string;
+      email: string;
+      dojoId: string;
+      dojoIds: string[];
+      role: "admin" | "instructor";
+      isAdmin: boolean;
+      staff: StaffSession;
+    }
+  | {
+      kind: "student";
+      userId: string;
+      name: string;
+      email: string | null;
+      dojoId: string;
+      dojoIds: string[];
+      role: "student";
+      isAdmin: false;
+    };
+
+/**
+ * Any signed-in member (student or staff) with active dojo scope.
+ * Used for bulletin, schedule view, and news read.
+ */
+export async function requireMember(
+  req: NextRequest
+): Promise<MemberSession | NextResponse> {
+  const sessionId = req.cookies.get("session")?.value;
+  if (!sessionId) return unauthorized();
+
+  const staff = await requireStaff(req);
+  if (!(staff instanceof NextResponse)) {
+    return {
+      kind: "staff",
+      userId: staff.instructorId,
+      name: staff.name,
+      email: staff.email,
+      dojoId: staff.dojoId,
+      dojoIds: staff.dojoIds,
+      role: staff.role,
+      isAdmin: staff.isAdmin,
+      staff,
+    };
+  }
+
+  const student = await prisma.student.findUnique({
+    where: { id: sessionId },
+    select: { id: true, name: true, email: true, dojoId: true },
+  });
+  if (!student) return unauthorized("Not authenticated");
+
+  return {
+    kind: "student",
+    userId: student.id,
+    name: student.name,
+    email: student.email,
+    dojoId: student.dojoId,
+    dojoIds: [student.dojoId],
+    role: "student",
+    isAdmin: false,
+  };
+}

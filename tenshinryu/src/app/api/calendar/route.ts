@@ -1,57 +1,43 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { requireMember } from "@/lib/session";
 
-// Mock schedule data until Google Calendar is configured
-const MOCK_EVENTS = [
-  {
-    id: "class_001",
-    title: "Kihon Fundamentals",
-    schedule: "Mondays & Wednesdays, 7:00 PM JST",
-    location: "Online - YouTube Live",
-    instructor: "Tenshin Sensei",
-  },
-  {
-    id: "class_002",
-    title: "Giho Techniques",
-    schedule: "Tuesdays & Thursdays, 7:00 PM JST",
-    location: "Online - Zoom (ROYAL members)",
-    instructor: "Tenshin Sensei",
-  },
-  {
-    id: "class_003",
-    title: "Keikoho Practice",
-    schedule: "Saturdays, 10:00 AM JST",
-    location: "Online - YouTube Live",
-    instructor: "Senior Instructor",
-  },
-  {
-    id: "class_004",
-    title: "Philosophy & History",
-    schedule: "Last Sunday of month, 8:00 PM JST",
-    location: "Online - Zoom (All members)",
-    instructor: "Tenshin Sensei",
-  },
-];
-
-// GET classes schedule
+/** GET classes schedule for the member's active dojo (replaces mock calendar). */
 export async function GET(req: NextRequest) {
   try {
-    // TODO: Connect Google Calendar API
-    // 1. Set GOOGLE_CALENDAR_CREDENTIALS in .env (service account JSON)
-    // 2. Set GOOGLE_CALENDAR_ID (the calendar ID to read from)
-    // 3. Uncomment the googleapis import and use getCalendarClient()
-    
-    // For now, return mock data
-    return NextResponse.json({
-      source: "mock",
-      note: "Connect Google Calendar for live schedule",
-      events: MOCK_EVENTS,
+    const member = await requireMember(req);
+    if (member instanceof NextResponse) {
+      // Unauthenticated: return empty with note (landing widgets)
+      return NextResponse.json({
+        source: "database",
+        events: [],
+        note: "Sign in to see your dojo schedule",
+      });
+    }
+
+    const classes = await prisma.class.findMany({
+      where: { dojoId: member.dojoId },
+      include: { instructor: { select: { name: true } } },
+      orderBy: { createdAt: "desc" },
+      take: 50,
     });
 
-  } catch (error: any) {
+    return NextResponse.json({
+      source: "database",
+      events: classes.map((c) => ({
+        id: c.id,
+        title: c.name,
+        schedule: c.schedule,
+        location: c.mode === "ONLINE" ? c.meetingUrl || c.location || "Online" : c.location || "Dojo",
+        instructor: c.instructor?.name || "TBD",
+        mode: c.mode,
+        meetingUrl: c.meetingUrl,
+        isRecurring: c.isRecurring,
+      })),
+      dojoId: member.dojoId,
+    });
+  } catch (error: unknown) {
     console.error("[Calendar] Error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch schedule" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch schedule" }, { status: 500 });
   }
 }

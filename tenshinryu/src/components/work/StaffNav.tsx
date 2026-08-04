@@ -26,6 +26,24 @@ const ITEMS: NavItem[] = [
     roles: ["admin", "instructor"],
   },
   {
+    href: "/schedule",
+    label: "Schedule",
+    match: (path) => path.startsWith("/schedule"),
+    roles: ["admin", "instructor"],
+  },
+  {
+    href: "/board",
+    label: "Board",
+    match: (path) => path.startsWith("/board"),
+    roles: ["admin", "instructor"],
+  },
+  {
+    href: "/news",
+    label: "News",
+    match: (path) => path.startsWith("/news"),
+    roles: ["admin", "instructor"],
+  },
+  {
     href: "/admin",
     label: "Owner",
     match: (path) => path.startsWith("/admin"),

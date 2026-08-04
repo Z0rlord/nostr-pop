@@ -7,6 +7,7 @@ import {
   Dumbbell,
   TrendingUp,
   User,
+  MessageSquare,
 } from "lucide-react";
 
 const ITEMS = [
@@ -27,6 +28,14 @@ const ITEMS = [
       path.startsWith("/student") && section === "practice",
   },
   {
+    id: "board",
+    label: "Board",
+    href: "/board",
+    icon: MessageSquare,
+    match: (path: string, _section: string | null) =>
+      path.startsWith("/board") || path.startsWith("/schedule") || path.startsWith("/news"),
+  },
+  {
     id: "progress",
     label: "Progress",
     href: "/student?section=progress",
@@ -39,7 +48,7 @@ const ITEMS = [
     label: "Account",
     href: "/member",
     icon: User,
-    match: (path: string) => path.startsWith("/member"),
+    match: (path: string, _section: string | null) => path.startsWith("/member"),
   },
 ] as const;
 

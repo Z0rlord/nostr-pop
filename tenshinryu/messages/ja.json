@@ -614,5 +614,73 @@
   },
   "testimonials": {
     "title": "門弟の声"
+  },
+  "community": {
+    "board": {
+      "title": "掲示板",
+      "subtitle": "道場への質問を投稿できます。指導者の回答は明確に表示されます。",
+      "ask": "質問する",
+      "questionTitle": "タイトル",
+      "questionBody": "質問内容…",
+      "post": "投稿する",
+      "posting": "投稿中…",
+      "empty": "まだ質問はありません。最初の質問をどうぞ。",
+      "pinned": "固定",
+      "pin": "固定する",
+      "unpin": "固定解除",
+      "hide": "非表示",
+      "replies": "件の返信",
+      "reply": "返信",
+      "replyPlaceholder": "返信を書く…",
+      "staffReply": "指導者"
+    },
+    "schedule": {
+      "title": "稽古スケジュール",
+      "subtitle": "対面稽古とオンライン稽古の一覧です。",
+      "add": "クラス追加",
+      "edit": "クラス編集",
+      "physical": "対面",
+      "online": "オンライン",
+      "physicalSection": "対面稽古",
+      "onlineSection": "オンライン稽古",
+      "empty": "まだクラスがありません。",
+      "instructor": "指導者",
+      "joinLink": "参加リンク",
+      "namePlaceholder": "クラス名",
+      "schedulePlaceholder": "例：月・水 19:00 JST",
+      "locationPhysical": "道場の住所・場所",
+      "locationOnline": "配信・会議のメモ（YouTube Live、Zoomなど）",
+      "urlPlaceholder": "https://… 参加URL",
+      "recurring": "毎週の定期クラス",
+      "saving": "保存中…",
+      "confirmDelete": "このクラスを削除しますか？"
+    },
+    "news": {
+      "title": "お知らせ",
+      "subtitle": "道場からのお知らせです。",
+      "publish": "お知らせを投稿",
+      "publishing": "投稿中…",
+      "empty": "まだお知らせはありません。",
+      "breaking": "緊急",
+      "markBreaking": "緊急にする",
+      "clearBreaking": "緊急を解除",
+      "hide": "非表示",
+      "titlePlaceholder": "見出し",
+      "bodyPlaceholder": "内容…",
+      "confirmDelete": "このお知らせを削除しますか？"
+    },
+    "nav": {
+      "board": "掲示板",
+      "schedule": "予定",
+      "news": "お知らせ"
+    },
+    "links": {
+      "boardTitle": "掲示板",
+      "boardDesc": "先生や仲間に質問",
+      "scheduleTitle": "スケジュール",
+      "scheduleDesc": "対面・オンライン稽古",
+      "newsTitle": "お知らせ",
+      "newsDesc": "道場からの連絡"
+    }
   }
 }

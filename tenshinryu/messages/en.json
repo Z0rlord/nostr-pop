@@ -550,5 +550,73 @@
     "ask": "Ask",
     "poweredBy": "AI-powered analysis",
     "disclaimer": "Analyzes your personal data only — not training advice."
+  },
+  "community": {
+    "board": {
+      "title": "Bulletin board",
+      "subtitle": "Ask questions for your dojo. Staff replies are marked clearly.",
+      "ask": "Ask a question",
+      "questionTitle": "Short title",
+      "questionBody": "Your question…",
+      "post": "Post question",
+      "posting": "Posting…",
+      "empty": "No questions yet — be the first to ask.",
+      "pinned": "Pinned",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "hide": "Hide",
+      "replies": "replies",
+      "reply": "Reply",
+      "replyPlaceholder": "Write a reply…",
+      "staffReply": "Staff"
+    },
+    "schedule": {
+      "title": "Class schedule",
+      "subtitle": "Physical dojo classes and online sessions for your school.",
+      "add": "Add class",
+      "edit": "Edit class",
+      "physical": "Physical",
+      "online": "Online",
+      "physicalSection": "Physical classes",
+      "onlineSection": "Online classes",
+      "empty": "No classes listed yet.",
+      "instructor": "Instructor",
+      "joinLink": "Join link",
+      "namePlaceholder": "Class name",
+      "schedulePlaceholder": "e.g. Mon & Wed 19:00 JST",
+      "locationPhysical": "Dojo address or room",
+      "locationOnline": "Platform note (YouTube Live, Zoom…)",
+      "urlPlaceholder": "https://… meeting or stream URL",
+      "recurring": "Recurring weekly",
+      "saving": "Saving…",
+      "confirmDelete": "Delete this class?"
+    },
+    "news": {
+      "title": "News",
+      "subtitle": "Announcements from your dojo.",
+      "publish": "Publish news",
+      "publishing": "Publishing…",
+      "empty": "No news yet.",
+      "breaking": "Breaking",
+      "markBreaking": "Mark as breaking",
+      "clearBreaking": "Clear breaking",
+      "hide": "Hide",
+      "titlePlaceholder": "Headline",
+      "bodyPlaceholder": "Details…",
+      "confirmDelete": "Delete this news item?"
+    },
+    "nav": {
+      "board": "Board",
+      "schedule": "Schedule",
+      "news": "News"
+    },
+    "links": {
+      "boardTitle": "Bulletin board",
+      "boardDesc": "Ask Sensei and classmates",
+      "scheduleTitle": "Schedule",
+      "scheduleDesc": "Physical & online classes",
+      "newsTitle": "News",
+      "newsDesc": "Announcements & updates"
+    }
   }
 }
