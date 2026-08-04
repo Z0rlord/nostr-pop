@@ -27,7 +27,8 @@ import { Resend } from "resend";
 import { FOREIGN_SCHOOLS } from "./foreign-schools.mjs";
 
 const prisma = new PrismaClient();
-const OWNER_EMAIL = "skskken@gmail.com";
+/** Org-wide admins (co-grandmasters) — granted on every school. */
+const ORG_ADMIN_EMAILS = ["skskken@gmail.com", "idecchi.h@gmail.com"];
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -66,28 +67,32 @@ async function upsertSchool(school) {
   });
 }
 
-async function grantOwnerAll(dojoIds) {
-  const owner = await prisma.instructor.findFirst({
-    where: { email: { equals: OWNER_EMAIL, mode: "insensitive" } },
-  });
-  if (!owner) {
-    console.warn(`Owner ${OWNER_EMAIL} not found — skip multi-school grant`);
-    return null;
-  }
-  for (const dojoId of dojoIds) {
-    await prisma.instructorDojoMembership.upsert({
-      where: {
-        instructorId_dojoId: { instructorId: owner.id, dojoId },
-      },
-      create: {
-        instructorId: owner.id,
-        dojoId,
-        isAdmin: true,
-      },
-      update: { isAdmin: true },
+async function grantOrgAdminsAll(dojoIds) {
+  const granted = [];
+  for (const email of ORG_ADMIN_EMAILS) {
+    const owner = await prisma.instructor.findFirst({
+      where: { email: { equals: email, mode: "insensitive" } },
     });
+    if (!owner) {
+      console.warn(`Org admin ${email} not found — skip multi-school grant`);
+      continue;
+    }
+    for (const dojoId of dojoIds) {
+      await prisma.instructorDojoMembership.upsert({
+        where: {
+          instructorId_dojoId: { instructorId: owner.id, dojoId },
+        },
+        create: {
+          instructorId: owner.id,
+          dojoId,
+          isAdmin: true,
+        },
+        update: { isAdmin: true },
+      });
+    }
+    granted.push({ email, id: owner.id });
   }
-  return owner;
+  return granted;
 }
 
 async function ensureOwnerInvite(school, leader, { sendEmail }) {
@@ -220,9 +225,11 @@ async function main() {
     }
   }
 
-  const owner = await grantOwnerAll(FOREIGN_SCHOOLS.map((s) => s.id));
-  if (owner) {
-    console.log(`\nGranted ${OWNER_EMAIL} admin on all ${FOREIGN_SCHOOLS.length} foreign schools`);
+  const owners = await grantOrgAdminsAll(FOREIGN_SCHOOLS.map((s) => s.id));
+  for (const o of owners) {
+    console.log(
+      `\nGranted ${o.email} admin on all ${FOREIGN_SCHOOLS.length} foreign schools`
+    );
   }
 
   console.log("\n=== Owner invites (email known) ===");

@@ -9,7 +9,11 @@
  *     node scripts/provision-owner.mjs --email skskken@gmail.com --name "Masakumo Kuwami"
  *   '
  *
- * Optional: --password "YourTempPass123!" --dojo-id <uuid> --force
+ * Org-wide admin (all dojos), e.g. co-grandmaster:
+ *   node scripts/provision-owner.mjs --email idecchi.h@gmail.com --name "Ryusetsu Ide" \
+ *     --all-dojos --password "…" --force
+ *
+ * Optional: --password "YourTempPass123!" --dojo-id <uuid> --all-dojos --force
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -22,13 +26,21 @@ const prisma = new PrismaClient();
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  const out = { email: "", name: "", dojoId: "", password: "", force: false };
+  const out = {
+    email: "",
+    name: "",
+    dojoId: "",
+    password: "",
+    force: false,
+    allDojos: false,
+  };
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--email") out.email = args[++i] || "";
     if (args[i] === "--name") out.name = args[++i] || "";
     if (args[i] === "--dojo-id") out.dojoId = args[++i] || "";
     if (args[i] === "--password") out.password = args[++i] || "";
     if (args[i] === "--force") out.force = true;
+    if (args[i] === "--all-dojos") out.allDojos = true;
   }
   return out;
 }
@@ -69,11 +81,54 @@ async function upsertFirebaseUser(email, password, displayName) {
   }
 }
 
+async function resolvePrimaryDojo(argDojoId) {
+  if (argDojoId) {
+    const byId = await prisma.dojo.findUnique({ where: { id: argDojoId } });
+    if (byId) return byId;
+  }
+  // Prefer Japan HQ when granting org-wide / default owner
+  const hq =
+    (await prisma.dojo.findUnique({ where: { id: "tenshinryu-hq" } })) ||
+    (await prisma.dojo.findFirst({ where: { code: "HQ" } }));
+  if (hq) return hq;
+
+  return (
+    (await prisma.dojo.findFirst({
+      where: { name: { contains: "International", mode: "insensitive" } },
+    })) || (await prisma.dojo.findFirst({ orderBy: { createdAt: "asc" } }))
+  );
+}
+
+async function grantAdminOnAllDojos(instructorId) {
+  const dojos = await prisma.dojo.findMany({ orderBy: { name: "asc" } });
+  for (const d of dojos) {
+    await prisma.instructorDojoMembership.upsert({
+      where: {
+        instructorId_dojoId: { instructorId, dojoId: d.id },
+      },
+      create: {
+        instructorId,
+        dojoId: d.id,
+        isAdmin: true,
+      },
+      update: { isAdmin: true },
+    });
+  }
+  return dojos.length;
+}
+
 async function main() {
-  const { email, name, dojoId: argDojoId, password: argPassword, force } = parseArgs();
+  const {
+    email,
+    name,
+    dojoId: argDojoId,
+    password: argPassword,
+    force,
+    allDojos,
+  } = parseArgs();
   if (!email) {
     console.error(
-      "Usage: provision-owner.mjs --email <email> [--name \"Name\"] [--dojo-id <uuid>] [--password <pass>] [--force]"
+      'Usage: provision-owner.mjs --email <email> [--name "Name"] [--dojo-id <uuid>] [--password <pass>] [--all-dojos] [--force]'
     );
     process.exit(1);
   }
@@ -82,13 +137,7 @@ async function main() {
   const password = argPassword || tempPassword();
   const displayName = name || normalized.split("@")[0];
 
-  const dojo =
-    (argDojoId && (await prisma.dojo.findUnique({ where: { id: argDojoId } }))) ||
-    (await prisma.dojo.findFirst({
-      where: { name: { contains: "International", mode: "insensitive" } },
-    })) ||
-    (await prisma.dojo.findFirst({ orderBy: { createdAt: "asc" } }));
-
+  const dojo = await resolvePrimaryDojo(argDojoId);
   if (!dojo) {
     console.error("No dojo found.");
     process.exit(1);
@@ -137,24 +186,36 @@ async function main() {
     data: { status: "accepted", acceptedAt: new Date() },
   });
 
-  await prisma.instructorDojoMembership.upsert({
-    where: {
-      instructorId_dojoId: { instructorId: instructor.id, dojoId: dojo.id },
-    },
-    create: {
-      instructorId: instructor.id,
-      dojoId: dojo.id,
-      isAdmin: true,
-    },
-    update: { isAdmin: true },
-  });
+  let adminDojoCount = 1;
+  if (allDojos) {
+    adminDojoCount = await grantAdminOnAllDojos(instructor.id);
+  } else {
+    await prisma.instructorDojoMembership.upsert({
+      where: {
+        instructorId_dojoId: { instructorId: instructor.id, dojoId: dojo.id },
+      },
+      create: {
+        instructorId: instructor.id,
+        dojoId: dojo.id,
+        isAdmin: true,
+      },
+      update: { isAdmin: true },
+    });
+  }
 
+  const dojoTotal = await prisma.dojo.count();
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tenshinryu.xyz";
   console.log("");
   console.log("Owner provisioned successfully");
-  console.log("Dojo:", dojo.name, `(${dojo.id})`);
+  console.log("Primary dojo:", dojo.name, `(${dojo.id})`);
   console.log("Name:", instructor.name);
   console.log("Email:", normalized);
+  console.log("Firebase UID:", firebaseUid);
+  console.log(
+    allDojos
+      ? `Admin memberships: ${adminDojoCount} / ${dojoTotal} dojos (all)`
+      : `Admin memberships: 1 dojo (primary only)`
+  );
   console.log("Login URL:", `${appUrl}/login`);
   console.log("");
   console.log("Temporary password (share securely, ask them to change after first login):");

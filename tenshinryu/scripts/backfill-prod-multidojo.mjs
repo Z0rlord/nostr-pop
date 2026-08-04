@@ -25,7 +25,8 @@ const CODE_BY_ID = {
   ...FOREIGN_CODE_BY_ID,
 };
 
-const OWNER_EMAIL = "skskken@gmail.com";
+/** Org-wide admins (co-grandmasters) — granted on every school. */
+const ORG_ADMIN_EMAILS = ["skskken@gmail.com", "idecchi.h@gmail.com"];
 
 async function main() {
   const url = process.env.DATABASE_URL || "";
@@ -100,27 +101,29 @@ async function main() {
   }
   console.log(`Backfilled memberships for ${instructors.length} instructor(s)`);
 
-  const owner = await prisma.instructor.findFirst({
-    where: { email: { equals: OWNER_EMAIL, mode: "insensitive" } },
-  });
+  for (const email of ORG_ADMIN_EMAILS) {
+    const owner = await prisma.instructor.findFirst({
+      where: { email: { equals: email, mode: "insensitive" } },
+    });
 
-  if (owner) {
-    for (const d of dojos) {
-      await prisma.instructorDojoMembership.upsert({
-        where: {
-          instructorId_dojoId: { instructorId: owner.id, dojoId: d.id },
-        },
-        create: {
-          instructorId: owner.id,
-          dojoId: d.id,
-          isAdmin: true,
-        },
-        update: { isAdmin: true },
-      });
+    if (owner) {
+      for (const d of dojos) {
+        await prisma.instructorDojoMembership.upsert({
+          where: {
+            instructorId_dojoId: { instructorId: owner.id, dojoId: d.id },
+          },
+          create: {
+            instructorId: owner.id,
+            dojoId: d.id,
+            isAdmin: true,
+          },
+          update: { isAdmin: true },
+        });
+      }
+      console.log(`Org admin ${email}: admin on all ${dojos.length} schools`);
+    } else {
+      console.warn(`Org admin ${email} not found — skip multi-school grant`);
     }
-    console.log(`Owner ${OWNER_EMAIL}: admin on all ${dojos.length} schools`);
-  } else {
-    console.warn(`Owner ${OWNER_EMAIL} not found — skip multi-school grant`);
   }
 
   console.log("Production multi-dojo backfill complete.");
