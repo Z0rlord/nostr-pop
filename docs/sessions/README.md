@@ -4,6 +4,8 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-08-04 | [youtube-catchup](./2026-08-04-youtube-catchup.md) | Catch-up Days 1347–1358 (+ Jul 28, 三尺刀); laptop publish; relay published.json merge |
+| 2026-07-23 | [block-buzz](./2026-07-23-block-buzz.md) | Block Buzz eval: skip as dep; Cordn vs NIP-29; agent workspace niche only |
 | 2026-07-20 | [facebook-og](./2026-07-20-facebook-og.md) | DNS-only og.dojopop.live for Meta og:image; AI Crawl Control still blocks pages |
 | 2026-07-20 | [youtube-catchup](./2026-07-20-youtube-catchup.md) | Catch-up Days 1345–1346; laptop publish; relay published.json merge |
 | 2026-07-17 | [youtube-catchup](./2026-07-17-youtube-catchup.md) | Catch-up Days 1342–1344; laptop publish; relay published.json merge |
