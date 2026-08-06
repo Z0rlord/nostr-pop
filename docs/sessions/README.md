@@ -4,6 +4,7 @@ Agent conversations with material decisions are captured here (local, git-tracke
 
 | Date | Session | Topics |
 |------|---------|--------|
+| 2026-08-06 | [dns-security-cloudflare](./2026-08-06-dns-security-cloudflare.md) | CAA, DNSSEC pending+DS, DMARC p=none, SPF for dojopop.live + tenshinryu.xyz |
 | 2026-08-04 | [tenshinryu-sensei-board-staging](./2026-08-04-tenshinryu-sensei-board-staging.md) | Staging v1: bulletin, schedule PHYSICAL/ONLINE, news/breaking; prod not deployed |
 | 2026-08-04 | [youtube-catchup](./2026-08-04-youtube-catchup.md) | Catch-up Days 1347–1358 (+ Jul 28, 三尺刀); laptop publish; relay published.json merge |
 | 2026-07-23 | [block-buzz](./2026-07-23-block-buzz.md) | Block Buzz eval: skip as dep; Cordn vs NIP-29; agent workspace niche only |
