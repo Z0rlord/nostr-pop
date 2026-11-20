@@ -24,7 +24,7 @@ for arg in "$@"; do
   esac
 done
 
-REMOTE_DIR="/opt/dojopop/tenshinryu-wiki"
+REMOTE_DIR="/opt/tenshinryu-wiki"
 STAGING="dist-staging"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOCK_DIR="/tmp/tenshinryu-wiki-deploy.lock.d"
