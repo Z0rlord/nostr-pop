@@ -6,7 +6,8 @@ import { PersonalPracticeDashboard } from "@/components/PersonalPracticeDashboar
 import { decodeNpubToHex, isValidNpub } from "@/lib/nostr";
 import { defaultOgImageUrl, profileShareUrl } from "@/lib/media-url";
 
-export function generateMetadata({ params }: { params: { npub: string } }) {
+export async function generateMetadata(props: { params: Promise<{ npub: string }> }) {
+  const params = await props.params;
   const npub = decodeURIComponent(params.npub);
   const label = isValidNpub(npub) ? `${npub.slice(0, 12)}…` : "Practitioner";
   const pageUrl = isValidNpub(npub) ? profileShareUrl(npub) : "https://dojopop.live";
@@ -39,11 +40,12 @@ export function generateMetadata({ params }: { params: { npub: string } }) {
   };
 }
 
-export default function PublicPracticePage({
-  params,
-}: {
-  params: { npub: string };
-}) {
+export default async function PublicPracticePage(
+  props: {
+    params: Promise<{ npub: string }>;
+  }
+) {
+  const params = await props.params;
   const npub = decodeURIComponent(params.npub);
   if (!isValidNpub(npub)) {
     notFound();

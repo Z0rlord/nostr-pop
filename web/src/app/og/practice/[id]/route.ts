@@ -10,10 +10,8 @@ function eventIdFromParam(raw: string): string {
   return raw.replace(/\.jpe?g$/i, "").toLowerCase();
 }
 
-export async function GET(
-  _request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(_request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   let eventId = eventIdFromParam(params.id);
   eventId = PRACTICE_VIDEO_REDIRECTS[eventId] ?? eventId;
 

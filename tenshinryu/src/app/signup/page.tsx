@@ -8,11 +8,12 @@ const TIER_INFO: Record<string, { name: string; price: string }> = {
   royal: { name: "TENSHINRYU ONLINE ROYAL", price: "$85/month" },
 };
 
-export default function SignupPage({
-  searchParams,
-}: {
-  searchParams: { tier?: string };
-}) {
+export default async function SignupPage(
+  props: {
+    searchParams: Promise<{ tier?: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const tier = searchParams.tier?.toLowerCase();
   const selected = tier && TIER_INFO[tier] ? TIER_INFO[tier] : null;
 

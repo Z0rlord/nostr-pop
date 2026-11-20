@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireMember } from "@/lib/session";
 
-type Params = { params: { id: string } };
+type Params = { params: Promise<{ id: string }> };
 
-export async function POST(req: NextRequest, { params }: Params) {
+export async function POST(req: NextRequest, props: Params) {
+  const params = await props.params;
   try {
     const member = await requireMember(req);
     if (member instanceof NextResponse) return member;

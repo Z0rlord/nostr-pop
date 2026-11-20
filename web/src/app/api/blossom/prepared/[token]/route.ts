@@ -15,10 +15,8 @@ async function assertActiveMember(npub: string): Promise<void> {
   }
 }
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { token: string } }
-) {
+export async function GET(req: NextRequest, props: { params: Promise<{ token: string }> }) {
+  const params = await props.params;
   const npub = req.nextUrl.searchParams.get("npub")?.trim();
   if (!npub) {
     return NextResponse.json({ error: "npub required" }, { status: 400 });

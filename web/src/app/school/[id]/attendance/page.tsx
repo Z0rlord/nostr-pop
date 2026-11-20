@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { connectNip07, publishEvent, signEventNip07 } from "@/lib/nip07";
 import { truncateNpub } from "@/lib/practice-events";
 
-export default function LogAttendancePage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function LogAttendancePage(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = use(props.params);
   const [npub, setNpub] = useState<string | null>(null);
   const [students, setStudents] = useState<string[]>([]);
   const [discipline, setDiscipline] = useState("aikido");

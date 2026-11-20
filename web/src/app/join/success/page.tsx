@@ -1,10 +1,11 @@
 import { JoinSuccessView } from "./JoinSuccessView";
 
-export default function SuccessPage({
-  searchParams,
-}: {
-  searchParams: { session_id?: string; lightning?: string };
-}) {
+export default async function SuccessPage(
+  props: {
+    searchParams: Promise<{ session_id?: string; lightning?: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   return (
     <JoinSuccessView
       viaLightning={searchParams.lightning === "1"}

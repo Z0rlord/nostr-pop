@@ -7,10 +7,8 @@ import {
 } from "@/lib/lightning";
 import { onMembershipChanged } from "@/lib/webhook-side-effects";
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(_req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const before = await refreshInvoiceStatus(params.id);
     if (!before) {

@@ -23,7 +23,8 @@ function formatDate(ts: number): string {
   });
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await fetchPracticeSessionById(params.id);
   if (!session) {
     return {
@@ -68,11 +69,12 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function PracticeVideoPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function PracticeVideoPage(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
   const session = await fetchPracticeSessionById(params.id);
   if (!session) {
     notFound();

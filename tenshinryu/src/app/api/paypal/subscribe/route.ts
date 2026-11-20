@@ -13,7 +13,7 @@ const OFFICIAL_SIGNUP_URL = "https://international.tenshinryu.net/tenshinryu-onl
 
 /** Start a PayPal subscription checkout for GOLD or ROYAL. */
 export async function POST(req: NextRequest) {
-  const sessionId = cookies().get("session")?.value;
+  const sessionId = (await cookies()).get("session")?.value;
   if (!sessionId) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }

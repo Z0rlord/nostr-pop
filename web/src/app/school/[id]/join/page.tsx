@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,7 +8,8 @@ import { NostrGuideContent } from "@/components/NostrGuideContent";
 import { useI18n } from "@/i18n/context";
 import { connectNip07 } from "@/lib/nip07";
 
-export default function SchoolJoinPage({ params }: { params: { id: string } }) {
+export default function SchoolJoinPage(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const { t } = useI18n();
   const [npub, setNpub] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");

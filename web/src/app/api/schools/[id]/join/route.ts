@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import { addStudentToSchool, getSchool } from "@/lib/schools";
 
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const school = await getSchool(params.id);
   if (!school) {
     return NextResponse.json({ error: "School not found" }, { status: 404 });

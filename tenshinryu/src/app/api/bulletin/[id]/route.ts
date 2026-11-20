@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireMember, requireStaff, forbidden } from "@/lib/session";
 
-type Params = { params: { id: string } };
+type Params = { params: Promise<{ id: string }> };
 
-export async function GET(req: NextRequest, { params }: Params) {
+export async function GET(req: NextRequest, props: Params) {
+  const params = await props.params;
   try {
     const member = await requireMember(req);
     if (member instanceof NextResponse) return member;
@@ -53,7 +54,8 @@ export async function GET(req: NextRequest, { params }: Params) {
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: Params) {
+export async function PATCH(req: NextRequest, props: Params) {
+  const params = await props.params;
   try {
     const staff = await requireStaff(req);
     if (staff instanceof NextResponse) return staff;
@@ -88,7 +90,8 @@ export async function PATCH(req: NextRequest, { params }: Params) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: Params) {
+export async function DELETE(req: NextRequest, props: Params) {
+  const params = await props.params;
   try {
     const member = await requireMember(req);
     if (member instanceof NextResponse) return member;

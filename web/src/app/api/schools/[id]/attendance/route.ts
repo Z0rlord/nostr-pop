@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import { fetchSchoolAttendance } from "@/lib/class-attendance";
 import { getSchool, isMember } from "@/lib/schools";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const school = await getSchool(params.id);
   if (!school) {
     return NextResponse.json({ error: "School not found" }, { status: 404 });
