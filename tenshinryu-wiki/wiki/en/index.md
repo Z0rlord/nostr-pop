@@ -159,6 +159,12 @@ Maintained by LLM ingest from official sources; human-reviewed.
 
 150+ source summaries in [[sources|Sources]] — catalog of ingested raw files from web clips and Drive exports.
 
+**Full-text books** (published with the author's permission, 2026-11-20):
+
+- [[sources/kuwami-foundations-principles-vol1|Foundations and Principles Vol. 1 — History and Philosophy]] (English, full text)
+- [[sources/kuwami-foundations-principles-vol2|Foundations and Principles Vol. 2 — Etiquette, Movements, Knowledge]] (English, full text)
+- [[sources/shogakushu-2025|天心流初学集 改訂版]] (Japanese original, full text)
+
 ## Raw files ingested
 
 - `raw/web/` — **286** clipped pages (international.tenshinryu.net + tenshinryu.net)

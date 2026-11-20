@@ -137,6 +137,12 @@ updated: '2026-07-02'
 
 150件以上の出典要約 — [[sources|ソース]] 参照。
 
+**書籍全文**（著者の許可を得て掲載、2026-11-20）:
+
+- [[sources/shogakushu-2025|天心流初学集 改訂版]]（日本語原著、全文）
+- [[sources/kuwami-foundations-principles-vol1|Foundations and Principles Vol. 1（歴史と思想・英語版）]]（全文）
+- [[sources/kuwami-foundations-principles-vol2|Foundations and Principles Vol. 2（礼法・動作・知識・英語版）]]（全文）
+
 ## 取り込み済み raw
 
 - `raw/web/` — **286** ページ（国際サイト + 公式日本語サイト）
