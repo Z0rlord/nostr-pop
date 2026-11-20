@@ -2,14 +2,14 @@
 slug: index
 lang: en
 title: Tenshinryu Hyoho Wiki — Index
-updated: '2026-07-02'
+updated: '2026-11-20'
 ---
 
 # Tenshinryu Hyoho Wiki (English)
 
 Maintained by LLM ingest from official sources; human-reviewed.
 
-日本語: [../ja/index.md](../ja/index.md)
+日本語: [日本語](../ja/index.md)
 
 ## Official resources
 
@@ -70,6 +70,19 @@ Maintained by LLM ingest from official sources; human-reviewed.
 | [[concepts/kurai/sanmi-no-kurai|Sanmi-no-Kurai — Three Standing Bodies (三躰の位)]] | Three standing bodies (老木 / 斜木 / 竹木) |
 | [[concepts/kurai/fundamentals|Kurai Fundamentals — Ten/Shin/Chi, Feet, In-Yo]] | Ten/Shin/Chi, feet, in-yo |
 | [[concepts/kurai/ten-no-kurai|Ten-no-Kurai (天の位) — Heaven Tier Stances]] | Ten tier catalog → **35 individual kurai pages** |
+| [[concepts/spatial-terminology|Spatial Terminology — Ten-Shin-Chi, In-Yō, Mei-An]] | Directional terms, Nakazumi, Jinchūro (Kuwami Ch. 2) |
+| [[concepts/hand-shapes|Hand Shapes — Hirade, Ika-no-Kuchi]] | Hirade, ika-no-kuchi, oyayubi-kakushi |
+| [[concepts/maai|Maai 間合 — Distance and Interval]] | Seated/standing/kenjutsu distance grades |
+| [[concepts/tenouchi|Tenouchi 手の内 — Grip and Hand Placement]] | Tatsu-no-kuchi, pre-draw hand placement |
+| [[concepts/koiguchi|Koiguchi 鯉口 — the Scabbard Mouth]] | Release methods (soto/uchi/hikae), maintenance |
+| [[concepts/sen|Sen 先 — Timing and Initiative]] | Seven sen timings per kata |
+| [[concepts/kiai-kiate|Kiai 気合 and Kiate 気当て]] | Martial shout; Yā/Tō, A/Un calls |
+| [[concepts/jo-ha-kyu|Jo-Ha-Kyū 序破急]] | Three phases of pace; sanbon de ippon |
+| [[concepts/kaisho-gyosho-sosho|Kaisho, Gyōsho, Sōsho and Shu-Ha-Ri]] | Stages of learning and performance |
+| [[concepts/metsuke|Metsuke 目付 — the Use of the Eyes]] | Hoshi-mine-tani-yama; tachiai-no-shinbō |
+| [[concepts/training-roles|Names of the Training Roles]] | Kōtō/bōtō, uchikata/shikata, gōte/yawara-te |
+| [[concepts/kata-geiko|Kata-geiko and Shiai-geiko]] | 勢法 training vs sparring; Tsuki no Sho |
+| [[concepts/batto-and-iai|Battō and Iai]] | Why Tenshinryu does not say "iai" |
 
 ## People
 
@@ -101,6 +114,15 @@ Maintained by LLM ingest from official sources; human-reviewed.
 | [[reiho/technique-of-respect|The Technique of Respect]] | The technique of respect |
 | [[reiho/sewing-haori|A scene of sewing.]] | Sewing haori cords |
 | [[reiho/traditional-costume|Traditional Costume Photo Album (Data Version) Vol. 2!]] | Traditional costume reference |
+| [[reiho/zaho-seated-postures|Zahō — Seated Postures]] | Ōgiza, Koza, Hanza, Kiza, Yagura, Orishiki, Sonkyo (Kuwami Ch. 2) |
+| [[reiho/kikyo-chakuza|Kikyo and Chakuza — Rising and Sitting]] | Hakama-sabaki, standing up |
+| [[reiho/bows|Ritsurei and Zarei — Standing and Seated Bows]] | Shin/gyō/sō; 3 standing + 10 seated forms |
+| [[reiho/folding-fan|The Folding Fan (Sensu)]] | Carrying, jisen/chisen/kaisen/hasen, bow placement |
+| [[reiho/yakujo-kincho|Yakujō (Kinchō)]] | The oath opening and closing training |
+| [[reiho/ken-zazen|Ken-zazen 剣坐禅]] | Sword zazen before training |
+| [[reiho/okigatana|Okigatana 置刀 — Placing the Sword]] | In/Yō/An placements indoors |
+| [[reiho/sageto|Sagetō 提刀 — Carrying the Sword]] | Ordinary, ceremonial, and tachi forms |
+| [[reiho/taito-datto|Taitō 帯刀 and Dattō 脱刀]] | Wearing and removing; four honzashi styles |
 
 ## Philosophy
 

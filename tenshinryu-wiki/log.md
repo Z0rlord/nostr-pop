@@ -432,3 +432,12 @@ Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 - lint OK; build **5019** pages; `./deploy.sh relay-2 --skip-build` (~26m, Tailscale was down initially)
 - Staged **5343** files; docker recreate on :3014
 - Health (wiki.tenshinryu.xyz): `/` `/en/philosophy/onko-chishin` `/en/philosophy/spirit-of-chugi` `/fr/guides/start-here` `/ja/` — all 200
+
+## [2026-11-20] ingest | Tenshinryu Foundations and Principles — Chapter Two (Kuwami, 2026)
+
+- Raw: `raw/books/Tenshinryu_Foundations_and_Principles_2.meta.yaml` (metadata only; full text private per the book's copyright page — user-sent PDF, 139 pp.)
+- Pages created (EN, 23): `sources/kuwami-foundations-principles-ch2`; concepts: `spatial-terminology`, `hand-shapes`, `maai`, `tenouchi`, `koiguchi`, `sen`, `kiai-kiate`, `jo-ha-kyu`, `kaisho-gyosho-sosho`, `metsuke`, `training-roles`, `kata-geiko`, `batto-and-iai`; reiho: `zaho-seated-postures`, `kikyo-chakuza`, `bows`, `folding-fan`, `yakujo-kincho`, `ken-zazen`, `okigatana`, `sageto`, `taito-datto`
+- Pages updated: `index.md` (Concepts + Reiho tables), `reiho/_index.md`, `people/kuwami-masakumo.md`
+- Also: fixed `index.md` EN→JA cross-link label (was raw `../ja/index.md` link text, now 日本語)
+- Notes: first book source ingested (vol. 1 not yet). Book photos/diagrams not captured (text-only ingest). JA/es/el/fr/de/it counterparts pending — EN-only this round; JA is the natural next step. Gaps: volume 1 not available.
+- Deploy: Contabo VPS /opt/tenshinryu-wiki (post relay-2 migration)

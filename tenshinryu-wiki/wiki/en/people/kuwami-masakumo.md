@@ -8,7 +8,7 @@ sources:
   - raw/web/tenshinryu-net-page-806.md
   - raw/web/tenshinryu-net-page-132.md
   - raw/community/kuwami-spirit-of-chugi-2025-06.md
-updated: 2026-07-01
+updated: 2026-11-20
 ---
 # Kuwami Masakumo 鍬海政雲 — 10th Shike
 
@@ -36,5 +36,6 @@ updated: 2026-07-01
 - [[guides/teaching-beginners|Guidelines for Teaching Beginners]]
 - [[concepts/miden-kurai-no-koto|Miden Kurai-no-Koto]]
 - [[techniques/tachiai-12-kata|Tachiai Battojutsu 12 Kata]]
+- [[sources/kuwami-foundations-principles-ch2|Tenshinryu Foundations and Principles — Chapter Two (2026 book)]] — etiquette, basic movements, basic knowledge
 
 See also: [[people/nakamura-tenshin]], [[history/instructors]], [[community/tenshinryu-hyoho-facebook]]
