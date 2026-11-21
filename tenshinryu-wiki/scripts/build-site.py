@@ -21,7 +21,7 @@ ASSETS = ROOT / "site" / "assets"
 RAW_ASSETS = ROOT / "raw" / "assets"
 
 LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
-CSS_VERSION = "20261121a"
+CSS_VERSION = "20261121b"
 LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)

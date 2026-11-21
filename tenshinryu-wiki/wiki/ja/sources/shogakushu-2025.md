@@ -19,6 +19,8 @@ updated: 2026-11-20
 
 **外国語版との関係:** 外国語版は分冊となっており、[[sources/kuwami-foundations-principles-vol1|Vol. 1（歴史と思想）]]と[[sources/kuwami-foundations-principles-vol2|Vol. 2（礼法・基本動作・基礎知識）]]が刊行済み（英語）。武具に関する最終部の英訳は未刊行のため、日本語のみの掲載。
 
+**学習に:** [[learn/foundations|基礎トラック]]が歴史と思想の章（まえがき〜第二十二章）を順に案内します。各ステップの短い確認テストに合格すると次が開きます。進捗はお使いの端末にのみ保存されます。
+
 ## 全文（章別）
 
 - [[sources/shogakushu-2025/ch-00-maegaki|まえがき]]
