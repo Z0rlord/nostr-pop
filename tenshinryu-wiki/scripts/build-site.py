@@ -1109,6 +1109,71 @@ def graph_alternate_urls() -> dict[str, str]:
     return {lang: f"/{lang}/graph" for lang in LANGS}
 
 
+# Book chapter trees indexed as multi-chunk passages for the Ask guide.
+# Key: (lang, sources-subtree slug prefix). Other sources pages stay out of
+# the index (web clips etc. are lower-trust than the school books).
+BOOK_CHUNK_TREES = {
+    ("en", "sources/kuwami-foundations-principles-vol1"),
+    ("en", "sources/kuwami-foundations-principles-vol2"),
+    ("ja", "sources/shogakushu-2025"),
+}
+BOOK_CHUNK_MAX = 1100  # chars per passage chunk
+BOOK_CHUNK_BOOST = 8   # just under curated sections (10), above articles (-5)
+
+# Koden (門外不出, confidential teaching) pages: the guide may name the page
+# and route to it, but must not elaborate from its text.
+KODEN_SLUG_PREFIXES = (
+    "concepts/miden-kurai-no-koto",
+    "concepts/kurai",
+    "techniques/tachiai-12-kata",
+)
+
+
+def is_koden_slug(slug: str) -> bool:
+    return any(
+        slug == p or slug.startswith(p + "/") for p in KODEN_SLUG_PREFIXES
+    )
+
+
+def plain_for_index(body: str) -> str:
+    """Strip wiki/markdown syntax for index text (no length cap)."""
+    plain = re.sub(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", r"\1", body)
+    plain = re.sub(r"[#*_>`|\[\]()]", " ", plain)
+    return re.sub(r"\s+", " ", plain).strip()
+
+
+def chunk_passages(text: str, max_chars: int = BOOK_CHUNK_MAX) -> list[str]:
+    """Split plain text into passage chunks on paragraph/sentence boundaries."""
+    chunks: list[str] = []
+    cur = ""
+    for para in re.split(r"\n\s*\n", text):
+        para = " ".join(para.split())
+        if not para:
+            continue
+        if cur and len(cur) + len(para) + 1 > max_chars:
+            chunks.append(cur)
+            cur = ""
+        cur = f"{cur} {para}".strip()
+        while len(cur) > max_chars:
+            cut = cur.rfind("。", 0, max_chars)
+            if cut < max_chars // 2:
+                cut = cur.rfind(". ", 0, max_chars)
+            if cut < max_chars // 2:
+                cut = max_chars
+            chunks.append(cur[: cut + 1].strip())
+            cur = cur[cut + 1 :].strip()
+    if cur:
+        chunks.append(cur)
+    return [c for c in chunks if c]
+
+
+def book_tree_for(lang: str, slug: str) -> str | None:
+    for tree_lang, prefix in BOOK_CHUNK_TREES:
+        if lang == tree_lang and (slug == prefix or slug.startswith(prefix + "/")):
+            return prefix
+    return None
+
+
 def build_search_index(pages: dict[tuple[str, str], Page]) -> list[dict]:
     """Build search index with section metadata and ranking boosts."""
     section_boost = {
@@ -1133,28 +1198,49 @@ def build_search_index(pages: dict[tuple[str, str], Page]) -> list[dict]:
         if not md_path.is_file():
             continue
         section = slug.split("/")[0] if "/" in slug else slug
+        labels = section_labels(lang)
         if section == "sources":
+            tree = book_tree_for(lang, slug)
+            if tree is None:
+                continue
+            _, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
+            chunks = chunk_passages(plain_for_index(body))
+            for i, chunk in enumerate(chunks):
+                items.append(
+                    {
+                        "lang": lang,
+                        "title": (
+                            page.title
+                            if len(chunks) == 1
+                            else f"{page.title} · {i + 1}/{len(chunks)}"
+                        ),
+                        "url": page.html_path,
+                        "text": chunk,
+                        "section": "sources",
+                        "sectionLabel": labels.get("sources", "sources"),
+                        "boost": BOOK_CHUNK_BOOST,
+                        "book": True,
+                    }
+                )
             continue
         _, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
-        plain = re.sub(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", r"\1", body)
-        plain = re.sub(r"[#*_>`|\[\]()]", " ", plain)
-        plain = re.sub(r"\s+", " ", plain).strip()[:240]
+        plain = plain_for_index(body)[:240]
         boost = section_boost.get(section, 0)
         boost += essentials_boost.get(slug, 0)
         if section == "articles":
             boost -= 5
-        labels = section_labels(lang)
-        items.append(
-            {
-                "lang": lang,
-                "title": page.title,
-                "url": page.html_path,
-                "text": plain,
-                "section": section,
-                "sectionLabel": labels.get(section, section),
-                "boost": boost,
-            }
-        )
+        item = {
+            "lang": lang,
+            "title": page.title,
+            "url": page.html_path,
+            "text": plain,
+            "section": section,
+            "sectionLabel": labels.get(section, section),
+            "boost": boost,
+        }
+        if is_koden_slug(slug):
+            item["koden"] = True
+        items.append(item)
     return items
 
 

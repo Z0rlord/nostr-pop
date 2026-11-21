@@ -91,9 +91,60 @@ def normalize(text: str) -> str:
     return stripped.lower()
 
 
-def score_item(item: dict[str, Any], query: str) -> float:
-    terms = [t for t in normalize(query).split() if t]
-    if not terms:
+STOPWORDS_EN = set(
+    "a an the is are was were be been being what which who whom whose when "
+    "where why how do does did doing can could should would will shall may "
+    "might must i me my you your he his she her it its we our they their of "
+    "in on at to for with by from as and or but if then than so not no this "
+    "that these those there here about into over under between mean means "
+    "meaning explain tell please does do".split()
+)
+
+CJK_RE = re.compile(r"[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+
+
+def stem_en(term: str) -> str:
+    """Very light English stemming so 'holding' also matches 'hold'."""
+    if CJK_RE.search(term):
+        return term
+    if term.endswith("ies") and len(term) > 4:
+        return term[:-3] + "y"
+    for suf in ("ing", "es", "ed", "s"):
+        if term.endswith(suf) and len(term) > len(suf) + 2:
+            return term[: -len(suf)]
+    return term
+
+
+def query_terms(question: str) -> tuple[list[str], list[str]]:
+    """Split a question into content terms plus CJK bigrams.
+
+    English questions carry stopwords that drown real matches; Japanese
+    questions have no spaces, so whitespace tokens fail entirely. Bigrams
+    over the CJK characters give Japanese (and mixed) queries something
+    that can actually match page text.
+    """
+    norm = normalize(question)
+    terms: list[str] = []
+    for tok in norm.split():
+        tok = tok.strip(".,!?;:()[]\"'")
+        if not tok:
+            continue
+        if CJK_RE.search(tok):
+            terms.append(tok)
+        elif tok not in STOPWORDS_EN and len(tok) > 1:
+            terms.append(tok)
+            stem = stem_en(tok)
+            if stem != tok and stem not in terms:
+                terms.append(stem)
+    cjk = "".join(CJK_RE.findall(norm))
+    bigrams = [cjk[i : i + 2] for i in range(len(cjk) - 1)]
+    if cjk and not bigrams:
+        terms.append(cjk)  # single CJK character query
+    return terms, bigrams
+
+
+def score_item(item: dict[str, Any], terms: list[str], bigrams: list[str]) -> float:
+    if not terms and not bigrams:
         return 0.0
     title = normalize(item.get("title", ""))
     body = normalize(item.get("text", ""))
@@ -103,9 +154,18 @@ def score_item(item: dict[str, Any], query: str) -> float:
         if term in title:
             relevance += 100
             matched = True
-        if term in body:
+        elif term in body:
             relevance += 10
             matched = True
+    bigram_score = 0.0
+    for bg in bigrams:
+        if bg in title:
+            bigram_score += 30
+            matched = True
+        elif bg in body:
+            bigram_score += 3
+            matched = True
+    relevance += min(bigram_score, 150.0)
     if not matched:
         return 0.0
     return relevance + float(item.get("boost", 0)) * 0.01
@@ -123,17 +183,57 @@ def load_index() -> list[dict[str, Any]]:
     return _index_cache
 
 
+KODEN_NOTE = {
+    "en": "Confidential teaching (koden). Name the page and its general subject only; direct the student to their instructor for the content.",
+    "ja": "門外不出の伝授内容です。ページ名と概要のみ案内し、内容は指導者に確認するよう促してください。",
+    "es": "Enseñanza confidencial (koden). Nombra solo la página y su tema general; remite al estudiante a su instructor.",
+    "el": "Εμπιστευτική διδασκαλία (koden). Αναφέρετε μόνο τη σελίδα και το γενικό θέμα· παραπέμψτε τον μαθητή στον δάσκαλό του.",
+    "fr": "Enseignement confidentiel (koden). Nommez uniquement la page et son sujet général ; renvoyez l'élève vers son instructeur.",
+    "de": "Vertrauliche Lehre (Koden). Nennen Sie nur die Seite und ihr allgemeines Thema; verweisen Sie den Schüler an seinen Lehrer.",
+    "it": "Insegnamento riservato (koden). Nomina solo la pagina e il suo argomento generale; rimanda lo studente al suo istruttore.",
+}
+
+CORRECTION_RE = re.compile(
+    r"(am i (doing|holding|standing|sitting)|is my \w+ (correct|right|ok)|"
+    r"correct (my|me)|check my (form|posture|grip|stance)|"
+    r"fix my (form|posture|grip|stance)|"
+    r"できていますか|合っていますか|正しいですか|直してください|見てください)",
+    re.IGNORECASE,
+)
+
+CORRECTION_LINE = {
+    "en": "I can't judge form or correct technique — please confirm with your instructor.",
+    "ja": "型や技の正誤を判断することはできません。必ず指導者に確認してください。",
+    "es": "No puedo juzgar la forma ni corregir la técnica; confírmalo con tu instructor.",
+    "el": "Δεν μπορώ να κρίνω τη φόρμα ή να διορθώσω τεχνική· επιβεβαιώστε με τον δάσκαλό σας.",
+    "fr": "Je ne peux ni juger la forme ni corriger la technique — confirmez avec votre instructeur.",
+    "de": "Ich kann Form oder Technik nicht beurteilen — bitte bestätigen Sie dies mit Ihrem Lehrer.",
+    "it": "Non posso valutare la forma né correggere la tecnica: conferma con il tuo istruttore.",
+}
+
+
 def retrieve_chunks(question: str, lang: str, top_k: int = TOP_K) -> list[dict[str, Any]]:
     index = load_index()
+    terms, bigrams = query_terms(question)
     scored: list[tuple[float, dict[str, Any]]] = []
     for item in index:
-        if item.get("lang") != lang or item.get("section") == "sources":
+        if item.get("lang") != lang:
             continue
-        s = score_item(item, question)
+        if item.get("section") == "sources" and not item.get("book"):
+            continue
+        s = score_item(item, terms, bigrams)
+        if item.get("section") == "articles":
+            s -= 40.0  # blog posts lose to curated pages and book chapters
         if s > 0:
             scored.append((s, item))
     scored.sort(key=lambda x: x[0], reverse=True)
-    return [item for _, item in scored[:top_k]]
+    results: list[dict[str, Any]] = []
+    for _, item in scored[:top_k]:
+        if item.get("koden"):
+            item = dict(item)
+            item["text"] = KODEN_NOTE.get(lang, KODEN_NOTE["en"])
+        results.append(item)
+    return results
 
 
 def check_rate_limit(client_ip: str) -> None:
@@ -174,6 +274,10 @@ Rules:
 - Write the answer in {answer_lang}.
 - Keep answers concise (2–5 sentences for simple questions).
 - When you use a fact, cite the wiki page title in parentheses, e.g. (Start Here).
+- Never quote more than 25 words verbatim from any single source; paraphrase and cite instead.
+- If the student asks whether they are doing something correctly, or asks you to judge or correct their form, posture, grip, or technique, do not evaluate or correct them: point to the relevant passage and tell them to confirm with their instructor.
+- Excerpts marked as confidential teaching (koden) must only be named, never explained; direct the student to their instructor.
+- When an excerpt comes from one of the school books, name the book and chapter so the student knows what to read.
 - If excerpts are insufficient, say what is missing and suggest which wiki section to read.
 - End with one short reminder to verify with a qualified instructor.
 
@@ -278,10 +382,16 @@ async def ask(body: AskRequest, request: Request) -> AskResponse:
     prompt = build_prompt(question, body.lang, chunks)
     answer = await call_gemini(prompt)
 
-    citations = [
-        Citation(title=c["title"], url=c["url"])
-        for c in chunks
-    ]
+    if CORRECTION_RE.search(question):
+        answer = answer + "\n\n" + CORRECTION_LINE.get(body.lang, CORRECTION_LINE["en"])
+
+    seen_urls: set[str] = set()
+    citations: list[Citation] = []
+    for c in chunks:
+        if c["url"] in seen_urls:
+            continue
+        seen_urls.add(c["url"])
+        citations.append(Citation(title=c["title"].split(" · ")[0], url=c["url"]))
     disclaimer = DISCLAIMER.get(body.lang, DISCLAIMER["en"])
     return AskResponse(answer=answer, citations=citations, disclaimer=disclaimer)
 
