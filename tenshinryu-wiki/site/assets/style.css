@@ -1102,3 +1102,34 @@ article hr {
   height: 100%;
   border: 0;
 }
+
+/* Learn track (Phase 2 curriculum) */
+.learn-track-list { list-style: none; padding: 0; margin: 1.25rem 0; }
+.learn-track-list li { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; padding: .45rem .6rem; border: 1px solid var(--border); border-radius: 6px; margin-bottom: .4rem; background: #fff; }
+.learn-track-list li.learn-locked { opacity: .55; }
+.learn-track-list li.learn-passed { border-color: #b8d9c0; background: #f4faf5; }
+.learn-badge { font-size: .8rem; color: var(--muted); white-space: nowrap; }
+.learn-passed .learn-badge { color: #2e7d43; }
+.learn-progress-line { color: var(--muted); }
+.learn-reset { font: inherit; font-size: .85rem; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: .15rem .6rem; cursor: pointer; }
+.learn-check-box { border: 1px solid var(--border); border-radius: 8px; background: #fff; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.learn-check-title { font-weight: 600; margin: 0 0 .25rem; }
+.learn-check-note { color: var(--muted); font-size: .9rem; margin: 0 0 1rem; }
+.learn-q { margin-bottom: 1.1rem; }
+.learn-q-text { font-weight: 600; margin: 0 0 .5rem; }
+.learn-choices { display: flex; flex-direction: column; gap: .4rem; }
+.learn-choice { font: inherit; text-align: left; padding: .5rem .75rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); cursor: pointer; }
+.learn-choice:hover:not(:disabled) { border-color: var(--accent); }
+.learn-choice:disabled { cursor: default; }
+.learn-choice.learn-correct { border-color: #2e7d43; background: #eef7ef; }
+.learn-choice.learn-wrong { border-color: #c9a0a0; background: #faf1f1; color: var(--muted); text-decoration: line-through; }
+.learn-ref { font-size: .85rem; color: var(--muted); margin: .45rem 0 0; }
+.learn-banner { margin: .75rem 0 0; font-weight: 600; }
+.learn-banner:empty { display: none; }
+.learn-banner.learn-pass { color: #2e7d43; }
+.learn-banner.learn-try { color: var(--accent); font-weight: 400; }
+.learn-passed { color: #2e7d43; font-weight: 600; }
+.learn-locked { color: var(--muted); }
+.learn-retake { font: inherit; font-size: .85rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: .2rem .7rem; cursor: pointer; }
+.learn-stepnav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; font-size: .95rem; }
+.learn-complete-open, .learn-complete-locked { border: 1px solid var(--border); border-radius: 8px; background: #fff; padding: 1rem 1.25rem; }

@@ -18,6 +18,8 @@ updated: 2026-11-20
 
 **Scope:** Foreign-language volume 1 of the revised edition of the 2012 introductory book for beginners ([[sources/shogakushu-2025|天心流初学集 改訂版]]). Covers the **history and philosophy** of Tenshinryu: its founding and naming, the Kōgan, the school after the Meiji Restoration, the lineage to the 10th Shike, the Hyoho system, the Yagyū family, Bushidō, and the school's values. Volume 2 covers etiquette, movements, and training knowledge; the equipment section of the Japanese original has no English edition yet.
 
+**Studying this volume?** The [[learn/foundations|Foundations Track]] guides you through these chapters in order, with a short comprehension check before each unlocks.
+
 ## Full text (by chapter)
 
 - [[sources/kuwami-foundations-principles-vol1/ch-00-preface|Preface]]
