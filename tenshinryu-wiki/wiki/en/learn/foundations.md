@@ -8,7 +8,7 @@ updated: 2026-11-21
 
 # Foundations Track — History and Philosophy (Vol. 1)
 
-A guided path through *Tenshinryu: Foundations and Principles, Volume 1* — the school's own account of its history and philosophy, published here in full with the author's permission.
+A guided path through *Tenshinryu: Foundations and Principles, Volume 1* — the school's own account of its history and philosophy.
 
 **How it works:** 21 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Your progress is stored on this device only — no account, nothing sent anywhere.
 
