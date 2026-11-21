@@ -22,21 +22,21 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Which set makes up the Five Constant Virtues (gojō no toku)?",
    "choices": [
-    "Jin (benevolence), Gi (righteousness), Rei (propriety), Chi (wisdom), Shin (faithfulness)",
+    "Sword, spear, bow, horse, swimming",
     "Courage, honor, duty, loyalty, strength",
-    "Heaven, earth, water, fire, wind",
-    "Sword, spear, bow, horse, swimming"
+    "Jin (benevolence), Gi (righteousness), Rei (propriety), Chi (wisdom), Shin (faithfulness)",
+    "Heaven, earth, water, fire, wind"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 23: the gojō no toku from Confucian teaching, emphasized under the Tokugawa shogunate's Neo-Confucianism."
   },
   {
    "q": "What was said to symbolize the Five Constant Virtues on a warrior's clothing?",
    "choices": [
     "The number of pleats on the front of the hakama",
-    "The length of the sleeves",
     "The color of the obi",
-    "The number of crests on the haori"
+    "The number of crests on the haori",
+    "The length of the sleeves"
    ],
    "answer": 0,
    "ref": "Ch. 23: the front pleats of the hakama matched the number of the virtues; wearing hakama was a warrior privilege."
@@ -44,12 +44,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What did Yagyū Sekishūsai write about the virtues in his Hyōhō Hyakushu?",
    "choices": [
-    "Do not grant the treasured license of martial strategy to anyone who lacks the spirit of the Five Constant Virtues",
     "Technique alone makes the master",
-    "The virtues matter only in peacetime",
-    "Wisdom outranks all other virtues"
+    "Wisdom outranks all other virtues",
+    "Do not grant the treasured license of martial strategy to anyone who lacks the spirit of the Five Constant Virtues",
+    "The virtues matter only in peacetime"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 23 quotes both poems: cultivate jin-gi-rei-chi-shin always, and grant no license to one who lacks them."
   }
  ]

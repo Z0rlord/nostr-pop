@@ -22,45 +22,45 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "The name \"Kōgan\" (光願) literally means what?",
    "choices": [
+    "Honor and glory",
     "Wishing for light — a hope that war would end and peace follow",
-    "The shining sword",
     "The shogun's eye",
-    "Honor and glory"
+    "The shining sword"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 2: \"Kōgan literally means 'wishing for light'… 'light' symbolizes peace.\""
   },
   {
    "q": "Because their duties were largely clandestine, Kōgan warriors were also known as what?",
    "choices": [
-    "Eishi — shadow warriors",
     "Hatamoto — bannermen",
+    "Kenshi — sword saints",
     "Rōnin — wave men",
-    "Kenshi — sword saints"
+    "Eishi — shadow warriors"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 2: they called themselves Bakushi and, for their clandestine duties, were also known as Eishi, \"shadow warriors.\""
   },
   {
    "q": "How was a Kōgan unit structured?",
    "choices": [
+    "Pairs of swordsmen assigned to city gates",
     "Five members led by a Kumigashira, named in I-ro-ha kana order",
     "Ten members led by a daimyō",
-    "Pairs of swordsmen assigned to city gates",
     "A single master with twelve disciples"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 2: small units of five — a Kumigashira plus four members — named I-gumi, Ro-gumi, Ha-gumi and so on."
   },
   {
    "q": "What ultimately happened to the Kōgan?",
    "choices": [
+    "It still operates today",
     "Completely dismantled by the time of the eighth shōgun, Yoshimune",
     "It became the Tokyo police force",
-    "It still operates today",
     "It merged into the imperial court"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 2: downsized under the fifth shōgun Tsunayoshi; by Yoshimune's time, completely dismantled, some members reassigned as Gokenin or into the Oniwaban."
   }
  ]

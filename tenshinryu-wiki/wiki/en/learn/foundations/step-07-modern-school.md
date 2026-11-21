@@ -22,34 +22,34 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Under what name were Japanese domestic trademark rights secured in 2015?",
    "choices": [
-    "Edo Yagyū Tenshinryu Hyōhō",
     "Tenshin Ittō-ryū",
     "Kōgan Bujutsu",
+    "Edo Yagyū Tenshinryu Hyōhō",
     "Shinkage-ryū"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 6: trademark rights secured in 2015 as Edo Yagyū Tenshinryu Hyoho, after advisors warned of infringement risk."
   },
   {
    "q": "When did Tenshinryu Online launch?",
    "choices": [
-    "2019, the first year of Reiwa",
+    "2008",
     "2015",
     "2021, during the pandemic",
-    "2008"
+    "2019, the first year of Reiwa"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 6: 2019 — the same year the NPO became a General Incorporated Association."
   },
   {
    "q": "Why was the title of 11th Shike passed to Ide Ryusetsu Sensei in 2019, while the 10th Shike was still active?",
    "choices": [
+    "Tenshin Sensei ordered it as punishment",
     "Without a formally recognized successor, the lineage's very existence could be threatened by unforeseen events",
     "Kuwami wished to retire",
-    "Tenshin Sensei ordered it as punishment",
     "It was required for the trademark"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 6: after illness from overwork, continuity required a designated successor — \"traditions are immutable in essence, but not indestructible.\""
   }
  ]

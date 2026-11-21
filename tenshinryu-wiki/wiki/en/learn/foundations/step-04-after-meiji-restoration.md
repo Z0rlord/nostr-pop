@@ -22,32 +22,32 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "After Tenshinryu's succession proved difficult, what did Ishii Seizō Sensei found instead?",
    "choices": [
-    "The Kengikai, teaching Ittō-ryū and stage sword techniques",
-    "The Kōdōkan",
+    "The Oniwaban",
     "A kendō federation",
-    "The Oniwaban"
+    "The Kōdōkan",
+    "The Kengikai, teaching Ittō-ryū and stage sword techniques"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 3: he founded the Kengikai, teaching Ittō-ryū and stage sword techniques to tateshi and actors."
   },
   {
    "q": "How did Ishii Sensei's encounter with the young Nakamura (later Tenshin Sensei) begin?",
    "choices": [
-    "Ishii noticed him dressed in traditional Japanese clothing on his way to practice and spoke to him",
-    "Nakamura challenged Ishii at a tournament",
     "They met at the Mitaka Police Station",
-    "Nakamura answered a newspaper advertisement"
+    "Nakamura answered a newspaper advertisement",
+    "Ishii noticed him dressed in traditional Japanese clothing on his way to practice and spoke to him",
+    "Nakamura challenged Ishii at a tournament"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 3: Ishii approached Nakamura after noticing him in traditional dress on his way to iaidō practice."
   },
   {
    "q": "Why was Tenshin Sensei ordered to dissolve Tenshinryu and banned from teaching?",
    "choices": [
     "A public brawl in a park soon after the Koken Hozon Fukyūkai was founded",
-    "Teaching without a dan rank",
+    "Publishing the Kōgan roster",
     "A dispute over the Yagyū family crest",
-    "Publishing the Kōgan roster"
+    "Teaching without a dan rank"
    ],
    "answer": 0,
    "ref": "Ch. 3: after the brawl he was summoned to Mitaka Police Station, ordered to dissolve the group, and banned from teaching."
@@ -55,12 +55,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What did Ishii Sensei's written will demand of Tenshin Sensei?",
    "choices": [
-    "Never disclose Ishii Sensei's background or the full origins of the style",
-    "Burn all densho within a year",
+    "Move the school to Kyoto",
     "Adopt the dan-kyū system",
-    "Move the school to Kyoto"
+    "Burn all densho within a year",
+    "Never disclose Ishii Sensei's background or the full origins of the style"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 3: the will required that Ishii's background and the style's full origins never be disclosed."
   }
  ]

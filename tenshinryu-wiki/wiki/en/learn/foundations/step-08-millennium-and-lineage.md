@@ -23,34 +23,34 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What is the reasoning behind the Tenshinryu Millennium Project?",
    "choices": [
-    "Aim for a millennium and the tradition may survive at least a century; aim for a century and it may last only decades",
-    "The art is contractually funded for 1,000 years",
+    "It marks a prediction about the return of the samurai",
     "Each Shike must serve exactly 100 years",
-    "It marks a prediction about the return of the samurai"
+    "The art is contractually funded for 1,000 years",
+    "Aim for a millennium and the tradition may survive at least a century; aim for a century and it may last only decades"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 7: aiming high is what gives the tradition a realistic chance at even a century."
   },
   {
    "q": "In Tenshinryu, the successor of the style is called the Shike. Where does that term come from?",
    "choices": [
-    "Zen Buddhism — the master who receives legitimate transmission of the Buddha's teachings",
-    "The Tokugawa court rank system",
     "The Kōgan unit structure",
-    "A Meiji-era law"
+    "A Meiji-era law",
+    "Zen Buddhism — the master who receives legitimate transmission of the Buddha's teachings",
+    "The Tokugawa court rank system"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 8: Shike originates in Zen Buddhism (Shihō transmission); many Edo-period styles adopted it. Tenshinryu deliberately reverted to it from the modern Sōke."
   },
   {
    "q": "Which sequence matches the recorded lineage (Denkei)?",
    "choices": [
-    "Tokizawa Yahei (1st) → … → Ishii Seizō (8th) → Nakamura Tenshin (9th) → Kuwami Masakumo (10th) → Ide Ryusetsu (11th)",
     "Yagyū Munenori (1st) → Tokizawa Yahei (2nd) → Nakamura Tenshin (8th)",
-    "Kamiizumi Nobutsuna (1st) → Ishii Seizō (2nd) → Kuwami Masakumo (3rd)",
-    "Kunitomi Chūzaemon (1st) → Tokizawa Yahei (9th) → Ide Ryusetsu (10th)"
+    "Tokizawa Yahei (1st) → … → Ishii Seizō (8th) → Nakamura Tenshin (9th) → Kuwami Masakumo (10th) → Ide Ryusetsu (11th)",
+    "Kunitomi Chūzaemon (1st) → Tokizawa Yahei (9th) → Ide Ryusetsu (10th)",
+    "Kamiizumi Nobutsuna (1st) → Ishii Seizō (2nd) → Kuwami Masakumo (3rd)"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 8: Munenori is Enso (distant ancestor), not the founder; the recorded line runs Tokizawa → Kunitomi generations → Ishii → Nakamura → Kuwami → Ide."
   }
  ]

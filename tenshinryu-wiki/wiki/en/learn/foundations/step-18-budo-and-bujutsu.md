@@ -22,32 +22,32 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "When did the \"-dō\" (Way) naming of martial arts begin?",
    "choices": [
-    "After the Meiji Restoration, modeled on arts like kadō, sadō and kōdō",
     "In the Kamakura period",
-    "During the Kan'ei era",
-    "After World War II"
+    "After World War II",
+    "After the Meiji Restoration, modeled on arts like kadō, sadō and kōdō",
+    "During the Kan'ei era"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 20: the dō suffix began after Meiji; Kanō Jigorō's renaming of jūjutsu to jūdō is cited as the origin of the shift."
   },
   {
    "q": "What was the purpose of changing \"jutsu\" (technique) to \"dō\" (way)?",
    "choices": [
-    "To add a moral and educational dimension and preserve martial traditions after the samurai class was abolished",
-    "To make techniques more lethal",
     "To comply with a government ban",
-    "To attract foreign students"
+    "To make techniques more lethal",
+    "To attract foreign students",
+    "To add a moral and educational dimension and preserve martial traditions after the samurai class was abolished"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 20: the change emphasized moral development (tokuiku) alongside physical training — a deliberate preservation strategy."
   },
   {
    "q": "Which terms does Tenshinryu prefer for itself, and why?",
    "choices": [
     "Bujutsu or bugei (koryū bujutsu when distinction is needed), because Ishii Sensei did not favor \"kobudō\"",
-    "Kobudō, because it is the oldest term",
     "Budō, because it sounds modern",
-    "Kendō, as an umbrella term"
+    "Kendō, as an umbrella term",
+    "Kobudō, because it is the oldest term"
    ],
    "answer": 0,
    "ref": "Ch. 20: \"budō\" is a modern coinage, so \"kobudō\" is historically misapplied; out of respect for Ishii Sensei, Tenshinryu says bujutsu/bugei."

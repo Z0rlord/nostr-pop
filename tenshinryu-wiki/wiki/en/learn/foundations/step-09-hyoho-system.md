@@ -22,21 +22,21 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What does \"Bugei Jūhappan\" refer to?",
    "choices": [
+    "The eighteen provinces where Kōgan operated",
     "The eighteen categories of martial skills considered essential for warriors",
-    "The eighteen founders of Tenshinryu",
     "Eighteen secret sword techniques",
-    "The eighteen provinces where Kōgan operated"
+    "The eighteen founders of Tenshinryu"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 9: Bugei Jūhappan, the Eighteen Martial Arts — by extension, all martial disciplines."
   },
   {
    "q": "What is Tenshinryu's central technical focus within its wide system?",
    "choices": [
     "Battōjutsu and kenjutsu, within a systematically organized range of weapons and strategy",
+    "Archery and horsemanship",
     "Only spear techniques",
-    "Unarmed grappling above all",
-    "Archery and horsemanship"
+    "Unarmed grappling above all"
    ],
    "answer": 0,
    "ref": "Ch. 9: the focus is battōjutsu and kenjutsu, with weapons and strategy transmitted as one integrated system."
@@ -44,12 +44,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What does the chapter say about pursuing perfection as the school's goal?",
    "choices": [
-    "Tenshinryu does not pursue perfection; practitioners of the past needed usable skill for their duties, so accelerated training was essential",
     "Perfection is expected within ten years",
+    "Perfection is achieved through kata alone",
     "Perfection is required before any license",
-    "Perfection is achieved through kata alone"
+    "Tenshinryu does not pursue perfection; practitioners of the past needed usable skill for their duties, so accelerated training was essential"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 9: the priority was applying the art in duty, not producing perfect masters over thirty or forty years."
   }
  ]

@@ -22,21 +22,21 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "The philosophy of Denchū-Tōhō Saya-no-uchi (殿中刀法鞘ノ中) emphasizes what?",
    "choices": [
-    "Resolving confrontations without drawing the sword",
     "Drawing faster than any opponent",
-    "Fighting indoors only",
-    "Keeping the sword sharp at all times"
+    "Resolving confrontations without drawing the sword",
+    "Keeping the sword sharp at all times",
+    "Fighting indoors only"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 11: the philosophy of \"the sword remaining in its sheath\" — resolving confrontation without drawing."
   },
   {
    "q": "What was Ishii Sensei's most likely meaning in calling Tenshinryu \"a style different from others\"?",
    "choices": [
     "Its purpose: created for the Kōgan's public service to the shogunate, not one founder's personal ambition",
-    "It has more kata than any other style",
     "It was the first style to use bamboo swords",
-    "It never lost a match"
+    "It never lost a match",
+    "It has more kata than any other style"
    ],
    "answer": 0,
    "ref": "Ch. 11: most styles begin in personal ambition; Tenshinryu was military training for public service — \"a martial art created for the nation's sake, a true Katsujinken.\""
@@ -44,12 +44,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "According to the chapter, anyone joining Tenshinryu — even a high dan holder from another style — is regarded as what?",
    "choices": [
-    "A beginner",
-    "An instructor candidate",
     "A visiting master",
-    "Exempt from fundamentals"
+    "An instructor candidate",
+    "Exempt from fundamentals",
+    "A beginner"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "The chapter's note: even an eighth dan from elsewhere is a beginner within Tenshinryu."
   }
  ]

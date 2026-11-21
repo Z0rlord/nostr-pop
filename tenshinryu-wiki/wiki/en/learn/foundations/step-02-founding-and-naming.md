@@ -22,34 +22,34 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Tenshinryu was founded in which period?",
    "choices": [
-    "The early Edo period, during the Kan'ei era",
     "The late Sengoku period",
     "The Meiji era",
+    "The early Edo period, during the Kan'ei era",
     "The Muromachi period"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 1: \"founded in the early Edo period, during the Kan'ei era.\""
   },
   {
    "q": "Who is the founder (Ryūso) of Tenshinryu?",
    "choices": [
-    "Tokizawa Yahei",
+    "Ishii Seizō",
     "Yagyū Munenori",
     "Yagyū Sekishūsai",
-    "Ishii Seizō"
+    "Tokizawa Yahei"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 1: \"Its founder (Ryūso), Tokizawa Yahei, studied Shinkage-ryū under Yagyū Sekishūsai.\""
   },
   {
    "q": "The name 天心流 (Tenshinryu) was chosen to mean what?",
    "choices": [
-    "A style that follows the will of Ten",
     "The style of Ten's vassals",
+    "A style that follows the will of Ten",
     "The style of heavenly sword technique",
     "The style of the Emperor's guard"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "The \"Ten's vassals\" reading (天臣流) was proposed first and rejected for being too obvious; 天心流, \"a style that follows the will of Ten,\" was chosen."
   }
  ]

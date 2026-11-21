@@ -22,45 +22,45 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Who founded Shinkage-ryū?",
    "choices": [
-    "Kamiizumi Nobutsuna",
     "Yagyū Sekishūsai",
-    "Tsukahara Bokuden",
-    "Itō Ittōsai"
+    "Itō Ittōsai",
+    "Kamiizumi Nobutsuna",
+    "Tsukahara Bokuden"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 13: Shinkage-ryū was founded by the strategist Kamiizumi Nobutsuna in the late Sengoku period."
   },
   {
    "q": "What does the name \"Shinkage-ryū\" (新陰流) mean?",
    "choices": [
+    "Hidden sword style",
     "New Kage-ryū — named to signify its development from Kage-ryū",
-    "The shadow of the gods",
     "The style of the new moon",
-    "Hidden sword style"
+    "The shadow of the gods"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 13: Kamiizumi studied under Aisu Ikōsai of Kage-ryū; \"Shin\" means new — \"New Kage-ryū.\""
   },
   {
    "q": "For what did Kamiizumi award Sekishūsai the Kaiden-Inka in 1565?",
    "choices": [
-    "The Mutōdori techniques Sekishūsai developed while Kamiizumi was away",
     "Winning three matches against him",
+    "The Mutōdori techniques Sekishūsai developed while Kamiizumi was away",
     "Defeating Hōzōin In-ei",
     "Compiling the Heihō Kadensho"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 13: Sekishūsai demonstrated the Mutōdori he had developed and received Kaiden-Inka; later the \"Ikkoku Ichinin\" inka in 1571."
   },
   {
    "q": "Into which two lines did the Yagyū tradition split?",
    "choices": [
-    "Edo Yagyū and Owari Yagyū",
+    "Takeda and Tokugawa branches",
     "Kanto and Kansai Shinkage",
-    "Jūbei-ryū and Munenori-ryū",
-    "Takeda and Tokugawa branches"
+    "Edo Yagyū and Owari Yagyū",
+    "Jūbei-ryū and Munenori-ryū"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 13: the lineage split into Edo Yagyū (Munenori) and Owari Yagyū (Toshitoshi). Tenshinryu traces to Edo Yagyū and Munenori."
   }
  ]

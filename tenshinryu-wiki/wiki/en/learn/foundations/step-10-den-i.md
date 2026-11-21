@@ -33,31 +33,31 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What is Den-i?",
    "choices": [
+    "A form of tournament seeding",
     "\"Transmitted rank\" — ranks conveyed through scrolls or certificates rather than belts or numbers",
-    "A colored-belt system from Okinawa",
     "A tax register for dōjō",
-    "A form of tournament seeding"
+    "A colored-belt system from Okinawa"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 10: Den-i (伝位), the Edo-period system based on issuance of certificates or scrolls; Tenshinryu keeps it out of respect for tradition."
   },
   {
    "q": "Which is the correct order of Tenshinryu's transmission levels?",
    "choices": [
+    "White belt → brown belt → black belt",
     "Hatsu-yurushi → Naka-yurushi → Oku-yurushi → Kirigami → Mokuroku → Menkyo → Kaiden/Sōden",
-    "Kirigami → Mokuroku → Hatsu-yurushi → Menkyo",
     "Menkyo → Kaiden → Mokuroku → Kirigami",
-    "White belt → brown belt → black belt"
+    "Kirigami → Mokuroku → Hatsu-yurushi → Menkyo"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 10 lists the seven-level system in this order; Kaiden goes to a single successor, so six practical levels."
   },
   {
    "q": "What is Tenshinryu's stated position on adopting the dan-kyū system?",
    "choices": [
     "It will not adopt it, now or in the future, out of pride in its traditions",
-    "It plans to adopt it by 2030",
     "It uses it only for children",
+    "It plans to adopt it by 2030",
     "It lets each instructor decide"
    ],
    "answer": 0,

@@ -22,21 +22,21 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Why did the Yagyū family fall into ruin in 1585?",
    "choices": [
-    "They were reported for concealing rice fields during the Taikō Land Survey, and their domain was confiscated",
-    "They lost at the Battle of Sekigahara",
     "They refused to serve Toyotomi Hideyoshi in Korea",
+    "They lost at the Battle of Sekigahara",
+    "They were reported for concealing rice fields during the Taikō Land Survey, and their domain was confiscated",
     "Their castle burned down"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 14: concealment found in the Taikō land survey; the 2,000-goku domain was confiscated."
   },
   {
    "q": "What so impressed Tokugawa Ieyasu in 1594 that he presented a written pledge and became Sekishūsai's disciple?",
    "choices": [
     "Sekishūsai's demonstration of Mutōdori — disarming an opponent bare-handed",
-    "A seven-man sword match",
     "A lecture on Sun Tzu",
-    "The forging of a famous blade"
+    "The forging of a famous blade",
+    "A seven-man sword match"
    ],
    "answer": 0,
    "ref": "Ch. 14: Ieyasu took up a wooden sword himself to experience Mutōdori and became Sekishūsai's disciple on the spot."
@@ -44,12 +44,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "When Ieyasu asked Sekishūsai to enter his service, what happened?",
    "choices": [
-    "Sekishūsai declined citing age, and recommended his son Munenori, whom Ieyasu accepted",
-    "He accepted and moved to Edo",
+    "He sent Kamiizumi instead",
     "He refused and was exiled",
-    "He sent Kamiizumi instead"
+    "He accepted and moved to Edo",
+    "Sekishūsai declined citing age, and recommended his son Munenori, whom Ieyasu accepted"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 14: the pivotal link between the Yagyū and the Tokugawa house began with Munenori's service."
   }
  ]

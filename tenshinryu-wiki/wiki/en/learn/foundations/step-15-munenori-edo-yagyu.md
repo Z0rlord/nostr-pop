@@ -22,12 +22,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "At the Summer Campaign of Osaka in 1615, Munenori is said to have done what?",
    "choices": [
+    "Defected to the Toyotomi side",
     "Cut down seven hadaka musha — lightly armored suicide attackers — who approached Hidetada",
-    "Captured Osaka Castle alone",
     "Negotiated the castle's surrender",
-    "Defected to the Toyotomi side"
+    "Captured Osaka Castle alone"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 15: seven hadaka musha; the Tenshinryu training method Toppei-Gaeshi is said to originate from this episode."
   },
   {
@@ -44,12 +44,12 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "The Yagyū family's secondary crest (uramon), taken after the Sakazaki Incident, is known as what?",
    "choices": [
-    "Nigaigasa — \"two hats\" — later called the Yagyū Kasa",
-    "Aoi no Gomon",
+    "The chrysanthemum seal",
     "Waremokō-ni-Suzume",
-    "The chrysanthemum seal"
+    "Aoi no Gomon",
+    "Nigaigasa — \"two hats\" — later called the Yagyū Kasa"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 15: the Nigaigasa became the Yagyū Kasa; the official jōmon crest is Waremokō-ni-Suzume (sparrow with the waremokō plant)."
   }
  ]

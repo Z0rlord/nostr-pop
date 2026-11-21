@@ -22,32 +22,32 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "When did Kuwami Masakumo enter Tenshinryu?",
    "choices": [
-    "March 1, 2008",
+    "January 1, 2007",
     "February 11, 2012",
     "March 11, 2011",
-    "January 1, 2007"
+    "March 1, 2008"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 5: \"on March 1, 2008, I (Kuwami Masakumo) entered Tenshinryu.\""
   },
   {
    "q": "Why had Tenshin Sensei stubbornly refused a website for nearly ten months?",
    "choices": [
-    "He believed the state's prohibition on teaching still bound him",
     "He distrusted computers",
-    "The NPO forbade it",
-    "He wanted to charge for access first"
+    "He believed the state's prohibition on teaching still bound him",
+    "He wanted to charge for access first",
+    "The NPO forbade it"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 5: \"In truth, Tenshinryu is not supposed to be taught… the state has prohibited me.\" The directive proved to carry no legal force."
   },
   {
    "q": "On what date was Kuwami formally granted Sōden Inka (full transmission)?",
    "choices": [
     "February 11, 2012 — National Foundation Day",
-    "March 1, 2008",
     "January 1, 2019",
-    "April 1, 2015"
+    "April 1, 2015",
+    "March 1, 2008"
    ],
    "answer": 0,
    "ref": "Ch. 5: Sōden Inka on February 11, 2012, after the Great East Japan Earthquake heightened Tenshin Sensei's urgency."

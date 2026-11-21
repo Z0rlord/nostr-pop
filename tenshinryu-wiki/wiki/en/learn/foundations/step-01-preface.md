@@ -23,9 +23,9 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
    "q": "The saying \"tatami suiren\" — swimming practice on tatami mats — is used to make which point?",
    "choices": [
     "No matter how diligently you practice on dry land, you cannot learn without entering the water",
-    "Traditional training must always happen on tatami",
+    "Theory should be avoided entirely in martial arts",
     "Swimming is part of the Tenshinryu curriculum",
-    "Theory should be avoided entirely in martial arts"
+    "Traditional training must always happen on tatami"
    ],
    "answer": 0,
    "ref": "The preface: theory without practice is criticized, but practice without correct knowledge leads to deviation."
@@ -33,23 +33,23 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Training without a solid foundation of theory and understanding is compared to what?",
    "choices": [
-    "Walking an unmarked trail without a map",
-    "Swimming against the current",
     "Building a house without a roof",
-    "Sailing without wind"
+    "Swimming against the current",
+    "Sailing without wind",
+    "Walking an unmarked trail without a map"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Preface: \"like walking an unmarked trail without a map.\""
   },
   {
    "q": "Who wrote Foundations and Principles, and in what role?",
    "choices": [
-    "Kuwami Masakumo, 10th Shike of Tenshinryu Hyoho",
-    "Nakamura Tenshin, 9th Shike",
     "Tokizawa Yahei, the founder",
-    "Yagyū Munenori"
+    "Nakamura Tenshin, 9th Shike",
+    "Yagyū Munenori",
+    "Kuwami Masakumo, 10th Shike of Tenshinryu Hyoho"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "The preface is signed \"Tenshinryu Hyoho, 10th Shike, Kuwami Masakumo,\" year 7 of Reiwa (2025)."
   }
  ]

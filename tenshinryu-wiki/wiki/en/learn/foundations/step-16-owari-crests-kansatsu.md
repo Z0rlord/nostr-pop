@@ -24,45 +24,45 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "Who established the Owari Yagyū line as swordsmanship instructor to Tokugawa Yoshinao?",
    "choices": [
-    "Yagyū Toshitoshi (Hyōgonosuke), grandson of Sekishūsai",
-    "Yagyū Munenori",
     "Yagyū Jūbei",
-    "Nagaoka Fusashige"
+    "Yagyū Munenori",
+    "Nagaoka Fusashige",
+    "Yagyū Toshitoshi (Hyōgonosuke), grandson of Sekishūsai"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 16: Toshitoshi began serving the Owari Domain in 1615; licenses later alternated between the domain lord and the Yagyū family."
   },
   {
    "q": "What did a Kōgan samurai's kansatsu (license tag) look like?",
    "choices": [
+    "A round bronze medal",
     "Pentagonal, resembling a shōgi piece, small enough to fit in the hand",
     "A long scroll carried in the sleeve",
-    "A round bronze medal",
     "A folded paper sealed with wax"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 17: pentagonal like a shōgi piece, about three sun (~9 cm); it bore the Aoi no Gomon, the Yagyū-gasa, and the kaō of Iemitsu and Munenori."
   },
   {
    "q": "Why was the kansatsu made thin and fragile?",
    "choices": [
-    "So it could be easily broken and discarded, ensuring it could never be stolen or misused",
     "To save expensive materials",
-    "So it could be hidden inside a sword handle",
-    "So it would dissolve in rain"
+    "So it could be easily broken and discarded, ensuring it could never be stolen or misused",
+    "So it would dissolve in rain",
+    "So it could be hidden inside a sword handle"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 18: a tag bearing the Aoi no Gomon and the shōgun's kaō carried tremendous authority, so it was designed to be destroyed if compromised."
   },
   {
    "q": "Which two crests did Tenshinryu officially adopt, and why?",
    "choices": [
-    "The Aoi no Gomon and the Yagyū-gasa, as symbols of its deep connection to Kōgan",
-    "The imperial chrysanthemum and the Sakazaki crest",
+    "The Hōzōin crescent and the Kage-ryū moon",
     "Only the Tokizawa family crest",
-    "The Hōzōin crescent and the Kage-ryū moon"
+    "The imperial chrysanthemum and the Sakazaki crest",
+    "The Aoi no Gomon and the Yagyū-gasa, as symbols of its deep connection to Kōgan"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 18: the crests on the Tenshinryu flag symbolize the Kōgan legacy carried into the modern age."
   }
  ]

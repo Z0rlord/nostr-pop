@@ -22,45 +22,45 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "What is Setsunintō (殺人刀)?",
    "choices": [
-    "A sword used to pursue selfish desires — the death-dealing blade that strays from the Way of Heaven",
     "Any sword that has taken a life",
-    "A forbidden ninja weapon",
-    "A sword used in practice"
+    "A sword used to pursue selfish desires — the death-dealing blade that strays from the Way of Heaven",
+    "A sword used in practice",
+    "A forbidden ninja weapon"
    ],
-   "answer": 0,
+   "answer": 1,
    "ref": "Ch. 19: a sword swung for selfish desire is Setsunintō; a sword used for the world, even if it kills, is Katsujinken."
   },
   {
    "q": "Munenori's Heihō Kadensho teaches which of the following?",
    "choices": [
-    "If killing one evil person allows ten thousand to live, a sword that takes life is also a sword that gives life",
-    "All use of weapons violates the Way of Heaven without exception",
     "The shōgun's sword may never be drawn",
+    "All use of weapons violates the Way of Heaven without exception",
+    "If killing one evil person allows ten thousand to live, a sword that takes life is also a sword that gives life",
     "Killing in battle is always glorious"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 19 quotes the Kadensho directly: \"The true goal is not to cut people down with a sword, but to cut down evil itself.\""
   },
   {
    "q": "If drawing the sword is unavoidable, what does Tenshinryu teach?",
    "choices": [
-    "Ideally strike with the back of the blade (mineuchi), and even a necessary cut should inflict the lightest possible injury",
     "Always strike to kill first",
     "Surrender the sword immediately",
+    "Ideally strike with the back of the blade (mineuchi), and even a necessary cut should inflict the lightest possible injury",
     "Only thrust, never cut"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 19: resolve conflict without drawing when possible; if not, mineuchi; minimize suffering and avoid creating lasting resentment."
   },
   {
    "q": "What did Munenori call the form of Katsujinken appropriate for the shogunate that governed the nation?",
    "choices": [
-    "Taishō no Ken — the General's Sword",
     "Kage-ryū no Ken",
-    "Tenka no Ken",
-    "Ōgi no Ken"
+    "Ōgi no Ken",
+    "Taishō no Ken — the General's Sword",
+    "Tenka no Ken"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 19: the Yagyū Shinkage-ryū had to embody Taishō no Ken — a sword that ends conflict and governs the nation."
   }
  ]

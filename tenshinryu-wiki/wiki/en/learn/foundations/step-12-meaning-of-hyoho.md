@@ -22,23 +22,23 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
   {
    "q": "How are the characters 兵法 pronounced within Tenshinryu?",
    "choices": [
-    "Hyōhō",
+    "Takedō",
     "Heihō",
-    "Bubō",
-    "Takedō"
+    "Hyōhō",
+    "Bubō"
    ],
-   "answer": 0,
+   "answer": 2,
    "ref": "Ch. 12: generally read heihō, but in Tenshinryu pronounced Hyōhō, on Ishii Sensei's instruction."
   },
   {
    "q": "Through the pivot word 平 (peace), Hyōhō also carries the meaning of Heihō (平法) — what is that?",
    "choices": [
-    "The philosophy and methods of resolving conflicts peacefully and saving lives — the meaning of Katsujinken",
     "Flat-ground footwork",
     "A legal code of the Edo period",
-    "Equal rules for tournament matches"
+    "Equal rules for tournament matches",
+    "The philosophy and methods of resolving conflicts peacefully and saving lives — the meaning of Katsujinken"
    ],
-   "answer": 0,
+   "answer": 3,
    "ref": "Ch. 12: Heihō (平法) as kakekotoba — peaceful methods, tied to Katsujinken, the life-giving sword."
   },
   {
