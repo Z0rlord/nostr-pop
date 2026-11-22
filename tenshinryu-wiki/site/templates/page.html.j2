@@ -6,10 +6,9 @@
   <title>{{ title }} — Tenshinryu Hyoho Wiki</title>
   <meta name="description" content="{{ description }}">
   <link rel="stylesheet" href="/assets/style.css?v={{ css_version }}">
-  <link rel="alternate" hreflang="en" href="{{ alternate.en }}">
-  <link rel="alternate" hreflang="ja" href="{{ alternate.ja }}">
-  <link rel="alternate" hreflang="es" href="{{ alternate.es }}">
-  <link rel="alternate" hreflang="el" href="{{ alternate.el }}">
+  {% for code, href in alternate.items() %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ href }}">
+  {% endfor %}
 </head>
 <body class="lang-{{ lang }}{% if is_index %} index-page{% endif %}">
   {% include "_nav.html.j2" %}

@@ -69,6 +69,152 @@
     }
   };
 
+  // Localized runtime messages for the Japanese-aligned study translations.
+  var LOCAL = {
+  "de": {
+    "index": "Kursübersicht",
+    "finish": "Kurs abschließen",
+    "badges": [
+      "✓ bestanden",
+      "gesperrt",
+      "beginnen"
+    ],
+    "lockedTitle": "Bestehe zuerst den vorherigen Schritt",
+    "progress": "Fortschritt auf diesem Gerät: {done} von {total} Schritten bestanden.",
+    "resetConfirm": "Den Fortschritt dieses Kurses auf diesem Gerät zurücksetzen?",
+    "passed": "✓ Schritt {step} bestanden.",
+    "nextUnlocked": "Der nächste Schritt ist unten freigeschaltet.",
+    "completeUnlocked": "Die Abschlussseite ist unten freigeschaltet.",
+    "retake": "Fragen erneut beantworten",
+    "stepLocked": "Die Fragen dieses Schritts sind gesperrt. Bestehe zuerst Schritt {prev}. Der Lesetext bleibt zugänglich.",
+    "checkTitle": "Verständnisfragen: Schritt {step} von {total}",
+    "checkNote": "Alle {n} Antworten müssen richtig sein. Die Antworten stehen in der Lesehilfe und den Quellen. Beliebig viele Versuche.",
+    "correct": "Richtig: ",
+    "dataError": "Die Fragen konnten nicht geladen werden.",
+    "continue": "Weiter zu Schritt {step}",
+    "score": "{correct} von {n} richtig.",
+    "wrong": "Nicht diese Antwort. Lies noch einmal nach und wähle eine andere."
+  },
+  "el": {
+    "index": "Περιεχόμενα του κύκλου",
+    "finish": "Ολοκλήρωση του κύκλου",
+    "badges": [
+      "✓ επιτυχία",
+      "κλειδωμένο",
+      "έναρξη"
+    ],
+    "lockedTitle": "Περάστε πρώτα το προηγούμενο βήμα",
+    "progress": "Πρόοδος σε αυτή τη συσκευή: {done} από {total} βήματα με επιτυχία.",
+    "resetConfirm": "Να μηδενιστεί η πρόοδος αυτού του κύκλου σε αυτή τη συσκευή;",
+    "passed": "✓ Περάσατε το βήμα {step}.",
+    "nextUnlocked": "Το επόμενο βήμα είναι πλέον διαθέσιμο παρακάτω.",
+    "completeUnlocked": "Η σελίδα ολοκλήρωσης είναι πλέον διαθέσιμη παρακάτω.",
+    "retake": "Επανάληψη του ελέγχου",
+    "stepLocked": "Ο έλεγχος αυτού του βήματος είναι κλειδωμένος. Περάστε πρώτα το βήμα {prev}. Το κείμενο παραμένει διαθέσιμο.",
+    "checkTitle": "Έλεγχος: βήμα {step} από {total}",
+    "checkNote": "Χρειάζονται και οι {n} σωστές απαντήσεις. Όλες βρίσκονται στον οδηγό και στις πηγές. Απεριόριστες προσπάθειες.",
+    "correct": "Σωστά: ",
+    "dataError": "Δεν ήταν δυνατή η φόρτωση των ερωτήσεων.",
+    "continue": "Συνέχεια στο βήμα {step}",
+    "score": "{correct} από {n} σωστές απαντήσεις.",
+    "wrong": "Όχι αυτή η απάντηση. Ξαναδιαβάστε και επιλέξτε άλλη."
+  },
+  "es": {
+    "index": "Índice del curso",
+    "finish": "Finalizar el curso",
+    "badges": [
+      "✓ superado",
+      "bloqueado",
+      "empezar"
+    ],
+    "lockedTitle": "Supere primero el paso anterior",
+    "progress": "Progreso en este dispositivo: {done} de {total} pasos superados.",
+    "resetConfirm": "¿Borrar el progreso de este curso en este dispositivo?",
+    "passed": "✓ Paso {step} superado.",
+    "nextUnlocked": "El siguiente paso ya está disponible abajo.",
+    "completeUnlocked": "La página de finalización ya está disponible abajo.",
+    "retake": "Repetir la prueba",
+    "stepLocked": "La prueba de este paso está bloqueada. Supere primero el paso {prev}. El texto de lectura sigue disponible.",
+    "checkTitle": "Prueba: paso {step} de {total}",
+    "checkNote": "Se necesitan las {n} respuestas correctas. Todas están en la guía y las fuentes. Intentos ilimitados.",
+    "correct": "Correcto: ",
+    "dataError": "No se pudieron cargar las preguntas.",
+    "continue": "Continuar al paso {step}",
+    "score": "{correct} de {n} respuestas correctas.",
+    "wrong": "Esa no es la respuesta. Vuelva a leer y elija otra."
+  },
+  "fr": {
+    "index": "Sommaire du parcours",
+    "finish": "Terminer le parcours",
+    "badges": [
+      "✓ réussi",
+      "verrouillé",
+      "commencer"
+    ],
+    "lockedTitle": "Réussissez d'abord l'étape précédente",
+    "progress": "Progression sur cet appareil : {done} étapes réussies sur {total}.",
+    "resetConfirm": "Effacer la progression de ce parcours sur cet appareil ?",
+    "passed": "✓ Étape {step} réussie.",
+    "nextUnlocked": "L'étape suivante est débloquée ci-dessous.",
+    "completeUnlocked": "La page de fin de parcours est débloquée ci-dessous.",
+    "retake": "Refaire le questionnaire",
+    "stepLocked": "Le questionnaire est verrouillé. Réussissez d'abord l'étape {prev}. Le texte reste accessible.",
+    "checkTitle": "Questionnaire : étape {step} sur {total}",
+    "checkNote": "Il faut {n} bonnes réponses. Toutes figurent dans le guide et les sources. Essais illimités.",
+    "correct": "Correct : ",
+    "dataError": "Impossible de charger les questions.",
+    "continue": "Continuer vers l'étape {step}",
+    "score": "{correct} bonnes réponses sur {n}.",
+    "wrong": "Ce n'est pas cette réponse. Relisez puis choisissez-en une autre."
+  },
+  "it": {
+    "index": "Indice del percorso",
+    "finish": "Concludi il percorso",
+    "badges": [
+      "✓ superato",
+      "bloccato",
+      "inizia"
+    ],
+    "lockedTitle": "Supera prima il passo precedente",
+    "progress": "Progressi su questo dispositivo: {done} passi superati su {total}.",
+    "resetConfirm": "Azzerare i progressi di questo percorso su questo dispositivo?",
+    "passed": "✓ Passo {step} superato.",
+    "nextUnlocked": "Il passo successivo è sbloccato qui sotto.",
+    "completeUnlocked": "La pagina conclusiva è sbloccata qui sotto.",
+    "retake": "Ripeti la verifica",
+    "stepLocked": "La verifica di questo passo è bloccata. Supera prima il passo {prev}. Il testo rimane accessibile.",
+    "checkTitle": "Verifica: passo {step} di {total}",
+    "checkNote": "Servono tutte le {n} risposte corrette. Si trovano nella guida e nelle fonti. Tentativi illimitati.",
+    "correct": "Corretto: ",
+    "dataError": "Impossibile caricare le domande.",
+    "continue": "Continua al passo {step}",
+    "score": "{correct} risposte corrette su {n}.",
+    "wrong": "Non è questa la risposta. Rileggi e scegli un'altra opzione."
+  }
+};
+  function format(s, values) {
+    return s.replace(/\{([a-z]+)\}/g, function (_, k) { return String(values[k]); });
+  }
+  Object.keys(LOCAL).forEach(function (locale) {
+    var L = LOCAL[locale];
+    STR[locale] = {
+      badgePassed: L.badges[0], badgeLocked: L.badges[1], badgeStart: L.badges[2],
+      lockedTitle: L.lockedTitle, resetConfirm: L.resetConfirm, retake: L.retake,
+      correctPrefix: L.correct, dataError: L.dataError, bannerWrong: L.wrong,
+      progress: function (done, total) { return format(L.progress, {done: done, total: total}); },
+      stepPassed: function (step, total) { return format(L.passed, {step: step}) + ' ' + (step < total ? L.nextUnlocked : L.completeUnlocked); },
+      stepLocked: function (prev, base) { return format(L.stepLocked, {prev: prev}) + ' <a href="' + base + '">' + L.index + '</a>'; },
+      checkTitle: function (step, total) { return format(L.checkTitle, {step: step, total: total}); },
+      checkNote: function (n) { return format(L.checkNote, {n: n}); },
+      bannerPass: function (step, total, nextUrl, base) {
+        return format(L.passed, {step: step}) + ' ' + (step < total
+          ? '<a href="' + nextUrl + '">' + format(L.continue, {step: step + 1}) + ' →</a>'
+          : '<a href="' + base + '/complete">' + L.finish + ' →</a>');
+      },
+      bannerProgress: function (correct, n) { return format(L.score, {correct: correct, n: n}); }
+    };
+  });
+
   var lang = (document.documentElement.getAttribute("lang") || "").split("-")[0];
   if (!STR[lang]) {
     var m = location.pathname.match(/^\/([a-z]{2})\//);
