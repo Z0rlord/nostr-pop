@@ -21,7 +21,7 @@ ASSETS = ROOT / "site" / "assets"
 RAW_ASSETS = ROOT / "raw" / "assets"
 
 LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
-CSS_VERSION = "20261121b"
+CSS_VERSION = "20261122-learn-i18n"
 LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
@@ -368,6 +368,42 @@ def canonical_en_slug(page: Page) -> str:
 
 def pair_urls(page: Page, pages: dict[tuple[str, str], Page]) -> dict[str, str]:
     slug = canonical_en_slug(page)
+    if page.slug.startswith("learn/foundations"):
+        ja_to_en = {'learn/foundations/step-01-preface': 'learn/foundations/step-01-preface',
+         'learn/foundations/step-02-founding-and-naming': 'learn/foundations/step-02-founding-and-naming',
+         'learn/foundations/step-03-kogan': 'learn/foundations/step-03-kogan',
+         'learn/foundations/step-04-after-meiji-restoration': 'learn/foundations/step-04-after-meiji-restoration',
+         'learn/foundations/step-05-tenshin-sensei-path': 'learn/foundations/step-05-tenshin-sensei-path',
+         'learn/foundations/step-06-transmission-10th-shike': 'learn/foundations/step-06-transmission-10th-shike',
+         'learn/foundations/step-07-modern-school': 'learn/foundations/step-07-modern-school',
+         'learn/foundations/step-08-lineage': 'learn/foundations/step-08-millennium-and-lineage',
+         'learn/foundations/step-09-hyoho-system': 'learn/foundations/step-09-hyoho-system',
+         'learn/foundations/step-10-den-i': 'learn/foundations/step-10-den-i',
+         'learn/foundations/step-11-characteristics': 'learn/foundations/step-11-characteristics',
+         'learn/foundations/step-12-meaning-of-hyoho': 'learn/foundations/step-12-meaning-of-hyoho',
+         'learn/foundations/step-13-shinkageryu': 'learn/foundations/step-13-shinkageryu',
+         'learn/foundations/step-14-yagyu-family': 'learn/foundations/step-14-yagyu-family',
+         'learn/foundations/step-15-aoi-crests-kansatsu': 'learn/foundations/step-16-owari-crests-kansatsu',
+         'learn/foundations/step-16-katsujinken-setsuninto': 'learn/foundations/step-17-katsujinken-setsuninto',
+         'learn/foundations/step-17-budo-and-bujutsu': 'learn/foundations/step-18-budo-and-bujutsu',
+         'learn/foundations/step-18-bushi-samurai-bushido': 'learn/foundations/step-19-bushi-samurai-bushido',
+         'learn/foundations/step-19-five-virtues': 'learn/foundations/step-20-five-virtues',
+         'learn/foundations/step-20-loyalty-family-honor': 'learn/foundations/step-21-loyalty-family-sword',
+         'learn/foundations/step-21-samurai-and-sword': 'learn/foundations/step-21-loyalty-family-sword'}
+        en_to_ja = {v: k for k, v in ja_to_en.items()}
+        en_to_ja["learn/foundations/step-21-loyalty-family-sword"] = "learn/foundations/step-20-loyalty-family-honor"
+        # EN 15 is included in JA 14; EN 21 spans JA 20 and JA 21.
+        en_to_ja["learn/foundations/step-15-munenori-edo-yagyu"] = "learn/foundations/step-14-yagyu-family"
+        ja_slug = en_to_ja.get(page.slug, page.slug) if page.lang == "en" else page.slug
+        course_urls: dict[str, str] = {}
+        for locale in LANGS:
+            if locale == "en":
+                target = page.slug if page.lang == "en" else ja_to_en.get(ja_slug, ja_slug)
+            else:
+                target = ja_slug
+            match = pages.get((locale, target))
+            course_urls[locale] = match.html_path if match else url_for_slug(locale, "learn/foundations")
+        return course_urls
     urls: dict[str, str] = {}
     for lang in LANGS:
         key = (lang, slug)
@@ -512,36 +548,43 @@ def curriculum_subnav_for(lang: str) -> list[dict]:
     """Curriculum dropdown links (arts, seiho, kurai)."""
     defs = {
         "en": [
+            ("Foundations course", "learn/foundations"),
             ("Arts", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "ja": [
+            ("基礎トラック", "learn/foundations"),
             ("兵法", "arts/_index"),
             ("十二勢法", "techniques/tachiai-12-kata"),
             ("位", "concepts/miden-kurai-no-koto"),
         ],
         "es": [
+            ("Curso de fundamentos", "learn/foundations"),
             ("Artes", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "el": [
+            ("Βασικός κύκλος", "learn/foundations"),
             ("Τέχνες", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "fr": [
+            ("Parcours des fondements", "learn/foundations"),
             ("Arts", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "de": [
+            ("Grundlagenkurs", "learn/foundations"),
             ("Künste", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "it": [
+            ("Percorso di base", "learn/foundations"),
             ("Arti", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
@@ -615,7 +658,7 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
     }
     items: list[dict] = []
     section = slug.split("/")[0] if "/" in slug else slug
-    curriculum_sections = {"arts", "techniques", "concepts"}
+    curriculum_sections = {"arts", "techniques", "concepts", "learn"}
     for key, label, target, cta, sub in defs.get(lang, defs["en"]):
         active = slug == target or (key != "start_here" and section == target.split("/")[0])
         if key == "start_here" and slug.startswith("guides/"):
