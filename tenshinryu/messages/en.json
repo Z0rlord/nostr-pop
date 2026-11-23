@@ -113,13 +113,13 @@
         "description": "Step-by-step progression from basic to advanced techniques, following the traditional Tenshinryu syllabus."
       },
       "feedback": {
-        "number": "02", 
+        "number": "02",
         "title": "Direct Feedback",
         "description": "Submit your practice videos and receive personalized corrections from certified instructors."
       },
       "community": {
         "number": "03",
-        "title": "Global Community", 
+        "title": "Global Community",
         "description": "Connect with fellow practitioners worldwide. Share experiences and grow together."
       },
       "ranking": {
@@ -130,16 +130,11 @@
     }
   },
   "footer": {
-    "description": "Japanese Tradition Tenshinryu Hyoho",
-    "training": "Training",
-    "legal": "Legal",
+    "memberArea": "Member Area",
+    "connect": "Connect",
+    "internationalSite": "International Site",
     "terms": "Terms of Service",
-    "privacy": "Privacy Policy",
-    "contact": "Contact",
-    "rules": "Dojo Rules",
-    "support": "Support",
-    "donate": "Become a Patron",
-    "copyright": "© 2026 JAPANESE TRADITION TENSHINRYU HYOHO. ALL RIGHTS RESERVED."
+    "privacy": "Privacy Policy"
   },
   "cta": {
     "subtitle": "Start your journey in Tenshinryu Hyoho today.",
@@ -215,7 +210,11 @@
       "duration": "Duration",
       "minutes": "min",
       "intensity": "Intensity",
-      "intensities": { "light": "Light", "medium": "Medium", "hard": "Hard" },
+      "intensities": {
+        "light": "Light",
+        "medium": "Medium",
+        "hard": "Hard"
+      },
       "mood": "Mood",
       "moods": {
         "great": "Great",
@@ -305,8 +304,13 @@
         "enbu": "Enbu & grading",
         "enbuDesc": "Demonstration and grading videos"
       },
-      "social": { "title": "Follow us", "blog": "Blog" },
-      "website": { "title": "Official website" }
+      "social": {
+        "title": "Follow us",
+        "blog": "Blog"
+      },
+      "website": {
+        "title": "Official website"
+      }
     }
   },
   "instructor": {
@@ -382,7 +386,11 @@
       "correction": "Attendance correction",
       "notes": "Notes (optional)",
       "notCheckedIn": "Not checked in",
-      "status": { "present": "Present", "absent": "Absent", "late": "Late" }
+      "status": {
+        "present": "Present",
+        "absent": "Absent",
+        "late": "Late"
+      }
     },
     "invite": {
       "title": "Invite instructor",
@@ -400,8 +408,15 @@
       "copyLink": "Copy link",
       "linkCopied": "Copied!",
       "sendAnother": "Send another",
-      "tabs": { "send": "Send invite", "list": "Invites" },
-      "status": { "pending": "Pending", "accepted": "Accepted", "expired": "Expired" },
+      "tabs": {
+        "send": "Send invite",
+        "list": "Invites"
+      },
+      "status": {
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "expired": "Expired"
+      },
       "list": {
         "empty": "No invites sent yet.",
         "sent": "Sent",
@@ -481,13 +496,6 @@
       "desc": "Study techniques, history, and philosophy."
     }
   },
-  "footer": {
-    "memberArea": "Member Area",
-    "connect": "Connect",
-    "internationalSite": "International Site",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy"
-  },
   "common": {
     "loading": "Loading…",
     "save": "Save",
@@ -541,6 +549,28 @@
       "count": "Count",
       "price": "Price",
       "revenue": "Revenue"
+    },
+    "students": {
+      "manageTitle": "Manage Students",
+      "add": "Add Student",
+      "addTitle": "New Student",
+      "editTitle": "Edit Student",
+      "name": "Name *",
+      "email": "Email",
+      "phone": "Phone",
+      "stripes": "Stripes",
+      "belt": "Belt",
+      "contact": "Contact",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "actions": "Actions",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No students yet.",
+      "confirmDelete": "Delete {name}? This also removes their check-ins, journal and progress. This cannot be undone."
     }
   },
   "aiInsights": {

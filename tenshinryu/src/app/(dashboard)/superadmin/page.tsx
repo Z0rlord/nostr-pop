@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { StudentManager } from "@/components/work/StudentManager";
 
 const SUPERADMIN_KEY = "dev-admin-123"; // Change this in production via env var
 
@@ -24,6 +25,7 @@ export default function SuperAdminPage() {
   const [creating, setCreating] = useState(false);
   const [createdInvite, setCreatedInvite] = useState<any>(null);
   const [invitingDojoId, setInvitingDojoId] = useState<string | null>(null);
+  const [studentDojoId, setStudentDojoId] = useState<string>("");
 
   const fetchData = async () => {
     setLoading(true);
@@ -521,6 +523,28 @@ export default function SuperAdminPage() {
               </table>
             </div>
           )}
+        </section>
+
+        {/* Student Management */}
+        <section className="mb-6">
+          <h2 className="font-bold mb-3">🎓 Manage Students</h2>
+          <div className="bg-gray-900 rounded p-4">
+            <select
+              className="w-full px-3 py-2 bg-black border border-gray-700 rounded text-white mb-4"
+              value={studentDojoId}
+              onChange={(e) => setStudentDojoId(e.target.value)}
+            >
+              <option value="">Select a school…</option>
+              {data.dojos.map((dojo: any) => (
+                <option key={dojo.id} value={dojo.id}>
+                  {dojo.name}
+                </option>
+              ))}
+            </select>
+            {studentDojoId && (
+              <StudentManager dojoId={studentDojoId} superadminKey={key} />
+            )}
+          </div>
         </section>
 
         {/* Quick Actions */}

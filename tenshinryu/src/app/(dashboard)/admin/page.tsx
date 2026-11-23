@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useI18n } from "@/components/I18nProvider";
 import { StaffShell } from "@/components/work/StaffShell";
+import { StudentManager } from "@/components/work/StudentManager";
 import { SchoolsOverview } from "@/components/work/SchoolsOverview";
 import { PageLoading } from "@/components/ui/PageLoading";
 
@@ -314,6 +315,8 @@ export default function AdminDashboard() {
           )}
 
           {activeTab === "students" && metrics && (
+            <>
+            <StudentManager />
             <div className="dashboard-card">
               <h3 className="card-title mb-4">{t("admin.membershipDistribution") || "Membership breakdown"}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -330,6 +333,7 @@ export default function AdminDashboard() {
                 ))}
               </div>
             </div>
+            </>
           )}
 
           {activeTab === "classes" && metrics && (

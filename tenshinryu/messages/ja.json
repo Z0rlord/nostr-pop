@@ -122,6 +122,9 @@
     }
   },
   "footer": {
+    "memberArea": "会員エリア",
+    "connect": "つながる",
+    "internationalSite": "国際サイト",
     "terms": "利用規約",
     "privacy": "プライバシーポリシー"
   },
@@ -510,13 +513,6 @@
       "desc": "技法・歴史・哲学を学ぶ"
     }
   },
-  "footer": {
-    "memberArea": "会員エリア",
-    "connect": "つながる",
-    "internationalSite": "国際サイト",
-    "terms": "利用規約",
-    "privacy": "プライバシーポリシー"
-  },
   "common": {
     "loading": "読み込み中...",
     "save": "保存",
@@ -577,6 +573,28 @@
       "count": "人数",
       "price": "価格",
       "revenue": "収益"
+    },
+    "students": {
+      "manageTitle": "生徒管理",
+      "add": "生徒を追加",
+      "addTitle": "新規生徒",
+      "editTitle": "生徒を編集",
+      "name": "名前 *",
+      "email": "メール",
+      "phone": "電話番号",
+      "stripes": "ストライプ",
+      "belt": "帯",
+      "contact": "連絡先",
+      "status": "状態",
+      "active": "在籍",
+      "inactive": "退会",
+      "actions": "操作",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "edit": "編集",
+      "delete": "削除",
+      "empty": "生徒がまだいません。",
+      "confirmDelete": "{name} を削除しますか?チェックイン・稽古日誌・進捗もすべて削除されます。この操作は取り消せません。"
     }
   },
   "curriculum": {
