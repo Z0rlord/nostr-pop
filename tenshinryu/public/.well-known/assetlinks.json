@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "xyz.tenshinryu.kiwami",
+    "sha256_cert_fingerprints": ["9C:85:F2:C3:81:87:A1:76:A6:4F:25:67:92:5A:0B:04:F4:FA:F2:F0:56:76:9E:D8:75:D0:DA:60:F8:0C:1D:02"]
+  }
+}]
