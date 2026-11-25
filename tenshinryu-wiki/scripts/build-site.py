@@ -25,7 +25,7 @@ CSS_VERSION = "20261125-learn-accounts"
 LANG_ALT = "|".join(LANGS)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
-WIKILINK_RE = re.compile(r"\[\[([^\]|#]+?)(?:\|([^\]]+?))?\]\]")
+WIKILINK_RE = re.compile(r"\[\[([^\]|#]+?)\\?(?:\|([^\]]+?))?\]\]")
 H1_LINE_RE = re.compile(r"^#\s+")
 # Anchor group must not consume the closing ")" — old [#)] char-class broke table links.
 MD_LINK_RE = re.compile(r"(\[[^\]]+\]\()([^)#]+?\.md)(#[^)]*)?\)")
@@ -407,7 +407,9 @@ def pair_urls(page: Page, pages: dict[tuple[str, str], Page]) -> dict[str, str]:
     urls: dict[str, str] = {}
     for lang in LANGS:
         key = (lang, slug)
-        urls[lang] = pages[key].html_path if key in pages else url_for_slug(lang, slug)
+        # A page that was never stubbed in a locale has no counterpart: send the switcher
+        # to that locale's home instead of a 404.
+        urls[lang] = pages[key].html_path if key in pages else url_for_slug(lang, "index")
     if slug.startswith("learn/den-no-ichi-i") and ("ja", slug) not in pages:
         # No Japanese track yet: send the switcher to the Japanese book page, not a 404.
         ja_book = pages.get(("ja", "sources/den-no-ichi-i"))
