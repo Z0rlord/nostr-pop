@@ -32,7 +32,7 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
    "ref": "Overview: the name likens drawing straight up and cutting straight down (makkō) to the bucket of a tsurube well. You cut to near the ground with Hizagoshi."
   },
   {
-   "q": "How does the book describe the relationship between Tsurube-otoshi and Tsurube-nuki?",
+   "q": "What is the relationship between Tsurube-otoshi and Tsurube-nuki?",
    "choices": [
     "Unrelated techniques",
     "Tsurube-otoshi is a Kyōdai-gata — a \"brother kata,\" Tenshinryu's term for techniques of the same lineage — of Tsurube-nuki",

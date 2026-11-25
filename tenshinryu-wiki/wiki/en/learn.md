@@ -10,7 +10,7 @@ updated: 2026-11-25
 
 Guided tracks through the school's published sources. Each track is an ordered path of readings with a short check before the next step unlocks. Tracks orient — they never replace live instruction.
 
-- [[learn/den-no-ichi-i|Den no Ichi-i Track — Required Beginner Curriculum]] — 14 steps through the school's beginner book (2026): the ten techniques of the new first transmission rank. Start here if you are new to practice.
+- [[learn/den-no-ichi-i|Den no Ichi-i Track — Required Beginner Curriculum]] — 14 steps through Den no Ichi-i.
 - [[learn/foundations|Foundations Track — History & Philosophy (Vol. 1)]] — 21 steps through the school's own book.
 
 

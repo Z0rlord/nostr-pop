@@ -8,7 +8,7 @@ updated: 2026-11-25
 
 # Step 8 of 14 — No. 3: Kojiri-gaeshi
 
-**Why this step:** The third Okigatana technique answers an attack from farther away and strikes with the scabbard tip — proof that in this school the whole sword mounting is a weapon.
+**Why this step:** The third Okigatana technique answers an attack from farther away and strikes with the scabbard tip. The whole sword mounting is a weapon.
 
 **Read first:**
 - [[sources/den-no-ichi-i/ch-09-kojiri-gaeshi|No. 3 — Kojiri-gaeshi (鐺返)]]

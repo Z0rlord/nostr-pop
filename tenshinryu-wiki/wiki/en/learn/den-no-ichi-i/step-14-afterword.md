@@ -8,7 +8,7 @@ updated: 2026-11-25
 
 # Step 14 of 14 — Afterword: Why the Basics Are Never Wasted
 
-**Why this step:** The author closes with what he was really writing against: the way instruction evaporates, and the lazy argument that basics are meaningless repetition. His answer is the point of the whole rank.
+**Why this step:** The closing essay addresses the way instruction evaporates, and the argument that basics are meaningless repetition.
 
 **Read first:**
 - [[sources/den-no-ichi-i/ch-19-afterword|Afterword]]
@@ -28,7 +28,7 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
     "About 25%"
    ],
    "answer": 2,
-   "ref": "Afterword: \"about 47% on average. In writing it is 58%, and with video about 67%\" — one reason the book itself exists."
+   "ref": "Afterword: \"about 47% on average. In writing it is 58%, and with video about 67%\"."
   },
   {
    "q": "What is the author's verdict on repeating the same basics for years?",
