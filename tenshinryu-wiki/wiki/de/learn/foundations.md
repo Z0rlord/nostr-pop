@@ -13,7 +13,7 @@ updated: '2026-11-22'
 
 Ein geführter Weg durch die Kapitel zu Geschichte und Gedankenwelt in Tenshinryu Shogakushu, überarbeitete Ausgabe (天心流初学集 改訂版), von Kuwami Masakumo. Die japanische Fassung gibt die Gliederung vor; die offizielle englische Übersetzung dient zum Vergleich.
 
-21 Schritte in fester Reihenfolge, jeweils mit einer Lesehilfe und kurzen Verständnisfragen. Alle Fragen eines Schritts müssen richtig beantwortet werden, um den nächsten freizuschalten. Der Fortschritt wird nur in diesem Browser gespeichert. Kein Konto, keine Übertragung.
+21 Schritte in fester Reihenfolge, jeweils mit einer Lesehilfe und kurzen Verständnisfragen. Alle Fragen eines Schritts müssen richtig beantwortet werden, um den nächsten freizuschalten. Der Lesetext steht allen offen. Für die Verständnisfragen meldest du dich an; der Fortschritt wird in deinem Konto gespeichert und folgt dir auf jedes Gerät.
 
 Dies ist keine praktische Unterweisung. Der Kurs führt durch veröffentlichte Quellen und prüft das Textverständnis. Er lehrt oder korrigiert keine Technik. Vertrauliche Lehren (門外不出) sind nicht enthalten.
 
@@ -44,6 +44,6 @@ Diese Lesehilfen und Fragen sind Studienübersetzungen auf Grundlage des japanis
 </ol>
 
 <p class="learn-progress-line"><span id="learn-progress-text"></span></p>
-<p><a href="/de/learn/foundations/complete" id="learn-complete-link">Abschluss</a> · <button type="button" id="learn-reset" class="learn-reset">Fortschritt auf diesem Gerät zurücksetzen</button></p>
+<p><a href="/de/learn/foundations/complete" id="learn-complete-link">Abschluss</a> · <button type="button" id="learn-reset" class="learn-reset">Fortschritt zurücksetzen</button></p>
 
 <a href="/de/guides/start-here">Erste Schritte</a>

@@ -10,7 +10,7 @@ updated: 2026-11-25
 
 A guided path through *Den no Ichi-i* (伝壱位, 2026), the school's own required curriculum for beginners: the ten techniques of the new first transmission rank, and the training-method essays that frame them.
 
-**How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Your progress is stored on this device only — no account, nothing sent anywhere.
+**How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Reading is open to everyone. To take the checks you sign in, and your progress is saved to your account so it follows you across devices.
 
 <ol id="learn-track-index" data-track="den-no-ichi-i" data-total="14" class="learn-track-list">
 <li data-step="1"><a href="/en/learn/den-no-ichi-i/step-01-why-this-book">Step 1: Why This Book Exists</a></li>

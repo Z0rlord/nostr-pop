@@ -19,5 +19,7 @@ updated: 2026-11-25
 - [[learn/foundations|The Foundations Track]]
 - [[sources/kuwami-foundations-principles-vol2|Volume 2]]
 
+Your progress is saved to your account, so it is still here on any device you sign in on.
+
 </div>
 </div>

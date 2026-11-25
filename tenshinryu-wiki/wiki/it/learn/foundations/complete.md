@@ -21,7 +21,7 @@ Puoi continuare nell'originale giapponese o nella traduzione inglese ufficiale. 
 
 <a href="/ja/sources/shogakushu-2025">Originale giapponese</a> · <a href="/en/sources/kuwami-foundations-principles-vol1">Traduzione inglese ufficiale</a>
 
-I progressi rimangono solo in questo browser. Se vengono cancellati, il percorso ricomincia dall'inizio.
+I tuoi progressi sono salvati nel tuo account e restano disponibili su ogni dispositivo in cui accedi.
 
 </div>
 </div>

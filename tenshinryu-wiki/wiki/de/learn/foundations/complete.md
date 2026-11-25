@@ -21,7 +21,7 @@ Lies bei Bedarf im japanischen Original oder in der offiziellen englischen Über
 
 <a href="/ja/sources/shogakushu-2025">Japanisches Original</a> · <a href="/en/sources/kuwami-foundations-principles-vol1">Offizielle englische Übersetzung</a>
 
-Der Fortschritt bleibt nur in diesem Browser. Wird er gelöscht, beginnt der Kurs wieder von vorn.
+Dein Fortschritt ist in deinem Konto gespeichert und auf jedem Gerät sichtbar, auf dem du dich anmeldest.
 
 </div>
 </div>
