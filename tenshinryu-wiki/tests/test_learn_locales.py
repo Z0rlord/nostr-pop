@@ -118,5 +118,48 @@ class DenNoIchiILocales(unittest.TestCase):
                 page = DIST / lang / "learn/den-no-ichi-i/step-06-tsuka-uchi.html"
                 self.assertIn(f"/{other}/learn/den-no-ichi-i/step-06-tsuka-uchi", page.read_text())
 
+
+class DenNoIchiIJapanese(unittest.TestCase):
+    """Japanese original text and track: the Japanese is the prime source for the book."""
+
+    def test_book_pages_match_english_structure(self):
+        en = sorted((WIKI / "en/sources/den-no-ichi-i").glob("ch-*.md"))
+        ja = sorted((WIKI / "ja/sources/den-no-ichi-i").glob("ch-*.md"))
+        self.assertEqual([p.name for p in en], [p.name for p in ja])
+        for page in ja:
+            text = page.read_text(encoding="utf-8")
+            self.assertIn("lang: ja", text)
+            self.assertIn("pair: en/sources/den-no-ichi-i/" + page.stem, text)
+            self.assertGreater(len(text), 400)
+
+    def test_extraction_numbers_are_not_reversed(self):
+        # Two-digit numbers set horizontally in vertical text come out reversed in the PDF text layer.
+        text = (WIKI / "ja/sources/den-no-ichi-i/ch-19-afterword.md").read_text(encoding="utf-8")
+        self.assertIn("47％", text)
+        self.assertNotIn("74％", text)
+
+    def test_track_has_14_steps_with_matching_answer_indexes(self):
+        originals = sorted((WIKI / "en/learn/den-no-ichi-i").glob("step-*.md"))
+        folder = WIKI / "ja/learn/den-no-ichi-i"
+        self.assertEqual(len(list(folder.glob("*.md"))), 15)
+        for source in originals:
+            with self.subTest(step=source.stem):
+                text = (folder / source.name).read_text(encoding="utf-8")
+                self.assertIn('data-track="den-no-ichi-i-ja"', text)
+                questions = json.loads(QUIZ.search(text)[1])["questions"]
+                self.assertEqual(len(questions), 3)
+                for q in questions:
+                    self.assertEqual(len(q["choices"]), 4)
+                    self.assertEqual(len(set(q["choices"])), 4)
+                    self.assertTrue(q["q"].strip() and q["ref"].strip())
+
+    def test_switcher_pairs_japanese_book_and_track(self):
+        self.assertTrue(DIST.is_dir(), "Build the site first")
+        page = DIST / "en/learn/den-no-ichi-i/step-06-tsuka-uchi.html"
+        self.assertIn("/ja/learn/den-no-ichi-i/step-06-tsuka-uchi", page.read_text())
+        page = DIST / "en/sources/den-no-ichi-i/ch-07-tsuka-uchi.html"
+        self.assertIn("/ja/sources/den-no-ichi-i/ch-07-tsuka-uchi", page.read_text())
+
+
 if __name__ == "__main__":
     unittest.main()

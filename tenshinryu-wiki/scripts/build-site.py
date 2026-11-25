@@ -579,6 +579,7 @@ def curriculum_subnav_for(lang: str) -> list[dict]:
         ],
         "ja": [
             ("基礎トラック", "learn/foundations"),
+            ("伝壱位トラック", "learn/den-no-ichi-i"),
             ("兵法", "arts/_index"),
             ("十二勢法", "techniques/tachiai-12-kata"),
             ("位", "concepts/miden-kurai-no-koto"),
@@ -1246,6 +1247,7 @@ BOOK_CHUNK_TREES = {
     ("en", "sources/kuwami-foundations-principles-vol2"),
     ("en", "sources/den-no-ichi-i"),
     ("ja", "sources/shogakushu-2025"),
+    ("ja", "sources/den-no-ichi-i"),
 }
 BOOK_CHUNK_MAX = 1100  # chars per passage chunk
 BOOK_CHUNK_BOOST = 8   # just under curated sections (10), above articles (-5)
