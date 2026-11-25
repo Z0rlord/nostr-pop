@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 1 of 14 — Why This Book Exists
 
-**Why this step:** The school explains why it created a new first rank at all: the traditional seven-stage Den-i system can take ten years to even begin. Small steps are the school's answer for people training today.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-00-preface|Den no Ichi-i, Preface and Notes]]
 - [[sources/den-no-ichi-i/ch-05-contents-mokuroku|Contents (Mokuroku)]]

@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 2 of 14 — Kaisho, Gyōsho, Sōsho — Shu, Ha, Ri
 
-**Why this step:** Every traditional art says "train step by step." Tenshinryu's reading of that idea is unusual, and it shapes how this whole book — and your training — is paced.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-01-kaisho-gyosho-sosho-shu-ha-ri|About Kaisho, Gyōsho and Sōsho, and Shu, Ha and Ri]]
 
@@ -28,7 +26,7 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
     "It reserves Kaisho for advanced students"
    ],
    "answer": 1,
-   "ref": "The book: \"Tenshinryu teaches students to move on to training of the next stage, even if it is premature\" — derived from the Shirin-dan educational system."
+   "ref": "\"Tenshinryu teaches students to move on to training of the next stage, even if it is premature\" — derived from the Shirin-dan educational system."
   },
   {
    "q": "The explanations in Den no Ichi-i are limited to which stage?",

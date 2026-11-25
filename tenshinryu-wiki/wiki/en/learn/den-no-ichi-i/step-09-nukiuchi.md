@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 9 of 14 — No. 4: Nukiuchi
 
-**Why this step:** The first drawing technique of the Okigatana group — but one that strikes without cutting. It carries the school's Katsujinken ideal into a drawn sword, and its three names each tell part of the story.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-10-nukiuchi|No. 4 — Nukiuchi (抜打)]]
 

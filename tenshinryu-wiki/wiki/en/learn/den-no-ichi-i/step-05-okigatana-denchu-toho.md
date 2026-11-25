@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 5 of 14 — Okigatana and the Sword That Gives Life
 
-**Why this step:** The first four techniques are done seated, from a sword placed at your side — and none of them is an attack. This chapter explains Okigatana and the Katsujinken teaching behind Denchū-Tōhō Saya-no-uchi.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-06-zaho-okigatana|Zahō — Okigatana]]
 

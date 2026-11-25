@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 12 of 14 — No. 7: Tsurube-nuki and No. 8: Tsurube-otoshi
 
-**Why this step:** A pair of "brother kata" named after the well bucket: one draws it straight up and cuts straight down, the other lets it fall. Together they forge the posture that runs through the whole school.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-15-tsurube-nuki|No. 7 — Tsurube-nuki (釣瓶抜)]]
 - [[sources/den-no-ichi-i/ch-16-tsurube-otoshi|No. 8 — Tsurube-otoshi (釣瓶落)]]
@@ -32,7 +30,7 @@ Every answer below is in the linked chapter. Read it, then take the check. This 
    "ref": "Overview: the name likens drawing straight up and cutting straight down (makkō) to the bucket of a tsurube well. You cut to near the ground with Hizagoshi."
   },
   {
-   "q": "How does the book describe the relationship between Tsurube-otoshi and Tsurube-nuki?",
+   "q": "What is the relationship between Tsurube-otoshi and Tsurube-nuki?",
    "choices": [
     "Unrelated techniques",
     "Tsurube-otoshi is a Kyōdai-gata — a \"brother kata,\" Tenshinryu's term for techniques of the same lineage — of Tsurube-nuki",

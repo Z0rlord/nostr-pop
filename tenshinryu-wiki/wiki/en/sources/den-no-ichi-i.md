@@ -12,7 +12,6 @@ updated: 2026-11-25
 
 **Author:** [[people/kuwami-masakumo|Kuwami Masakumo]], 10th Shike of Tenshinryu Hyoho
 **Published:** Shimotsuki (November), Year 8 of the Reiwa Era (2026), Tenshinryu Hyoho. 139 pp., English.
-**Provenance:** English PDF shared with the user via Google Drive and received on 2026-11-25; added to this wiki in full on the user's instruction the same day.
 
 **Scope:** The school's new **required curriculum for beginners**. Tenshinryu's traditional transmission ranks (Den-i 伝位) run seven stages — Hatsu-yurushi, Naka-yurushi, Oku-yurushi, Kirigami, Mokuroku, Menkyo, Kaiden — but under that system even Hatsu-yurushi can take ten years. Den no Ichi-i (伝壱位, "First Transmission Rank") establishes small steps suited to the present day: **ten techniques** regarded as especially important for beginners, in technique and in Shinpō (心法, training of the mind):
 
@@ -20,11 +19,7 @@ updated: 2026-11-25
 - **Kodachi-Battōjutsu (小太刀抜刀術):** Nukiuchi no Koto — the basic short-sword draw and body mechanics.
 - **Tachiai-Battōjutsu (立相抜刀術):** Kusame-nuki, Tsurube-nuki, Tsurube-otoshi, Ogami-nuki, Tsuri-nuki — standing draws, including the school's gateway training kata.
 
-The opening essays cover Kaisho/Gyōsho/Sōsho and Shu/Ha/Ri, breaking down movements, Jo/Ha/Kyū training speeds, and the three goals set for every technique (name; characteristics — Maai and Situation; sequence, form and movements). The book limits itself to the Kaisho and Shu stage.
-
-**Studying this book?** The [[learn/den-no-ichi-i|Den no Ichi-i Track]] guides you through it in order, with a short comprehension check before each step unlocks. It is the school's own beginner curriculum — the natural core of the wiki's Learn section.
-
-**Companion volumes:** [[sources/shogakushu-2025|天心流初学集 改訂版]] (Japanese) and [[sources/kuwami-foundations-principles-vol1|Foundations and Principles Vol. 1]]–[[sources/kuwami-foundations-principles-vol2|2]] (English) — the notes in this book omit terms already explained there.
+The opening essays cover Kaisho/Gyōsho/Sōsho and Shu/Ha/Ri, breaking down movements, Jo/Ha/Kyū training speeds, and the three goals set for every technique (name; characteristics — Maai and Situation; sequence, form and movements). Explanations are limited to the Kaisho and Shu stage.
 
 ## Full text (by chapter)
 

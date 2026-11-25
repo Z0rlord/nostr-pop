@@ -12,8 +12,6 @@ A guided path through *Den no Ichi-i* (伝壱位, 2026), the school's own requir
 
 **How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Your progress is stored on this device only — no account, nothing sent anywhere.
 
-**What this is not:** instruction. The track points you through the published sources and checks that you found what they say. It never teaches or corrects technique, and interpretation belongs to the school's instructors. The book itself says the photographs and explanations "are still not perfect. Please acquire the details by being taught in person by the instructors."
-
 <ol id="learn-track-index" data-track="den-no-ichi-i" data-total="14" class="learn-track-list">
 <li data-step="1"><a href="/en/learn/den-no-ichi-i/step-01-why-this-book">Step 1: Why This Book Exists</a></li>
 <li data-step="2"><a href="/en/learn/den-no-ichi-i/step-02-kaisho-shu-ha-ri">Step 2: Kaisho, Gyōsho, Sōsho — Shu, Ha, Ri</a></li>
@@ -33,5 +31,3 @@ A guided path through *Den no Ichi-i* (伝壱位, 2026), the school's own requir
 
 <p class="learn-progress-line"><span id="learn-progress-text"></span></p>
 <p><a href="/en/learn/den-no-ichi-i/complete" id="learn-complete-link">Completion</a> · <button type="button" id="learn-reset" class="learn-reset">Reset my progress</button></p>
-
-**Where this sits:** this is the school's beginner curriculum — start here if you are new to practice. The [[learn/foundations|Foundations Track]] walks the school's history and philosophy (Vol. 1) and is the natural companion. Questions along the way: use the **Ask** button — it answers from the wiki's sources, this book included.

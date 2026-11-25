@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 11 of 14 — Tachiai-Battōjutsu and No. 6: Kusame-nuki
 
-**Why this step:** The standing draws begin. Kusame-nuki is the school's gateway technique: difficult, packed with teachings, and unique in carrying all three training speeds inside a single kata.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-13-tachiai-battojutsu|Tachiai-Battōjutsu (Standing Drawing)]]
 - [[sources/den-no-ichi-i/ch-14-kusame-nuki|No. 6 — Kusame-nuki (嚔抜 / 草芽抜き)]]

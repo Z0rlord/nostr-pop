@@ -8,8 +8,6 @@ updated: 2026-11-25
 
 # Step 6 of 14 — No. 1: Tsuka-uchi
 
-**Why this step:** The first technique: stop the draw by striking with the hilt, before the sword ever leaves the scabbard. This is the template for the whole Okigatana group — distance, timing and Zanshin all start here.
-
 **Read first:**
 - [[sources/den-no-ichi-i/ch-07-tsuka-uchi|No. 1 — Tsuka-uchi (柄打)]]
 
