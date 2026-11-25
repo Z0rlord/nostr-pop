@@ -22,7 +22,7 @@ Advanced curriculum — especially [[techniques/tachiai-12-kata|twelve seihō]] 
 
 For the big picture of how hubs connect, see [[synthesis|Synthesis]].
 
-**Guided track:** [[learn/foundations|The Foundations Track]] walks through the school's own book — Foundations & Principles Vol. 1, history and philosophy — step by step, with a short check before each step unlocks. Progress stays on your device; no account needed.
+**Guided track:** [[learn/foundations|The Foundations Track]] walks through the book — Foundations & Principles Vol. 1, history and philosophy — step by step, with a short check before each step unlocks. Reading is open to everyone; taking the checks needs a free account, and your progress is saved to it.
 
 ## Week 1 checklist
 

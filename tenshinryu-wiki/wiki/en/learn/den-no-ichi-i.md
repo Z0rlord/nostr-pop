@@ -8,7 +8,7 @@ updated: 2026-11-25
 
 # Den no Ichi-i Track — the Required Beginner Curriculum
 
-A guided path through *Den no Ichi-i* (伝壱位, 2026), the school's own required curriculum for beginners: the ten techniques of the new first transmission rank, and the training-method essays that frame them.
+A guided path through *Den no Ichi-i* (伝壱位, 2026), the required curriculum for beginners: the ten techniques of the new first transmission rank, and the training-method essays that frame them.
 
 **How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Reading is open to everyone. To take the checks you sign in, and your progress is saved to your account so it follows you across devices.
 
