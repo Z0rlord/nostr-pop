@@ -215,153 +215,357 @@
     };
   });
 
+  /* ---------- Account strings (sign-in, server-side progress) ---------- */
+  var ACCT = {
+    en: {
+      gateTitle: "Sign in to take the checks",
+      gateBody: "The reading is open to everyone. To take a step's check and keep your progress, sign in. Your progress is saved to your account, so it follows you across devices.",
+      google: "Continue with Google", apple: "Continue with Apple",
+      signedInAs: "Signed in as {name}", signOut: "Sign out", badgeSignIn: "sign in",
+      loading: "Loading your progress…",
+      saveError: "Could not save your progress. Check your connection and try again.",
+      loadError: "Could not load your progress. Reload the page to try again.",
+      signInError: "Sign-in did not complete. Try again.",
+      progress: "Your progress: {done} of {total} steps passed.",
+      resetConfirm: "Reset your saved progress for this track? This cannot be undone.",
+      completeGate: "Sign in and pass all {total} steps to open this page."
+    },
+    ja: {
+      gateTitle: "確認テストを受けるにはサインインしてください",
+      gateBody: "本文は誰でも読めます。確認テストを受けて進捗を残すには、サインインが必要です。進捗はアカウントに保存されるので、端末を変えても続きから学べます。",
+      google: "Googleで続ける", apple: "Appleで続ける",
+      signedInAs: "{name} としてサインイン中", signOut: "サインアウト", badgeSignIn: "サインイン",
+      loading: "進捗を読み込んでいます…",
+      saveError: "進捗を保存できませんでした。接続を確認して、もう一度お試しください。",
+      loadError: "進捗を読み込めませんでした。ページを再読み込みしてください。",
+      signInError: "サインインが完了しませんでした。もう一度お試しください。",
+      progress: "あなたの進捗: 全{total}ステップ中 {done} 合格",
+      resetConfirm: "このトラックの保存済みの進捗をリセットしますか? 元に戻せません。",
+      completeGate: "サインインして全{total}ステップに合格すると、このページが開きます。"
+    },
+    de: {
+      gateTitle: "Anmelden, um die Fragen zu beantworten",
+      gateBody: "Der Lesetext steht allen offen. Um die Verständnisfragen eines Schritts zu beantworten und deinen Fortschritt zu behalten, melde dich an. Der Fortschritt wird in deinem Konto gespeichert und folgt dir auf jedes Gerät.",
+      google: "Weiter mit Google", apple: "Weiter mit Apple",
+      signedInAs: "Angemeldet als {name}", signOut: "Abmelden", badgeSignIn: "anmelden",
+      loading: "Dein Fortschritt wird geladen…",
+      saveError: "Der Fortschritt konnte nicht gespeichert werden. Prüfe die Verbindung und versuche es erneut.",
+      loadError: "Der Fortschritt konnte nicht geladen werden. Lade die Seite neu.",
+      signInError: "Die Anmeldung wurde nicht abgeschlossen. Versuche es erneut.",
+      progress: "Dein Fortschritt: {done} von {total} Schritten bestanden.",
+      resetConfirm: "Den gespeicherten Fortschritt dieses Kurses zurücksetzen? Das lässt sich nicht rückgängig machen.",
+      completeGate: "Melde dich an und bestehe alle {total} Schritte, um diese Seite zu öffnen."
+    },
+    el: {
+      gateTitle: "Συνδεθείτε για να απαντήσετε στους ελέγχους",
+      gateBody: "Το κείμενο είναι ανοιχτό σε όλους. Για να απαντήσετε στον έλεγχο ενός βήματος και να κρατήσετε την πρόοδό σας, συνδεθείτε. Η πρόοδος αποθηκεύεται στον λογαριασμό σας και σας ακολουθεί σε κάθε συσκευή.",
+      google: "Συνέχεια με Google", apple: "Συνέχεια με Apple",
+      signedInAs: "Συνδεδεμένος ως {name}", signOut: "Αποσύνδεση", badgeSignIn: "σύνδεση",
+      loading: "Φόρτωση της προόδου σας…",
+      saveError: "Δεν ήταν δυνατή η αποθήκευση της προόδου. Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.",
+      loadError: "Δεν ήταν δυνατή η φόρτωση της προόδου. Ανανεώστε τη σελίδα.",
+      signInError: "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά.",
+      progress: "Η πρόοδός σας: {done} από {total} βήματα με επιτυχία.",
+      resetConfirm: "Να μηδενιστεί η αποθηκευμένη πρόοδος αυτού του κύκλου; Η ενέργεια δεν αναιρείται.",
+      completeGate: "Συνδεθείτε και περάστε και τα {total} βήματα για να ανοίξει αυτή η σελίδα."
+    },
+    es: {
+      gateTitle: "Inicie sesión para hacer las pruebas",
+      gateBody: "La lectura está abierta a todos. Para hacer la prueba de un paso y conservar su progreso, inicie sesión. El progreso se guarda en su cuenta y le acompaña en cualquier dispositivo.",
+      google: "Continuar con Google", apple: "Continuar con Apple",
+      signedInAs: "Sesión iniciada como {name}", signOut: "Cerrar sesión", badgeSignIn: "iniciar sesión",
+      loading: "Cargando su progreso…",
+      saveError: "No se pudo guardar su progreso. Compruebe la conexión e inténtelo de nuevo.",
+      loadError: "No se pudo cargar su progreso. Recargue la página.",
+      signInError: "El inicio de sesión no se completó. Inténtelo de nuevo.",
+      progress: "Su progreso: {done} de {total} pasos superados.",
+      resetConfirm: "¿Borrar el progreso guardado de este curso? No se puede deshacer.",
+      completeGate: "Inicie sesión y supere los {total} pasos para abrir esta página."
+    },
+    fr: {
+      gateTitle: "Connectez-vous pour passer les questionnaires",
+      gateBody: "La lecture est ouverte à tous. Pour passer le questionnaire d'une étape et conserver votre progression, connectez-vous. Elle est enregistrée dans votre compte et vous suit d'un appareil à l'autre.",
+      google: "Continuer avec Google", apple: "Continuer avec Apple",
+      signedInAs: "Connecté en tant que {name}", signOut: "Se déconnecter", badgeSignIn: "connexion",
+      loading: "Chargement de votre progression…",
+      saveError: "Impossible d'enregistrer votre progression. Vérifiez la connexion et réessayez.",
+      loadError: "Impossible de charger votre progression. Rechargez la page.",
+      signInError: "La connexion n'a pas abouti. Réessayez.",
+      progress: "Votre progression : {done} étapes réussies sur {total}.",
+      resetConfirm: "Effacer la progression enregistrée de ce parcours ? Cette action est définitive.",
+      completeGate: "Connectez-vous et réussissez les {total} étapes pour ouvrir cette page."
+    },
+    it: {
+      gateTitle: "Accedi per svolgere le verifiche",
+      gateBody: "Il testo è aperto a tutti. Per svolgere la verifica di un passo e conservare i tuoi progressi, accedi. I progressi sono salvati nel tuo account e ti seguono su ogni dispositivo.",
+      google: "Continua con Google", apple: "Continua con Apple",
+      signedInAs: "Accesso eseguito come {name}", signOut: "Esci", badgeSignIn: "accedi",
+      loading: "Caricamento dei tuoi progressi…",
+      saveError: "Impossibile salvare i progressi. Controlla la connessione e riprova.",
+      loadError: "Impossibile caricare i progressi. Ricarica la pagina.",
+      signInError: "L'accesso non è stato completato. Riprova.",
+      progress: "I tuoi progressi: {done} passi superati su {total}.",
+      resetConfirm: "Azzerare i progressi salvati di questo percorso? L'azione non si può annullare.",
+      completeGate: "Accedi e supera tutti i {total} passi per aprire questa pagina."
+    }
+  };
+
   var lang = (document.documentElement.getAttribute("lang") || "").split("-")[0];
   if (!STR[lang]) {
     var m = location.pathname.match(/^\/([a-z]{2})\//);
     lang = (m && STR[m[1]]) ? m[1] : "en";
   }
   var S = STR[lang];
+  var A = ACCT[lang] || ACCT.en;
 
   function trackBase() {
     var m = location.pathname.match(/^(\/[a-z]{2}\/learn\/[^\/]+)/);
     return m ? m[1] : "/en/learn/foundations";
   }
-
-  function key(track) { return "tw-learn:" + track; }
-  function load(track) {
-    try {
-      var d = JSON.parse(localStorage.getItem(key(track)));
-      if (d && Array.isArray(d.passed)) return d;
-    } catch (e) {}
-    return { passed: [] };
-  }
-  function save(track, p) {
-    try { localStorage.setItem(key(track), JSON.stringify(p)); } catch (e) {}
-  }
-  function hasPassed(p, n) { return p.passed.indexOf(n) !== -1; }
   function nextHref() {
     var nl = document.querySelector(".learn-stepnav .learn-next");
     return nl ? nl.getAttribute("href") : trackBase();
   }
+  function hasPassed(p, n) { return p.indexOf(n) !== -1; }
 
-  /* ---------- Track index page ---------- */
+  /* ---------- Where we are on the page ---------- */
   var idx = document.getElementById("learn-track-index");
-  if (idx) {
-    var track = idx.getAttribute("data-track");
-    var total = parseInt(idx.getAttribute("data-total"), 10);
-    var prog = load(track);
-    Array.prototype.forEach.call(idx.querySelectorAll("li[data-step]"), function (li) {
-      var n = parseInt(li.getAttribute("data-step"), 10);
-      var state = hasPassed(prog, n) ? "passed" : (n === 1 || hasPassed(prog, n - 1)) ? "open" : "locked";
-      li.classList.add("learn-" + state);
-      var badge = document.createElement("span");
-      badge.className = "learn-badge";
-      if (state === "passed") badge.textContent = S.badgePassed;
-      else if (state === "locked") { badge.textContent = S.badgeLocked; li.setAttribute("title", S.lockedTitle); }
-      else badge.textContent = S.badgeStart;
-      li.appendChild(badge);
-    });
-    var done = prog.passed.filter(function (n) { return n >= 1 && n <= total; }).length;
-    var pt = document.getElementById("learn-progress-text");
-    if (pt && done > 0) pt.textContent = S.progress(done, total);
-    var reset = document.getElementById("learn-reset");
-    if (reset) reset.addEventListener("click", function () {
-      if (window.confirm(S.resetConfirm)) {
-        save(track, { passed: [] });
-        location.reload();
-      }
+  var box = document.querySelector(".learn-check");
+  var comp = document.getElementById("learn-complete");
+  if (!idx && !box && !comp) return;
+
+  var trackEl = idx || box || comp;
+  var TRACK = trackEl.getAttribute("data-track");
+  var TOTAL = parseInt(trackEl.getAttribute("data-total"), 10);
+
+  /* ---------- State ---------- */
+  var AUTH = null;       // auth.js module once loaded
+  var state = "loading"; // loading | out | in | error
+  var user = null;
+  var passed = [];
+
+  function localKey() { return "tw-learn:" + TRACK; }
+  function readLocal() {
+    try {
+      var d = JSON.parse(localStorage.getItem(localKey()));
+      if (d && Array.isArray(d.passed)) return d.passed;
+    } catch (e) {}
+    return [];
+  }
+  function clearLocal() { try { localStorage.removeItem(localKey()); } catch (e) {} }
+
+  function api(method, path, body) {
+    return AUTH.getToken().then(function (tok) {
+      if (!tok) throw new Error("no token");
+      var opts = { method: method, headers: { "Authorization": "Bearer " + tok } };
+      if (body) { opts.headers["Content-Type"] = "application/json"; opts.body = JSON.stringify(body); }
+      return fetch(path, opts).then(function (r) {
+        if (!r.ok) { var e = new Error("http " + r.status); e.status = r.status; throw e; }
+        return r.json();
+      });
     });
   }
 
-  /* ---------- Step pages ---------- */
-  var box = document.querySelector(".learn-check");
-  if (box) {
-    var track2 = box.getAttribute("data-track");
-    var step = parseInt(box.getAttribute("data-step"), 10);
-    var total2 = parseInt(box.getAttribute("data-total"), 10);
-    var prog2 = load(track2);
-    var dataEl = box.querySelector("script.learn-quiz-data");
-    var data = null;
-    try { data = JSON.parse(dataEl.textContent); } catch (e) {}
+  function loadProgress() {
+    var local = readLocal();
+    var first = local.length
+      ? api("POST", "/api/progress/import", { track: TRACK, passed: local })
+          .then(function (r) { clearLocal(); return r; })
+      : api("GET", "/api/progress?track=" + encodeURIComponent(TRACK));
+    return first.then(function (r) { passed = r.passed || []; state = "in"; });
+  }
 
-    if (hasPassed(prog2, step)) {
-      var doneBox = document.createElement("div");
-      doneBox.className = "learn-check-box";
-      var passedMsg = document.createElement("p");
-      passedMsg.className = "learn-passed";
-      passedMsg.textContent = S.stepPassed(step, total2);
-      var retakeP = document.createElement("p");
-      var retake = document.createElement("button");
+  function savePass(step) {
+    return api("POST", "/api/progress", { track: TRACK, step: step })
+      .then(function (r) { passed = r.passed || passed; });
+  }
+
+  /* ---------- Small DOM helpers ---------- */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fmt(s, vals) { return s.replace(/\{([a-z]+)\}/g, function (_, k) { return String(vals[k]); }); }
+
+  function authButtons(msgEl) {
+    var row = el("p", "learn-auth-buttons");
+    [["google", A.google, "signInGoogle"], ["apple", A.apple, "signInApple"]].forEach(function (b) {
+      var btn = el("button", "learn-auth-btn learn-auth-" + b[0], b[1]);
+      btn.type = "button";
+      btn.addEventListener("click", function () {
+        msgEl.textContent = "";
+        AUTH[b[2]]().catch(function (e) {
+          var c = e && e.code;
+          if (c === "auth/popup-closed-by-user" || c === "auth/cancelled-popup-request") return;
+          msgEl.textContent = A.signInError;
+        });
+      });
+      row.appendChild(btn);
+    });
+    return row;
+  }
+
+  function gateBox() {
+    var wrap = el("div", "learn-check-box learn-gate");
+    wrap.appendChild(el("p", "learn-check-title", A.gateTitle));
+    wrap.appendChild(el("p", "learn-check-note", A.gateBody));
+    var msg = el("p", "learn-banner learn-try");
+    wrap.appendChild(authButtons(msg));
+    wrap.appendChild(msg);
+    return wrap;
+  }
+
+  function accountBar() {
+    var bar = el("p", "learn-account");
+    bar.appendChild(el("span", "learn-account-name",
+      fmt(A.signedInAs, { name: (user && (user.displayName || user.email)) || "" })));
+    var out = el("button", "learn-signout", A.signOut);
+    out.type = "button";
+    out.addEventListener("click", function () { AUTH.signOutUser(); });
+    bar.appendChild(document.createTextNode(" · "));
+    bar.appendChild(out);
+    return bar;
+  }
+
+  function noticeBox(text) {
+    var wrap = el("div", "learn-check-box");
+    wrap.appendChild(el("p", "learn-locked", text));
+    return wrap;
+  }
+
+  /* ---------- Render ---------- */
+  var bars = [];
+  function clearBars() { bars.forEach(function (b) { if (b.parentNode) b.parentNode.removeChild(b); }); bars = []; }
+  function placeBar(anchor) {
+    if (state !== "in" || !anchor || !anchor.parentNode) return;
+    var b = accountBar();
+    anchor.parentNode.insertBefore(b, anchor);
+    bars.push(b);
+  }
+
+  function render() {
+    clearBars();
+    if (idx) renderIndex();
+    if (box) renderStep();
+    if (comp) renderComplete();
+  }
+
+  function renderIndex() {
+    var gate = document.getElementById("learn-gate-slot");
+    if (!gate) { gate = el("div"); gate.id = "learn-gate-slot"; idx.parentNode.insertBefore(gate, idx); }
+    gate.innerHTML = "";
+    if (state === "out") gate.appendChild(gateBox());
+    if (state === "loading") gate.appendChild(noticeBox(A.loading));
+    if (state === "error") gate.appendChild(noticeBox(A.loadError));
+    placeBar(gate);
+    var open = state === "in";
+    Array.prototype.forEach.call(idx.querySelectorAll("li[data-step]"), function (li) {
+      var n = parseInt(li.getAttribute("data-step"), 10);
+      var old = li.querySelector(".learn-badge");
+      if (old) li.removeChild(old);
+      li.classList.remove("learn-passed", "learn-open", "learn-locked");
+      li.removeAttribute("title");
+      var badge = el("span", "learn-badge");
+      if (!open) {
+        li.classList.add("learn-locked");
+        badge.textContent = state === "out" ? A.badgeSignIn : "";
+      } else if (hasPassed(passed, n)) { li.classList.add("learn-passed"); badge.textContent = S.badgePassed; }
+      else if (n === 1 || hasPassed(passed, n - 1)) { li.classList.add("learn-open"); badge.textContent = S.badgeStart; }
+      else { li.classList.add("learn-locked"); badge.textContent = S.badgeLocked; li.setAttribute("title", S.lockedTitle); }
+      li.appendChild(badge);
+    });
+    var done = passed.filter(function (n) { return n >= 1 && n <= TOTAL; }).length;
+    var pt = document.getElementById("learn-progress-text");
+    if (pt) pt.textContent = (open && done > 0) ? fmt(A.progress, { done: done, total: TOTAL }) : "";
+    var reset = document.getElementById("learn-reset");
+    if (reset) {
+      reset.style.display = open ? "" : "none";
+      if (!reset.getAttribute("data-bound")) {
+        reset.setAttribute("data-bound", "1");
+        reset.addEventListener("click", function () {
+          if (state !== "in" || !window.confirm(A.resetConfirm)) return;
+          api("DELETE", "/api/progress?track=" + encodeURIComponent(TRACK))
+            .then(function () { passed = []; render(); })
+            .catch(function () { window.alert(A.saveError); });
+        });
+      }
+    }
+  }
+
+  function renderStep() {
+    var step = parseInt(box.getAttribute("data-step"), 10);
+    var dataEl = box.querySelector("script.learn-quiz-data");
+    if (dataEl && !box._quizData) {
+      try { box._quizData = JSON.parse(dataEl.textContent); } catch (e) {}
+      box._quizScript = dataEl;
+    }
+    var data = box._quizData || null;
+    // Rebuild everything except the stored quiz JSON.
+    Array.prototype.slice.call(box.children).forEach(function (c) { if (c !== box._quizScript) box.removeChild(c); });
+    if (state === "loading") { box.appendChild(noticeBox(A.loading)); return; }
+    if (state === "error") { box.appendChild(noticeBox(A.loadError)); return; }
+    if (state === "out") { box.appendChild(gateBox()); return; }
+    placeBar(box);
+    if (hasPassed(passed, step)) {
+      var doneBox = el("div", "learn-check-box");
+      doneBox.appendChild(el("p", "learn-passed", S.stepPassed(step, TOTAL)));
+      var retakeP = el("p");
+      var retake = el("button", "learn-retake", S.retake);
       retake.type = "button";
-      retake.className = "learn-retake";
-      retake.textContent = S.retake;
-      retake.addEventListener("click", function () { renderQuiz(box, data, track2, step, total2); });
+      retake.addEventListener("click", function () { renderQuiz(box, data, step); });
       retakeP.appendChild(retake);
-      doneBox.appendChild(passedMsg);
       doneBox.appendChild(retakeP);
       box.appendChild(doneBox);
-    } else if (step > 1 && !hasPassed(prog2, step - 1)) {
-      var lockBox = document.createElement("div");
-      lockBox.className = "learn-check-box";
-      var lp = document.createElement("p");
-      lp.className = "learn-locked";
+    } else if (step > 1 && !hasPassed(passed, step - 1)) {
+      var lockBox = el("div", "learn-check-box");
+      var lp = el("p", "learn-locked");
       lp.innerHTML = S.stepLocked(step - 1, trackBase());
       lockBox.appendChild(lp);
       box.appendChild(lockBox);
     } else {
-      renderQuiz(box, data, track2, step, total2);
+      renderQuiz(box, data, step);
     }
   }
 
-  function renderQuiz(box, data, track, step, total) {
-    if (!data || !data.questions) { box.textContent = S.dataError; return; }
-    box.innerHTML = "";
-    var wrap = document.createElement("div");
-    wrap.className = "learn-check-box";
-
-    var title = document.createElement("p");
-    title.className = "learn-check-title";
-    title.textContent = S.checkTitle(step, total);
-    wrap.appendChild(title);
-    var note = document.createElement("p");
-    note.className = "learn-check-note";
-    note.textContent = S.checkNote(data.questions.length);
-    wrap.appendChild(note);
+  function renderQuiz(box, data, step) {
+    if (!data || !data.questions) { box.appendChild(el("p", null, S.dataError)); return; }
+    Array.prototype.slice.call(box.children).forEach(function (c) {
+      if (c !== box._quizScript && !c.classList.contains("learn-account")) box.removeChild(c);
+    });
+    var wrap = el("div", "learn-check-box");
+    wrap.appendChild(el("p", "learn-check-title", S.checkTitle(step, TOTAL)));
+    wrap.appendChild(el("p", "learn-check-note", S.checkNote(data.questions.length)));
 
     var correct = 0;
-    var banner = document.createElement("p");
-    banner.className = "learn-banner";
+    var banner = el("p", "learn-banner");
 
     data.questions.forEach(function (qq, qi) {
-      var qd = document.createElement("div");
-      qd.className = "learn-q";
-      var qp = document.createElement("p");
-      qp.className = "learn-q-text";
-      qp.textContent = (qi + 1) + ". " + qq.q;
-      qd.appendChild(qp);
-      var ul = document.createElement("div");
-      ul.className = "learn-choices";
+      var qd = el("div", "learn-q");
+      qd.appendChild(el("p", "learn-q-text", (qi + 1) + ". " + qq.q));
+      var ul = el("div", "learn-choices");
       qq.choices.forEach(function (c, ci) {
-        var b = document.createElement("button");
+        var b = el("button", "learn-choice", c);
         b.type = "button";
-        b.className = "learn-choice";
-        b.textContent = c;
         b.addEventListener("click", function () {
           if (qd.classList.contains("learn-q-done")) return;
           if (ci === qq.answer) {
             qd.classList.add("learn-q-done");
             b.classList.add("learn-correct");
             Array.prototype.forEach.call(ul.children, function (x) { x.disabled = true; });
-            var ref = document.createElement("p");
-            ref.className = "learn-ref";
-            ref.textContent = S.correctPrefix + qq.ref;
-            qd.appendChild(ref);
+            qd.appendChild(el("p", "learn-ref", S.correctPrefix + qq.ref));
             correct++;
             if (correct === data.questions.length) {
-              var p = load(track);
-              if (!hasPassed(p, step)) { p.passed.push(step); save(track, p); }
-              banner.className = "learn-banner learn-pass";
-              banner.innerHTML = S.bannerPass(step, total, nextHref(), trackBase());
+              var done = function () {
+                banner.className = "learn-banner learn-pass";
+                banner.innerHTML = S.bannerPass(step, TOTAL, nextHref(), trackBase());
+              };
+              if (hasPassed(passed, step)) done();
+              else savePass(step).then(done).catch(function () {
+                banner.className = "learn-banner learn-try";
+                banner.textContent = A.saveError;
+              });
             } else {
               banner.className = "learn-banner";
               banner.textContent = S.bannerProgress(correct, data.questions.length);
@@ -383,19 +587,34 @@
     box.appendChild(wrap);
   }
 
-  /* ---------- Completion page ---------- */
-  var comp = document.getElementById("learn-complete");
-  if (comp) {
-    var t3 = comp.getAttribute("data-track");
-    var total3 = parseInt(comp.getAttribute("data-total"), 10);
-    var p4 = load(t3);
-    var doneAll = true;
-    for (var i = 1; i <= total3; i++) {
-      if (!hasPassed(p4, i)) { doneAll = false; break; }
+  function renderComplete() {
+    var doneAll = state === "in";
+    if (doneAll) {
+      for (var i = 1; i <= TOTAL; i++) { if (!hasPassed(passed, i)) { doneAll = false; break; } }
     }
     var locked = comp.querySelector(".learn-complete-locked");
     var open = comp.querySelector(".learn-complete-open");
-    if (doneAll) { if (locked) locked.style.display = "none"; }
-    else if (open) { open.style.display = "none"; }
+    if (locked) locked.style.display = doneAll ? "none" : "";
+    if (open) open.style.display = doneAll ? "" : "none";
+    var slot = document.getElementById("learn-complete-gate");
+    if (!slot) { slot = el("div"); slot.id = "learn-complete-gate"; comp.parentNode.insertBefore(slot, comp); }
+    slot.innerHTML = "";
+    if (state === "out") {
+      if (locked) locked.textContent = fmt(A.completeGate, { total: TOTAL });
+      slot.appendChild(gateBox());
+    }
+    if (state === "in") placeBar(slot);
   }
+
+  /* ---------- Start: load sign-in on demand ---------- */
+  render();
+  import("/assets/auth.js?v=" + (window.WIKI_ASSET_V || "1")).then(function (mod) {
+    AUTH = mod;
+    AUTH.onUser(function (u) {
+      user = u;
+      if (!u) { state = "out"; passed = []; render(); return; }
+      state = "loading"; render();
+      loadProgress().then(render).catch(function () { state = "error"; render(); });
+    });
+  }).catch(function () { state = "error"; render(); });
 })();

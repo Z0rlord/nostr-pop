@@ -10,7 +10,7 @@ updated: 2026-11-25
 
 A guided path through *Den no Ichi-i* (伝壱位, 2026), the school's own required curriculum for beginners: the ten techniques of the new first transmission rank, and the training-method essays that frame them.
 
-**How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Your progress is stored on this device only — no account, nothing sent anywhere.
+**How it works:** 14 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Reading is open to everyone. To take the checks you sign in, and your progress is saved to your account so it follows you across devices.
 
 **What this is not:** instruction. The track points you through the published sources and checks that you found what they say. It never teaches or corrects technique, and interpretation belongs to the school's instructors. The book itself says the photographs and explanations "are still not perfect. Please acquire the details by being taught in person by the instructors."
 

@@ -10,7 +10,7 @@ updated: 2026-11-21
 
 A guided path through *Tenshinryu: Foundations and Principles, Volume 1* — the school's own account of its history and philosophy.
 
-**How it works:** 21 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Your progress is stored on this device only — no account, nothing sent anywhere.
+**How it works:** 21 steps, in order. Each step is one or two chapters of the book plus a short check. Pass a step's check to unlock the next. Reading is open to everyone. To take the checks you sign in, and your progress is saved to your account so it follows you across devices.
 
 **What this is not:** instruction. The track points you through the published sources and checks that you found what they say. It never teaches or corrects technique, and interpretation belongs to the school's instructors. Confidential teachings (門外不出) are not part of this track.
 
