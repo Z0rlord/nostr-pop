@@ -75,6 +75,15 @@ LOCALE = {
         "summary_prefix": "Riassunto provvisorio:",
         "default_summary": "Voce wiki su questa tecnica o tema dell'hyōhō Tenshinryu.",
     },
+    "pt": {
+        "lang": "pt",
+        "banner": "> **Tradução em andamento** — Esta página ainda não foi traduzida para o português (pt-BR).",
+        "stub_lead": "Consulte a versão em",
+        "en_label": "inglês",
+        "ja_label": "japonês",
+        "summary_prefix": "Resumo provisório:",
+        "default_summary": "Verbete da wiki sobre esta técnica ou tema do hyōhō Tenshinryu.",
+    },
 }
 
 
@@ -147,7 +156,7 @@ def scaffold_slug(slug: str, target_lang: str, loc: dict, *, include_hubs: bool)
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Scaffold es/el/fr/de/it wiki from EN tree")
-    parser.add_argument("lang", choices=("es", "el", "fr", "de", "it"), help="Target locale")
+    parser.add_argument("lang", choices=("es", "el", "fr", "de", "it", "pt"), help="Target locale")
     parser.add_argument("--include-hubs", action="store_true", help="Also scaffold hub slugs (EN body + banner)")
     parser.add_argument("--dry-run", action="store_true", help="Print counts only")
     args = parser.parse_args()

@@ -12,7 +12,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 WIKI = ROOT / "wiki"
-LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
+LANGS = ("en", "ja", "es", "el", "fr", "de", "it", "pt")
 TODAY = date.today().isoformat()
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)

@@ -72,6 +72,7 @@ DISCLAIMER = {
     "fr": "Aide à l'étude uniquement — entraînez-vous toujours avec un instructeur qualifié.",
     "de": "Nur Lernhilfe — trainieren Sie immer unter qualifizierter Anleitung.",
     "it": "Solo supporto allo studio — allenati sempre con un istruttore qualificato.",
+    "pt": "Apenas apoio ao estudo: treine sempre com um instrutor qualificado.",
 }
 
 
@@ -197,6 +198,7 @@ KODEN_NOTE = {
     "fr": "Enseignement confidentiel (koden). Nommez uniquement la page et son sujet général ; renvoyez l'élève vers son instructeur.",
     "de": "Vertrauliche Lehre (Koden). Nennen Sie nur die Seite und ihr allgemeines Thema; verweisen Sie den Schüler an seinen Lehrer.",
     "it": "Insegnamento riservato (koden). Nomina solo la pagina e il suo argomento generale; rimanda lo studente al suo istruttore.",
+    "pt": "Ensinamento reservado (koden). Cite apenas a página e o assunto geral; encaminhe o aluno ao seu instrutor.",
 }
 
 CORRECTION_RE = re.compile(
@@ -215,6 +217,7 @@ CORRECTION_LINE = {
     "fr": "Je ne peux ni juger la forme ni corriger la technique — confirmez avec votre instructeur.",
     "de": "Ich kann Form oder Technik nicht beurteilen — bitte bestätigen Sie dies mit Ihrem Lehrer.",
     "it": "Non posso valutare la forma né correggere la tecnica: conferma con il tuo istruttore.",
+    "pt": "Não posso avaliar a forma nem corrigir a técnica: confirme com o seu instrutor.",
 }
 
 
@@ -261,6 +264,7 @@ def build_prompt(question: str, lang: str, chunks: list[dict[str, Any]]) -> str:
         "fr": "French",
         "de": "German",
         "it": "Italian",
+        "pt": "Portuguese",
     }
     answer_lang = lang_names.get(lang, "English")
     if not chunks:

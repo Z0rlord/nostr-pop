@@ -190,6 +190,30 @@
     "continue": "Continua al passo {step}",
     "score": "{correct} risposte corrette su {n}.",
     "wrong": "Non è questa la risposta. Rileggi e scegli un'altra opzione."
+  },
+  "pt": {
+    "index": "Índice do curso",
+    "finish": "Concluir o curso",
+    "badges": [
+      "✓ aprovado",
+      "bloqueado",
+      "começar"
+    ],
+    "lockedTitle": "Seja aprovado primeiro no passo anterior",
+    "progress": "Progresso neste dispositivo: {done} de {total} passos aprovados.",
+    "resetConfirm": "Apagar o progresso deste curso neste dispositivo?",
+    "passed": "✓ Passo {step} aprovado.",
+    "nextUnlocked": "O próximo passo está liberado logo abaixo.",
+    "completeUnlocked": "A página final está liberada logo abaixo.",
+    "retake": "Refazer a verificação",
+    "stepLocked": "A verificação deste passo está bloqueada. Seja aprovado primeiro no passo {prev}. O texto continua acessível.",
+    "checkTitle": "Verificação: passo {step} de {total}",
+    "checkNote": "É preciso acertar todas as {n} respostas. Elas estão no guia e nas fontes. Tentativas ilimitadas.",
+    "correct": "Correto: ",
+    "dataError": "Não foi possível carregar as perguntas.",
+    "continue": "Continuar para o passo {step}",
+    "score": "{correct} respostas corretas de {n}.",
+    "wrong": "Não é esta a resposta. Releia e escolha outra opção."
   }
 };
   function format(s, values) {
@@ -307,6 +331,19 @@
       progress: "I tuoi progressi: {done} passi superati su {total}.",
       resetConfirm: "Azzerare i progressi salvati di questo percorso? L'azione non si può annullare.",
       completeGate: "Accedi e supera tutti i {total} passi per aprire questa pagina."
+    },
+    pt: {
+      gateTitle: "Entre para fazer as verificações",
+      gateBody: "O texto é aberto a todos. Para fazer a verificação de um passo e guardar o seu progresso, entre na sua conta. O progresso fica salvo na sua conta e acompanha você em qualquer dispositivo.",
+      google: "Continuar com o Google", apple: "Continuar com a Apple",
+      signedInAs: "Conectado como {name}", signOut: "Sair", badgeSignIn: "entrar",
+      loading: "Carregando o seu progresso…",
+      saveError: "Não foi possível salvar o progresso. Verifique a conexão e tente de novo.",
+      loadError: "Não foi possível carregar o progresso. Recarregue a página.",
+      signInError: "A entrada não foi concluída. Tente de novo.",
+      progress: "O seu progresso: {done} de {total} passos aprovados.",
+      resetConfirm: "Apagar o progresso salvo deste curso? Esta ação não pode ser desfeita.",
+      completeGate: "Entre e seja aprovado em todos os {total} passos para abrir esta página."
     }
   };
 

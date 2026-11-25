@@ -26,6 +26,7 @@ STUB_BANNER = {
     "fr": "Traduction en cours",
     "de": "Übersetzung ausstehend",
     "it": "Traduzione in corso",
+    "pt": "Tradução em andamento",
 }
 
 # Markers that should not appear on non-English pages (fully translated content)

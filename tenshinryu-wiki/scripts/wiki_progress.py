@@ -48,12 +48,14 @@ TRACKS: dict[str, int] = {
     "foundations-es": 21,
     "foundations-fr": 21,
     "foundations-it": 21,
+    "foundations-pt": 21,
     "den-no-ichi-i": 14,
     "den-no-ichi-i-de": 14,
     "den-no-ichi-i-el": 14,
     "den-no-ichi-i-es": 14,
     "den-no-ichi-i-fr": 14,
     "den-no-ichi-i-it": 14,
+    "den-no-ichi-i-pt": 14,
 }
 
 SCHEMA_SQL = """
