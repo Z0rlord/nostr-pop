@@ -50,6 +50,7 @@ TRACKS: dict[str, int] = {
     "foundations-it": 21,
     "foundations-pt": 21,
     "den-no-ichi-i": 14,
+    "den-no-ichi-i-ja": 14,
     "den-no-ichi-i-de": 14,
     "den-no-ichi-i-el": 14,
     "den-no-ichi-i-es": 14,
