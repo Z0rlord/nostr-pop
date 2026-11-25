@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 13 of 14 — No. 9: Ogami-nuki and No. 10: Tsuri-nuki
 
+**Why this step:** The last two techniques begin from etiquette: a deep bow, a standing bow.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-17-ogami-nuki|No. 9 — Ogami-nuki (拝抜)]]
 - [[sources/den-no-ichi-i/ch-18-tsuri-nuki|No. 10 — Tsuri-nuki (釣抜)]]

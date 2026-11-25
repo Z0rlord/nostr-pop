@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 2 of 14 — Kaisho, Gyōsho, Sōsho — Shu, Ha, Ri
 
+**Why this step:** Every traditional art says "train step by step." Tenshinryu's reading of that idea is unusual, and it sets the pace for everything after it.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-01-kaisho-gyosho-sosho-shu-ha-ri|About Kaisho, Gyōsho and Sōsho, and Shu, Ha and Ri]]
 

@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 4 of 14 — The Three Goals of Training
 
+**Why this step:** Every technique has the same three goals. Knowing them turns each chapter from a photo sequence into a checklist you can hold yourself to.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-04-goals-of-training|Goals of Training]]
 

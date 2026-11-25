@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 10 of 14 — Kodachi and No. 5: Nukiuchi no Koto
 
+**Why this step:** One seated technique with the short sword: the most basic of the basics, and the source of the body mechanics you will meet again in the standing techniques.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-11-kodachi-battojutsu|Zahō Kodachi-Battōjutsu (Short-Sword Drawing)]]
 - [[sources/den-no-ichi-i/ch-12-nukiuchi-no-koto|No. 5 — Nukiuchi no Koto (抜刀ノ事)]]

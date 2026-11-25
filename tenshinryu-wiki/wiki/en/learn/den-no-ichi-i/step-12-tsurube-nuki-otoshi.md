@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 12 of 14 — No. 7: Tsurube-nuki and No. 8: Tsurube-otoshi
 
+**Why this step:** A pair of "brother kata" named after the well bucket: one draws it straight up and cuts straight down, the other lets it fall. Together they forge the posture that runs through the whole school.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-15-tsurube-nuki|No. 7 — Tsurube-nuki (釣瓶抜)]]
 - [[sources/den-no-ichi-i/ch-16-tsurube-otoshi|No. 8 — Tsurube-otoshi (釣瓶落)]]

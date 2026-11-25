@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 3 of 14 — Breaking Down Movements; Jo, Ha, Kyū
 
+**Why this step:** With the stage settled, two short essays set the training method: how a technique is divided for learning, and the three speeds you train at. Getting this right early prevents detours and needless injuries.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-02-breaking-down-the-movements|About Breaking Down the Movements]]
 - [[sources/den-no-ichi-i/ch-03-jo-ha-kyu|About Jo, Ha and Kyū]]

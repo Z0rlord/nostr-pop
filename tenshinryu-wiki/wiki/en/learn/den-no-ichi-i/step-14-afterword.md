@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 14 of 14 — Afterword: Why the Basics Are Never Wasted
 
+**Why this step:** The closing essay addresses the way instruction evaporates, and the argument that basics are meaningless repetition.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-19-afterword|Afterword]]
 

@@ -8,6 +8,8 @@ updated: 2026-11-25
 
 # Step 7 of 14 — No. 2: Tsuba-tengaeshi
 
+**Why this step:** The second technique begins from Heifuku, full prostration — the most defenseless-looking posture there is. Its name describes the mechanics: turning the sword over with the tsuba as the pivot.
+
 **Read first:**
 - [[sources/den-no-ichi-i/ch-08-tsuba-tengaeshi|No. 2 — Tsuba-tengaeshi (鍔転返)]]
 
