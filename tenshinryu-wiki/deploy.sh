@@ -84,12 +84,13 @@ rsync -az \
   "$SCRIPT_DIR/nginx.conf" \
   "$SCRIPT_DIR/Dockerfile.ask" \
   "$SCRIPT_DIR/scripts/wiki_ask.py" \
+  "$SCRIPT_DIR/scripts/wiki_progress.py" \
   "$HOST:$REMOTE_DIR/"
 
 echo "==> Syncing Doppler env for wiki-ask (GEMINI_API_KEY)..."
 ENV_TMP="$(mktemp)"
 doppler secrets download --project dojopop --config prd_zorie --no-file --format docker > "$ENV_TMP"
-grep -E '^(GEMINI_API_KEY)=' "$ENV_TMP" > "${ENV_TMP}.wiki-ask" || true
+grep -E '^(GEMINI_API_KEY|TENSHINRYU_DATABASE_URL)=' "$ENV_TMP" > "${ENV_TMP}.wiki-ask" || true
 if ! grep -q '^GEMINI_API_KEY=' "${ENV_TMP}.wiki-ask"; then
   echo "WARN: GEMINI_API_KEY not in Doppler download — wiki Ask will return 503"
 fi
@@ -98,7 +99,7 @@ ssh -o BatchMode=yes "$HOST" "chmod 600 '$REMOTE_DIR/.env'"
 rm -f "$ENV_TMP" "${ENV_TMP}.wiki-ask"
 
 ssh -o BatchMode=yes "$HOST" "mkdir -p '$REMOTE_DIR/scripts'"
-rsync -az "$SCRIPT_DIR/scripts/wiki_ask.py" "$HOST:$REMOTE_DIR/scripts/"
+rsync -az "$SCRIPT_DIR/scripts/wiki_ask.py" "$SCRIPT_DIR/scripts/wiki_progress.py" "$HOST:$REMOTE_DIR/scripts/"
 
 ssh -o BatchMode=yes "$HOST" "
   set -euo pipefail

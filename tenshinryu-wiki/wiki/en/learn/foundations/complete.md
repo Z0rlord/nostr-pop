@@ -20,7 +20,7 @@ Close the book with the author's own afterword and publication record: [[sources
 - The revised Japanese edition (天心流初学集) is in the Japanese wiki — switch languages from the menu at the top.
 - Keep training. The preface's point stands: the book is a map, the dōjō is the territory. What matters most is the direct instruction you receive.
 
-Your progress is stored only in this browser. If you clear it, the track simply starts over — the reading is worth it twice.
+Your progress is saved to your account, so it is still here on any device you sign in on.
 
 </div>
 </div>

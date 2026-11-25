@@ -13,7 +13,7 @@ updated: '2026-11-22'
 
 Un recorrido guiado por los capítulos de historia y pensamiento de Tenshinryu Shogakushu, edición revisada (天心流初学集 改訂版), de Kuwami Masakumo. La estructura sigue el original japonés, con la traducción oficial al inglés como referencia de apoyo.
 
-21 pasos en orden, cada uno con una guía de lectura y una breve prueba de comprensión. Responda correctamente a todas las preguntas para desbloquear el siguiente paso. El progreso se guarda solo en este navegador. No hace falta una cuenta ni se envía información.
+21 pasos en orden, cada uno con una guía de lectura y una breve prueba de comprensión. Responda correctamente a todas las preguntas para desbloquear el siguiente paso. La lectura está abierta a todos. Para hacer las pruebas se inicia sesión, y el progreso se guarda en su cuenta y le acompaña en cualquier dispositivo.
 
 No es instrucción práctica. El curso orienta por las fuentes publicadas y comprueba la comprensión del texto. No enseña ni corrige técnicas. No incluye enseñanzas confidenciales (門外不出).
 
@@ -44,6 +44,6 @@ Estas guías y preguntas son traducciones de estudio basadas en el original japo
 </ol>
 
 <p class="learn-progress-line"><span id="learn-progress-text"></span></p>
-<p><a href="/es/learn/foundations/complete" id="learn-complete-link">Finalización</a> · <button type="button" id="learn-reset" class="learn-reset">Borrar el progreso en este dispositivo</button></p>
+<p><a href="/es/learn/foundations/complete" id="learn-complete-link">Finalización</a> · <button type="button" id="learn-reset" class="learn-reset">Borrar mi progreso</button></p>
 
 <a href="/es/guides/start-here">Primeros pasos</a>

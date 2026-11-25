@@ -20,7 +20,7 @@ Close the book with the author's own parting words: [[sources/den-no-ichi-i/ch-1
 - [[sources/kuwami-foundations-principles-vol2|Volume 2]] covers etiquette, movements, and training knowledge in depth.
 - The book is the map, the dōjō is the territory: the details of these techniques are acquired by being taught in person.
 
-Your progress is stored only in this browser. If you clear it, the track simply starts over — the reading is worth it twice.
+Your progress is saved to your account, so it is still here on any device you sign in on.
 
 </div>
 </div>

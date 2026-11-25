@@ -25,6 +25,12 @@ from pydantic import BaseModel, Field
 
 APP = FastAPI(title="Tenshinryu Wiki Ask", version="0.1.0")
 
+try:  # flat layout in the container, package layout when run from the repo
+    from wiki_progress import router as _progress_router
+except ImportError:  # pragma: no cover
+    from scripts.wiki_progress import router as _progress_router
+APP.include_router(_progress_router)
+
 SEARCH_INDEX_PATH = Path(
     os.getenv("WIKI_SEARCH_INDEX", "/data/search-index.json")
 )
