@@ -408,6 +408,11 @@ def pair_urls(page: Page, pages: dict[tuple[str, str], Page]) -> dict[str, str]:
     for lang in LANGS:
         key = (lang, slug)
         urls[lang] = pages[key].html_path if key in pages else url_for_slug(lang, slug)
+    if slug.startswith("learn/den-no-ichi-i") and ("ja", slug) not in pages:
+        # No Japanese track yet: send the switcher to the Japanese book page, not a 404.
+        ja_book = pages.get(("ja", "sources/den-no-ichi-i"))
+        if ja_book:
+            urls["ja"] = ja_book.html_path
     return urls
 
 
@@ -549,6 +554,7 @@ def curriculum_subnav_for(lang: str) -> list[dict]:
     defs = {
         "en": [
             ("Foundations course", "learn/foundations"),
+            ("Den no Ichi-i course", "learn/den-no-ichi-i"),
             ("Arts", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
@@ -561,30 +567,35 @@ def curriculum_subnav_for(lang: str) -> list[dict]:
         ],
         "es": [
             ("Curso de fundamentos", "learn/foundations"),
+            ("Curso Den no Ichi-i", "learn/den-no-ichi-i"),
             ("Artes", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "el": [
             ("Βασικός κύκλος", "learn/foundations"),
+            ("Μονοπάτι Den no Ichi-i", "learn/den-no-ichi-i"),
             ("Τέχνες", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "fr": [
             ("Parcours des fondements", "learn/foundations"),
+            ("Parcours Den no Ichi-i", "learn/den-no-ichi-i"),
             ("Arts", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "de": [
             ("Grundlagenkurs", "learn/foundations"),
+            ("Den-no-Ichi-i-Pfad", "learn/den-no-ichi-i"),
             ("Künste", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
         "it": [
             ("Percorso di base", "learn/foundations"),
+            ("Percorso Den no Ichi-i", "learn/den-no-ichi-i"),
             ("Arti", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
