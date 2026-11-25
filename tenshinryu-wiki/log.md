@@ -2,6 +2,14 @@
 
 Append-only timeline. Prefix: `## [YYYY-MM-DD] ingest|query|lint | …`
 
+## [2026-11-25] ingest | Den no Ichi-i (伝壱位) — Required Curriculum for Beginners (Kuwami, 2026)
+
+- **Raw:** `raw/books/Den_no_Ichi-i_English.meta.yaml` + extracted chapters in `raw/books/den-no-ichi-i-en/` (20 sections from the 139-page English PDF; photos not extracted, text only, same as earlier book ingests).
+- **Pages:** `wiki/en/sources/den-no-ichi-i.md` (summary) + 20 full-text chapter pages under `wiki/en/sources/den-no-ichi-i/`; JA stub `wiki/ja/sources/den-no-ichi-i.md` (英語版のみ). EN index updated (full-text books list).
+- **Learn:** new track `learn/den-no-ichi-i` — 14 steps with pass-to-unlock checks (42 questions, all answers in the linked chapters), index + completion page; `learn.md` lists it first as the beginner core. User's direction: "Since this is for beginners it may form the core of the curriculum."
+- **Ask/search:** `scripts/build-site.py` — added `("en", "sources/den-no-ichi-i")` to `BOOK_CHUNK_TREES` so the book is chunked into the search index for Ask and search.
+- **Notes:** English edition only; no Japanese text received (user will supply if available). es/el/fr/de/it translations not yet produced — a full locale rollout of the track can follow the 2026-11-22 five-language pattern if requested.
+
 ## [2026-07-08] fix | Wiki Ask quota blocker — model fallback chain
 
 - **Root cause:** `gemini-2.0-flash` + `gemini-2.0-flash-lite` return **429 quota exceeded** on the free-tier key; `gemini-1.5-flash*` are **404** (retired). Current-gen `gemini-2.5-flash-lite` / `gemini-2.5-flash` return **200** — separate fresh free-tier quota buckets. No billing change needed.

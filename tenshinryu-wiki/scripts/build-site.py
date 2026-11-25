@@ -1158,6 +1158,7 @@ def graph_alternate_urls() -> dict[str, str]:
 BOOK_CHUNK_TREES = {
     ("en", "sources/kuwami-foundations-principles-vol1"),
     ("en", "sources/kuwami-foundations-principles-vol2"),
+    ("en", "sources/den-no-ichi-i"),
     ("ja", "sources/shogakushu-2025"),
 }
 BOOK_CHUNK_MAX = 1100  # chars per passage chunk

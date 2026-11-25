@@ -163,6 +163,7 @@ Maintained by LLM ingest from official sources; human-reviewed.
 
 - [[sources/kuwami-foundations-principles-vol1|Foundations and Principles Vol. 1 — History and Philosophy]] (English, full text)
 - [[sources/kuwami-foundations-principles-vol2|Foundations and Principles Vol. 2 — Etiquette, Movements, Knowledge]] (English, full text)
+- [[sources/den-no-ichi-i|Den no Ichi-i (伝壱位) — Required Curriculum for Beginners]] (English, full text; 2026) — with the [[learn/den-no-ichi-i|Den no Ichi-i Learn track]]
 - [[sources/shogakushu-2025|天心流初学集 改訂版]] (Japanese original, full text)
 
 ## Raw files ingested
