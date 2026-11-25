@@ -20,7 +20,7 @@ TEMPLATES = ROOT / "site" / "templates"
 ASSETS = ROOT / "site" / "assets"
 RAW_ASSETS = ROOT / "raw" / "assets"
 
-LANGS = ("en", "ja", "es", "el", "fr", "de", "it")
+LANGS = ("en", "ja", "es", "el", "fr", "de", "it", "pt")
 CSS_VERSION = "20261125-learn-accounts"
 LANG_ALT = "|".join(LANGS)
 
@@ -429,6 +429,7 @@ def meta_line_html(page: Page) -> str:
         "fr": "Mis à jour",
         "de": "Aktualisiert",
         "it": "Aggiornato",
+        "pt": "Atualizado",
     }
     label = labels.get(page.lang, "Updated")
     return f"{label} {page.updated}"
@@ -541,6 +542,21 @@ def section_labels(lang: str) -> dict[str, str]:
             "overview": "Panoramica",
             "synthesis": "Sintesi",
         },
+        "pt": {
+            "guides": "Guias",
+            "arts": "Artes",
+            "techniques": "Técnicas",
+            "concepts": "Conceitos",
+            "reiho": "Reiho",
+            "philosophy": "Filosofia",
+            "dojo": "Shinanjo (dojo)",
+            "history": "História",
+            "people": "Pessoas",
+            "articles": "Artigos",
+            "sources": "Fontes",
+            "overview": "Visão geral",
+            "synthesis": "Síntese",
+        },
     }
     return labels.get(lang, labels["en"])
 
@@ -599,6 +615,13 @@ def curriculum_subnav_for(lang: str) -> list[dict]:
             ("Percorso di base", "learn/foundations"),
             ("Percorso Den no Ichi-i", "learn/den-no-ichi-i"),
             ("Arti", "arts/_index"),
+            ("12 Seiho", "techniques/tachiai-12-kata"),
+            ("Kurai (位)", "concepts/miden-kurai-no-koto"),
+        ],
+        "pt": [
+            ("Curso de fundamentos", "learn/foundations"),
+            ("Curso Den no Ichi-i", "learn/den-no-ichi-i"),
+            ("Artes", "arts/_index"),
             ("12 Seiho", "techniques/tachiai-12-kata"),
             ("Kurai (位)", "concepts/miden-kurai-no-koto"),
         ],
@@ -668,6 +691,14 @@ def nav_items_for(lang: str, slug: str) -> list[dict]:
             ("dojo", "Shinanjo", "dojo/overview", False, False),
             ("articles", "Articoli", "articles/_index", False, False),
         ],
+        "pt": [
+            ("start_here", "Comece aqui", "guides/start-here", True, False),
+            ("curriculum", "Currículo", "arts/_index", False, True),
+            ("reiho", "Reiho", "reiho/_index", False, False),
+            ("philosophy", "Filosofia", "philosophy/_index", False, False),
+            ("dojo", "Shinanjo", "dojo/overview", False, False),
+            ("articles", "Artigos", "articles/_index", False, False),
+        ],
     }
     items: list[dict] = []
     section = slug.split("/")[0] if "/" in slug else slug
@@ -702,6 +733,7 @@ def build_breadcrumbs(
         "fr": "Accueil",
         "de": "Start",
         "it": "Home",
+        "pt": "Início",
     }
     if slug == "index":
         return []
@@ -715,6 +747,7 @@ def build_breadcrumbs(
             "fr": "Graphe",
             "de": "Graph",
             "it": "Grafo",
+            "pt": "Grafo",
         }
         crumbs.append({"label": graph_labels.get(lang, "Graph"), "href": ""})
         return crumbs
@@ -811,6 +844,16 @@ def index_cards_for(lang: str) -> list[dict]:
             ("Filosofia", "Saggi sulla pratica", "philosophy/_index", False),
             ("Shinanjo (dojo)", "Dojo in Giappone", "dojo/overview", False),
             ("Articoli", "Archivio del blog", "articles/_index", False),
+        ],
+        "pt": [
+            ("Comece aqui", "Semana 1 e percurso", "guides/start-here", True),
+            ("Artes", "Oito artes do hyōhō", "arts/_index", False),
+            ("12 Seiho", "Programa de battojutsu", "techniques/tachiai-12-kata", False),
+            ("Kurai (位)", "Posições Miden", "concepts/miden-kurai-no-koto", False),
+            ("Reiho", "Etiqueta e conduta", "reiho/_index", False),
+            ("Filosofia", "Ensaios sobre a prática", "philosophy/_index", False),
+            ("Shinanjo (dojo)", "Dojos no Japão", "dojo/overview", False),
+            ("Artigos", "Arquivo do blog", "articles/_index", False),
         ],
     }
     return [
@@ -1024,6 +1067,35 @@ def ui_strings(lang: str) -> dict[str, str]:
             "ask_error": "Impossibile ottenere una risposta. Prova la ricerca.",
             "ask_error_rate": "Troppe domande — attendi e riprova.",
         },
+        "pt": {
+            "site_subtitle": "Wiki Hyōhō Tenshinryu",
+            "footer_lead": "Wiki Hyōhō Tenshinryu, compilada a partir de fontes oficiais. Não substitui o ensino presencial.",
+            "footer_kiwami": "Tenshinryu KIWAMI",
+            "footer_federation": "Federação internacional",
+            "search_placeholder": "Pesquisar…",
+            "graph_label": "Grafo",
+            "home_label": "Início",
+            "graph_title": "Grafo",
+            "graph_hint": "Rótulos sempre visíveis · arraste os nós · role para ampliar · clique para abrir",
+            "nav_menu_label": "Menu",
+            "nav_main_label": "Navegação principal",
+            "nav_lang_label": "Idioma",
+            "nav_footer_label": "Navegação do rodapé",
+            "breadcrumb_label": "Caminho",
+            "toc_label": "Nesta página",
+            "index_hero_title": "Wiki Hyōhō Tenshinryu",
+            "index_hero_lead": "Base de conhecimento para alunos: comece pela Semana 1 e siga para as artes, os seiho e o kurai.",
+            "index_cta_label": "Comece aqui →",
+            "index_cards_label": "Explore por tema",
+            "index_full_heading": "Índice completo",
+            "ask_label": "Perguntar",
+            "ask_placeholder": "Pergunta sobre o Tenshinryu…",
+            "ask_submit": "Perguntar",
+            "ask_loading": "Pensando…",
+            "ask_sources": "Fontes",
+            "ask_error": "Não foi possível obter uma resposta. Tente a pesquisa.",
+            "ask_error_rate": "Perguntas demais. Aguarde e tente de novo.",
+        },
     }
     return strings.get(lang, strings["en"])
 
@@ -1117,6 +1189,7 @@ def node_label(slug: str, title: str, lang: str) -> str:
         "fr": "Index",
         "de": "Index",
         "it": "Indice",
+        "pt": "Índice",
     }
     if slug == "index":
         return index_labels.get(lang, "Index")

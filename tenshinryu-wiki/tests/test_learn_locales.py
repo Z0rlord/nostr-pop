@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WIKI = ROOT / "wiki"
 DIST = ROOT / "dist"
-LOCALES = ("de", "el", "es", "fr", "it")
+LOCALES = ("de", "el", "es", "fr", "it", "pt")
 QUIZ = re.compile(r'<script[^>]+class="learn-quiz-data"[^>]*>(.*?)</script>', re.S)
 
 
