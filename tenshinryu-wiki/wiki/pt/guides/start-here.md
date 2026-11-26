@@ -34,7 +34,7 @@ Percorra estes itens em ordem durante a primeira semana:
    - Lista completa: [[reiho/_index|Índice de reihō]]
 3. **Como é uma aula:** o fluxo típico de uma sessão (reverência inicial, narashi-geiko, temas principais, encerramento):
 
-> **Do texto do instrutor (vol. II):** chegue cedo; cumprimente os alunos; abra com o **zarei** (reverência sentada), com **ken-za-zen** opcional, e depois o **kinchō**. O **narashi-geiko** repete saques sem muita correção (cerca de 10 a 20 repetições). Os blocos principais incluem o **doran-keiko**, uma palestra sobre bushidō e história, e depois temas de **battōjutsu** e **kenjutsu** em pé. Encerre com as considerações finais e o **keiko osame**.
+A aula começa antes da primeira reverência: os alunos chegam cedo e se cumprimentam. A sessão abre com o **zarei** (reverência sentada), o **ken-za-zen** opcional e depois o **kinchō**. Em seguida, o **narashi-geiko** repete os saques sem muita correção (cerca de 10 a 20 repetições). Os blocos principais cobrem o **doran-keiko**, uma palestra sobre bushidō e história, e depois temas de **battōjutsu** e **kenjutsu** em pé. O instrutor encerra com as considerações finais e o **keiko osame**.
 
    Detalhes completos: [[guides/instructor-3rd-grade/vol-2-training-flow|O fluxo do treino]].
 

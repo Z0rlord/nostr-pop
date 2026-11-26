@@ -36,7 +36,7 @@ Work through these in order during your first week:
    - Full list: [[reiho/_index|Reiho index]]
 3. **What a class feels like** — a typical session flow (opening bow, narashi-geiko, main themes, closing):
 
-> **From instructor text (Vol. II):** Arrive early; greet students; open with **zarei** (seated bow), optional **ken-za-zen**, then **kinchō**. **Narashi-geiko** repeats draws without heavy correction (~10–20 reps). Main blocks include **doran-keiko**, instructional talk on bushidō and history, then standing **battojutsu** / **kenjutsu** themes. Close with remarks and **keiko osame**.
+A class starts before the first bow: students arrive early and greet one another. The session opens with **zarei** (seated bow), optional **ken-za-zen**, then **kinchō**. **Narashi-geiko** follows, repeating the draws without heavy correction (~10–20 reps). The main blocks cover **doran-keiko**, a talk on bushidō and history, then standing **battojutsu** / **kenjutsu** themes. The instructor closes with remarks and **keiko osame**.
 
    Full detail: [[guides/instructor-3rd-grade/vol-2-training-flow|The Flow of Training]].
 

@@ -34,7 +34,7 @@ Pour une vue d'ensemble des hubs, voir [[synthesis|Synthèse]].
    - Liste complète : [[reiho/_index|Index reihō]]
 3. **À quoi ressemble un cours** — déroulement type (salut d'ouverture, narashi-geiko, thèmes principaux, clôture) :
 
-> **D'après le texte instructeur (Vol. II) :** Arriver tôt ; saluer les élèves ; ouvrir par **zarei** (salut assis), **ken-za-zen** optionnel, puis **kinchō**. **Narashi-geiko** répète les sorties de lame sans correction lourde (~10–20 répétitions). Les blocs principaux incluent **doran-keiko**, un exposé sur le bushidō et l'histoire, puis des thèmes debout de **battojutsu** / **kenjutsu**. Clôture par des remarques et **keiko osame**.
+Le cours commence avant le premier salut : les élèves arrivent tôt et se saluent. La séance s'ouvre avec le **zarei** (salut assis), le **ken-za-zen** optionnel, puis le **kinchō**. Le **narashi-geiko** suit et répète les sorties de lame sans correction lourde (~10–20 répétitions). Les blocs principaux couvrent le **doran-keiko**, un exposé sur le bushidō et l'histoire, puis des thèmes debout de **battojutsu** / **kenjutsu**. L'instructeur clôt le cours avec des remarques et le **keiko osame**.
 
    Détail complet : [[guides/instructor-3rd-grade/vol-2-training-flow|The Flow of Training]].
 
