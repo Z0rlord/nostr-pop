@@ -22,6 +22,8 @@ Le curriculum avancé — notamment les [[techniques/tachiai-12-kata|douze seih�
 
 Pour une vue d'ensemble des hubs, voir [[synthesis|Synthèse]].
 
+**Parcours guidés :** le [[learn/foundations|Parcours des fondements]] suit pas à pas l'histoire et la pensée de l'école, et le [[learn/den-no-ichi-i|Parcours Den no Ichi-i]] parcourt le curriculum requis des débutants : les dix techniques du premier rang de transmission et les essais d'entraînement qui les encadrent. Chaque étape se termine par une courte vérification. La lecture est libre ; les vérifications demandent un compte gratuit, qui enregistre votre progression.
+
 ## Checklist Semaine 1
 
 À parcourir dans l'ordre pendant votre première semaine :

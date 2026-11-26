@@ -16,6 +16,13 @@ updated: '2026-07-02'
 
 - [[guides/start-here|Start Here]] (αγγλικά) · [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) · [Επίσημο κανάλι YouTube](https://www.youtube.com/@tenshinryu/featured) · [international.tenshinryu.net](https://international.tenshinryu.net/)
 
+## Καθοδηγούμενες διαδρομές
+
+| Σελίδα | Περίληψη |
+|--------|---------|
+| [[learn/den-no-ichi-i\|Μονοπάτι Den no Ichi-i]] | 14 βήματα μέσα από το απαιτούμενο πρόγραμμα για αρχάριους: οι δέκα τεχνικές του πρώτου βαθμού μετάδοσης |
+| [[learn/foundations\|Βασικός κύκλος]] | 21 βήματα για την ιστορία και τη σκέψη, με σύντομο έλεγχο σε κάθε βήμα |
+
 ## Επισκόπηση
 
 | Σελίδα | Περίληψη |
