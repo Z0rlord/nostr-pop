@@ -34,7 +34,7 @@ Da seguire in ordine nella prima settimana:
    - Elenco completo: [[reiho/_index|Indice reihō]]
 3. **Com'è una lezione** — flusso tipico (inchino iniziale, narashi-geiko, temi principali, chiusura):
 
-> **Dal testo istruttore (Vol. II):** Arrivare presto; salutare gli allievi; apertura con **zarei**, opzionale **ken-za-zen**, poi **kinchō**. **Narashi-geiko** ripete estrazioni senza correzioni pesanti (~10–20 ripetizioni). Blocchi principali: **doran-keiko**, discorso su bushidō e storia, poi **battojutsu** / **kenjutsu** in piedi. Chiusura con osservazioni e **keiko osame**.
+La lezione inizia prima del primo inchino: gli allievi arrivano presto e si salutano. La sessione si apre con lo **zarei** (inchino seduto), il **ken-za-zen** opzionale, poi il **kinchō**. Segue il **narashi-geiko**, che ripete le estrazioni senza correzioni pesanti (~10–20 ripetizioni). I blocchi principali coprono il **doran-keiko**, un discorso su bushidō e storia, poi i temi in piedi di **battojutsu** / **kenjutsu**. L'istruttore chiude con osservazioni e **keiko osame**.
 
    Dettaglio: [[guides/instructor-3rd-grade/vol-2-training-flow|The Flow of Training]].
 

@@ -34,7 +34,7 @@ In der ersten Woche in dieser Reihenfolge:
    - Vollständige Liste: [[reiho/_index|Reihō-Index]]
 3. **Wie eine Stunde abläuft** — typischer Ablauf (Eröffnungsgruß, Narashi-geiko, Hauptthemen, Abschluss):
 
-> **Aus Instruktorentext (Bd. II):** Früh kommen; Schüler begrüßen; Beginn mit **Zarei** (Sitzgruß), optional **Ken-za-zen**, dann **Kinchō**. **Narashi-geiko** wiederholt Ziehungen ohne starke Korrektur (~10–20 Wdh.). Hauptblöcke: **Doran-keiko**, Vortrag zu Bushidō und Geschichte, dann stehendes **Battojutsu** / **Kenjutsu**. Abschluss mit Bemerkungen und **Keiko osame**.
+Die Stunde beginnt vor dem ersten Gruß: Die Schüler kommen früh und begrüßen einander. Sie eröffnet mit **Zarei** (Sitzgruß), optional **Ken-za-zen**, dann **Kinchō**. Im **Narashi-geiko** wiederholen die Schüler die Ziehungen ohne starke Korrektur (~10–20 Wdh.). Die Hauptblöcke decken **Doran-keiko**, einen Vortrag zu Bushidō und Geschichte, dann stehendes **Battojutsu** / **Kenjutsu** ab. Der Lehrer schließt mit Bemerkungen und **Keiko osame**.
 
    Details: [[guides/instructor-3rd-grade/vol-2-training-flow|The Flow of Training]].
 
