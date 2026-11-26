@@ -22,6 +22,8 @@ Fortgeschrittener Lehrplan — besonders [[techniques/tachiai-12-kata|zwölf Sei
 
 Überblick über die Hubs: [[synthesis|Synthese]].
 
+**Geführte Kurse:** der [[learn/foundations|Grundlagenkurs]] führt Schritt für Schritt durch Geschichte und Denkweise der Schule, und der [[learn/den-no-ichi-i|Den-no-Ichi-i-Pfad]] durch das Pflichtcurriculum für Anfänger: die zehn Techniken des ersten Übertragungsgrads und die dazugehörigen Trainingsaufsätze. Jeder Schritt endet mit einer kurzen Prüfung. Das Lesen ist frei; für die Prüfungen brauchen Sie ein kostenloses Konto, das Ihren Fortschritt speichert.
+
 ## Checkliste Woche 1
 
 In der ersten Woche in dieser Reihenfolge:

@@ -24,6 +24,8 @@ For the big picture of how hubs connect, see [[synthesis|Synthesis]].
 
 **Guided track:** [[learn/foundations|The Foundations Track]] walks through the book — Foundations & Principles Vol. 1, history and philosophy — step by step, with a short check before each step unlocks. Reading is open to everyone; taking the checks needs a free account, and your progress is saved to it.
 
+**Also guided:** the [[learn/den-no-ichi-i|Den no Ichi-i Track]] walks through the required beginner curriculum (伝壱位, 2026): the ten techniques of the first transmission rank, plus the training-method essays that frame them. The [[sources/den-no-ichi-i|full book text]] is free to read.
+
 ## Week 1 checklist
 
 Work through these in order during your first week:

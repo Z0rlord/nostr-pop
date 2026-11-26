@@ -20,6 +20,13 @@ Maintained by LLM ingest from official sources; human-reviewed.
 | Official YouTube | [youtube.com/@tenshinryu](https://www.youtube.com/@tenshinryu/featured) |
 | International federation | [international.tenshinryu.net](https://international.tenshinryu.net/) |
 
+## Guided tracks
+
+| Page | Summary |
+|------|---------|
+| [[learn/den-no-ichi-i\|The Den no Ichi-i Track]] | 14 steps through the required beginner curriculum: the ten techniques of the first transmission rank, with a short check at each step. The [[sources/den-no-ichi-i\|full book text]] is free to read |
+| [[learn/foundations\|The Foundations Track]] | 21 steps through Foundations & Principles Vol. 1: history and philosophy, with a short check at each step |
+
 <details class="full-index">
 <summary><strong>Full index</strong> — all pages by section</summary>
 

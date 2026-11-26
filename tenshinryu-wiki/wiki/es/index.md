@@ -16,6 +16,13 @@ Otros idiomas: [inglés](../en/index.md) · [japonés](../ja/index.md) · [grieg
 
 - [[guides/start-here|Empezar aquí]] (inglés) · [Tenshinryu ONLINE / KIWAMI](https://tenshinryu.xyz) · [Canal oficial de YouTube](https://www.youtube.com/@tenshinryu/featured) · [international.tenshinryu.net](https://international.tenshinryu.net/)
 
+## Cursos guiados
+
+| Página | Resumen |
+|--------|---------|
+| [[learn/den-no-ichi-i\|Curso Den no Ichi-i]] | 14 pasos por el currículo requerido para principiantes: las diez técnicas del primer grado de transmisión |
+| [[learn/foundations\|Curso de fundamentos]] | 21 pasos sobre historia y pensamiento, con una verificación corta en cada uno |
+
 ## Panorama general
 
 | Página | Resumen |

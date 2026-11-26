@@ -20,6 +20,13 @@ updated: '2026-07-02'
 | 公式 YouTube | [youtube.com/@tenshinryu](https://www.youtube.com/@tenshinryu/featured) |
 | 国際連盟サイト | [international.tenshinryu.net](https://international.tenshinryu.net/) |
 
+## 学習トラック
+
+| ページ | 概要 |
+|--------|------|
+| [[learn/den-no-ichi-i\|伝壱位トラック]] | 初伝の位「伝壱位」の必修カリキュラムを14ステップで。各ステップに短い確認テスト。[[sources/den-no-ichi-i\|書籍の全文]]も公開 |
+| [[learn/foundations\|基礎トラック]] | 『天心流初学集 改訂版』の歴史と思想を21ステップで。各ステップに短い確認テスト |
+
 <details class="full-index">
 <summary><strong>全文索引</strong> — セクション別の全ページ</summary>
 

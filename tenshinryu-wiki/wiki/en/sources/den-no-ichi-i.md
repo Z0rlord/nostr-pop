@@ -21,6 +21,8 @@ updated: 2026-11-25
 
 The opening essays cover Kaisho/Gyōsho/Sōsho and Shu/Ha/Ri, breaking down movements, Jo/Ha/Kyū training speeds, and the three goals set for every technique (name; characteristics — Maai and Situation; sequence, form and movements). Explanations are limited to the Kaisho and Shu stage.
 
+A guided 14-step study path with short checks is available in the [[learn/den-no-ichi-i|Den no Ichi-i Track]].
+
 ## Full text (by chapter)
 
 - [[sources/den-no-ichi-i/ch-00-preface|Preface and Notes]]

@@ -22,6 +22,8 @@ Il curriculum avanzato — in particolare i [[techniques/tachiai-12-kata|dodici 
 
 Panoramica dei hub: [[synthesis|Sintesi]].
 
+**Percorsi guidati:** il [[learn/foundations|Percorso di base]] segue passo passo la storia e il pensiero della scuola, e il [[learn/den-no-ichi-i|Percorso Den no Ichi-i]] attraversa il curriculum richiesto ai principianti: le dieci tecniche del primo grado di trasmissione e i saggi di allenamento che le inquadrano. Ogni passo termina con una breve verifica. La lettura è aperta; per le verifiche serve un account gratuito, che salva i vostri progressi.
+
 ## Checklist Settimana 1
 
 Da seguire in ordine nella prima settimana:
