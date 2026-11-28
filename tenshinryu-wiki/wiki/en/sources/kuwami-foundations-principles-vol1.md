@@ -14,7 +14,7 @@ updated: 2026-11-20
 **Author:** [[people/kuwami-masakumo|Kuwami Masakumo]], 10th Shike (Masakumo Isshin Kuwami)
 **Supervised by:** Tenshin Nakamura
 **Published:** 2025 (Reiwa 7), Tenshinryu Hyoho Headquarters (Hyohojuku), Syōgetsuan 抄月庵. 91 pp., English.
-**Provenance:** PDF in the user's Google Drive (English official edition). Published here in full **with the author's permission**, granted via the user on 2026-11-20 for inclusion in this wiki.
+**Provenance:** PDF in the user's Google Drive (English official edition). Published here in full.
 
 **Scope:** Foreign-language volume 1 of the revised edition of the 2012 introductory book for beginners ([[sources/shogakushu-2025|天心流初学集 改訂版]]). Covers the **history and philosophy** of Tenshinryu: its founding and naming, the Kōgan, the school after the Meiji Restoration, the lineage to the 10th Shike, the Hyoho system, the Yagyū family, Bushidō, and the school's values. Volume 2 covers etiquette, movements, and training knowledge; the equipment section of the Japanese original has no English edition yet.
 

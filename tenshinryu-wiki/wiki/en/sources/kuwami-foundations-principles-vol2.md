@@ -14,7 +14,7 @@ updated: 2026-11-20
 **Author:** [[people/kuwami-masakumo|Kuwami Masakumo]], 10th Shike (Masakumo Isshin Kuwami)
 **Supervised by:** Tenshin Nakamura
 **Published:** 2026 (Reiwa 8), Tenshinryu Hyoho Headquarters (Hyohojuku), Syōgetsuan 抄月庵. 139 pp., English.
-**Provenance:** PDF from the user, 2026-11-20. Published here in full **with the author's permission**, granted via the user on 2026-11-20 for inclusion in this wiki. A synthesized summary with links into the concept and reiho pages is at [[sources/kuwami-foundations-principles-ch2]].
+**Provenance:** PDF from the user, 2026-11-20. Published here in full. A synthesized summary with links into the concept and reiho pages is at [[sources/kuwami-foundations-principles-ch2]].
 
 **Scope:** Foreign-language volume 2 of the revised 2012 beginner's book ([[sources/shogakushu-2025|天心流初学集 改訂版]]): fundamental etiquette, basic movements, and basic knowledge — terminology, seated postures, bows, the fan, okigatana, maai, sword handling, sen timings, kiai, jo-ha-kyū, metsuke, and training roles.
 

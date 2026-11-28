@@ -14,7 +14,7 @@ updated: 2026-11-20
 **Author:** [[people/kuwami-masakumo|Kuwami Masakumo]], 10th Shike (Masakumo Isshin Kuwami)
 **Supervised by:** Tenshin Nakamura
 **Published:** 2026 (Reiwa 8), Tenshinryu Hyoho Headquarters (Hyohojuku), Syōgetsuan 抄月庵. First edition, 139 pp., English.
-**Provenance:** PDF from the user, 2026-11-20. Full text published at [[sources/kuwami-foundations-principles-vol2]] **with the author's permission**, granted via the user on 2026-11-20; this page remains the synthesized summary.
+**Provenance:** PDF from the user, 2026-11-20. Full text published at [[sources/kuwami-foundations-principles-vol2]]; this page remains the synthesized summary.
 
 **Scope:** Foreign-language volume 2. Volume 1 covered history and philosophy; this volume covers **fundamental etiquette, basic movements, and basic knowledge** for beginners, drawn from the oral and written transmission Kuwami received from Tenshin Sensei.
 
@@ -35,7 +35,7 @@ updated: 2026-11-20
 
 ## Not in this document
 
-- The full text — see [[sources/kuwami-foundations-principles-vol2]] (added 2026-11-20 with the author's permission).
+- The full text — see [[sources/kuwami-foundations-principles-vol2]] (added 2026-11-20).
 - The book's photographs and step-by-step photo sequences (posture photos, hakama-sabaki sequences, grip angles). The wiki text describes the movements; the book remains the visual reference.
 - Volume 1 (history and philosophy) — not yet ingested.
 - Japanese edition of 2012 from which this revised English edition derives.

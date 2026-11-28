@@ -2,12 +2,12 @@
 slug: index
 lang: en
 title: Tenshinryu Hyoho Wiki — Index
-updated: '2026-11-20'
+updated: '2026-11-28'
 ---
 
 # Tenshinryu Hyoho Wiki (English)
 
-Maintained by LLM ingest from official sources; human-reviewed.
+Questions first: [[faq/index|Questions and answers]]. Is Tenshinryu connected to Yagyū Shinkage-ryū? See [[faq/yagyu-shinkage-ryu|the answer]].
 
 日本語: [日本語](../ja/index.md)
 
@@ -19,6 +19,14 @@ Maintained by LLM ingest from official sources; human-reviewed.
 | Tenshinryu ONLINE / KIWAMI | [tenshinryu.xyz](https://tenshinryu.xyz) |
 | Official YouTube | [youtube.com/@tenshinryu](https://www.youtube.com/@tenshinryu/featured) |
 | International federation | [international.tenshinryu.net](https://international.tenshinryu.net/) |
+
+## Questions
+
+| Page | Summary |
+|------|---------|
+| [[faq/index\|Questions and answers]] | Short answers, each linked to the full page |
+| [[faq/yagyu-shinkage-ryu\|Is Tenshinryu connected to Yagyū Shinkage-ryū?]] | Yes: a branch of Shinkage-ryū in the Edo Yagyū line |
+| [[faq/crests\|Why does the flag carry the Tokugawa and Yagyū crests?]] | They stand for the Kōgan legacy |
 
 ## Guided tracks
 
@@ -41,7 +49,8 @@ Maintained by LLM ingest from official sources; human-reviewed.
 
 | Page | Summary |
 |------|---------|
-| [[history/overview|History & Lineage — Overview]] | Edo origins, Kogan, preservation, modern revival |
+| [[history/yagyu-and-shinkage-ryu|Tenshinryu and the Yagyū Clan]] | Shinkage-ryū, Munenori, Tokizawa Yahei, crests, line of heads |
+| [[history/overview|History & Lineage — Overview]] | Edo origins, Kōgan, preservation, modern revival |
 | [[history/1795|In Japan, heads are not displayed in homes.]] | Historical article (1795) |
 | [[history/1937|Etiquette Toward the Kamiza]] | Historical article (1937) |
 | [[history/koran-to|&#8220;Koran-To (虎乱刀)&#8221; from TENSHINRYU]] | Koran-to (虎乱刀) |
@@ -166,7 +175,7 @@ Maintained by LLM ingest from official sources; human-reviewed.
 
 150+ source summaries in [[sources|Sources]] — catalog of ingested raw files from web clips and Drive exports.
 
-**Full-text books** (published with the author's permission, 2026-11-20):
+**Full-text books:**
 
 - [[sources/kuwami-foundations-principles-vol1|Foundations and Principles Vol. 1 — History and Philosophy]] (English, full text)
 - [[sources/kuwami-foundations-principles-vol2|Foundations and Principles Vol. 2 — Etiquette, Movements, Knowledge]] (English, full text)
@@ -180,3 +189,4 @@ Maintained by LLM ingest from official sources; human-reviewed.
 - `raw/assets/` — **606** kata reference photos + promo images
 
 </details>
+
