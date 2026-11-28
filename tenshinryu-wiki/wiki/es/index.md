@@ -8,7 +8,7 @@ updated: '2026-07-02'
 
 # Wiki de Hyōhō Tenshinryu (español)
 
-Base de conocimiento estructurada sobre **Tenshinryu Hyōhō** (天心流兵法). Mantenida por ingestión LLM desde fuentes oficiales; revisada por humanos.
+Base de conocimiento estructurada sobre **Tenshinryu Hyōhō** (天心流兵法).
 
 Otros idiomas: [inglés](../en/index.md) · [japonés](../ja/index.md) · [griego](../el/index.md)
 
